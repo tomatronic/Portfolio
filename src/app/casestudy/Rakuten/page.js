@@ -42,7 +42,7 @@ function Offer() {
                             <div className="col-span-4 mb-12">
 
                                 {/* Challenge / Problem */}
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Challenge / Problem</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Challenge / Problem</h2>
                                 <p>Managing offers is a cumbersome task, it involves multiple pages and unclear terminology that deters users from exploring options. The dashboard has also been neglected for many years and is in need of a UI overhaul.</p>
 
                                 {/* Approach */}
@@ -59,7 +59,7 @@ function Offer() {
                                 </div>
 
                                 {/* Goals */}
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Goals</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Goals</h2>
                                 <p>Using survey data I was able to identify three main goals to focus on:</p>
                                 <h3 className="pt-6">Comparison</h3>
                                 <p>If I am presented with a new offer invitation I want to be able to compare it to my current offer.</p>
@@ -69,25 +69,25 @@ function Offer() {
                                 <p>The current UI does not offer any indication of partnership status. A user wants to know if a partnership already exists.</p>
 
                                 {/* Solution */}
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Solution</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Solution</h2>
                                 <p>Redesign how publishers manage affiliate offers within the Rakuten Advertising dashboard — making the flow cleaner and easier to use, so publishers actually engage with it rather than avoid it.</p>
 
                                 {/* Planning */}
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Planning</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Planning</h2>
                                 <p>I started with a flowchart mapping the routes a user might take to accept an offer request, then ran it past people in user-facing teams to check nothing was missing.</p>
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
                                     <Image src="/flowchart.png" className="rounded-2xl" width={1116} height={766} alt="Simple flowchart of a proposed solution" />
                                 </div>
 
                                 {/* Sketching */}
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Sketching</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Sketching</h2>
                                 <p>Once happy with the flow I opened my notepad and began sketching some initial ideas. At this stage I scribble a lot of ideas down both illustrated and in note form, it can look like a mess but I find it helps to get all my initial ideas on paper and then quickly eliminate ideas or come back to them at a later date if needed. As I develop an idea I start to sketch it into something of higher quality to allow me to easily translate it to a digital wireframe when the time comes.</p>
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
                                     <Image src="/sketches.png" className="rounded-2xl" width={1116} height={766} alt="Initial sketches and ideas - A bit messy but helps me gather thoughts" />
                                 </div>
 
                                 {/* Prototypes */}
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Prototypes</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Prototypes</h2>
                                 <p>Rather than testing from sketches, I built simple wireframes in Sketch first and ran them with candidates over Zoom. I gave them a set of tasks to complete and watched where they got stuck. That first round told me users wanted a dedicated landing page for offer invitations alongside the notification system — something I hadn&apos;t fully anticipated.</p>
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
                                     <Image src="/digitalwireframe.png" className="rounded-2xl" width={1116} height={766} alt="Simple flowchart of a proposed solution" />
@@ -98,14 +98,14 @@ function Offer() {
                                 </div>
 
                                 {/* User testing */}
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">User testing</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">User testing</h2>
                                 <p>Testing surfaced a few things that needed fixing — mainly how functionality was communicated and making offers easier to compare side by side. I iterated on both before sign-off.</p>
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
                                     <Image src="/usertestingOffers.png" className="rounded-2xl" width={1849} height={900} alt="An example of the complex web of interactions created to allow for testing of the prototype with external users" />
                                 </div>
 
                                 {/* Outcome */}
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Outcome</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Outcome</h2>
                                 <p>Since the updated flow launched, support tickets around offer management have dropped, and account managers have reported fewer queries from publishers on this area. That freed them up to focus on users' actual needs rather than walking people through a confusing interface.</p>
                                 <p>I still monitor usage through FullStory and make iterative updates as patterns emerge.</p>
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">

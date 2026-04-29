@@ -144,7 +144,7 @@ function CaseStudyContent() {
               </p>
 
               {/* Challenge */}
-              <h2 className="pt-10 text-2xl tracking-tight mb-12">Challenge</h2>
+              <h2 className="pt-10 text-xl tracking-tight">Challenge</h2>
               <p>This project had many constraints that can make design hard:</p>
               <ul className="mb-8 space-y-2">
                 <li><b>Extreme time pressure</b> — a prospect demo within a week of project initiation</li>
@@ -195,7 +195,7 @@ function CaseStudyContent() {
               </div>
 
               {/* Key Decisions */}
-              <h2 className="pt-10 text-2xl tracking-tight mb-12">Key Decisions</h2>
+              <h2 className="pt-10 text-xl tracking-tight">Key Decisions</h2>
               <p>
                 With the prototype validated, I moved into detailed design and scoping. Here are the
                 critical decisions that helped shape the product.
@@ -297,7 +297,7 @@ function CaseStudyContent() {
               </div>
 
               {/* Testing */}
-              <h2 className="pt-10 text-2xl tracking-tight mb-12">Testing and iteration</h2>
+              <h2 className="pt-10 text-xl tracking-tight">Testing and iteration</h2>
               <div className="mb-12 space-y-6">
                 <p><b>Internal validation (Weeks 2–3)</b> — tested with 8 PMs and engineers; advertiser flows were clear, but influencer outcome messaging needed clarification and workflows were adjusted accordingly.</p>
                 <p><b>MVP scope refinement (Weeks 3–8)</b> — weekly reviews with VP and engineering; continuously cutting scope to hit December, with every cut documented with rationale for potential V2.</p>
@@ -317,7 +317,7 @@ function CaseStudyContent() {
               </div>
 
               {/* Solution */}
-              <h2 className="pt-10 text-2xl tracking-tight mb-12">Solution</h2>
+              <h2 className="pt-10 text-xl tracking-tight">Solution</h2>
               <p>
                 The final MVP design focused on the core workflow: advertisers create campaigns,
                 influencers discover and apply, content gets posted and verified, incentives get
@@ -329,7 +329,7 @@ function CaseStudyContent() {
               </p>
 
               {/* Outcome */}
-              <h2 className="pt-10 text-2xl tracking-tight mb-12">Outcome</h2>
+              <h2 className="pt-10 text-xl tracking-tight">Outcome</h2>
               <ul className="mb-8 space-y-2">
                 <li><b>Complete clickable prototype</b> — 5 days</li>
                 <li><b>Prospect demo and buy-in</b> — Day 6</li>
@@ -345,7 +345,7 @@ function CaseStudyContent() {
               </ul>
 
               {/* What I learned */}
-              <h2 className="pt-10 text-2xl tracking-tight mb-12">What I learned</h2>
+              <h2 className="pt-10 text-xl tracking-tight">What I learned</h2>
               <p>Having a prototype that looked and felt real made a concrete difference. A VP could show it to a prospect with confidence — wireframes wouldn't have done that. Fidelity bought credibility faster than I expected.</p>
               <p>The five-month deadline forced a kind of clarity I rarely have on longer projects. Every feature had to earn its place in V1. I ended up cutting things I would normally have kept, and the product was tighter for it.</p>
               <p>I built the layouts to be flexible from the start — cards that could handle variable data, components that could be extended without breaking. That wasn't over-engineering; it was the only practical way to ship something that could grow once real users showed up with real feedback.</p>

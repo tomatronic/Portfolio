@@ -50,14 +50,14 @@ function BeerBlog() {
                                     <Image src="/sampleBeer.png" className="rounded-2xl" width={500} height={542} alt="I had previously begun exploring ways of documenting beers I had sampled" />
                                 </Zoom>
 
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">A new brand is born</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">A new brand is born</h2>
                                 <p>Now I had the idea, I needed a name. I wanted something that felt like a brand, not just a project title — and I needed an end goal to work towards.</p>
                                 <p className="mb-8">After a lot of searching (domain availability checks, social handle hunting) I landed on &apos;Brewtiful&apos;. It plays on words, it&apos;s easy to remember, and it covers both sides of the concept.</p>
                                 <Zoom>
                                     <Image src="/initialDoodle.png" className="rounded-2xl" width={1000} height={774} alt="Some very messy initial thoughts on what I wanted to include and the direction I could take a name" />
                                 </Zoom>
 
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Understanding the landscape</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Understanding the landscape</h2>
                                 <p>My first task was to look at what was already out there and figure out where Brewtiful might sit.</p>
                                 <p className="mb-8">I pulled together a handful of sites, identified where they overlapped and where they had something different going on, then mapped my idea against those findings.</p>
                                 <div className="mb-8">
@@ -77,7 +77,7 @@ function BeerBlog() {
                                     </Zoom>
                                 </div>
 
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Considering content</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Considering content</h2>
                                 <p>Next up was figuring out what the site would actually need.</p>
                                 <p>I sketched out a rough IA to identify what pages I&apos;d need to design. The site would be fairly simple, built so content could be added without it becoming a chore. I landed on 5&ndash;6 main pages and templates:</p>
                                 <p>
@@ -93,39 +93,39 @@ function BeerBlog() {
                                     <Image src="/brewtifulIA.png" className="rounded-2xl" width={1392} height={622} alt="Initial IA for the new site — kept deliberately flat" />
                                 </Zoom>
 
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Initial sketches</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Initial sketches</h2>
                                 <p>I got the pen out and started sketching. At this stage it&apos;s all rough — quick scribbles to explore ideas and work out what information actually needs to be on each page. It&apos;s scrappy but fast, and I can discard and revisit ideas without losing much time.</p>
                                 <Zoom>
                                     <Image src="/initialSketchBrewtiful.png" className="rounded-2xl" width={1000} height={1000} alt="A sample of initial sketches and ideas for Brewtiful" />
                                 </Zoom>
 
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Brand identity</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Brand identity</h2>
 
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Low fidelity mocks</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Low fidelity mocks</h2>
                                 <p>At this point I took my favourite sketch and turned it into a slightly more polished digital version.</p>
                                 <p className="mb-8">Not a huge leap, but it helped me get a clearer sense of how the final page might look. A few tweaks in and I was getting pretty happy with the direction.</p>
                                 <Zoom>
                                     <Image src="/lofiBeer.png" className="rounded-2xl" width={2000} height={1500} alt="Developing sketches into simple digital assets" />
                                 </Zoom>
 
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Prototyping</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Prototyping</h2>
                                 <p>I took a slightly different route than usual — I built some prototypes first, then figured out how to get feedback on them.</p>
                                 <p className="mb-8">I didn&apos;t want to rely on friends and colleagues (too much risk of polite non-answers), so I posted on Reddit. Not a conventional approach, and I&apos;ll be honest — it&apos;s not that much more rigorous. You don&apos;t know who&apos;s responding or what their background is.</p>
 
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Feedback</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Feedback</h2>
                                 <p>Reddit isn&apos;t built for design research. It doesn&apos;t give you focused insights — it depends on whoever happens to see the post and has something to say.</p>
                                 <p className="mb-8">That said, the response was positive, which was reassuring. I also got a few useful ideas for iterations out of it.</p>
                                 <Zoom>
                                     <Image src="/crit.png" className="rounded-2xl" width={1212} height={784} alt="Examples of replies and feedback from reddit" />
                                 </Zoom>
 
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Final mocks</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Final mocks</h2>
                                 <p className="mb-8">Armed with the reddit feedback I made a few tweaks before settling on a final design.</p>
                                 <Zoom>
                                     <Image src="/brewtiful.png" className="rounded-2xl" width={1211} height={1567} alt="Brewtiful — current hi-fidelity mocks" />
                                 </Zoom>
 
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Project reflection</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Project reflection</h2>
                                 <p className="mb-8">It&apos;s a personal project, so I&apos;m happy with where it landed. I&apos;d like to come back to it — maybe even build it into a real site one day.</p>
                                 <p>This one needed more self-discipline than most projects I&apos;ve worked on. Finding time around work and life takes actual planning. If I do something similar again, I&apos;ll set aside dedicated time each week from the start rather than fitting it in wherever I can.</p>
 

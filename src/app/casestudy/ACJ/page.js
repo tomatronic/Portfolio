@@ -41,7 +41,7 @@ function ACJ() {
                                     <li><b>Dual audiences</b>: Publishers needed to see "Where do I contribute?", Advertisers needed "Which publishers work together to drive conversions?". Same data, different questions and mental models.</li>
                                     <li><b>Trust</b>: Users needed confidence to make budget decisions, which meant explaining the complex attribution logic without overwhelming them.</li>
                                 </ul>
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Approach</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Approach</h2>
                                 <p>Through interviews with both internal account managers and external users, I learned that users wanted answers to specific questions with the ability to dig deeper when needed, not open ended data exploration.</p>
 
                                 <p><b>Key insight</b>: Start with answers, allow exploration.</p>
@@ -58,7 +58,7 @@ function ACJ() {
                                     </li>
                                     <li><b>Dual-audience design</b>: Publishers see their own contribution. Advertisers see all publishers in each journey. Same data structure, different views. The core visualisation is adapted to work for both user types, without increasing engineering efforts.</li>
                                 </ul>
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">Solution</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">Solution</h2>
                                 <div className="space-y-6">
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
                                         <Image src="/ACJ-activity-summary.png" width={1000} height={774} alt="Users first see an activity summary with total clicks across phases, average clicks to conversion, and their baseline contribution footprint—providing context before diving into detailed journeys." />
@@ -107,7 +107,7 @@ function ACJ() {
                                         <p>Users engaged more with the high-level summaries than the detailed paths. They wanted answers to specific questions, not open-ended data exploration. The more I added context around the numbers, the more confident they were making decisions from them.</p>
                                     </div>
                                 </div>
-                                <h2 className="pt-10 text-2xl tracking-tight mb-12">What I learned</h2>
+                                <h2 className="pt-10 text-xl tracking-tight">What I learned</h2>
                                 <p>The dual-audience constraint pushed me somewhere I wouldn't have gone otherwise. Rather than building two separate tools, sharing a data structure with different views turned out to be a cleaner solution than I expected. The same data really can tell different stories depending on what question you're starting with.</p>
                                 <p>Users engaged more readily with the attribution data once the logic was explained upfront — not simplified away. They didn't need less information, they needed better framing. That's something I've kept in mind since.</p>
                                 <OtherCaseStudies currentHref="/casestudy/ACJ" />
