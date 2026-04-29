@@ -125,7 +125,7 @@ function CardInner({ card, isHovered }) {
           {card.body}
         </p>
         {card.bullets && (
-          <ul className="space-y-1.5 text-sm font-normal text-slate-600 dark:text-slate-400">
+          <ul className="space-y-1.5 text-base font-normal text-slate-600 dark:text-slate-400">
             {card.bullets.map((b, i) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
