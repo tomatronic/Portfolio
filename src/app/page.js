@@ -16,8 +16,8 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <motion.div {...fadeUp}><CasestudyShowcase /></motion.div>
       <motion.div {...fadeUp}><AboutMeSection /></motion.div>
+      <motion.div {...fadeUp}><CasestudyShowcase /></motion.div>
       <motion.div {...fadeUp}><ExampleGallery /></motion.div>
     </div>
   );

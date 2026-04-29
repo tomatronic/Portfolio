@@ -21,14 +21,14 @@ const images = [
 
 export default function ExampleGallery() {
   return (
-    <div className="py-24">
+    <div className="py-16">
       <div className="container mx-auto max-w-6xl px-4">
 
         <h2 className="mb-4 text-2xl font-normal tracking-tight text-slate-950 dark:text-white md:text-3xl">
-          Extra Pixels
+          Additional work
         </h2>
         <p className="text-balance pb-6 pt-0 text-base font-normal text-slate-600 dark:text-slate-400">
-          Work I do when nobody&apos;s watching. Personal projects, speculative ideas, and the occasional rabbit hole.
+          A selection of personal projects, exploratory ideas, and award submissions.
         </p>
 
         <div className="grid grid-cols-2 gap-4 pb-16 md:grid-cols-4">

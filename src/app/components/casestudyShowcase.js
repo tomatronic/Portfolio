@@ -27,7 +27,13 @@ const CARDS = [
   {
     href:  '/casestudy/Prompt',
     title: 'Natural Language Search & AI',
-    body:  'Designed a natural language search tool for 1,000+ advertisers that cut report creation time by 90%, with an estimated $10M in annual time savings.',
+    tags:  ['Enterprise UX', 'AI Search'],
+    body:  'Designed a plain-English search tool used by 1,000+ advertisers, allowing users to generate reports without needing technical knowledge.',
+    bullets: [
+      { text: 'Reduced report creation time by ', highlight: '90%' },
+      { text: 'Estimated ', highlight: '$10M annual time savings' },
+      { text: 'Removed reliance on specialist support teams' },
+    ],
     images: [
       '/prompt_1.png',
       '/prompt_2.png',
@@ -37,7 +43,13 @@ const CARDS = [
   {
     href:  '/casestudy/ACJ',
     title: 'Multi-Touch Attribution for Affiliate',
-    body:  'Gave publishers a way to prove their value across journeys spanning up to 15 touchpoints — it ended up as a selling point for Rakuten in competitive pitches.',
+    tags:  ['Data Visualisation', 'Decision Tools'],
+    body:  'Devised a system that shows how different marketing channels contribute to a sale across up to 15 interactions.',
+    bullets: [
+      { text: 'Helped users understand complex customer journeys' },
+      { text: 'Enabled publishers to clearly demonstrate their impact' },
+      { text: 'Became a ', highlight: 'key differentiator in client pitches' },
+    ],
     images: [
       '/acj_1.png',
       '/acj_2.png',
@@ -46,8 +58,14 @@ const CARDS = [
   },
   {
     href:  '/casestudy/Rakuten',
-    title: 'Enhancing offer management',
-    body:  'Overhauled a long-neglected affiliate offer dashboard through research and testing. Support tickets dropped after launch and account managers got back the time they\'d been spending fielding queries.',
+    title: 'Offer Management Dashboard',
+    tags:  ['UX Optimisation', 'Workflow Design'],
+    body:  'Overhauled a complex and underperforming internal tool used to manage affiliate offers.',
+    bullets: [
+      { text: 'Simplified navigation and reduced user confusion' },
+      { text: 'Lowered support ticket volume post-launch' },
+      { text: 'Freed up account managers\' time from fielding queries' },
+    ],
     images: [
       '/offer_1.png',
       '/offer_2.png',
@@ -56,8 +74,14 @@ const CARDS = [
   },
   {
     href:   '/casestudy/InfluencerCampaigns',
-    title:  'Influencer Campaign Management',
-    body:   'Designed a full influencer campaign platform from scratch — prototype to prospect demo in 5 days, shipped to production 5 months later.',
+    title:  'Influencer Campaign Platform',
+    tags:   ['End-to-End Product Design'],
+    body:   'Designed and delivered a full campaign management platform from concept to launch.',
+    bullets: [
+      { text: 'Prototype ready in ', highlight: '5 days' , suffix: ' for early validation' },
+      { text: 'Shipped to production in ', highlight: '5 months' },
+      { text: 'Enabled teams to plan, track, and manage influencer campaigns in one place' },
+    ],
     images: [
       '/influencer_1.png',
       '/influencer_2.png',
@@ -85,12 +109,31 @@ function CardInner({ card, isHovered }) {
         <CardImageStack images={images} isHovered={isHovered} params={STACK_PARAMS} />
       </div>
       <div className="relative grid grid-cols-1 content-center gap-4 px-8 py-8 md:px-0 md:py-10 md:pl-10 md:pr-8">
+        {card.tags && (
+          <div className="flex flex-wrap gap-2 -mb-2">
+            {card.tags.map(tag => (
+              <span key={tag} className="rounded-full border border-[#C8BEB0] px-2.5 py-0.5 text-xs font-normal text-slate-500 dark:border-[#2A3A4A] dark:text-slate-400">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
         <h2 className="text-2xl font-normal tracking-tight text-slate-950 dark:text-white md:text-3xl">
           {card.title}
         </h2>
         <p className="mb-0 text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400">
           {card.body}
         </p>
+        {card.bullets && (
+          <ul className="space-y-1.5 text-sm font-normal text-slate-600 dark:text-slate-400">
+            {card.bullets.map((b, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                <span>{typeof b === 'string' ? b : <>{b.text}<strong className="font-semibold">{b.highlight}</strong>{b.suffix ?? ''}</>}</span>
+              </li>
+            ))}
+          </ul>
+        )}
         <p className="mb-0 mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-600 dark:text-accent-400">
           {card.locked ? (
             <>
@@ -152,11 +195,8 @@ export default function CasestudyShowcase() {
 
         <div className="mb-16">
           <h2 className="text-3xl font-normal tracking-tight text-slate-950 dark:text-white md:text-4xl">
-            Case studies
+            Selected case studies
           </h2>
-          <p className="mt-4 max-w-2xl text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400">
-            Four projects from eight years of designing at Rakuten Advertising.
-          </p>
         </div>
 
         <div className="flex flex-col gap-8">

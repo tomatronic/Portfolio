@@ -377,31 +377,23 @@ export default function SolarHero() {
               style={{ color: headingColour, lineHeight: 1.1, marginBottom: 0 }}
             >
               Senior UX Designer
-              <br />
-              <span
-                className="font-normal md:whitespace-nowrap"
-                style={{ color: dark ? 'rgba(200,215,230,0.65)' : '#475569' }}
-              >
-                Complex Problems, Clear Interfaces
-              </span>
             </h1>
 
-            <p
-              className="max-w-md text-center text-base font-normal leading-relaxed"
-              style={{ marginBottom: 0, color: dark ? 'rgba(160,185,210,0.70)' : '#64748B' }}
-            >
-              Currently at{' '}
-              <a
-                href="https://www.rakutenadvertising.com"
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium text-accent-600 underline decoration-accent-300 underline-offset-2 hover:decoration-accent-500"
+            <div className="flex flex-col items-center gap-3 max-w-3xl w-full">
+              <h2
+                className="w-full text-center text-xl font-normal tracking-tight"
+                style={{ color: dark ? 'rgba(200,215,230,0.85)' : '#334155' }}
               >
-                Rakuten Advertising
-              </a>
-              {' '}turning data-heavy, high-stakes workflows into something that feels obvious,
-              even when the problem underneath isn't.
-            </p>
+                Making complex products easy to use, especially where decisions matter most.
+              </h2>
+
+              <p
+                className="max-w-2xl text-center text-base font-normal leading-relaxed"
+                style={{ marginBottom: 0, color: dark ? 'rgba(160,185,210,0.70)' : '#64748B' }}
+              >
+                I specialise in turning data-heavy, high-stakes workflows into interfaces that are easy to understand and quick to act on. In practice, this means helping users move from &ldquo;what am I looking at?&rdquo; to &ldquo;I know exactly what to do next&rdquo; without training, friction, or guesswork.
+              </p>
+            </div>
 
             {/* ref used to suppress tooltip/crosshair when cursor is over this button */}
             <span ref={copyRef}>
