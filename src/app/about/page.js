@@ -10,7 +10,7 @@ export async function generateMetadata() {
 
 export default function About() {
     return (
-        <div className="mt-4">
+        <div className="mt-4 mb-16">
             <div className="container mx-auto max-w-6xl px-6 flex flex-col gap-4">
 
                 {/* Bio card */}
