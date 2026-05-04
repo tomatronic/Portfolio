@@ -159,7 +159,7 @@ export default function SolarHero() {
       <div
         ref={containerRef}
         className="w-full"
-        style={{ background: dark ? '#0F1623' : '#F2ECE2', height: '100vh', marginTop: `-${NAV_HEIGHT}px` }}
+        style={{ background: dark ? '#0F1623' : '#F2ECE2', height: '80vh', marginTop: `-${NAV_HEIGHT}px` }}
       />
     )
   }
@@ -260,7 +260,7 @@ export default function SolarHero() {
       style={{
         background: bgColour,
         cursor:     'none',
-        height:     '100vh',
+        height:     '80vh',
         marginTop:  `-${NAV_HEIGHT}px`,
       }}
       onMouseMove={handleMouseMove}
@@ -403,7 +403,7 @@ export default function SolarHero() {
                   const el = document.getElementById('work')
                   if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }) }
                 }}
-                className="btn-dark-3d inline-flex items-center gap-2 rounded-xl px-6 py-2.5 text-sm font-medium text-white"
+                className="inline-flex items-center gap-2 rounded-full bg-accent-600 px-5 py-2.5 text-sm font-normal text-white transition-colors hover:bg-accent-800 dark:bg-accent-400 dark:text-slate-950 dark:hover:bg-accent-300"
               >
                 Explore case studies
                 <ArrowDown size={15} strokeWidth={2.5} />

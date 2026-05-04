@@ -106,14 +106,14 @@ export default function Navigation() {
               <Link
                 href="/#work"
                 onClick={() => setHash('#work')}
-                className={`text-base ${isActive('/#work') ? 'text-accent-600 dark:text-accent-400' : 'text-slate-950 dark:text-slate-200 hover:text-accent-600 dark:hover:text-accent-400'}`}
+                className={`text-base ${isActive('/#work') ? 'text-slate-950 dark:text-white underline underline-offset-4 decoration-accent-600 dark:decoration-accent-400' : 'text-slate-950 dark:text-slate-200 hover:text-accent-600 dark:hover:text-accent-400'}`}
               >
                 Work
               </Link>
 
               <Link
                 href="/about"
-                className={`text-base ${isActive('/about') ? 'text-accent-600 dark:text-accent-400' : 'text-slate-950 dark:text-slate-200 hover:text-accent-600 dark:hover:text-accent-400'}`}
+                className={`text-base ${isActive('/about') ? 'text-slate-950 dark:text-white underline underline-offset-4 decoration-accent-600 dark:decoration-accent-400' : 'text-slate-950 dark:text-slate-200 hover:text-accent-600 dark:hover:text-accent-400'}`}
               >
                 About
               </Link>
