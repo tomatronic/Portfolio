@@ -147,11 +147,7 @@ body {
   }
 
   p {
-    @apply text-base font-normal leading-relaxed mb-4 text-slate-600 dark:text-slate-400 max-w-prose;
-  }
-
-  ul, ol {
-    @apply max-w-prose;
+    @apply text-base font-normal leading-relaxed mb-4 text-slate-600 dark:text-slate-400;
   }
 
   li {
