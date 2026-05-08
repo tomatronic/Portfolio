@@ -138,7 +138,7 @@ function CardInner({ card, isHovered }) {
           {card.locked ? (
             <>
               <Lock size={13} strokeWidth={2.5} />
-              <span>Password required</span>
+              <span>Password on request</span>
             </>
           ) : (
             <>

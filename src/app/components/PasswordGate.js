@@ -65,10 +65,17 @@ export default function PasswordGate({ href, onClose }) {
               className="text-xl text-slate-950 dark:text-white"
               style={{ fontFamily: 'var(--font-fraunces), Georgia, serif' }}
             >
-              Password protected
+              NDA protected
             </h3>
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              This case study is currently under wraps.
+              This work is confidential.{' '}
+              <a
+                href="mailto:tom.m.spencer@gmail.com?subject=Influencer Campaigns case study"
+                className="text-accent-600 hover:underline dark:text-accent-400"
+              >
+                Get in touch
+              </a>
+              {' '}and I'll send you the password.
             </p>
           </div>
         </div>

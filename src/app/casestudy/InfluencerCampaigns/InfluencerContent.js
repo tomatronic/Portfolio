@@ -42,10 +42,17 @@ function PagePasswordGate({ onAuth }) {
               className="text-xl text-slate-950 dark:text-white"
               style={{ fontFamily: 'var(--font-fraunces), Georgia, serif' }}
             >
-              Password protected
+              NDA protected
             </h3>
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              This case study is currently under wraps.
+              This work is confidential.{' '}
+              <a
+                href="mailto:tom.m.spencer@gmail.com?subject=Influencer Campaigns case study"
+                className="text-accent-600 hover:underline dark:text-accent-400"
+              >
+                Get in touch
+              </a>
+              {' '}and I'll send you the password.
             </p>
           </div>
         </div>
@@ -130,12 +137,11 @@ function CaseStudyContent() {
             <div className="col-span-4 mb-12">
 
               {/* Business case */}
-              <p>The business case was clear:</p>
-              <ul className="mb-8 space-y-2">
-                <li><b>Retain and win high-value advertisers</b> who wanted influencer and affiliate in one platform</li>
-                <li><b>Grow the creator network</b> — attract influencers to Rakuten Advertising and encourage advertisers to invite them into the ecosystem</li>
-                <li><b>New revenue streams</b> from influencer campaigns and creator-focused advertisers</li>
-              </ul>
+              <p>
+                The business case was clear: retain and win high-value advertisers who wanted influencer
+                and affiliate in one platform, grow the creator network by attracting influencers to the
+                ecosystem, and open new revenue streams from creator-focused campaigns.
+              </p>
               <p>
                 The challenge? Rakuten had never worked closely with influencers before. There was no
                 infrastructure to connect social accounts, no management tools for campaigns, and no
@@ -155,6 +161,121 @@ function CaseStudyContent() {
                 <li><b>Cross-functional complexity</b> — working across timezones, coordinating with external partners, aligning with developers estimating effort on the fly</li>
               </ul>
 
+              {/* Personas */}
+              <div className="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+                {/* Advertiser */}
+                <div className="rounded-2xl border border-[#C8BEB0] bg-[#EDE7DD] p-6 dark:border-[#2A3A4A] dark:bg-slate-800/50">
+                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-xs font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-400">
+                    Advertiser
+                  </span>
+                  <div className="mb-5 flex items-center gap-3">
+                    <div
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-200 text-accent-700 dark:bg-accent-950 dark:text-accent-400"
+                      style={{ fontFamily: 'var(--font-fraunces), Georgia, serif', fontSize: '1.1rem' }}
+                    >
+                      S
+                    </div>
+                    <div>
+                      <p className="mb-0 max-w-none text-sm font-semibold text-slate-950 dark:text-white">Sarah Chen</p>
+                      <p className="mb-0 max-w-none text-xs text-slate-500 dark:text-slate-400">Performance Marketing Manager</p>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">Goals</p>
+                      <ul className="max-w-none space-y-1.5">
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          Retain influencer partners within one platform
+                        </li>
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          Prove influencer ROI to stakeholders
+                        </li>
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          Manage deliverables without switching tools
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">Pain points</p>
+                      <ul className="max-w-none space-y-1.5">
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
+                          Fragmented tools for affiliate and influencer management
+                        </li>
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
+                          No way to verify posts were published as agreed
+                        </li>
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
+                          Social metrics don't connect to affiliate performance data
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Creator */}
+                <div className="rounded-2xl border border-[#C8BEB0] bg-[#EDE7DD] p-6 dark:border-[#2A3A4A] dark:bg-slate-800/50">
+                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-xs font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-400">
+                    Creator
+                  </span>
+                  <div className="mb-5 flex items-center gap-3">
+                    <div
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-200 text-accent-700 dark:bg-accent-950 dark:text-accent-400"
+                      style={{ fontFamily: 'var(--font-fraunces), Georgia, serif', fontSize: '1.1rem' }}
+                    >
+                      M
+                    </div>
+                    <div>
+                      <p className="mb-0 max-w-none text-sm font-semibold text-slate-950 dark:text-white">Marcus Reid</p>
+                      <p className="mb-0 max-w-none text-xs text-slate-500 dark:text-slate-400">Lifestyle Content Creator · 85k followers</p>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">Goals</p>
+                      <ul className="max-w-none space-y-1.5">
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          Find brand partnerships that match their niche
+                        </li>
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          Understand exactly what's required before committing
+                        </li>
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          Get paid reliably with clear terms upfront
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">Pain points</p>
+                      <ul className="max-w-none space-y-1.5">
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
+                          Vague campaign briefs with unclear deliverables
+                        </li>
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
+                          Platforms built for advertisers, not creators
+                        </li>
+                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
+                          No visibility on payment status after posting
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
               <h3 className="pt-10">My approach: Prototype first, validate fast</h3>
               <p>
                 On Tuesday morning, I joined a briefing call with the VP of Product. The big question
@@ -166,21 +287,20 @@ function CaseStudyContent() {
                 out with wireframes and quickly iterated into a golden-path clickthrough prototype with
                 high-fidelity mocks.
               </p>
-              <p>What I built in 5 days:</p>
-              <ul className="mb-8 space-y-2">
-                <li>Full clickable prototype showing the end-to-end experience</li>
-                <li>Advertiser side: campaign creation, influencer invites, application review</li>
-                <li>Influencer side: campaign discovery, application flow, deliverable submission</li>
-                <li>Social post display</li>
-                <li>Key workflows connected and demonstrable</li>
-              </ul>
-              <p>Why this approach worked:</p>
-              <ul className="mb-8 space-y-2">
-                <li><b>Speed over perfection</b> — I jumped straight to high-fidelity mockups using existing design system components where possible</li>
-                <li><b>Risk reduction</b> — by prototyping the complete flow, I surfaced technical questions early and gave engineering and the external partner team clear requirements to evaluate</li>
-                <li><b>Stakeholder confidence</b> — when the VP of Product saw the prototype, it gave her confidence to demo the vision to the prospect</li>
-                <li><b>The result</b> — prototype delivered Friday, demo to prospect Monday, prospect impressed, project greenlit for December MVP</li>
-              </ul>
+              <p>
+                In five days I built a full clickable prototype covering the end-to-end experience:
+                campaign creation, influencer invites, and application review on the advertiser side;
+                campaign discovery, application flow, and deliverable submission on the influencer side;
+                social post display; and all key workflows connected and demonstrable.
+              </p>
+              <p>
+                Jumping straight to high-fidelity mockups — using existing design system components
+                where possible — meant the prototype moved fast without sacrificing credibility.
+                Prototyping the complete flow, rather than individual screens, surfaced technical
+                questions early and gave engineering clear requirements to evaluate. When the VP of
+                Product saw it, she had enough confidence to demo the vision to the prospect directly.
+                Prototype delivered Friday, demo on Monday, project greenlit for December MVP.
+              </p>
 
               <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
                 <Zoom>
@@ -206,25 +326,19 @@ function CaseStudyContent() {
                 With only five months to production, I worked with the PM to make hard choices about
                 what to include in MVP versus what to defer.
               </p>
-              <p>What I cut for V1:</p>
-              <ul className="mb-8 space-y-2">
-                <li><b>In-app negotiation</b> — advertisers and influencers can't negotiate terms in-platform (V2 feature pending user feedback)</li>
-                <li><b>AI integrations</b> — brief and campaign creation, smart influencer suggestions, and AI-optimised incentive recommendations deferred to V2</li>
-                <li><b>Multiple invite entry points</b> — limited to one primary location to reduce engineering surface area</li>
-              </ul>
-              <p>What I kept for V1:</p>
-              <ul className="mb-8 space-y-2">
-                <li>Core campaign creation and editing</li>
-                <li>Influencer application flow</li>
-                <li>Social post verification (the key differentiator)</li>
-                <li>Basic campaign management and review tools</li>
-              </ul>
               <p>
-                <b>The principle</b>: ship a complete story a user can accomplish end-to-end, even if
-                it's missing extra polish. The ruthless scoping had an unexpected benefit — it forced
-                me to identify the absolute core value proposition. What's the ONE thing this product
-                must do? Let advertisers create campaigns and let influencers apply and complete them.
-                Everything else is enhancement.
+                Everything went through the same filter: does this need to exist on day one?
+                In-app negotiation, AI-powered brief creation, and smart influencer recommendations
+                all got cut to V2 — genuinely useful, but not necessary to ship a complete story.
+                What stayed was the core loop: campaign creation, the influencer application flow,
+                social post verification (the key differentiator), and the basic management tools
+                to run it all. If a user could complete that journey end-to-end, we had an MVP.
+              </p>
+              <p>
+                The ruthless scoping had an unexpected benefit — it forced me to identify the absolute
+                core value proposition. What's the one thing this product must do? Let advertisers
+                create campaigns and let influencers apply and complete them. Everything else is
+                enhancement.
               </p>
 
               <h3 className="pt-10">Dual-audience UI</h3>
@@ -232,18 +346,15 @@ function CaseStudyContent() {
                 Advertisers and influencers needed fundamentally different experiences from the same
                 underlying campaign system.
               </p>
-              <p>For advertisers (campaign creation):</p>
-              <ul className="mb-8 space-y-2">
-                <li>Business-focused language: goals, deliverables, compensation structures</li>
-                <li>Campaign management dashboard showing applications, completions, performance</li>
-                <li>Detailed influencer profiles with audience data, engagement rates, previous campaigns</li>
-              </ul>
-              <p>For influencers (campaign discovery):</p>
-              <ul className="mb-8 space-y-2">
-                <li>Opportunity-focused language: what's in it for them, what they need to do</li>
-                <li>"Sell" the campaign with compelling visuals and clear expectations</li>
-                <li>Simplified application flow — quick to apply, easy to understand requirements</li>
-              </ul>
+              <p>
+                Advertisers needed business-focused tools: a management dashboard tracking applications
+                and completions, detailed influencer profiles with audience data and engagement rates,
+                and language around goals, deliverables, and compensation structures. Influencers needed
+                almost the opposite — opportunity-focused framing that answered "what's in it for me?"
+                before anything else. Campaigns needed to be sold, not specified. The application flow
+                had to be quick and low-friction, with requirements framed as expectations rather than
+                obligations.
+              </p>
               <p>
                 These couldn't be separate products (engineering would never deliver in time), but they
                 couldn't feel identical either. I settled on shared underlying components and data
@@ -283,18 +394,6 @@ function CaseStudyContent() {
                 CTAs with minimal friction. The page needed to feel like an opportunity worth pursuing,
                 not a dry specification document.
               </p>
-
-              <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
-                <Zoom>
-                  <Image
-                    src="/initialDoodle.png"
-                    className="w-full rounded-2xl"
-                    width={1000}
-                    height={774}
-                    alt="Early wireframe sketches for the influencer campaign creation and discovery flows"
-                  />
-                </Zoom>
-              </div>
 
               {/* Testing */}
               <h2 className="pt-10 text-xl tracking-tight">Testing and iteration</h2>
@@ -336,13 +435,14 @@ function CaseStudyContent() {
                 <li><b>MVP development</b> — September 2025 to February 2026 (5 months concept-to-production)</li>
                 <li><b>Planned V2 iteration</b> — Mid-January 2026 based on real user feedback and data</li>
               </ul>
-              <p>What this speed enabled:</p>
-              <ul className="mb-8 space-y-2">
-                <li>Secured prospect commitment by demonstrating vision before competitors</li>
-                <li>Lowered project risk by validating concepts before heavy engineering investment</li>
-                <li>Aligned stakeholders around a shared vision through tangible prototypes</li>
-                <li>Created urgency that kept the project prioritised through competing demands</li>
-              </ul>
+              <p>
+                Moving fast with a tangible prototype did more than hit a deadline. It secured the
+                prospect's commitment before competitors could respond, validated the concept before
+                any serious engineering investment, and aligned stakeholders around a shared vision
+                they could actually click through. The prototype also created its own momentum —
+                when people can see and interact with something real, it stays prioritised through
+                competing demands in a way that a slide deck never does.
+              </p>
 
               {/* What I learned */}
               <h2 className="pt-10 text-xl tracking-tight">What I learned</h2>
@@ -351,27 +451,6 @@ function CaseStudyContent() {
               <p>I built the layouts to be flexible from the start — cards that could handle variable data, components that could be extended without breaking. That wasn't over-engineering; it was the only practical way to ship something that could grow once real users showed up with real feedback.</p>
               <p>Prototyping end-to-end, rather than screen by screen, helped me catch gaps that would have been expensive to fix later. It's easy to design a screen that looks good in isolation. It's harder to design a journey that actually holds together.</p>
               <p className="mb-12">And the deadline, oddly, helped. When you have to ship something complete in a tight timeframe, you stop defending nice-to-haves and focus on what the product actually needs to be usable.</p>
-
-              <div className="mb-8 space-y-8">
-                <Zoom>
-                  <Image
-                    src="/beerLover.png"
-                    className="w-full rounded-2xl"
-                    width={1684}
-                    height={1190}
-                    alt="Advertiser persona — goals, pain points, and mental model for an advertiser using Rakuten's influencer campaign tools"
-                  />
-                </Zoom>
-                <Zoom>
-                  <Image
-                    src="/designLover.png"
-                    className="w-full rounded-2xl"
-                    width={1684}
-                    height={1190}
-                    alt="Influencer persona — goals, pain points, and mental model for a content creator using Rakuten's campaign discovery and application flow"
-                  />
-                </Zoom>
-              </div>
 
               <OtherCaseStudies currentHref="/casestudy/InfluencerCampaigns" />
             </div>
