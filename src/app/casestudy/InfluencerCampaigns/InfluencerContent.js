@@ -97,7 +97,7 @@ function CaseStudyContent() {
           {/* Hero */}
           <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
             <Image
-              src="/brewtifulBg.png"
+              src="/influencerHero.png"
               width={1600}
               height={927}
               alt="Influencer Campaigns product overview — advertiser and influencer interface for managing affiliate influencer campaigns on Rakuten Advertising"
