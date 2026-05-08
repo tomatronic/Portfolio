@@ -305,10 +305,10 @@ function CaseStudyContent() {
               <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
                 <Zoom>
                   <Image
-                    src="/sampleBeer.png"
+                    src="/prototypeScreens.png"
                     className="w-full rounded-2xl"
-                    width={500}
-                    height={542}
+                    width={1400}
+                    height={800}
                     alt="High-fidelity prototype screens delivered in five days showing the end-to-end influencer campaign flow for the prospect demo"
                   />
                 </Zoom>
