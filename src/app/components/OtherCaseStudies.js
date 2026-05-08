@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import CardImageStack from './CardImageStack'
 
 const COMPACT_PARAMS = {
@@ -52,7 +53,7 @@ function CompactCard({ card }) {
 
   const images = useMemo(
     () => card.images.map((src, i) => (
-      <img key={i} src={src} alt="" loading="lazy" decoding="async"
+      <Image key={i} src={src} alt="" width={120} height={120}
         className="aspect-square w-full object-cover" />
     )),
     [card.images]
