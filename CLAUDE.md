@@ -9,10 +9,15 @@
 - To restore full safe version: `git checkout ce8b3de` (creates detached HEAD — branch off from there if needed)
 - **Palette**: violet-600 accent, `#fafafa` / `#0a0a0a` bg
 
-### Experimental version (current — active)
+### Current version (active — May 2026)
+- **Hero**: Centred, full-bleed noise + gradient background. Pill badge, Fraunces headline with amber gradient highlight on "easy to use", sub-copy, rounded-full CTA with smooth scroll to `#work`.
+- **Background**: Fixed fractal noise SVG (`feTurbulence baseFrequency 0.9`) + 3 radial gradient blobs over `#EDE7DD` light / `#0F1623` dark. Both layers at `z-index: 0`; page content at `z-index: 1`.
+- **Palette**: amber `#B84010` accent, warm cream `#EDE7DD` (page + hero base) light, deep navy `#0F1623` dark
+
+### Archived version — SolarHero (`/testHome`)
 - **Hero**: `SolarHero.js` — full-viewport solar elevation arc for Brighton, UK. Real-time sun position. Hover tooltip + custom cursor (6px dot).
-- `hero.js` re-exports from `SolarHero.js`
-- **Palette**: amber `#B84010` accent, warm cream `#F2ECE2` (hero) / `#EDE7DD` (page) light, deep navy `#0F1623` dark
+- `hero.js` still re-exports from `SolarHero.js` — used by `/testHome` only.
+- Accessible at `http://localhost:3000/testHome`
 
 ## Project
 Tom Spencer's portfolio site. Next.js 15 + Tailwind CSS v4 + Framer Motion.
@@ -32,11 +37,12 @@ Project root: `/Users/thomasspencer/Documents/Portfolio2.0/portfolio2.0/`
 ```
 src/app/
   layout.js                   — root layout: Navigation, Footer, ThemeProvider, PageBackground, FOUC script
-  page.js                     — home page: Hero + CasestudyShowcase + AboutMeSection + ExampleGallery
+  page.js                     — home page: noise/gradient hero + AboutMeSection + CasestudyShowcase + Testimonials
+  testHome/page.js            — archived SolarHero design (for reference)
   globals.css                 — Tailwind v4 config, @theme accent tokens, dark mode variant, base styles, btn-violet-3d / btn-dark-3d utilities
   components/
-    hero.js                   — re-exports SolarHero (1 line)
-    SolarHero.js              — solar elevation chart hero (see below)
+    hero.js                   — re-exports SolarHero (used by /testHome only)
+    SolarHero.js              — archived solar elevation chart hero (see below)
     hero.safe.js              — safe version hero (original centred layout, violet accent)
     hero.original.js          — same as hero.safe.js — kept for reference
     casestudyShowcase.js      — work cards: full-width 2-col, CardImageStack right, text left
@@ -134,7 +140,7 @@ One theme-switching method in context:
 - Desktop links: Work, About, Resume pill (hover → `accent-600` with white text)
 - Mobile: full-screen `bg-slate-950` overlay with Menu/X lucide icons. Links are `font-normal` (not bold).
 - `className="relative z-50"` — `relative` is required for `z-50` to take effect
-- **No background** — chart shows through nav area. This is intentional.
+- **No background** — fixed noise/gradient layers show through nav area. This is intentional.
 
 ## Case study cards (home page)
 `src/app/components/casestudyShowcase.js`
@@ -169,7 +175,7 @@ Colours match site palette:
 ## Colour palette — Experimental (current)
 | Role | Light | Dark |
 |------|-------|------|
-| Hero chart bg | `#F2ECE2` | `#0F1623` |
+| Hero / page bg | `#EDE7DD` + noise + gradient blobs | `#0F1623` + noise + gradient blobs |
 | Page body bg | `#EDE7DD` | `#0F1623` |
 | Case study image containers | `#EDE7DD` | `slate-800/50` |
 | Nav bg | none (transparent) | none (transparent) |
@@ -206,7 +212,7 @@ Use `text-accent-600`, `bg-accent-600`, `border-accent-200`, etc. in Tailwind cl
 Defined in `globals.css`. Base `#155C5C`, hover `#0A3A3A`. White gradient overlay on hover. `rounded-xl`.
 
 ### `btn-dark-3d`
-Near-black `#1C1C16` base, hover `#2C2C22`. Used on the SolarHero CTA ("Explore case studies").
+Near-black `#1C1C16` base, hover `#2C2C22`. Used on the archived SolarHero CTA.
 
 ## Dark mode
 - **Tailwind v4** dark mode: configured via `@variant dark (&:is(.dark, .dark *))` in `globals.css`
@@ -215,16 +221,17 @@ Near-black `#1C1C16` base, hover `#2C2C22`. Used on the SolarHero CTA ("Explore 
 - FOUC prevention: inline `<script>` in layout.js applies dark class before hydration
 - `<html>` has `suppressHydrationWarning` to avoid React mismatch warnings
 - PageBackground.js only reacts to theme changes (NOT pathname — avoids flash on modal open)
-- SolarHero reads `useTheme()` directly and switches colour palette via JS (not Tailwind dark: classes)
+- `page.js` and `SolarHero.js` both read `useTheme()` directly and switch colour palette via JS (not Tailwind dark: classes)
 
 ## Case study modal (Parallel + Intercepting Routes)
 - Clicking a card triggers `@modal/(.)casestudy/[slug]/page.js` — URL updates, modal slides up
 - Direct URL (`/casestudy/Prompt`) still renders the full page normally
-- Modal: spring slide-up (open), fast `easeIn` 0.22s (close)
-- Close: sticky X button inside panel, Escape key. `router.back()` fires after animation.
+- **Two separate layers**: backdrop (`motion.div` fade 0.28s open / 0.18s close) + panel (`motion.div` spring slide-up open / `easeIn` 0.22s close)
+- Backdrop: `bg-[#B84010]/[0.08] dark:bg-[#3D1204]/90 backdrop-blur-sm pointer-events-none` — fades independently
+- Panel: transparent container, handles scroll + close button + content
+- Close: sticky X button inside panel, Escape key. `router.back()` fires after panel animation completes.
 - OtherCaseStudies links use `replace` prop to avoid history stacking (close always returns home)
 - Scroll lock: `overflow: hidden` + `paddingRight` compensates for scrollbar width shift
-- Modal bg: `bg-[#2A6B6B]/[0.12] dark:bg-[#051F1F]/90 backdrop-blur-sm`
 
 ## Card interactions
 - **Hover shadow**: `0 4px 24px rgba(184,64,16,0.10)` light / `rgba(238,159,104,0.12)` dark (amber-tinted)

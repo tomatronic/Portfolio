@@ -29,9 +29,19 @@ export default function CaseStudyModal({ children }) {
 
   return (
     <>
-      {/* Panel */}
+      {/* Backdrop — fades in/out independently */}
       <motion.div
-        className="fixed inset-0 z-50 overflow-y-auto bg-[#B84010]/[0.08] dark:bg-[#3D1204]/90 backdrop-blur-sm"
+        className="fixed inset-0 z-50 bg-[#B84010]/[0.08] dark:bg-[#3D1204]/90 backdrop-blur-sm pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isClosing ? 0 : 1 }}
+        transition={isClosing
+          ? { duration: 0.18, ease: 'easeIn' }
+          : { duration: 0.28, ease: 'easeOut' }}
+      />
+
+      {/* Panel — slides up from bottom */}
+      <motion.div
+        className="fixed inset-0 z-50 overflow-y-auto"
         initial={{ y: '100%' }}
         animate={{ y: isClosing ? '100%' : '0%' }}
         transition={isClosing
@@ -39,7 +49,7 @@ export default function CaseStudyModal({ children }) {
           : { type: 'spring', stiffness: 320, damping: 38, mass: 0.9 }}
         onAnimationComplete={() => { if (isClosing) router.back() }}
       >
-        {/* Floating close button — absolute inside the panel so it slides with it */}
+        {/* Floating close button */}
         <div className="pointer-events-none sticky right-0 top-0 z-10 flex justify-end px-6 pt-6">
           <button
             onClick={close}
