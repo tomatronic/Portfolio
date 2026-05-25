@@ -191,14 +191,8 @@ function Card({ card }) {
 
 export default function CasestudyShowcase() {
   return (
-    <div id="work" className="py-24">
+    <div id="work" className="pb-24 pt-10">
       <div className="container mx-auto max-w-6xl px-4">
-
-        <div className="mb-16">
-          <h2 className="text-3xl font-normal tracking-tight text-slate-950 dark:text-white md:text-4xl">
-            Selected case studies
-          </h2>
-        </div>
 
         <div className="flex flex-col gap-8">
           {CARDS.map(card => <Card key={card.href} card={card} />)}

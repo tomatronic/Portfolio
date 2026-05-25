@@ -82,7 +82,7 @@ export default function Navigation() {
   return (
     <>
       <nav className="relative z-50">
-        <div className="container mx-auto max-w-6xl px-6 py-12">
+        <div className="container mx-auto max-w-6xl px-6 py-8">
           <div className="flex items-center justify-between">
             <Link
               href="/"
@@ -143,7 +143,7 @@ export default function Navigation() {
           exit={{ opacity: 0, y: -12 }}
           transition={{ type: 'spring', stiffness: 340, damping: 30 }}
         >
-          <div className="container relative mx-auto h-full px-6 py-12">
+          <div className="container relative mx-auto h-full px-6 py-8">
             <button
               onClick={() => setIsMenuOpen(false)}
               className="absolute right-6 top-12 text-white md:hidden"

@@ -8,7 +8,7 @@ import AboutMeSection from './components/AboutMeSection'
 import Testimonials from './components/Testimonials'
 import { useTheme } from './components/ThemeProvider'
 
-const NAV_HEIGHT = 144
+const NAV_HEIGHT = 96
 
 const NOISE_LIGHT = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.18 0 0 0 0 0.12 0 0 0 0 0.07 0 0 0 0.04 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>")`
 
@@ -67,7 +67,7 @@ export default function Home() {
 
         {/* ── Hero ──────────────────────────────────────────────────────────── */}
         <section style={{ marginTop: `-${NAV_HEIGHT}px`, paddingTop: `${NAV_HEIGHT}px` }}>
-          <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-6 py-20 text-center md:py-28">
+          <div className="container mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-10 text-center md:items-start md:py-16 md:text-left">
 
             {/* Pill */}
             <div
@@ -88,7 +88,7 @@ export default function Home() {
 
             {/* Headline */}
             <h1
-              className="mb-8 text-balance text-center text-4xl font-normal tracking-tight md:text-5xl lg:text-6xl"
+              className="mb-8 w-full max-w-[800px] text-balance text-2xl font-normal tracking-tight md:text-left md:text-3xl lg:text-4xl"
               style={{ lineHeight: 1.1, color: dark ? '#ffffff' : '#020617' }}
             >
               Making complex products{' '}
@@ -98,7 +98,7 @@ export default function Home() {
 
             {/* Sub-copy */}
             <p
-              className="mb-10 max-w-2xl text-center text-base font-normal leading-relaxed"
+              className="mb-10 w-full max-w-[800px] text-base font-normal leading-relaxed"
               style={{ color: dark ? 'rgba(160,185,210,0.70)' : '#64748B' }}
             >
               I specialise in turning data-heavy, high-stakes workflows into interfaces that are easy to understand and quick to act on. In practice, this means helping users move from &ldquo;what am I looking at?&rdquo; to &ldquo;I know exactly what to do next&rdquo; without training, friction, or guesswork.
@@ -120,11 +120,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── About me ──────────────────────────────────────────────────────── */}
-        <motion.div {...fadeUp}><AboutMeSection /></motion.div>
-
         {/* ── Case studies ──────────────────────────────────────────────────── */}
         <motion.div {...fadeUp}><CasestudyShowcase /></motion.div>
+
+        {/* ── About me ──────────────────────────────────────────────────────── */}
+        <motion.div {...fadeUp}><AboutMeSection /></motion.div>
 
         {/* ── Testimonials ──────────────────────────────────────────────────── */}
         <motion.div {...fadeUp}><Testimonials /></motion.div>
