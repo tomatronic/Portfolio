@@ -30,7 +30,6 @@ const CARDS = [
       { text: 'Enabled teams to plan, track, and manage influencer campaigns in one place' },
     ],
     images: ['/view-campaign.png', { src: '/influencer_2.png', position: 'bottom' }],
-    locked: true,
   },
   {
     href:  '/casestudy/ACJ',
@@ -81,39 +80,40 @@ function CardInner({ card }) {
       {/* Text: title+body+CTA left, bullets right */}
       <div className="px-2 pb-2 pt-1 md:px-4 md:pb-4">
 
+        <h2 className="mb-3 text-2xl font-normal tracking-tight text-slate-950 dark:text-white">
+          {card.title}
+        </h2>
+
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
-        <div>
-          <h2 className="mb-3 text-2xl font-normal tracking-tight text-slate-950 dark:text-white">
-            {card.title}
-          </h2>
-          <p className="mb-5 text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400">
+          <p className="mb-0 text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400">
             {card.body}
           </p>
-          <p className="mb-0 inline-flex items-center gap-1.5 text-sm font-medium text-accent-600 dark:text-accent-400">
-            {card.locked ? (
-              <><Lock size={13} strokeWidth={2.5} /><span>Password on request</span></>
-            ) : (
-              <>Read case study<ArrowRight size={14} strokeWidth={2.5} className="transition-transform duration-200 group-hover:translate-x-0.5" /></>
-            )}
-          </p>
+
+          {card.bullets && (
+            <ul className="space-y-2.5 text-base font-normal text-slate-600 dark:text-slate-400">
+              {card.bullets.map((b, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                  <span>
+                    {typeof b === 'string'
+                      ? b
+                      : <>{b.text}<strong className="font-semibold">{b.highlight}</strong>{b.suffix ?? ''}</>}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
-        {card.bullets && (
-          <ul className="space-y-2.5 text-base font-normal text-slate-600 dark:text-slate-400 md:pt-1">
-            {card.bullets.map((b, i) => (
-              <li key={i} className="flex items-start gap-2">
-                <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
-                <span>
-                  {typeof b === 'string'
-                    ? b
-                    : <>{b.text}<strong className="font-semibold">{b.highlight}</strong>{b.suffix ?? ''}</>}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
 
-        </div>
+        {/* CTA — always at the base of the card */}
+        <p className="mb-0 mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-600 dark:text-accent-400">
+          {card.locked ? (
+            <><Lock size={13} strokeWidth={2.5} /><span>Password on request</span></>
+          ) : (
+            <>Read case study<ArrowRight size={14} strokeWidth={2.5} className="transition-transform duration-200 group-hover:translate-x-0.5" /></>
+          )}
+        </p>
       </div>
     </div>
   )

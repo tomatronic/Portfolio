@@ -80,32 +80,30 @@ function ACJ() {
                                 </div>
                                 <div className="max-w-full mb-12">
                                     <h2 className="pt-10 text-xl tracking-tight">Outcome</h2>
-                                    <div className="space-y-4">
-                                        <p> &bull; 8-month development from concept to production (October 2022 - June 2023) <br/>
-                                            &bull; Sole designer on a cross-functional team<br/>
-                                            &bull; Launched to all eligible publishers and advertisers</p>
-                                        <p><b>Impact</b><br />
-                                            &bull; 35 daily active users exploring multi-touch attribution<br/>
-                                            &bull; Used in sales pitches as a key differentiator against competitors<br/>
-                                            &bull; Became standard part of the platform's analytics offering</p>
-                                        <div>
-                                            <p><b>What this enabled</b></p>
-                                            <ul className="list-disc list-inside space-y-1">
-                                                <li>Proved value beyond last-click (e.g., "I drive 40% of awareness-phase conversions").</li>
-                                                <li>Created new sales narratives when pitching to advertisers.</li>
-                                                <li>Enabled data-backed conversations about their role in the funnel.</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <p><b>What this enabled for advertisers:</b></p>
-                                            <ul className="list-disc list-inside space-y-1">
-                                                <li>Understood which publisher combinations drive the best results.</li>
-                                                <li>Optimized partner mix based on full-funnel contribution.</li>
-                                                <li>More informed budget allocation decisions across awareness, consideration, and conversion</li>
-                                            </ul>
-                                        </div>
-                                        <p>Users engaged more with the high-level summaries than the detailed paths. They wanted answers to specific questions, not open-ended data exploration. The more I added context around the numbers, the more confident they were making decisions from them.</p>
-                                    </div>
+                                    <ul className="mb-8 space-y-2">
+                                        <li>8-month development from concept to production (October 2022 – June 2023)</li>
+                                        <li>Sole designer on a cross-functional team</li>
+                                        <li>Launched to all eligible publishers and advertisers</li>
+                                    </ul>
+                                    <h3 className="pt-6">Impact</h3>
+                                    <ul className="mb-8 space-y-2">
+                                        <li>35 daily active users exploring multi-touch attribution</li>
+                                        <li>Used in sales pitches as a key differentiator against competitors</li>
+                                        <li>Became standard part of the platform's analytics offering</li>
+                                    </ul>
+                                    <h3 className="pt-6">What this enabled for publishers</h3>
+                                    <ul className="mb-8 space-y-2">
+                                        <li>Proved value beyond last-click (e.g., &ldquo;I drive 40% of awareness-phase conversions&rdquo;)</li>
+                                        <li>Created new sales narratives when pitching to advertisers</li>
+                                        <li>Enabled data-backed conversations about their role in the funnel</li>
+                                    </ul>
+                                    <h3 className="pt-6">What this enabled for advertisers</h3>
+                                    <ul className="mb-8 space-y-2">
+                                        <li>Understood which publisher combinations drive the best results</li>
+                                        <li>Optimised partner mix based on full-funnel contribution</li>
+                                        <li>More informed budget allocation decisions across awareness, consideration, and conversion</li>
+                                    </ul>
+                                    <p>Users engaged more with the high-level summaries than the detailed paths. They wanted answers to specific questions, not open-ended data exploration. The more I added context around the numbers, the more confident they were making decisions from them.</p>
                                 </div>
                                 <h2 className="pt-10 text-xl tracking-tight">What I learned</h2>
                                 <p>The dual-audience constraint pushed me somewhere I wouldn't have gone otherwise. Rather than building two separate tools, sharing a data structure with different views turned out to be a cleaner solution than I expected. The same data really can tell different stories depending on what question you're starting with.</p>

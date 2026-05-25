@@ -326,19 +326,57 @@ function CaseStudyContent() {
                 With only five months to production, I worked with the PM to make hard choices about
                 what to include in MVP versus what to defer.
               </p>
+              <p>Everything went through the same filter: does this need to exist on day one?</p>
+
+              <div className="my-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+                {/* Shipped in V1 */}
+                <div className="rounded-2xl bg-[#EDE7DD] p-6 dark:bg-slate-800/50">
+                  <p className="mb-4 text-sm font-semibold text-slate-950 dark:text-white">Shipped in V1</p>
+                  <ul className="space-y-2.5 text-base font-normal text-slate-600 dark:text-slate-400">
+                    <li className="flex items-start gap-2">
+                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                      <span>Campaign creation</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                      <span>The influencer application flow</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                      <span>Social post verification (the key differentiator)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                      <span>The basic management tools to run it all</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Deferred to V2 */}
+                <div className="rounded-2xl bg-[#EDE7DD] p-6 dark:bg-slate-800/50">
+                  <p className="mb-4 text-sm font-semibold text-slate-950 dark:text-white">Deferred to V2 — genuinely useful, but not necessary to ship a complete story</p>
+                  <ul className="space-y-2.5 text-base font-normal text-slate-600 dark:text-slate-400">
+                    <li className="flex items-start gap-2">
+                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400 dark:bg-slate-500" />
+                      <span>In-app negotiation</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400 dark:bg-slate-500" />
+                      <span>AI-powered brief creation</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400 dark:bg-slate-500" />
+                      <span>Smart influencer recommendations</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
               <p>
-                Everything went through the same filter: does this need to exist on day one?
-                In-app negotiation, AI-powered brief creation, and smart influencer recommendations
-                all got cut to V2 — genuinely useful, but not necessary to ship a complete story.
-                What stayed was the core loop: campaign creation, the influencer application flow,
-                social post verification (the key differentiator), and the basic management tools
-                to run it all. If a user could complete that journey end-to-end, we had an MVP.
-              </p>
-              <p>
-                The ruthless scoping had an unexpected benefit — it forced me to identify the absolute
-                core value proposition. What's the one thing this product must do? Let advertisers
-                create campaigns and let influencers apply and complete them. Everything else is
-                enhancement.
+                If a user could complete that journey end-to-end, we had an MVP. The ruthless scoping
+                had an unexpected benefit — it forced me to identify the absolute core value proposition.
+                What's the one thing this product must do? Let advertisers create campaigns and let
+                influencers apply and complete them. Everything else is enhancement.
               </p>
 
               <h3 className="pt-10">Dual-audience UI</h3>
@@ -454,13 +492,5 @@ function CaseStudyContent() {
 // ─── Auth wrapper ──────────────────────────────────────────────────────────────
 
 export default function InfluencerContent() {
-  const [auth, setAuth] = useState(null) // null = checking, true/false = result
-
-  useEffect(() => {
-    setAuth(sessionStorage.getItem('influencer_auth') === '1')
-  }, [])
-
-  if (auth === null) return null // avoid flash before sessionStorage check
-  if (!auth) return <PagePasswordGate onAuth={() => setAuth(true)} />
   return <CaseStudyContent />
 }

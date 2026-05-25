@@ -37,7 +37,7 @@ Project root: `/Users/thomasspencer/Documents/Portfolio2.0/portfolio2.0/`
 ```
 src/app/
   layout.js                   — root layout: Navigation, Footer, ThemeProvider, PageBackground, FOUC script
-  page.js                     — home page: noise/gradient hero + AboutMeSection + CasestudyShowcase + Testimonials
+  page.js                     — home page: noise/gradient hero + CasestudyShowcase + AboutMeSection + Testimonials
   testHome/page.js            — archived SolarHero design (for reference)
   globals.css                 — Tailwind v4 config, @theme accent tokens, dark mode variant, base styles, btn-violet-3d / btn-dark-3d utilities
   components/
@@ -45,7 +45,7 @@ src/app/
     SolarHero.js              — archived solar elevation chart hero (see below)
     hero.safe.js              — safe version hero (original centred layout, violet accent)
     hero.original.js          — same as hero.safe.js — kept for reference
-    casestudyShowcase.js      — work cards: full-width 2-col, CardImageStack right, text left
+    casestudyShowcase.js      — work cards: two images (aspect-4/3, object-cover) above text; title full-width, body+bullets in 2-col grid below
     navigation.js             — top nav: just_me.webp avatar + "Tom Spencer", desktop links, Resume pill, mobile full-screen menu. No background (chart shows through).
     PageBackground.js         — sets body bg from theme: #EDE7DD light / #0F1623 dark
     AboutMeSection.js         — open editorial layout: large Fraunces headline + 2 body paragraphs + "More about me →" + LinkedIn link
@@ -147,14 +147,11 @@ One theme-switching method in context:
 
 Card order (top to bottom):
 1. **Prompt** — Natural Language Search & AI (linked)
-2. **ACJ** — Multi-Touch Attribution for Affiliate (linked)
-3. **Rakuten** — Enhancing Offer Management (linked)
-4. **InfluencerCampaigns** — Influencer Campaign Management (locked — password gate)
+2. **InfluencerCampaigns** — Influencer Campaign Management (linked — password removed)
+3. **ACJ** — Multi-Touch Attribution for Affiliate (linked)
+4. **Rakuten** — Enhancing Offer Management (linked)
 
-Locked card behaviour:
-- `div` instead of `Link` — clicking opens `PasswordGate` modal
-- CTA shows `<Lock size={13} />` + "Password required" (no ArrowRight) — clicking anywhere on the card opens the PasswordGate modal
-- No badge/tag
+No cards are currently locked. `PasswordGate` component still exists but is not used by any card.
 
 Hover shadows (amber-tinted):
 ```
@@ -282,9 +279,19 @@ Near-black `#1C1C16` base, hover `#2C2C22`. Used on the archived SolarHero CTA.
 ```
 
 **Known content gaps (not code issues):**
-- InfluencerCampaigns: all inline images are placeholders from other case studies — needs real product screenshots
-- InfluencerCampaigns: hero image is `/brewtifulBg.png` placeholder
+- InfluencerCampaigns: hero image is `/brewtifulBg.png` placeholder — needs replacing
+- InfluencerCampaigns: outcome metrics missing — needs Tom's input
+- Rakuten: Solution section is one sentence — needs expanding; no outcome metrics
+- ACJ: "35 DAU" metric needs context (total eligible users)
+- Prompt: no before/after comparison or process images yet (`Prompt-old2.png` exists in /public/ ready to use)
 - About page: philosophy cards show `"Image placeholder"` — awaiting real images from Tom
+
+**Unused images in /public/ ready to add to case studies:**
+- `Prompt-userflow.png` — user flow diagram; add to Prompt Approach section
+- `Prompt-suggestion.png`, `Prompt-error.png` — UI states; add to Prompt Challenge/Solution
+- `ACJ-early-mock.png`, `ACJ-early-mock-touchpoints.png` — early mocks; add to ACJ Approach
+- `ACJ-pub-view.png`, `ACJ-advertiser-view.png` — dual views; add to ACJ dual-audience section
+- `Campaign-application.png`, `Campaign-view-posts.png`, `Campaigns-all.png`, `Campaigns-approvals.png`, `Campaigns-setup.png` — final Influencer screens
 
 ## AboutMeSection
 `src/app/components/AboutMeSection.js`

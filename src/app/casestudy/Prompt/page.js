@@ -87,13 +87,19 @@ function Prompt() {
                                         <li>Power user adoption: The introduction of tags has helped create more advanced reports within the Prompt product.</li>
                                     </ul>
                                     <h2 className="pt-10 text-xl tracking-tight">Learning from beta</h2>
-                                    <p>
-                                        Reviews and feedback have been positive and allowed us to continue to deliver updates and additional features. Some items of Prompt have not been as successful as we hoped, for example saving reports has not been used as much as expected, largely due to users finding it easy to recreate reports as needed. The suggested prompts have become a useful tool for new users, offering guidance into creating a first time prompt, we hope to expand this in the future to allow for personalised suggestions.</p>
-                                    <p>What surprised me?: The request for tags/tokens was not expected, it became apparent that for more accuracy in data heavy UI we needed additional ways to control the search results.
-                                    </p>
-                                    <p>
-                                        Seeing users explore the search possibilities was interesting and allowed us to observe users trying to create more complex reports through search that they may not have been confident in building manually.
-                                    </p>
+                                    <h3 className="pt-6">What worked</h3>
+                                    <ul className="mb-8 space-y-2">
+                                        <li>Suggested prompts became a reliable onboarding tool — new users used them to understand what Prompt could do before writing their own queries</li>
+                                        <li>The tag system was adopted quickly by power users, enabling more precise, complex reports than pure natural language alone could produce</li>
+                                        <li>Users began exploring reports they would never have built manually — discovery-driven reporting emerged as an unexpected use case</li>
+                                        <li>Reduced multi-report workflows: users who previously needed 3–4 report iterations were completing the same analysis in a single query</li>
+                                    </ul>
+                                    <h3 className="pt-6">What surprised us</h3>
+                                    <ul className="mb-8 space-y-2">
+                                        <li>Saving reports was used far less than expected — users found it easier to recreate reports on demand than to manage a saved library</li>
+                                        <li>The tag request itself was a surprise — we assumed free-form text would be enough, but data-heavy reporting required a more precise input mechanism</li>
+                                        <li>Trust was the real adoption gate, not usability. Users who didn&apos;t trust the output verified everything manually, which negated the time saving entirely. Adoption followed trust, not the other way around</li>
+                                    </ul>
 
                                 </div>
                                 <h2 className="pt-10 text-xl tracking-tight">What I learned</h2>
