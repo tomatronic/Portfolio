@@ -403,17 +403,6 @@ function CaseStudyContent() {
                 <p><b>The biggest surprise</b> — advertisers cared more about getting influencers onboard and carrying out campaigns than the outcomes. With a small initial advertiser pool of larger companies, the extras can come later.</p>
               </div>
 
-              <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
-                <Zoom>
-                  <Image
-                    src="/brewComp.png"
-                    className="w-full rounded-2xl"
-                    width={2390}
-                    height={1206}
-                    alt="Iteration notes and internal validation feedback from weeks two and three"
-                  />
-                </Zoom>
-              </div>
 
               {/* Solution */}
               <h2 className="pt-10 text-xl tracking-tight">Solution</h2>
