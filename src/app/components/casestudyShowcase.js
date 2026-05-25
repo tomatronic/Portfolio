@@ -18,7 +18,7 @@ const CARDS = [
       { text: 'Estimated ', highlight: '$10M annual time savings' },
       { text: 'Removed reliance on specialist support teams' },
     ],
-    images: ['/report-generated.png', '/saved-reports.png'],
+    images: [{ src: '/report-generated.png', scale: 1.005 }, '/saved-reports.png'],
   },
   {
     href:   '/casestudy/InfluencerCampaigns',
@@ -67,10 +67,11 @@ function CardInner({ card }) {
         {card.images.map((img, i) => {
           const src = typeof img === 'string' ? img : img.src
           const position = typeof img === 'string' ? 'top' : (img.position ?? 'top')
+          const scale = typeof img === 'string' ? 1 : (img.scale ?? 1)
           return (
             <div key={i} className="relative overflow-hidden rounded-xl bg-[#EDE7DD] ring-1 ring-[rgba(15,22,35,0.12)] dark:bg-slate-800/50 dark:ring-[rgba(255,255,255,0.12)]">
               <div className="aspect-[4/3]">
-                <Image src={src} alt="" fill className="object-cover" style={{ objectPosition: position }} />
+                <Image src={src} alt="" fill className="object-cover" style={{ objectPosition: position, transform: `scale(${scale})` }} />
               </div>
             </div>
           )
