@@ -69,23 +69,6 @@ export default function Home() {
         <section style={{ marginTop: `-${NAV_HEIGHT}px`, paddingTop: `${NAV_HEIGHT}px` }}>
           <div className="container mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-10 text-center md:items-start md:py-16 md:text-left">
 
-            {/* Pill */}
-            <div
-              className="mb-8 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 backdrop-blur-sm"
-              style={{
-                borderColor: dark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)',
-                background:   dark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.50)',
-              }}
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-600 dark:bg-accent-400" />
-              <span
-                className="text-[10px] font-bold tracking-[0.2em] uppercase"
-                style={{ color: dark ? 'rgba(255,255,255,0.55)' : 'rgba(0,0,0,0.55)' }}
-              >
-                Senior UX Designer @ Rakuten Advertising
-              </span>
-            </div>
-
             {/* Headline */}
             <h1
               className="mb-8 w-full max-w-[800px] text-balance text-2xl font-normal tracking-tight md:text-left md:text-3xl lg:text-4xl"
@@ -101,7 +84,7 @@ export default function Home() {
               className="mb-10 w-full max-w-[800px] text-base font-normal leading-relaxed"
               style={{ color: dark ? 'rgba(160,185,210,0.70)' : '#64748B' }}
             >
-              I specialise in turning data-heavy, high-stakes workflows into interfaces that are easy to understand and quick to act on. In practice, this means helping users move from &ldquo;what am I looking at?&rdquo; to &ldquo;I know exactly what to do next&rdquo; without training, friction, or guesswork.
+              As a Senior Product Designer, I specialise in turning data-heavy, high-stakes workflows into interfaces that are easy to understand and quick to act on. In practice, this means helping users move from &ldquo;what am I looking at?&rdquo; to &ldquo;I know exactly what to do next&rdquo; without training, friction, or guesswork.
             </p>
 
             {/* CTA */}
