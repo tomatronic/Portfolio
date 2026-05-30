@@ -87,7 +87,6 @@ function ACJ() {
                                     </ul>
                                     <h3 className="pt-6">Impact</h3>
                                     <ul className="mb-8 space-y-2">
-                                        <li>35 daily active users exploring multi-touch attribution</li>
                                         <li>Used in sales pitches as a key differentiator against competitors</li>
                                         <li>Became standard part of the platform's analytics offering</li>
                                     </ul>

@@ -283,15 +283,15 @@ Near-black `#1C1C16` base, hover `#2C2C22`. Used on the archived SolarHero CTA.
 - InfluencerCampaigns: outcome metrics missing — needs Tom's input
 - Rakuten: Solution section is one sentence — needs expanding; no outcome metrics
 - ACJ: "35 DAU" metric needs context (total eligible users)
-- Prompt: no before/after comparison or process images yet (`Prompt-old2.png` exists in /public/ ready to use)
+- Prompt: `Prompt-userflow.png` (customer journey map) added to Approach section 2026-05-26. Still missing: before/after comparison copy + section header for `Prompt-old2.png`
+- ACJ: "35 daily active users" metric removed from Impact section 2026-05-26 (no denominator; removed rather than reframed)
 - About page: philosophy cards show `"Image placeholder"` — awaiting real images from Tom
 
 **Unused images in /public/ ready to add to case studies:**
-- `Prompt-userflow.png` — user flow diagram; add to Prompt Approach section
 - `Prompt-suggestion.png`, `Prompt-error.png` — UI states; add to Prompt Challenge/Solution
-- `ACJ-early-mock.png`, `ACJ-early-mock-touchpoints.png` — early mocks; add to ACJ Approach
-- `ACJ-pub-view.png`, `ACJ-advertiser-view.png` — dual views; add to ACJ dual-audience section
-- `Campaign-application.png`, `Campaign-view-posts.png`, `Campaigns-all.png`, `Campaigns-approvals.png`, `Campaigns-setup.png` — final Influencer screens
+- `ACJ-early-mock.png`, `ACJ-early-mock-touchpoints.png` — despite filename, these are final shipped UI not early mocks; hold until Tom provides a genuine early exploration artefact for the Approach section
+- `ACJ-pub-view.png`, `ACJ-advertiser-view.png` — final shipped UI; dual-audience angle already covered by `ACJ-comparison.png`; not needed
+- `Campaign-application.png`, `Campaigns-approvals.png`, `Campaign-view-posts.png` — add to Influencer Solution section in a 3-col grid; skip `Campaigns-setup.png` (form too long at case study scale) and `Campaigns-all.png` (too simple)
 
 ## AboutMeSection
 `src/app/components/AboutMeSection.js`

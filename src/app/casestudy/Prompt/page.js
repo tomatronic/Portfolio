@@ -52,6 +52,9 @@ function Prompt() {
                                 </div>
                                 <h2 className="pt-10 text-xl tracking-tight">Approach</h2>
                                 <p>I started by analyzing existing reports to understand common patterns: What metrics did users combine? What date ranges mattered? What questions were they trying to answer? This informed the natural language query design. Instead of just free-form text, I included suggested questions to help a user get started and understand the mechanics of the input box. We also included a 'tag' system in a later iteration to help users find and include certain data points that were harder to remember.</p>
+                                <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
+                                    <Image src="/Prompt-userflow.png" width={1754} height={1240} alt="Customer journey map comparing the current multi-step report creation flow with the proposed natural language search flow" />
+                                </div>
                                 <h3 className="pt-10">Key decisions</h3>
                                 <ul className="mb-8 space-y-2">
                                     <li><b>Tags/Tokens</b>: Users were able to include 'quick selected' tags to help direct a prompt better.</li>
