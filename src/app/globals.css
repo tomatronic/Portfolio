@@ -20,8 +20,8 @@
 
 /*
   Typographic scale:
-  - Hero / page title:  h1, Fraunces 400, text-3xl → text-5xl, tracking-tight
-  - Section headings:   h2, Fraunces 400, text-2xl → text-3xl, tracking-tight
+  - Hero / page title:  h1, Space Grotesk 500, text-3xl → text-5xl, tracking-tight
+  - Section headings:   h2, Space Grotesk 500, text-2xl → text-3xl, tracking-tight
   - Body:               DM Sans 400, text-base, leading-7
   - Body muted:         text-slate-600 dark:text-slate-400
   - Small / caption:    text-sm or text-xs
@@ -132,18 +132,18 @@ body {
 
 @layer base {
   h1 {
-    font-family: var(--font-fraunces), Georgia, serif;
-    @apply text-4xl font-normal leading-tight tracking-tight dark:text-white;
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    @apply text-4xl font-medium leading-tight tracking-tight dark:text-white;
   }
 
   h2 {
-    font-family: var(--font-fraunces), Georgia, serif;
-    @apply text-2xl font-normal tracking-tight text-slate-950 md:text-3xl dark:text-white;
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    @apply text-2xl font-medium tracking-tight text-slate-950 md:text-3xl dark:text-white;
   }
 
   h3 {
-    font-family: var(--font-fraunces), Georgia, serif;
-    @apply text-xl font-normal tracking-tight text-slate-950 dark:text-white;
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    @apply text-xl font-medium tracking-tight text-slate-950 dark:text-white;
   }
 
   p {

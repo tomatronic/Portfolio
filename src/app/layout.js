@@ -4,7 +4,7 @@ import Footer from "./components/footer";
 import PageBackground from './components/PageBackground';
 import ThemeProvider from './components/ThemeProvider';
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { DM_Sans, Fraunces } from 'next/font/google';
+import { DM_Sans, Space_Grotesk } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -14,12 +14,11 @@ const dmSans = DM_Sans({
   variable: '--font-dm-sans',
 });
 
-const fraunces = Fraunces({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-fraunces',
-  weight: ['300', '400', '600', '700'],
-  style: ['normal', 'italic'],
+  variable: '--font-space-grotesk',
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 export async function generateMetadata() {
@@ -43,7 +42,7 @@ const themeScript = `
 
 export default function RootLayout({ children, modal }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${fraunces.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${dmSans.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
