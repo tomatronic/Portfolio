@@ -4,20 +4,14 @@ import Footer from "./components/footer";
 import PageBackground from './components/PageBackground';
 import ThemeProvider from './components/ThemeProvider';
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { DM_Sans, Space_Grotesk } from 'next/font/google';
+import { Jost } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
-const dmSans = DM_Sans({
+const jost = Jost({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-dm-sans',
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-space-grotesk',
+  variable: '--font-jost',
   weight: ['300', '400', '500', '600', '700'],
 });
 
@@ -42,7 +36,7 @@ const themeScript = `
 
 export default function RootLayout({ children, modal }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${jost.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
