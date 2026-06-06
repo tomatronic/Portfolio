@@ -10,7 +10,7 @@
 - **Palette**: violet-600 accent, `#fafafa` / `#0a0a0a` bg
 
 ### Current version (active — May 2026)
-- **Hero**: Centred, full-bleed noise + gradient background. Pill badge, Fraunces headline with amber gradient highlight on "easy to use", sub-copy, rounded-full CTA with smooth scroll to `#work`.
+- **Hero**: Centred, full-bleed noise + gradient background. Pill badge, Jost headline with amber gradient highlight on "easy to use", sub-copy, rounded-full CTA with smooth scroll to `#work`.
 - **Background**: Fixed fractal noise SVG (`feTurbulence baseFrequency 0.9`) + 3 radial gradient blobs over `#EDE7DD` light / `#0F1623` dark. Both layers at `z-index: 0`; page content at `z-index: 1`.
 - **Palette**: amber `#B84010` accent, warm cream `#EDE7DD` (page + hero base) light, deep navy `#0F1623` dark
 
@@ -30,7 +30,7 @@ Project root: `/Users/thomasspencer/Documents/Portfolio2.0/portfolio2.0/`
 - **Styling**: Tailwind CSS v4 (`globals.css` — uses `@import "tailwindcss"`, no PostCSS config needed)
 - **Animation**: Framer Motion
 - **Icons**: Lucide React (`lucide-react`)
-- **Fonts**: DM Sans (body, `--font-dm-sans`) + Fraunces (headings, `--font-fraunces`) via `next/font/google`
+- **Fonts**: Jost only (`--font-jost`) via `next/font/google` — single font across all text; headings at `font-semibold` (600), body at `font-normal` (400)
 - **Deployment**: Vercel (Analytics integrated)
 
 ## Key files
@@ -45,10 +45,10 @@ src/app/
     SolarHero.js              — archived solar elevation chart hero (see below)
     hero.safe.js              — safe version hero (original centred layout, violet accent)
     hero.original.js          — same as hero.safe.js — kept for reference
-    casestudyShowcase.js      — work cards: two images (aspect-4/3, object-cover) above text; title full-width, body+bullets in 2-col grid below
+    casestudyShowcase.js      — work cards: two images (aspect-4/3, object-cover) above text; title full-width, body+bullets in 2-col grid below. NOTE: amber colour is currently overloaded (used for both description text and CTA link) — pending fix
     navigation.js             — top nav: just_me.webp avatar + "Tom Spencer", desktop links, Resume pill, mobile full-screen menu. No background (chart shows through).
     PageBackground.js         — sets body bg from theme: #EDE7DD light / #0F1623 dark
-    AboutMeSection.js         — open editorial layout: large Fraunces headline + 2 body paragraphs + "More about me →" + LinkedIn link
+    AboutMeSection.js         — open editorial layout: large Jost headline + 2 body paragraphs + "More about me →" + LinkedIn link
     examples.js               — ExampleGallery: hover-expand 4-image grid ("Extra Pixels" section)
     CardImageStack.js         — fanned/spread image stack, shared by casestudyShowcase + OtherCaseStudies
     ThemeProvider.js          — context for dark/light theme; toggle() persists to localStorage
@@ -136,7 +136,7 @@ One theme-switching method in context:
 ## Navigation
 `src/app/components/navigation.js`
 
-- Left: `just_me.webp` circular avatar + "Tom Spencer" in Fraunces `font-normal text-2xl`. Hover triggers spring scale + rotate on avatar.
+- Left: `just_me.webp` circular avatar + "Tom Spencer" in Jost `font-semibold text-2xl`. Hover triggers spring scale + rotate on avatar.
 - Desktop links: Work, About, Resume pill (hover → `accent-600` with white text)
 - Mobile: full-screen `bg-slate-950` overlay with Menu/X lucide icons. Links are `font-normal` (not bold).
 - `className="relative z-50"` — `relative` is required for `z-50` to take effect
@@ -237,7 +237,7 @@ Near-black `#1C1C16` base, hover `#2C2C22`. Used on the archived SolarHero CTA.
 - **Gallery cards** (examples.js): rest shadow `rgba(184,64,16,0.07)`, hover `rgba(184,64,16,0.14)`
 
 ## OtherCaseStudies cards
-- Layout: title (Fraunces, text-base, font-normal) left — image stack right
+- Layout: title (Jost, text-base, font-semibold) left — image stack right
 - Padding: `px-5 py-8`, image container `h-16 w-28 mr-6`
 - Border: `border-[#C8BEB0] dark:border-[#2A3A4A]` — matches main card borders
 - Hover shadow: amber-tinted `rgba(184,64,16,0.10)` / `rgba(238,159,104,0.12)` — matches rest of site
@@ -302,28 +302,30 @@ Links row: "More about me →" (text link) + LinkedIn icon link (`https://www.li
 `src/app/about/page.js`
 
 - Card: `rounded-4xl bg-white dark:bg-slate-900 p-8 md:p-12 lg:p-16`
-- h1: `text-2xl tracking-tight md:text-3xl` (uses globals Fraunces, not a custom override)
+- h1: `text-2xl tracking-tight md:text-3xl` (uses globals Jost font-semibold, not a custom override)
 - Philosophy cards: `bg-[#EDE7DD] dark:bg-slate-800/50` with `bg-[#E4DDD2] dark:bg-slate-700/50` image placeholders
 - Hobbies image gallery is present in code but commented out — enable when `/public/hobbies/` images are ready
 
 ## Typographic scale
+Single font: **Jost** (`--font-jost`) for all text. Hierarchy is created through weight and size alone.
+
 | Role | Font | Size | Weight | Color | Leading |
 |------|------|------|--------|-------|---------|
-| Page title (h1) | Fraunces | `text-4xl` (globals default) | `font-normal` | `text-slate-950 dark:text-white` | `leading-tight` |
-| Section heading (h2) | Fraunces | `text-xl` (case studies override) / `text-2xl→3xl` (globals) | `font-normal` | `text-slate-950 dark:text-white` | `tracking-tight` |
-| Sub-heading (h3) | Fraunces | `text-xl` | `font-normal` | `text-slate-950 dark:text-white` | — |
-| Body / muted text | DM Sans | `text-base` | `font-normal` | `text-slate-600 dark:text-slate-400` | `leading-relaxed` |
-| Small / caption | DM Sans | `text-sm` or `text-xs` | — | — | — |
+| Page title (h1) | Jost | `text-4xl` (globals default) | `font-semibold` | `text-slate-950 dark:text-white` | `leading-tight` |
+| Section heading (h2) | Jost | `text-xl` (case studies override) / `text-2xl→3xl` (globals) | `font-semibold` | `text-slate-950 dark:text-white` | `tracking-tight` |
+| Sub-heading (h3) | Jost | `text-xl` | `font-semibold` | `text-slate-950 dark:text-white` | — |
+| Body / muted text | Jost | `text-base` | `font-normal` | `text-slate-600 dark:text-slate-400` | `leading-relaxed` |
+| Small / caption | Jost | `text-sm` or `text-xs` | — | — | — |
 
-**Rule**: All body/muted `<p>` text must use `text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400`. Do NOT use `font-medium`, `font-semibold`, `text-slate-700`, `leading-7`, or `text-lg` for regular body copy.
+**Rule**: All body/muted `<p>` text must use `text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400`. Do NOT use `font-medium`, `text-slate-700`, `leading-7`, or `text-lg` for regular body copy.
 
-**Fraunces on non-heading elements**: apply via `style={{ fontFamily: 'var(--font-fraunces), Georgia, serif' }}` — there is no Tailwind utility class for it.
+**Jost on non-heading elements**: apply via `style={{ fontFamily: 'var(--font-jost), system-ui, sans-serif' }}` — there is no Tailwind utility class for it.
 
 ## globals.css base styles
 ```css
-h1    { font-family: Fraunces; text-4xl font-normal leading-tight tracking-tight dark:text-white }
-h2    { font-family: Fraunces; text-2xl→text-3xl font-normal tracking-tight text-slate-950 dark:text-white }
-h3    { font-family: Fraunces; text-xl font-normal tracking-tight text-slate-950 dark:text-white }
+h1    { font-family: Jost; text-4xl font-semibold leading-tight tracking-tight dark:text-white }
+h2    { font-family: Jost; text-2xl→text-3xl font-semibold tracking-tight text-slate-950 dark:text-white }
+h3    { font-family: Jost; text-xl font-semibold tracking-tight text-slate-950 dark:text-white }
 p     { text-base font-normal leading-relaxed mb-4 text-slate-600 dark:text-slate-400 }
 blockquote { italic border-l-4 border-accent-300 dark:border-accent-600 pl-4 text-slate-600 dark:text-slate-400 my-6 }
 blockquote cite { block mt-2 not-italic text-sm text-slate-400 dark:text-slate-500 }
