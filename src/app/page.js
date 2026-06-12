@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import CasestudyShowcase from './components/casestudyShowcase'
 import AboutMeSection from './components/AboutMeSection'
 import Testimonials from './components/Testimonials'
+import ClosingCTA from './components/ClosingCTA'
 import { useTheme } from './components/ThemeProvider'
 
 const NAV_HEIGHT = 96
@@ -14,11 +15,27 @@ const NOISE_LIGHT = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/
 
 const NOISE_DARK = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.25 0 0 0 0 0.18 0 0 0 0 0.10 0 0 0 0.05 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>")`
 
-const GRADIENT_TEXT = {
-  background: 'linear-gradient(100deg, #E07840 0%, #B84010 100%)',
+// backgroundImage (not the background shorthand) — the shorthand resets
+// background-clip when React re-applies it on theme change, leaving a solid block.
+// padding-right + negative margin: the final glyph's terminal overshoots the text
+// box and background-clip won't paint it, clipping the "e" in "use"
+const GRADIENT_TEXT_LIGHT = {
+  backgroundImage: 'linear-gradient(100deg, #E07840 0%, #B84010 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',
+  paddingRight: '0.08em',
+  marginRight: '-0.08em',
+}
+
+// Lighter ramp in dark mode — #B84010 sinks into the navy background
+const GRADIENT_TEXT_DARK = {
+  backgroundImage: 'linear-gradient(100deg, #EE9F68 0%, #E07840 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
+  paddingRight: '0.08em',
+  marginRight: '-0.08em',
 }
 
 const BLOBS_LIGHT = [
@@ -75,14 +92,14 @@ export default function Home() {
               style={{ lineHeight: 1.1, color: dark ? '#ffffff' : '#020617' }}
             >
               Making complex products{' '}
-              <span style={GRADIENT_TEXT}>easy to use</span>
+              <span style={dark ? GRADIENT_TEXT_DARK : GRADIENT_TEXT_LIGHT}>easy to use</span>
               , especially where decisions matter most.
             </h1>
 
             {/* Sub-copy */}
             <p
               className="mb-10 w-full max-w-[800px] text-base font-normal leading-relaxed"
-              style={{ color: dark ? 'rgba(160,185,210,0.70)' : '#64748B' }}
+              style={{ color: dark ? 'rgba(165,190,215,0.85)' : '#64748B' }}
             >
               As a Senior Product Designer, I specialise in turning data-heavy, high-stakes workflows into interfaces that are easy to understand and quick to act on. In practice, this means helping users move from &ldquo;what am I looking at?&rdquo; to &ldquo;I know exactly what to do next&rdquo; without training, friction, or guesswork.
             </p>
@@ -111,6 +128,9 @@ export default function Home() {
 
         {/* ── Testimonials ──────────────────────────────────────────────────── */}
         <motion.div {...fadeUp}><Testimonials /></motion.div>
+
+        {/* ── Closing CTA ───────────────────────────────────────────────────── */}
+        <motion.div {...fadeUp}><ClosingCTA /></motion.div>
 
       </div>
     </div>

@@ -6,8 +6,6 @@ const caseStudyPages = {
   ACJ:                 () => import('../../../casestudy/ACJ/page'),
   Rakuten:             () => import('../../../casestudy/Rakuten/page'),
   InfluencerCampaigns: () => import('../../../casestudy/InfluencerCampaigns/page'),
-  Brewtiful:           () => import('../../../casestudy/Brewtiful/page'),
-  DesignFlows:         () => import('../../../casestudy/DesignFlows/page'),
 }
 
 export default async function CaseStudyModalPage({ params }) {

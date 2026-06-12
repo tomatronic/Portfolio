@@ -42,7 +42,7 @@ src/app/
     ThemeToggle.js            — pill toggle (Sun/Moon icons) in footer — cream/teal branded, no Tailwind dark: classes (uses inline styles)
     OtherCaseStudies.js       — compact cards at bottom of each case study (title left, image stack right)
     footer.js                 — footer with ThemeToggle + copyright
-  casestudy/                  — 6 individual case study pages
+  casestudy/                  — 4 individual case study pages (Prompt, InfluencerCampaigns, ACJ, Rakuten)
   @modal/
     default.js                — null default for modal slot
     (.)casestudy/[slug]/
@@ -155,15 +155,14 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 - Border: `border-[#C8BEB0] dark:border-[#2A3A4A]` — matches main card borders
 - Hover shadow: amber-tinted `rgba(184,64,16,0.10)` / `rgba(238,159,104,0.12)` — matches rest of site
 - `replace` prop on Link prevents modal history stacking
-- Images: use real case study images (prompt_1-3, acj_1-3); Rakuten still uses Unsplash placeholders
+- Images: use real case study images (prompt_1-3, acj_1-3, offer_1-3)
 
 ## Case studies
 - `/casestudy/Prompt` — Natural Language Search & AI (2025)
 - `/casestudy/ACJ` — Multi-Touch Attribution for Affiliate (Oct 2022 – Jun 2023)
 - `/casestudy/Rakuten` — Enhancing Offer Management (2021)
 - `/casestudy/InfluencerCampaigns` — Influencer Campaigns (2025) — password protected; accessible via home page password gate
-- `/casestudy/Brewtiful` — Craft Beer & Design (2023)
-- `/casestudy/DesignFlows` — DIY Toolkit Rental App (2021)
+- Brewtiful and DesignFlows (older, junior-level work) were deleted June 2026 — recover from git history if needed
 
 ### Case study layout template (all 6 now use this)
 ```jsx

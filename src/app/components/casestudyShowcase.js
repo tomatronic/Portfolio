@@ -49,7 +49,7 @@ const CARDS = [
       { text: 'Lowered support ticket volume post-launch' },
       { text: 'Freed up account managers\' time from fielding queries' },
     ],
-    images: ['/offer_2.png', '/offer_1.png'],
+    images: [{ src: '/offer-invites.png', position: 'left top' }, '/offer-detail.png'],
   },
 ]
 

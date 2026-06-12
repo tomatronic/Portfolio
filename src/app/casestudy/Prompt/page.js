@@ -30,10 +30,24 @@ function Prompt() {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Headline outcomes */}
+                        <div className="mb-12 grid grid-cols-1 gap-8 rounded-2xl bg-[#EDE7DD] p-8 sm:grid-cols-3 md:p-10 dark:bg-slate-800/50">
+                            {[
+                                { stat: '90%', label: 'faster report creation, measured in Fullstory during beta' },
+                                { stat: '~$10M', label: 'annual time-saving potential at full adoption' },
+                                { stat: '1,000+', label: 'active advertisers with access from open beta' },
+                            ].map(({ stat, label }) => (
+                                <div key={stat}>
+                                    <p className="mb-1 text-4xl font-semibold tracking-tight text-accent-600 dark:text-accent-400">{stat}</p>
+                                    <p className="mb-0 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{label}</p>
+                                </div>
+                            ))}
+                        </div>
                         <div className="grid auto-rows-auto grid-cols-1 gap-5 md:grid-cols-4 md:gap-10">
 
                             <div className="col-span-4 mb-12">
-                                <h2 className="pt-10 text-xl tracking-tight">Challenge</h2>
+                                <h2 className="pt-10 tracking-tight">Challenge</h2>
                                 <p>
                                     Natural language search features sound simple until you design one. The challenge wasn't just "add a text box", it was building trust in automation while preserving user control in an area where data accuracy matters. Users want to make decisions based on these reports, meaning any search generated content needs to be verifiable and editable.
                                     <br />
@@ -49,7 +63,7 @@ function Prompt() {
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
                                     <Image src="/Prompt-old2.png" width={1920} height={1142} alt="Original manual report builder showing the complex dropdown-based interface before natural language search" />
                                 </div>
-                                <h2 className="pt-10 text-xl tracking-tight">Approach</h2>
+                                <h2 className="pt-10 tracking-tight">Approach</h2>
                                 <p>I started by analyzing existing reports to understand common patterns: What metrics did users combine? What date ranges mattered? What questions were they trying to answer? This informed the natural language query design. Instead of just free-form text, I included suggested questions to help a user get started and understand the mechanics of the input box. We also included a 'tag' system in a later iteration to help users find and include certain data points that were harder to remember.</p>
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
                                     <Image src="/Prompt-userflow.png" width={1754} height={1240} alt="Customer journey map comparing the current multi-step report creation flow with the proposed natural language search flow" />
@@ -62,7 +76,7 @@ function Prompt() {
                                     <li><b>Conservative defaults</b>: The system suggested safe, common queries rather than trying to be clever.</li>
                                 </ul>
                                 <p className="mb-12">I prototyped three interaction models and tested them with multiple users. The ability to select suggestions won over many participants and the addition of tags was identified as an extremely helpful approach to more complex report requirements.</p>
-                                <h2 className="pt-10 text-xl tracking-tight">Solution</h2>
+                                <h2 className="pt-10 tracking-tight">Solution</h2>
                                 <p>
                                     The final solution combined natural language prompts, structured tags, and suggested queries to give users both speed and control. Every search generated report remained fully editable, could be saved as a template, or rebuilt from scratch, this preserved the manual workflow for users who preferred it.
                                 </p>
@@ -70,7 +84,7 @@ function Prompt() {
                                     <Image src="/Prompt-tags-alt.png" width={2390} height={1206} alt="Tag and token system allowing users to refine and direct natural language search queries" />
                                 </div>
                                 <div className="max-w-full mb-12">
-                                    <h2 className="pt-10 text-xl tracking-tight">Outcome</h2>
+                                    <h2 className="pt-10 tracking-tight">Outcome</h2>
                                     <p>Closed beta launched in May 2025 with select power users, followed by a full open beta in July 2025 to all users. With this staggered approach it has allowed us to begin gathering adoption data and user feedback before the full release.</p>
 
                                     <p>Based on the initial few months of usage we have determined that we have reduced the report creation time by up to 90% (measured using Fullstory during the beta phase) This translates to around $10 million in annual time saving potential when fully adopted by all users (both internal account managers and external users).</p>
@@ -82,13 +96,7 @@ function Prompt() {
                                     <blockquote>"When I needed to check week-on-week sales, Prompt made it easier and faster to generate the report, saving time and reducing manual effort." <cite>Account manager</cite></blockquote>
 
                                     <blockquote>"I was able to visualize best performing placement periods over time. I was able to add a 'lifetime value bounty' on top of RAD data. I was really impressed with that." <cite>Account manager</cite></blockquote>
-                                    <h3 className="pt-10">Behavioural changes observed</h3>
-                                    <ul className="mb-8 space-y-2">
-                                        <li>Discovery driven reporting: "I figured out new and noteworthy products performing well in the program which I could share with publishers", this shows users are willing to ask questions they may not have bothered searching for manually.</li>
-                                        <li>Reduced multireport workflows: Users may previously have needed to create or edit reports 3 or 4 times, AI is allowing them to get them in a single go.</li>
-                                        <li>Power user adoption: The introduction of tags has helped create more advanced reports within the Prompt product.</li>
-                                    </ul>
-                                    <h2 className="pt-10 text-xl tracking-tight">Learning from beta</h2>
+                                    <h2 className="pt-10 tracking-tight">Learning from beta</h2>
                                     <h3 className="pt-6">What worked</h3>
                                     <ul className="mb-8 space-y-2">
                                         <li>Suggested prompts became a reliable onboarding tool — new users used them to understand what Prompt could do before writing their own queries</li>
@@ -104,10 +112,9 @@ function Prompt() {
                                     </ul>
 
                                 </div>
-                                <h2 className="pt-10 text-xl tracking-tight">What I learned</h2>
+                                <h2 className="pt-10 tracking-tight">What I learned</h2>
                                 <p>The biggest surprise was how much trust mattered. I expected users to love the freedom of a text box; what they actually needed was confidence that the output matched their intent. The full text-to-report approach had to evolve so users could see exactly what had been selected and step in if anything looked off.</p>
-                                <p>We ended up with a hybrid interface. Everyone assumed users would prefer pure natural language, but the tag system became the most-used feature for complex reports. When there's a lot of data on the line, people want precision — not just speed.</p>
-                                <p className="mb-12">Users could generate reports in 90 seconds, but they'd still verify manually if they didn't trust the output — which defeated the point entirely. The continuous previews and manual override options were what finally shifted that. Adoption followed trust, not the other way around.</p>
+                                <p className="mb-12">We ended up with a hybrid interface. Everyone assumed users would prefer pure natural language, but the tag system became the most-used feature for complex reports. When there's a lot of data on the line, people want precision — not just speed.</p>
 
                                 <OtherCaseStudies currentHref="/casestudy/Prompt" />
                             </div>
