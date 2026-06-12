@@ -98,7 +98,7 @@ export default function Home() {
 
             {/* Sub-copy */}
             <p
-              className="mb-10 w-full max-w-[800px] text-base font-normal leading-relaxed"
+              className="mb-10 w-full max-w-[800px] text-left text-base font-normal leading-relaxed"
               style={{ color: dark ? 'rgba(165,190,215,0.85)' : '#64748B' }}
             >
               As a Senior Product Designer, I specialise in turning data-heavy, high-stakes workflows into interfaces that are easy to understand and quick to act on. In practice, this means helping users move from &ldquo;what am I looking at?&rdquo; to &ldquo;I know exactly what to do next&rdquo; without training, friction, or guesswork.

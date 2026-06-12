@@ -95,7 +95,7 @@ export default function About() {
                         <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-950 dark:text-white">
                             Where I add value
                         </h2>
-                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             {[
                                 {
                                     title: '8+ years in enterprise UX',
@@ -117,8 +117,8 @@ export default function About() {
                                     title: 'Cross-functional',
                                     body: 'Collaborative across product, engineering, and commercial teams to ship usable solutions.',
                                 },
-                            ].map(({ title, body }, i) => (
-                                <div key={i} className="rounded-2xl border border-[#C8BEB0] dark:border-[#2A3A4A] p-6 transition-shadow hover:shadow-[0_4px_24px_rgba(184,64,16,0.10)] dark:hover:shadow-[0_4px_24px_rgba(238,159,104,0.12)]">
+                            ].map(({ title, body }, i, arr) => (
+                                <div key={i} className={`rounded-2xl border border-[#C8BEB0] dark:border-[#2A3A4A] p-6 transition-shadow hover:shadow-[0_4px_24px_rgba(184,64,16,0.10)] dark:hover:shadow-[0_4px_24px_rgba(238,159,104,0.12)]${i === arr.length - 1 && arr.length % 2 !== 0 ? ' sm:col-span-2' : ''}`}>
                                     <p className="mb-2 text-base font-medium text-slate-950 dark:text-white">{title}</p>
                                     <p className="text-sm font-normal leading-relaxed text-slate-600 dark:text-slate-400">{body}</p>
                                 </div>

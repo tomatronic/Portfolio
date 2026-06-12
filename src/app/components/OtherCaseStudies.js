@@ -29,6 +29,15 @@ const CARDS = [
     ],
   },
   {
+    href: '/casestudy/InfluencerCampaigns',
+    title: 'Influencer Campaign Platform',
+    images: [
+      '/influencer_1.png',
+      '/influencer_2.png',
+      '/influencer_3.png',
+    ],
+  },
+  {
     href: '/casestudy/ACJ',
     title: 'Multi-Touch Attribution for Affiliate',
     images: [

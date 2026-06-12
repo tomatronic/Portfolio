@@ -79,6 +79,40 @@ export default function Navigation() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [isMenuOpen])
 
+  // Escape-close + focus trap for mobile menu
+  useEffect(() => {
+    if (!isMenuOpen) return
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsMenuOpen(false)
+        buttonRef.current?.focus()
+        return
+      }
+      if (e.key === 'Tab') {
+        const focusable = Array.from(
+          menuRef.current?.querySelectorAll('a, button') ?? []
+        )
+        if (!focusable.length) return
+        const first = focusable[0]
+        const last  = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    // Move initial focus into the menu
+    menuRef.current?.querySelector('button')?.focus()
+
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isMenuOpen])
+
   return (
     <>
       <nav className="relative z-50">
