@@ -15,11 +15,31 @@ const jost = Jost({
   weight: ['300', '400', '500', '600', '700'],
 });
 
+const SITE_URL = 'https://www.tomspencer.design'
+const SITE_TITLE = 'Tom Spencer — Senior Product Designer'
+const SITE_DESCRIPTION = 'Portfolio of Tom Spencer, a Senior Product Designer based in Brighton, UK — making complex, data-heavy products easy to use.'
+
 export async function generateMetadata() {
   return {
-    title: "Tom Spencer — UX Designer",
-    description: "Portfolio of Tom Spencer, a Senior UX Designer based in Brighton, UK — complex problems, clear interfaces.",
+    metadataBase: new URL(SITE_URL),
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     icons: { icon: '/just_me.webp' },
+    openGraph: {
+      title: SITE_TITLE,
+      description: SITE_DESCRIPTION,
+      url: SITE_URL,
+      siteName: 'Tom Spencer',
+      locale: 'en_GB',
+      type: 'website',
+      images: [{ url: '/ogdata.png', width: 1200, height: 630, alt: 'Tom Spencer — Senior Product Designer portfolio' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: SITE_TITLE,
+      description: SITE_DESCRIPTION,
+      images: ['/ogdata.png'],
+    },
   }
 }
 
@@ -48,7 +68,7 @@ export default function RootLayout({ children, modal }) {
           <Footer />
           {modal}
         </ThemeProvider>
-        <GoogleAnalytics gaId="G-CCDKVM70NV" debug={true} />
+        <GoogleAnalytics gaId="G-CCDKVM70NV" />
         <Analytics />
         <SpeedInsights />
       </body>
