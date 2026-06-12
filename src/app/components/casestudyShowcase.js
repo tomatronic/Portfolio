@@ -16,7 +16,7 @@ const CARDS = [
       { text: 'Estimated ', highlight: '$10M annual time savings' },
       { text: 'Removed reliance on specialist support teams' },
     ],
-    images: [{ src: '/report-generated.png', scale: 1.005 }, '/saved-reports.png'],
+    image: { src: '/report-generated.png', position: 'top' },
   },
   {
     href:   '/casestudy/InfluencerCampaigns',
@@ -27,7 +27,7 @@ const CARDS = [
       { text: 'Shipped to production in ', highlight: '5 months' },
       { text: 'Enabled teams to plan, track, and manage influencer campaigns in one place' },
     ],
-    images: ['/view-campaign.png', { src: '/influencer_2.png', position: 'bottom' }],
+    image: { src: '/view-campaign.png', position: 'top' },
   },
   {
     href:  '/casestudy/ACJ',
@@ -38,7 +38,7 @@ const CARDS = [
       { text: 'Enabled publishers to clearly demonstrate their impact' },
       { text: 'Became a ', highlight: 'key differentiator in client pitches' },
     ],
-    images: ['/touchpoints.png', '/acj_2.png'],
+    image: { src: '/touchpoints.png', position: 'top' },
   },
   {
     href:  '/casestudy/Rakuten',
@@ -47,88 +47,68 @@ const CARDS = [
     bullets: [
       { text: 'Simplified navigation and reduced user confusion' },
       { text: 'Lowered support ticket volume post-launch' },
-      { text: 'Freed up account managers\' time from fielding queries' },
+      { text: "Freed up account managers' time from fielding queries" },
     ],
-    images: ['/offer_2.png', '/offer_1.png'],
+    image: { src: '/offer_2.png', position: 'top' },
   },
 ]
 
-// ─── Card inner ───────────────────────────────────────────────────────────────
+// ─── Card ─────────────────────────────────────────────────────────────────────
 
-function CardInner({ card, isFirst }) {
+function Card({ card, isFirst }) {
   return (
-    <div className="p-4 md:p-5">
-
-      {/* Two images */}
-      <div className="mb-5 grid grid-cols-1 gap-3 md:grid-cols-2">
-        {card.images.map((img, i) => {
-          const src = typeof img === 'string' ? img : img.src
-          const position = typeof img === 'string' ? 'top' : (img.position ?? 'top')
-          const scale = typeof img === 'string' ? 1 : (img.scale ?? 1)
-          return (
-            <div key={i} className="overflow-hidden rounded-xl bg-[#EDE7DD] ring-1 ring-[rgba(15,22,35,0.12)] dark:bg-slate-800/50 dark:ring-[rgba(255,255,255,0.12)]">
-              <div className="relative aspect-[4/3]">
-                <Image
-                  src={src}
-                  alt={`${card.title} — product screenshot`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 540px"
-                  priority={isFirst}
-                  className="object-cover"
-                  style={{ objectPosition: position, transform: `scale(${scale})` }}
-                />
-              </div>
-            </div>
-          )
-        })}
+    <Link
+      href={card.href}
+      className="group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-[#DDD4C8] transition-shadow duration-200 hover:shadow-[0_4px_24px_rgba(184,64,16,0.10)] dark:bg-slate-900 dark:ring-[#2A3A4A] dark:hover:shadow-[0_4px_24px_rgba(238,159,104,0.12)] md:flex-row"
+    >
+      {/* ── Image — padded, inset, rounded ─────────────────────── */}
+      <div className="shrink-0 bg-white p-5 dark:bg-slate-800/50 md:w-[46%] md:p-8">
+        <div
+          className="relative w-full overflow-hidden rounded-xl shadow-[0_2px_16px_rgba(15,22,35,0.10)] dark:shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
+          style={{ aspectRatio: '4/3' }}
+        >
+          <Image
+            src={card.image.src}
+            alt={`${card.title} — product screenshot`}
+            fill
+            sizes="(max-width: 768px) 100vw, 46vw"
+            priority={isFirst}
+            className="object-cover"
+            style={{ objectPosition: card.image.position }}
+          />
+        </div>
       </div>
 
-      {/* Text: title+body+CTA left, bullets right */}
-      <div className="px-2 pb-2 pt-1 md:px-4 md:pb-4">
+      {/* ── Text ───────────────────────────────────────────────── */}
+      <div className="flex flex-col justify-center gap-5 p-8 md:w-[54%] md:p-10">
 
-        <h2 className="mb-3 text-2xl font-normal tracking-tight text-slate-950 dark:text-white">
+        <h2 className="text-2xl font-normal tracking-tight text-slate-950 dark:text-white md:text-3xl">
           {card.title}
         </h2>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
-          <p className="mb-0 text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400">
-            {card.body}
-          </p>
-
-          {card.bullets && (
-            <ul className="space-y-2.5 text-base font-normal text-slate-600 dark:text-slate-400">
-              {card.bullets.map((b, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
-                  <span>
-                    {typeof b === 'string'
-                      ? b
-                      : <>{b.text}<strong className="font-semibold">{b.highlight}</strong>{b.suffix ?? ''}</>}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-
-        {/* CTA — always at the base of the card */}
-        <p className="mb-0 mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-600 dark:text-accent-400">
-          Read case study<ArrowRight size={14} strokeWidth={2.5} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+        <p className="text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400">
+          {card.body}
         </p>
+
+        <ul className="space-y-2">
+          {card.bullets.map((b, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm font-normal text-slate-600 dark:text-slate-400">
+              <span className="mt-[0.35rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+              <span>
+                {typeof b === 'string'
+                  ? b
+                  : <>{b.text}<strong className="font-semibold text-slate-950 dark:text-white">{b.highlight}</strong>{b.suffix ?? ''}</>}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="mb-0 inline-flex items-center gap-1.5 text-sm font-medium text-accent-600 dark:text-accent-400">
+          Read case study
+          <ArrowRight size={14} strokeWidth={2.5} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+        </p>
+
       </div>
-    </div>
-  )
-}
-
-// ─── Card wrapper ─────────────────────────────────────────────────────────────
-
-function Card({ card, isFirst }) {
-  const sharedClass = "group relative block rounded-2xl border border-[#C8BEB0] transition-shadow duration-200 hover:shadow-[0_4px_24px_rgba(184,64,16,0.10)] dark:border-[#2A3A4A] dark:hover:shadow-[0_4px_24px_rgba(238,159,104,0.12)]"
-
-  return (
-    <Link href={card.href} className={sharedClass}>
-      <CardInner card={card} isFirst={isFirst} />
     </Link>
   )
 }
@@ -139,8 +119,12 @@ export default function CasestudyShowcase() {
   return (
     <div id="work" className="pb-24 pt-10">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className="flex flex-col gap-14">
-          {CARDS.map((card, i) => <Card key={card.href} card={card} isFirst={i === 0} />)}
+        <div className="rounded-3xl bg-[#C4B09A] p-4 dark:bg-[#0D1927] md:p-5">
+          <div className="flex flex-col gap-4">
+            {CARDS.map((card, i) => (
+              <Card key={card.href} card={card} isFirst={i === 0} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

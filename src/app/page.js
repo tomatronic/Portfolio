@@ -88,8 +88,8 @@ export default function Home() {
 
             {/* Headline */}
             <h1
-              className="mb-8 w-full max-w-[800px] text-balance text-2xl font-normal tracking-tight md:text-left md:text-3xl lg:text-4xl"
-              style={{ lineHeight: 1.1, color: dark ? '#ffffff' : '#020617' }}
+              className="mb-8 w-full max-w-[800px] text-balance text-4xl font-normal tracking-tight md:text-left md:text-5xl lg:text-6xl"
+              style={{ lineHeight: 1.05, color: dark ? '#ffffff' : '#020617' }}
             >
               Making complex products{' '}
               <span style={dark ? GRADIENT_TEXT_DARK : GRADIENT_TEXT_LIGHT}>easy to use</span>
@@ -98,10 +98,10 @@ export default function Home() {
 
             {/* Sub-copy */}
             <p
-              className="mb-10 w-full max-w-[800px] text-left text-base font-normal leading-relaxed"
+              className="mb-10 w-full max-w-[640px] text-left text-base font-normal leading-relaxed"
               style={{ color: dark ? 'rgba(165,190,215,0.85)' : '#64748B' }}
             >
-              As a Senior Product Designer, I specialise in turning data-heavy, high-stakes workflows into interfaces that are easy to understand and quick to act on. In practice, this means helping users move from &ldquo;what am I looking at?&rdquo; to &ldquo;I know exactly what to do next&rdquo; without training, friction, or guesswork.
+              I&rsquo;m a Senior Product Designer specialising in data-heavy, high-stakes products, turning &ldquo;what am I looking at?&rdquo; into &ldquo;I know exactly what to do.&rdquo;
             </p>
 
             {/* CTA */}
