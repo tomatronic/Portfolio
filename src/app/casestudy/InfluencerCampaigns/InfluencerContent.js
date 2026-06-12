@@ -1,90 +1,9 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
-import { Lock } from 'lucide-react'
 import OtherCaseStudies from '../../components/OtherCaseStudies'
-
-const CORRECT_PASSWORD = 'secret'
-
-// ─── Inline password gate (for direct URL access) ─────────────────────────────
-
-function PagePasswordGate({ onAuth }) {
-  const [value, setValue] = useState('')
-  const [error, setError] = useState(false)
-  const inputRef = useRef(null)
-
-  useEffect(() => { inputRef.current?.focus() }, [])
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    if (value === CORRECT_PASSWORD) {
-      sessionStorage.setItem('influencer_auth', '1')
-      onAuth()
-    } else {
-      setError(true)
-      setValue('')
-      inputRef.current?.focus()
-    }
-  }
-
-  return (
-    <div className="flex min-h-[70vh] items-center justify-center px-4">
-      <div className="w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <div className="mb-6 flex flex-col items-center gap-3 text-center">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-100 text-violet-600 dark:bg-violet-950 dark:text-violet-400">
-            <Lock size={18} />
-          </div>
-          <div>
-            <h3
-              className="text-xl text-slate-950 dark:text-white"
-              style={{ fontFamily: 'var(--font-fraunces), Georgia, serif' }}
-            >
-              NDA protected
-            </h3>
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              This work is confidential.{' '}
-              <a
-                href="mailto:tom.m.spencer@gmail.com?subject=Influencer Campaigns case study"
-                className="text-accent-600 hover:underline dark:text-accent-400"
-              >
-                Get in touch
-              </a>
-              {' '}and I'll send you the password.
-            </p>
-          </div>
-        </div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <input
-            ref={inputRef}
-            type="password"
-            value={value}
-            onChange={(e) => { setValue(e.target.value); setError(false) }}
-            placeholder="Enter password"
-            className={[
-              'w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors',
-              'bg-slate-50 text-slate-950 placeholder-slate-400 dark:bg-slate-950 dark:text-white dark:placeholder-slate-500',
-              error
-                ? 'border-red-400 dark:border-red-500'
-                : 'border-slate-200 focus:border-violet-500 dark:border-slate-700 dark:focus:border-violet-500',
-            ].join(' ')}
-          />
-          {error && (
-            <p className="text-xs text-red-500">Incorrect password. Try again.</p>
-          )}
-          <button
-            type="submit"
-            className="btn-violet-3d w-full rounded-xl px-4 py-3 text-sm font-medium text-white"
-          >
-            View case study
-          </button>
-        </form>
-      </div>
-    </div>
-  )
-}
 
 // ─── Case study content ────────────────────────────────────────────────────────
 
@@ -172,7 +91,7 @@ function CaseStudyContent() {
                   <div className="mb-5 flex items-center gap-3">
                     <div
                       className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-200 text-accent-700 dark:bg-accent-950 dark:text-accent-400"
-                      style={{ fontFamily: 'var(--font-fraunces), Georgia, serif', fontSize: '1.1rem' }}
+                      style={{ fontSize: '1.1rem' }}
                     >
                       S
                     </div>
@@ -227,7 +146,7 @@ function CaseStudyContent() {
                   <div className="mb-5 flex items-center gap-3">
                     <div
                       className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-200 text-accent-700 dark:bg-accent-950 dark:text-accent-400"
-                      style={{ fontFamily: 'var(--font-fraunces), Georgia, serif', fontSize: '1.1rem' }}
+                      style={{ fontSize: '1.1rem' }}
                     >
                       M
                     </div>
@@ -488,8 +407,6 @@ function CaseStudyContent() {
     </div>
   )
 }
-
-// ─── Auth wrapper ──────────────────────────────────────────────────────────────
 
 export default function InfluencerContent() {
   return <CaseStudyContent />

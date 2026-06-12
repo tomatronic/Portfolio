@@ -90,7 +90,7 @@ export default function Navigation() {
               className="flex items-center"
               aria-label="Tom Spencer — home"
             >
-              <span className="text-2xl font-normal tracking-tight text-slate-950 dark:text-white" style={{ fontFamily: 'var(--font-fraunces), Georgia, serif' }}>Tom Spencer</span>
+              <span className="text-2xl font-normal tracking-tight text-slate-950 dark:text-white">Tom Spencer</span>
             </Link>
 
             <button

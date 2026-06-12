@@ -4,7 +4,7 @@ import { Download, Linkedin } from "lucide-react"
 export async function generateMetadata() {
     return {
         title: "About | Tom Spencer",
-        description: "About Tom Spencer — Senior UX Designer specialising in data-heavy enterprise tools, based in Brighton, UK.",
+        description: "About Tom Spencer — Senior Product Designer specialising in data-heavy enterprise tools, based in Brighton, UK.",
     }
 }
 
@@ -78,6 +78,7 @@ export default function About() {
                                 src="/bio.png"
                                 alt="Tom Spencer"
                                 fill
+                                sizes="(max-width: 768px) 100vw, 430px"
                                 className="object-cover object-top"
                                 priority
                             />

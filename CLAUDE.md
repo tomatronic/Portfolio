@@ -2,22 +2,11 @@
 
 ## Versions
 
-### Safe version (stable baseline)
-- **Git commit**: `ce8b3de` — "Extend nav avatar hover effect to name + update CLAUDE.md"
-- **Hero backup**: `src/app/components/hero.safe.js` — original centred layout
-- To restore safe hero: `cp src/app/components/hero.safe.js src/app/components/hero.js`
-- To restore full safe version: `git checkout ce8b3de` (creates detached HEAD — branch off from there if needed)
-- **Palette**: violet-600 accent, `#fafafa` / `#0a0a0a` bg
-
-### Current version (active — May 2026)
-- **Hero**: Centred, full-bleed noise + gradient background. Pill badge, Jost headline with amber gradient highlight on "easy to use", sub-copy, rounded-full CTA with smooth scroll to `#work`.
+### Current version (active — June 2026)
+- **Hero**: Centred, full-bleed noise + gradient background. Jost headline with amber gradient highlight on "easy to use", sub-copy, rounded-full CTA with smooth scroll to `#work`. Defined inline in `page.js` — there is no separate hero component.
 - **Background**: Fixed fractal noise SVG (`feTurbulence baseFrequency 0.9`) + 3 radial gradient blobs over `#EDE7DD` light / `#0F1623` dark. Both layers at `z-index: 0`; page content at `z-index: 1`.
 - **Palette**: amber `#B84010` accent, warm cream `#EDE7DD` (page + hero base) light, deep navy `#0F1623` dark
-
-### Archived version — SolarHero (`/testHome`)
-- **Hero**: `SolarHero.js` — full-viewport solar elevation arc for Brighton, UK. Real-time sun position. Hover tooltip + custom cursor (6px dot).
-- `hero.js` still re-exports from `SolarHero.js` — used by `/testHome` only.
-- Accessible at `http://localhost:3000/testHome`
+- Older hero experiments (SolarHero solar-arc chart, `/testHome` route, `hero.safe.js`/`hero.original.js` centred violet layout) were deleted in June 2026 — recover from git history if ever needed (safe baseline commit `ce8b3de`).
 
 ## Project
 Tom Spencer's portfolio site. Next.js 15 + Tailwind CSS v4 + Framer Motion.
@@ -36,24 +25,21 @@ Project root: `/Users/thomasspencer/Documents/Portfolio2.0/portfolio2.0/`
 ## Key files
 ```
 src/app/
-  layout.js                   — root layout: Navigation, Footer, ThemeProvider, PageBackground, FOUC script
-  page.js                     — home page: noise/gradient hero + CasestudyShowcase + AboutMeSection + Testimonials
-  testHome/page.js            — archived SolarHero design (for reference)
-  globals.css                 — Tailwind v4 config, @theme accent tokens, dark mode variant, base styles, btn-violet-3d / btn-dark-3d utilities
+  layout.js                   — root layout: Navigation, Footer, ThemeProvider, PageBackground, FOUC script, full OpenGraph/Twitter metadata (metadataBase https://www.tomspencer.design, /ogdata.png card)
+  page.js                     — home page: noise/gradient hero (inline) + CasestudyShowcase + AboutMeSection + Testimonials
+  sitemap.js                  — sitemap for home, about + the 4 linked case studies
+  robots.js                   — robots.txt, points at sitemap
+  not-found.js                — branded typographic 404 with back-home CTA
+  globals.css                 — Tailwind v4 config, @theme accent tokens, dark mode variant, base styles
   components/
-    hero.js                   — re-exports SolarHero (used by /testHome only)
-    SolarHero.js              — archived solar elevation chart hero (see below)
-    hero.safe.js              — safe version hero (original centred layout, violet accent)
-    hero.original.js          — same as hero.safe.js — kept for reference
-    casestudyShowcase.js      — work cards: two images (aspect-4/3, object-cover) above text; title full-width, body+bullets in 2-col grid below. NOTE: amber colour is currently overloaded (used for both description text and CTA link) — pending fix
-    navigation.js             — top nav: just_me.webp avatar + "Tom Spencer", desktop links, Resume pill, mobile full-screen menu. No background (chart shows through).
+    casestudyShowcase.js      — work cards: two images (aspect-4/3, object-cover, sizes + priority on first card) above text; title full-width, body+bullets in 2-col grid below. NOTE: amber colour is currently overloaded (used for both description text and CTA link) — pending fix
+    navigation.js             — top nav: "Tom Spencer" wordmark, desktop links, Resume pill, mobile full-screen menu. No background (fixed noise/gradient shows through).
     PageBackground.js         — sets body bg from theme: #EDE7DD light / #0F1623 dark
     AboutMeSection.js         — open editorial layout: large Jost headline + 2 body paragraphs + "More about me →" + LinkedIn link
     examples.js               — ExampleGallery: hover-expand 4-image grid ("Extra Pixels" section)
-    CardImageStack.js         — fanned/spread image stack, shared by casestudyShowcase + OtherCaseStudies
+    CardImageStack.js         — fanned/spread image stack, used by OtherCaseStudies
     ThemeProvider.js          — context for dark/light theme; toggle() persists to localStorage
     ThemeToggle.js            — pill toggle (Sun/Moon icons) in footer — cream/teal branded, no Tailwind dark: classes (uses inline styles)
-    PasswordGate.js           — modal overlay for locked case studies; checks sessionStorage for auth
     OtherCaseStudies.js       — compact cards at bottom of each case study (title left, image stack right)
     footer.js                 — footer with ThemeToggle + copyright
   casestudy/                  — 6 individual case study pages
@@ -67,65 +53,11 @@ src/app/
 public/
   just_me.webp                — nav avatar + favicon
   bio.png                     — about page photo
+  ogdata.png                  — 1200×630 OpenGraph share card (old violet branding — pending refresh to amber/cream)
   resume.pdf
   prompt_1.png, prompt_2.png, prompt_3.png  — Prompt case study card images
   acj_1.png, acj_2.png, acj_3.png          — ACJ case study card images
 ```
-
-## SolarHero component
-`src/app/components/SolarHero.js`
-
-### Overview
-Full-viewport (`width: 100%`, `height: 100vh`) solar elevation arc chart showing today's sun path for Brighton, UK (50.82°N, -0.14°E). Real sun position updates every 30s. Hover shows time + elevation tooltip with locked-to-arc positioning.
-
-The chart extends behind the nav (`marginTop: -${NAV_HEIGHT}px`) so the chart fills the full viewport height visually. The nav has no background, allowing the chart to show through.
-
-### Key constants
-```js
-const NAV_HEIGHT    = 144      // nav py-12×2 + h-12 = 144px; chart pulls up by this amount
-const F_TOP         = 0.048    // summer solstice peak (~62°) aligns with nav vertical centre
-const F_BOT         = 0.95     // horizon sits at 95% of chart height
-const E_MAX         = 70       // chart elevation ceiling (degrees)
-const E_MIN         = -70      // chart elevation floor (degrees)
-const E_RNG         = 140      // E_MAX - E_MIN
-const GLOW_R_FACTOR = 0.33     // atmospheric glow radius as fraction of chart height
-```
-
-### Coordinate helpers
-```js
-lhToX(localHour, w)   // local hour 0–24 → SVG x pixel
-elevToY(elev, h)      // elevation degrees → SVG y pixel (F_TOP/F_BOT bounds)
-```
-
-### Arc colours (amber, reduced opacity for subtle background element)
-```js
-arcToday    = dark ? 'rgba(238,159,104,0.30)' : 'rgba(184,64,16,0.22)'
-arcSolstice = dark ? 'rgba(238,159,104,0.26)' : 'rgba(184,64,16,0.20)'
-gridStroke  = dark ? 'rgba(238,159,104,0.07)' : 'rgba(184,64,16,0.06)'
-```
-
-### Sun colour
-```js
-sunBright = sunAbove ? '#D4905A' : (dark ? '#6A8ABB' : '#C0B8A8')
-// amber when above horizon, steel-blue (dark) or warm grey (light) when below
-```
-No `mix-blend-mode` on the sun — plain colour only.
-
-### Layer order
-- `z-0` — background SVG (arcs, grid, glow)
-- `z-10` — hero copy + CTA button (`ref={copyRef}` on CTA for tooltip suppression)
-- `z-20` — sun dot SVG (always on top)
-
-### Tooltip behaviour
-- **Locked to arc**: tooltip x/y is derived from the arc point at the hovered hour, not the cursor position. Uses `containerRef.getBoundingClientRect()` (single call, consolidated) to convert SVG coords to screen coords.
-- **Suppressed over CTA button**: `cursorOverBtn` checks cursor against `copyRef.current.getBoundingClientRect()`. `showOverlay = hover && active && !cursorOverBtn`.
-- Custom cursor (hidden native cursor, 6×6 px dot rendered in JSX) follows the actual mouse position.
-
-### Time labels
-Labels positioned using **local hours** (not UTC). BST/GMT offset computed from last-Sunday-of-March/October rule. Displayed at 00:00, 06:00, 12:00, 18:00, 24:00.
-
-### Grid
-Ultra-fine horizontal + vertical grid lines at E = 0°, ±30°, ±60° and local hours 0, 6, 12, 18, 24. Stroke colour `gridStroke` (amber at ~6–7% opacity).
 
 ## ThemeProvider
 `src/app/components/ThemeProvider.js`
@@ -136,7 +68,7 @@ One theme-switching method in context:
 ## Navigation
 `src/app/components/navigation.js`
 
-- Left: `just_me.webp` circular avatar + "Tom Spencer" in Jost `font-semibold text-2xl`. Hover triggers spring scale + rotate on avatar.
+- Left: "Tom Spencer" wordmark in Jost `font-normal text-2xl` (no avatar image).
 - Desktop links: Work, About, Resume pill (hover → `accent-600` with white text)
 - Mobile: full-screen `bg-slate-950` overlay with Menu/X lucide icons. Links are `font-normal` (not bold).
 - `className="relative z-50"` — `relative` is required for `z-50` to take effect
@@ -151,23 +83,12 @@ Card order (top to bottom):
 3. **ACJ** — Multi-Touch Attribution for Affiliate (linked)
 4. **Rakuten** — Enhancing Offer Management (linked)
 
-No cards are currently locked. `PasswordGate` component still exists but is not used by any card.
+No cards are locked — all password-gate code (the `PasswordGate` component and the inline gate in `InfluencerContent.js`) was deleted in June 2026.
 
 Hover shadows (amber-tinted):
 ```
 hover:shadow-[0_4px_24px_rgba(184,64,16,0.10)] dark:hover:shadow-[0_4px_24px_rgba(238,159,104,0.12)]
 ```
-
-## PasswordGate
-`src/app/components/PasswordGate.js`
-
-Modal overlay for locked case studies. Password stored as `CORRECT_PASSWORD` constant (client-side — intended for light friction, not real security). On success, writes `influencer_auth: '1'` to `sessionStorage` and navigates to `href`.
-
-Colours match site palette:
-- Backdrop: `bg-[#1C1C16]/50 backdrop-blur-sm`
-- Panel: `bg-[#F2ECE2] border-[#C8BEB0] dark:bg-[#0F1623] dark:border-[#2A3A4A]`
-- Lock icon: `bg-accent-100 text-accent-600 dark:bg-accent-950 dark:text-accent-400`
-- Input: `bg-[#EDE7DD] focus:border-accent-600`
 
 ## Colour palette — Experimental (current)
 | Role | Light | Dark |
@@ -180,10 +101,6 @@ Colours match site palette:
 | Accent / CTA | `#B84010` (accent-600) | `#EE9F68` (accent-300) |
 | Body text | `#020617` | `#ededed` |
 | Card border | `#C8BEB0` | `#2A3A4A` |
-| Arc (today) | `rgba(184,64,16,0.22)` | `rgba(238,159,104,0.30)` |
-| Arc (solstice) | `rgba(184,64,16,0.20)` | `rgba(238,159,104,0.26)` |
-| Sun (above horizon) | `#D4905A` | `#D4905A` |
-| Sun (below horizon) | `#C0B8A8` | `#6A8ABB` |
 | Card image ring | `rgba(184,64,16,0.22)` | `rgba(238,159,104,0.30)` |
 | Card hover shadow | `rgba(184,64,16,0.10)` | `rgba(238,159,104,0.12)` |
 | Gallery hover shadow | `rgba(184,64,16,0.14)` | — |
@@ -205,11 +122,7 @@ Colours match site palette:
 Use `text-accent-600`, `bg-accent-600`, `border-accent-200`, etc. in Tailwind classes.
 
 ## Button styles
-### `btn-violet-3d` (now amber/teal — keep class name, used in PasswordGate + InfluencerContent)
-Defined in `globals.css`. Base `#155C5C`, hover `#0A3A3A`. White gradient overlay on hover. `rounded-xl`.
-
-### `btn-dark-3d`
-Near-black `#1C1C16` base, hover `#2C2C22`. Used on the archived SolarHero CTA.
+The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in June 2026 (their only consumers — the password gates and SolarHero — were deleted). CTAs now use plain Tailwind: `rounded-full bg-accent-600 ... hover:bg-accent-800 dark:bg-accent-400`.
 
 ## Dark mode
 - **Tailwind v4** dark mode: configured via `@variant dark (&:is(.dark, .dark *))` in `globals.css`
@@ -218,7 +131,7 @@ Near-black `#1C1C16` base, hover `#2C2C22`. Used on the archived SolarHero CTA.
 - FOUC prevention: inline `<script>` in layout.js applies dark class before hydration
 - `<html>` has `suppressHydrationWarning` to avoid React mismatch warnings
 - PageBackground.js only reacts to theme changes (NOT pathname — avoids flash on modal open)
-- `page.js` and `SolarHero.js` both read `useTheme()` directly and switch colour palette via JS (not Tailwind dark: classes)
+- `page.js` reads `useTheme()` directly and switches colour palette via JS (not Tailwind dark: classes)
 
 ## Case study modal (Parallel + Intercepting Routes)
 - Clicking a card triggers `@modal/(.)casestudy/[slug]/page.js` — URL updates, modal slides up

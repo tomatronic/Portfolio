@@ -1,5 +1,4 @@
 import Image from "next/image"
-import 'react-medium-image-zoom/dist/styles.css'
 import OtherCaseStudies from "../../components/OtherCaseStudies"
 
 export async function generateMetadata() {

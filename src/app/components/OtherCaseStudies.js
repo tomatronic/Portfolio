@@ -69,7 +69,7 @@ function CompactCard({ card }) {
     >
       <h3
         className="flex-1 truncate text-base tracking-tight text-slate-950 dark:text-white"
-        style={{ fontFamily: 'var(--font-fraunces), Georgia, serif', fontWeight: 400 }}
+
       >
         {card.title}
       </h3>

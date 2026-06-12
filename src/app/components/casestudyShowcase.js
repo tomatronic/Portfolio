@@ -1,10 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Lock } from 'lucide-react'
-import PasswordGate from './PasswordGate'
+import { ArrowRight } from 'lucide-react'
 
 // ─── Card data ────────────────────────────────────────────────────────────────
 
@@ -57,7 +55,7 @@ const CARDS = [
 
 // ─── Card inner ───────────────────────────────────────────────────────────────
 
-function CardInner({ card }) {
+function CardInner({ card, isFirst }) {
   return (
     <div className="p-4 md:p-5">
 
@@ -68,9 +66,17 @@ function CardInner({ card }) {
           const position = typeof img === 'string' ? 'top' : (img.position ?? 'top')
           const scale = typeof img === 'string' ? 1 : (img.scale ?? 1)
           return (
-            <div key={i} className="relative overflow-hidden rounded-xl bg-[#EDE7DD] ring-1 ring-[rgba(15,22,35,0.12)] dark:bg-slate-800/50 dark:ring-[rgba(255,255,255,0.12)]">
-              <div className="aspect-[4/3]">
-                <Image src={src} alt="" fill className="object-cover" style={{ objectPosition: position, transform: `scale(${scale})` }} />
+            <div key={i} className="overflow-hidden rounded-xl bg-[#EDE7DD] ring-1 ring-[rgba(15,22,35,0.12)] dark:bg-slate-800/50 dark:ring-[rgba(255,255,255,0.12)]">
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src={src}
+                  alt={`${card.title} — product screenshot`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 540px"
+                  priority={isFirst}
+                  className="object-cover"
+                  style={{ objectPosition: position, transform: `scale(${scale})` }}
+                />
               </div>
             </div>
           )
@@ -108,11 +114,7 @@ function CardInner({ card }) {
 
         {/* CTA — always at the base of the card */}
         <p className="mb-0 mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-600 dark:text-accent-400">
-          {card.locked ? (
-            <><Lock size={13} strokeWidth={2.5} /><span>Password on request</span></>
-          ) : (
-            <>Read case study<ArrowRight size={14} strokeWidth={2.5} className="transition-transform duration-200 group-hover:translate-x-0.5" /></>
-          )}
+          Read case study<ArrowRight size={14} strokeWidth={2.5} className="transition-transform duration-200 group-hover:translate-x-0.5" />
         </p>
       </div>
     </div>
@@ -121,25 +123,12 @@ function CardInner({ card }) {
 
 // ─── Card wrapper ─────────────────────────────────────────────────────────────
 
-function Card({ card }) {
-  const [showGate, setShowGate] = useState(false)
-
+function Card({ card, isFirst }) {
   const sharedClass = "group relative block rounded-2xl border border-[#C8BEB0] transition-shadow duration-200 hover:shadow-[0_4px_24px_rgba(184,64,16,0.10)] dark:border-[#2A3A4A] dark:hover:shadow-[0_4px_24px_rgba(238,159,104,0.12)]"
-
-  if (card.locked) {
-    return (
-      <>
-        <div className={sharedClass + ' cursor-pointer'} onClick={() => setShowGate(true)}>
-          <CardInner card={card} />
-        </div>
-        {showGate && <PasswordGate href={card.href} onClose={() => setShowGate(false)} />}
-      </>
-    )
-  }
 
   return (
     <Link href={card.href} className={sharedClass}>
-      <CardInner card={card} />
+      <CardInner card={card} isFirst={isFirst} />
     </Link>
   )
 }
@@ -151,7 +140,7 @@ export default function CasestudyShowcase() {
     <div id="work" className="pb-24 pt-10">
       <div className="container mx-auto max-w-6xl px-4">
         <div className="flex flex-col gap-14">
-          {CARDS.map(card => <Card key={card.href} card={card} />)}
+          {CARDS.map((card, i) => <Card key={card.href} card={card} isFirst={i === 0} />)}
         </div>
       </div>
     </div>
