@@ -87,46 +87,6 @@ export default function About() {
                     </div>
                 </div>
 
-                {/* Where I add value card */}
-                <div className="rounded-4xl bg-zinc-50 dark:bg-slate-900 p-8 md:p-12 lg:p-16">
-
-                    {/* Where I add value */}
-                    <section>
-                        <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-950 dark:text-white">
-                            Where I add value
-                        </h2>
-                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            {[
-                                {
-                                    title: '8+ years in enterprise UX',
-                                    body: 'Designing data-heavy products across product design and user behaviour.',
-                                },
-                                {
-                                    title: 'Usability & clarity',
-                                    body: 'Strong focus on helping users make fast, confident decisions without friction.',
-                                },
-                                {
-                                    title: 'Designing at scale',
-                                    body: 'Experience building tools used by thousands of users across large organisations.',
-                                },
-                                {
-                                    title: 'Technical domains',
-                                    body: 'Comfortable translating complex, technical systems into clear and usable interfaces.',
-                                },
-                                {
-                                    title: 'Cross-functional',
-                                    body: 'Collaborative across product, engineering, and commercial teams to ship usable solutions.',
-                                },
-                            ].map(({ title, body }, i, arr) => (
-                                <div key={i} className={`rounded-2xl border border-[#C8BEB0] dark:border-[#2A3A4A] p-6 transition-shadow hover:shadow-[0_4px_24px_rgba(184,64,16,0.10)] dark:hover:shadow-[0_4px_24px_rgba(238,159,104,0.12)]${i === arr.length - 1 && arr.length % 2 !== 0 ? ' sm:col-span-2' : ''}`}>
-                                    <p className="mb-2 text-base font-medium text-slate-950 dark:text-white">{title}</p>
-                                    <p className="text-sm font-normal leading-relaxed text-slate-600 dark:text-slate-400">{body}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-
-                </div>
 
                 {/* What I do outside of work card */}
                 <div className="rounded-4xl bg-zinc-50 dark:bg-slate-900 p-8 md:p-12 lg:p-16">

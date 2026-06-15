@@ -6,7 +6,6 @@ import { motion, useReducedMotion } from 'framer-motion'
 import CasestudyShowcase from './components/casestudyShowcase'
 import AboutMeSection from './components/AboutMeSection'
 import Testimonials from './components/Testimonials'
-import ClosingCTA from './components/ClosingCTA'
 import { useTheme } from './components/ThemeProvider'
 
 const NAV_HEIGHT = 96
@@ -129,8 +128,6 @@ export default function Home() {
         {/* ── Testimonials ──────────────────────────────────────────────────── */}
         <motion.div {...fadeUp}><Testimonials /></motion.div>
 
-        {/* ── Closing CTA ───────────────────────────────────────────────────── */}
-        <motion.div {...fadeUp}><ClosingCTA /></motion.div>
 
       </div>
     </div>
