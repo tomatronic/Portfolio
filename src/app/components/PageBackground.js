@@ -4,7 +4,7 @@ import { useTheme } from './ThemeProvider';
 import { useEffect } from 'react';
 
 const COLORS = {
-  light: '#EDE7DD',
+  light: '#ffffff',
   dark:  '#0F1623',
 }
 

@@ -36,18 +36,6 @@ const GRADIENT_TEXT_DARK = {
   marginRight: '-0.08em',
 }
 
-const BLOBS_LIGHT = [
-  'radial-gradient(70% 60% at 15% 10%, rgba(222, 144, 72, 0.16), transparent 55%)',
-  'radial-gradient(60% 50% at 88% 22%, rgba(248, 238, 225, 0.60), transparent 55%)',
-  'radial-gradient(80% 60% at 50% 95%, rgba(218, 185, 148, 0.20), transparent 60%)',
-].join(', ')
-
-const BLOBS_DARK = [
-  'radial-gradient(70% 60% at 15% 10%, rgba(238, 159, 104, 0.09), transparent 55%)',
-  'radial-gradient(60% 50% at 88% 22%, rgba(12, 24, 48, 0.55), transparent 55%)',
-  'radial-gradient(80% 60% at 50% 95%, rgba(238, 159, 104, 0.07), transparent 60%)',
-].join(', ')
-
 export default function Home() {
   const { theme } = useTheme()
   const dark = theme === 'dark'
@@ -62,14 +50,7 @@ export default function Home() {
         aria-hidden="true"
       />
 
-      {/* Gradient blobs */}
-      <div
-        className="pointer-events-none fixed inset-0"
-        style={{ zIndex: 0, background: dark ? BLOBS_DARK : BLOBS_LIGHT }}
-        aria-hidden="true"
-      />
-
-      {/* Page content sits above the fixed background layers */}
+      {/* Page content sits above the fixed background layer */}
       <div className="relative" style={{ zIndex: 1 }}>
 
         {/* ── Hero ──────────────────────────────────────────────────────────── */}
