@@ -27,7 +27,7 @@ export default function AboutMeSection() {
             </h2>
             <div className="mb-10 space-y-4 text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400">
               <p>
-                I&apos;m a Senior Product Designer currently working at Rakuten Advertising, with 8+ years&apos; experience designing enterprise tools used by advertisers, analysts, and account teams.
+                I&apos;m a Senior Product Designer currently working at Rakuten Advertising, with 13+ years&apos; experience designing enterprise tools used by advertisers, analysts, and account teams.
               </p>
               <p>
                 My approach prioritises outcome, resulting in fewer support tickets, faster workflows, and happier, more decisive users.

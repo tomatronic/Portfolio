@@ -24,7 +24,7 @@ export default function About() {
                             </h1>
                             <div className="space-y-4 text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400">
                                 <p>
-                                    For the past 8 years at Rakuten Advertising, I&apos;ve worked on large-scale internal platforms used by thousands of advertisers, publishers, and account teams. Since these systems are built around large datasets, detailed reporting, and multi-step workflows, they can easily become slow, confusing, or overly technical – adding friction where users need to make vital decisions.
+                                    For the past 13 years at Rakuten Advertising, I&apos;ve worked on large-scale internal platforms used by thousands of advertisers, publishers, and account teams. Since these systems are built around large datasets, detailed reporting, and multi-step workflows, they can easily become slow, confusing, or overly technical – adding friction where users need to make vital decisions.
                                 </p>
                                 <p className="font-medium text-slate-950 dark:text-white">
                                     It&apos;s my role to remove this friction.
