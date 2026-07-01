@@ -29,7 +29,7 @@ function CaseStudyContent() {
               <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">
                 Rakuten Advertising &bull; Sept 2025 – Ongoing
               </p>
-              <h1>From Concept to Production in 5 Months</h1>
+              <h1 className="text-balance">From Concept to Production in 5 Months</h1>
             </div>
             <div className="md:col-span-2">
               <p>

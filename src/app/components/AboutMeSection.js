@@ -3,15 +3,37 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { motion, useReducedMotion } from 'framer-motion'
 
 export default function AboutMeSection() {
+  const prefersReducedMotion = useReducedMotion()
+
+  const container = {
+    hidden: {},
+    visible: { transition: { staggerChildren: prefersReducedMotion ? 0 : 0.12 } },
+  }
+  const item = {
+    hidden: prefersReducedMotion ? {} : { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] },
+    },
+  }
+
   return (
     <section className="py-16">
       <div className="container mx-auto max-w-6xl px-4">
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[300px_1fr] md:gap-16">
+        <motion.div
+          className="grid grid-cols-1 gap-10 md:grid-cols-[300px_1fr] md:gap-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={container}
+        >
 
-          <div className="relative aspect-square w-full overflow-hidden rounded-2xl">
+          <motion.div variants={item} className="relative aspect-square w-full overflow-hidden rounded-2xl">
             <Image
               src="/meandcoffee.jpg"
               alt="Tom Spencer"
@@ -19,9 +41,9 @@ export default function AboutMeSection() {
               className="object-cover object-center"
               sizes="(max-width: 768px) 100vw, 300px"
             />
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col justify-center">
+          <motion.div variants={item} className="flex flex-col justify-center">
             <h2 className="mb-8 text-3xl font-normal leading-tight tracking-tight text-slate-950 dark:text-white md:text-4xl">
               A little about me
             </h2>
@@ -41,9 +63,9 @@ export default function AboutMeSection() {
               More about me
               <ArrowRight size={14} strokeWidth={2.5} className="transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

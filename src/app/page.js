@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { ArrowDown } from 'lucide-react'
-import { motion, useReducedMotion } from 'framer-motion'
 import CasestudyShowcase from './components/casestudyShowcase'
 import AboutMeSection from './components/AboutMeSection'
 import Testimonials from './components/Testimonials'
@@ -52,17 +51,9 @@ const BLOBS_DARK = [
 export default function Home() {
   const { theme } = useTheme()
   const dark = theme === 'dark'
-  const prefersReducedMotion = useReducedMotion()
-
-  const fadeUp = {
-    initial:     prefersReducedMotion ? {} : { opacity: 0, y: 28 },
-    whileInView: { opacity: 1, y: 0 },
-    transition:  { duration: prefersReducedMotion ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] },
-    viewport:    { once: true, margin: '-80px' },
-  }
 
   return (
-    <div className="relative" style={{ background: dark ? '#0F1623' : '#EDE7DD', minHeight: '100vh' }}>
+    <div className="relative" style={{ background: dark ? '#0F1623' : '#ffffff', minHeight: '100vh' }}>
 
       {/* Fractal noise texture — fixed so it stays put on scroll */}
       <div
@@ -110,7 +101,7 @@ export default function Home() {
                 const el = document.getElementById('work')
                 if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }) }
               }}
-              className="inline-flex items-center gap-2 rounded-full bg-accent-600 px-5 py-2.5 text-sm font-normal text-white transition-colors hover:bg-accent-800 dark:bg-accent-400 dark:text-slate-950 dark:hover:bg-accent-300"
+              className="inline-flex items-center gap-2 rounded-full bg-accent-600 px-5 py-2.5 text-sm font-normal text-white transition-[background-color,transform] hover:bg-accent-800 active:scale-[0.96] dark:bg-accent-400 dark:text-slate-950 dark:hover:bg-accent-300"
             >
               Explore case studies
               <ArrowDown size={15} strokeWidth={2.5} />
@@ -120,13 +111,13 @@ export default function Home() {
         </section>
 
         {/* ── Case studies ──────────────────────────────────────────────────── */}
-        <motion.div {...fadeUp}><CasestudyShowcase /></motion.div>
+        <CasestudyShowcase />
 
         {/* ── About me ──────────────────────────────────────────────────────── */}
-        <motion.div {...fadeUp}><AboutMeSection /></motion.div>
+        <AboutMeSection />
 
         {/* ── Testimonials ──────────────────────────────────────────────────── */}
-        <motion.div {...fadeUp}><Testimonials /></motion.div>
+        <Testimonials />
 
 
       </div>

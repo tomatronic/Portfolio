@@ -53,7 +53,7 @@ export default function CaseStudyModal({ children }) {
         <div className="pointer-events-none sticky right-0 top-0 z-10 flex justify-end px-6 pt-6">
           <button
             onClick={close}
-            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-md transition-all hover:scale-105 hover:shadow-lg"
+            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-md transition-[transform,box-shadow] hover:scale-105 hover:shadow-lg active:scale-[0.96]"
             aria-label="Close case study"
           >
             <X size={16} strokeWidth={2.5} className="text-slate-700 dark:text-slate-200" />

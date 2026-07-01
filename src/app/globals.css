@@ -45,6 +45,7 @@ body {
   font-size: 1rem;
   line-height: 1.7;
   transition: background-color 250ms ease-out;
+  -webkit-font-smoothing: antialiased;
 }
 
 @layer utilities {
@@ -71,6 +72,7 @@ body {
 
   p {
     @apply text-base font-normal leading-relaxed mb-4 text-slate-600 dark:text-slate-400;
+    text-wrap: pretty;
   }
 
   li {

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
+import { motion, useReducedMotion } from 'framer-motion'
 
 // ─── Card data ────────────────────────────────────────────────────────────────
 
@@ -64,7 +65,7 @@ function Card({ card, isFirst }) {
       {/* ── Image — padded, inset, rounded ─────────────────────── */}
       <div className="shrink-0 bg-white p-5 dark:bg-slate-800/50 md:w-[46%] md:p-8">
         <div
-          className="relative w-full overflow-hidden rounded-xl shadow-[0_2px_16px_rgba(15,22,35,0.10)] dark:shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
+          className="relative w-full overflow-hidden rounded-xl shadow-[0_2px_16px_rgba(15,22,35,0.10)] ring-1 ring-black/10 dark:shadow-[0_2px_16px_rgba(0,0,0,0.35)] dark:ring-white/10"
           style={{ aspectRatio: '4/3' }}
         >
           <Image
@@ -82,7 +83,7 @@ function Card({ card, isFirst }) {
       {/* ── Text ───────────────────────────────────────────────── */}
       <div className="flex flex-col justify-center gap-5 p-8 md:w-[54%] md:p-10">
 
-        <h2 className="text-2xl font-normal tracking-tight text-slate-950 dark:text-white md:text-3xl">
+        <h2 className="text-balance text-2xl font-normal tracking-tight text-slate-950 dark:text-white md:text-3xl">
           {card.title}
         </h2>
 
@@ -116,15 +117,38 @@ function Card({ card, isFirst }) {
 // ─── Showcase ─────────────────────────────────────────────────────────────────
 
 export default function CasestudyShowcase() {
+  const prefersReducedMotion = useReducedMotion()
+
+  const container = {
+    hidden: {},
+    visible: { transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 } },
+  }
+  const item = {
+    hidden: prefersReducedMotion ? {} : { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] },
+    },
+  }
+
   return (
     <div id="work" className="pb-24 pt-10">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className="rounded-3xl bg-[#C4B09A] p-4 dark:bg-[#0D1927] md:p-5">
-          <div className="flex flex-col gap-4">
+        <div className="rounded-4xl bg-[#C4B09A] p-4 dark:bg-[#0D1927] md:p-5">
+          <motion.div
+            className="flex flex-col gap-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={container}
+          >
             {CARDS.map((card, i) => (
-              <Card key={card.href} card={card} isFirst={i === 0} />
+              <motion.div key={card.href} variants={item}>
+                <Card card={card} isFirst={i === 0} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

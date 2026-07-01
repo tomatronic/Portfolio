@@ -33,7 +33,7 @@ export default function ExampleGallery() {
 
         <div className="grid grid-cols-2 gap-4 pb-16 md:grid-cols-4">
           {images.map((image, index) => (
-            <div key={index} className="relative aspect-square overflow-hidden rounded-2xl">
+            <div key={index} className="relative aspect-square overflow-hidden rounded-2xl ring-1 ring-black/10 dark:ring-white/10">
               <Image
                 src={image.src}
                 alt={image.alt}

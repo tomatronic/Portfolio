@@ -129,11 +129,22 @@ export default function Navigation() {
 
             <button
               ref={buttonRef}
-              className="text-slate-950 dark:text-white md:hidden"
+              className="relative flex h-11 w-11 items-center justify-center text-slate-950 transition-transform active:scale-[0.96] dark:text-white md:hidden"
               onClick={toggleMenu}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={isMenuOpen ? 'close' : 'open'}
+                  initial={{ opacity: 0, scale: 0.25, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, scale: 0.25, filter: 'blur(4px)' }}
+                  transition={{ type: 'spring', duration: 0.3, bounce: 0 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                </motion.span>
+              </AnimatePresence>
             </button>
 
             <div className="hidden md:flex md:items-center md:space-x-8">
@@ -154,7 +165,7 @@ export default function Navigation() {
 
               <a
                 href="/resume.pdf"
-                className="inline-flex items-center gap-2 rounded-full bg-slate-950/[0.07] px-4 py-1.5 text-base font-medium text-slate-950 transition-colors hover:bg-accent-600 hover:text-white dark:bg-white/10 dark:text-slate-200 dark:hover:bg-accent-600 dark:hover:text-white"
+                className="inline-flex items-center gap-2 rounded-full bg-slate-950/[0.07] px-4 py-1.5 text-base font-medium text-slate-950 transition-[background-color,color,transform] hover:bg-accent-600 hover:text-white active:scale-[0.96] dark:bg-white/10 dark:text-slate-200 dark:hover:bg-accent-600 dark:hover:text-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -180,7 +191,7 @@ export default function Navigation() {
           <div className="container relative mx-auto h-full px-6 py-8">
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="absolute right-6 top-12 text-white md:hidden"
+              className="absolute right-6 top-12 flex h-11 w-11 items-center justify-center text-white transition-transform active:scale-[0.96] md:hidden"
               aria-label="Close menu"
             >
               <X size={22} />

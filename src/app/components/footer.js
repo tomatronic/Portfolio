@@ -20,7 +20,7 @@ export default function Footer() {
                 <a
                   href="mailto:tom.m.spencer@gmail.com"
                   aria-label="Send email"
-                  className="inline-flex items-center justify-center rounded-full bg-slate-950/[0.07] p-2 text-slate-600 transition-colors hover:bg-accent-600 hover:text-white dark:bg-white/10 dark:text-slate-400 dark:hover:bg-accent-600 dark:hover:text-white"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/[0.07] text-slate-600 transition-[background-color,color,transform] hover:bg-accent-600 hover:text-white active:scale-[0.96] dark:bg-white/10 dark:text-slate-400 dark:hover:bg-accent-600 dark:hover:text-white"
                 >
                   <Mail size={14} strokeWidth={2} />
                 </a>
@@ -29,7 +29,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="inline-flex items-center justify-center rounded-full bg-slate-950/[0.07] p-2 text-slate-600 transition-colors hover:bg-accent-600 hover:text-white dark:bg-white/10 dark:text-slate-400 dark:hover:bg-accent-600 dark:hover:text-white"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/[0.07] text-slate-600 transition-[background-color,color,transform] hover:bg-accent-600 hover:text-white active:scale-[0.96] dark:bg-white/10 dark:text-slate-400 dark:hover:bg-accent-600 dark:hover:text-white"
                 >
                   <Linkedin size={14} strokeWidth={2} />
                 </a>

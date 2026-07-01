@@ -20,7 +20,7 @@ function ACJ() {
                         <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
                             <div className="md:col-span-2">
                                 <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">Rakuten Advertising &bull; Oct 2022 – Jun 2023</p>
-                                <h1><span className="text-slate-600 dark:text-slate-400">Affiliate Conversion Journey</span> — Multi-Touch Attribution for Affiliate</h1>
+                                <h1 className="text-balance"><span className="text-slate-600 dark:text-slate-400">Affiliate Conversion Journey</span> — Multi-Touch Attribution for Affiliate</h1>
                             </div>
                             <div className="md:col-span-2">
                                 <p>Publishers and advertisers on Rakuten's affiliate network needed to understand their contribution to sales beyond last-click attribution. When a customer discovers a product through Publisher A's blog, researches it via Publisher B's review site, then purchases after clicking Publisher C's discount link, who deserves credit?</p>

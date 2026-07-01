@@ -20,7 +20,7 @@ function Prompt() {
                         <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
                             <div className="md:col-span-2">
                                 <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">Rakuten Advertising &bull; Jan 2025 - Ongoing</p>
-                                <h1>Intelligent Search for Custom Reports — Natural Language Search & AI</h1>
+                                <h1 className="text-balance">Intelligent Search for Custom Reports — Natural Language Search & AI</h1>
                             </div>
                             <div className="md:col-span-2">
                                 <p>Advertisers on Rakuten&apos;s platform create custom reports monthly — sometimes weekly — to track campaign performance across 170+ metrics. Building one manually meant 15–20 minutes of clicking through dropdowns and configuring data points. With 1,000+ active advertisers and dozens of account managers doing this regularly, the time loss was significant. It also landed on support when people couldn&apos;t figure out the interface.</p>

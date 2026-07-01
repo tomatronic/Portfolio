@@ -19,7 +19,7 @@ export default function About() {
 
                         {/* Left: heading + body copy */}
                         <div>
-                            <h1 className="mb-8 text-2xl font-normal leading-snug tracking-tight text-slate-950 dark:text-white md:text-3xl">
+                            <h1 className="mb-8 text-balance text-2xl font-normal leading-snug tracking-tight text-slate-950 dark:text-white md:text-3xl">
                                 I design complex software so it feels easy to use – especially where people rely on data to make fast, high-impact decisions.
                             </h1>
                             <div className="space-y-4 text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400">
@@ -54,7 +54,7 @@ export default function About() {
                                         href="/resume.pdf"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 rounded-full bg-slate-950/[0.07] px-4 py-1.5 text-sm font-normal text-slate-600 transition-colors hover:bg-accent-600 hover:text-white dark:bg-white/10 dark:text-slate-400 dark:hover:bg-accent-600 dark:hover:text-white"
+                                        className="inline-flex items-center gap-2 rounded-full bg-slate-950/[0.07] px-4 py-1.5 text-sm font-normal text-slate-600 transition-[background-color,color,transform] hover:bg-accent-600 hover:text-white active:scale-[0.96] dark:bg-white/10 dark:text-slate-400 dark:hover:bg-accent-600 dark:hover:text-white"
                                     >
                                         <Download size={14} strokeWidth={2} />
                                         Download resume
@@ -63,7 +63,7 @@ export default function About() {
                                         href="https://www.linkedin.com/in/thomas-spencer/"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 rounded-full bg-slate-950/[0.07] px-4 py-1.5 text-sm font-normal text-slate-600 transition-colors hover:bg-accent-600 hover:text-white dark:bg-white/10 dark:text-slate-400 dark:hover:bg-accent-600 dark:hover:text-white"
+                                        className="inline-flex items-center gap-2 rounded-full bg-slate-950/[0.07] px-4 py-1.5 text-sm font-normal text-slate-600 transition-[background-color,color,transform] hover:bg-accent-600 hover:text-white active:scale-[0.96] dark:bg-white/10 dark:text-slate-400 dark:hover:bg-accent-600 dark:hover:text-white"
                                     >
                                         <Linkedin size={14} strokeWidth={2} />
                                         LinkedIn
