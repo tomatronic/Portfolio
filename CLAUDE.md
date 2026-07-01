@@ -3,7 +3,7 @@
 ## Versions
 
 ### Current version (active — June 2026)
-- **Hero**: Centred, full-bleed noise + gradient background. Jost headline with amber gradient highlight on "easy to use", sub-copy, rounded-full CTA with smooth scroll to `#work`. Defined inline in `page.js` — there is no separate hero component.
+- **Hero**: Left-aligned, full-bleed noise + gradient background. DM Sans headline (`text-4xl md:text-5xl lg:text-6xl`, `line-height: 1.05`) with amber gradient highlight on "easy to use". Short one-sentence sub-copy. Rounded-full CTA with smooth scroll to `#work`. Defined inline in `page.js` — there is no separate hero component.
 - **Background**: Fixed fractal noise SVG (`feTurbulence baseFrequency 0.9`) + 3 radial gradient blobs over `#EDE7DD` light / `#0F1623` dark. Both layers at `z-index: 0`; page content at `z-index: 1`.
 - **Palette**: amber `#B84010` accent, warm cream `#EDE7DD` (page + hero base) light, deep navy `#0F1623` dark
 - Older hero experiments (SolarHero solar-arc chart, `/testHome` route, `hero.safe.js`/`hero.original.js` centred violet layout) were deleted in June 2026 — recover from git history if ever needed (safe baseline commit `ce8b3de`).
@@ -19,7 +19,7 @@ Project root: `/Users/thomasspencer/Documents/Portfolio2.0/portfolio2.0/`
 - **Styling**: Tailwind CSS v4 (`globals.css` — uses `@import "tailwindcss"`, no PostCSS config needed)
 - **Animation**: Framer Motion
 - **Icons**: Lucide React (`lucide-react`)
-- **Fonts**: Jost only (`--font-jost`) via `next/font/google` — single font across all text; headings at `font-semibold` (600), body at `font-normal` (400)
+- **Fonts**: DM Sans only (`--font-dm-sans`) via `next/font/google` — single font across all text; headings at `font-semibold` (600), body at `font-normal` (400)
 - **Deployment**: Vercel (Analytics integrated)
 
 ## Key files
@@ -32,10 +32,10 @@ src/app/
   not-found.js                — branded typographic 404 with back-home CTA
   globals.css                 — Tailwind v4 config, @theme accent tokens, dark mode variant, base styles
   components/
-    casestudyShowcase.js      — work cards: two images (aspect-4/3, object-cover, sizes + priority on first card) above text; title full-width, body+bullets in 2-col grid below. NOTE: amber colour is currently overloaded (used for both description text and CTA link) — pending fix
+    casestudyShowcase.js      — work cards: individual white cards (rounded-2xl, ring border, hover shadow) in a warm tan outer container (#C4B09A light / #0D1927 dark, rounded-3xl, p-4/5). Each card: image left (46%, padded inset, rounded-xl screenshot with shadow) / text right (54%): title, body, bullets, CTA arrow.
     navigation.js             — top nav: "Tom Spencer" wordmark, desktop links, Resume pill, mobile full-screen menu. No background (fixed noise/gradient shows through).
     PageBackground.js         — sets body bg from theme: #EDE7DD light / #0F1623 dark
-    AboutMeSection.js         — open editorial layout: large Jost headline + 2 body paragraphs + "More about me →" + LinkedIn link
+    AboutMeSection.js         — open editorial layout: large DM Sans headline + 2 body paragraphs + "More about me →" + LinkedIn link
     examples.js               — ExampleGallery: hover-expand 4-image grid ("Extra Pixels" section)
     CardImageStack.js         — fanned/spread image stack, used by OtherCaseStudies
     ThemeProvider.js          — context for dark/light theme; toggle() persists to localStorage
@@ -53,7 +53,7 @@ src/app/
 public/
   just_me.webp                — nav avatar + favicon
   bio.png                     — about page photo
-  ogdata.png                  — 1200×630 OpenGraph share card (old violet branding — pending refresh to amber/cream)
+  ogdata.png                  — 1200×630 OpenGraph share card (refreshed by Tom, June 2026)
   resume.pdf
   prompt_1.png, prompt_2.png, prompt_3.png  — Prompt case study card images
   acj_1.png, acj_2.png, acj_3.png          — ACJ case study card images
@@ -68,7 +68,7 @@ One theme-switching method in context:
 ## Navigation
 `src/app/components/navigation.js`
 
-- Left: "Tom Spencer" wordmark in Jost `font-normal text-2xl` (no avatar image).
+- Left: "Tom Spencer" wordmark, `font-normal text-2xl` (no avatar image).
 - Desktop links: Work, About, Resume pill (hover → `accent-600` with white text)
 - Mobile: full-screen `bg-slate-950` overlay with Menu/X lucide icons. Links are `font-normal` (not bold).
 - `className="relative z-50"` — `relative` is required for `z-50` to take effect
@@ -150,7 +150,7 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 - **Gallery cards** (examples.js): rest shadow `rgba(184,64,16,0.07)`, hover `rgba(184,64,16,0.14)`
 
 ## OtherCaseStudies cards
-- Layout: title (Jost, text-base, font-semibold) left — image stack right
+- Layout: title (DM Sans, text-base, font-semibold) left — image stack right
 - Padding: `px-5 py-8`, image container `h-16 w-28 mr-6`
 - Border: `border-[#C8BEB0] dark:border-[#2A3A4A]` — matches main card borders
 - Hover shadow: amber-tinted `rgba(184,64,16,0.10)` / `rgba(238,159,104,0.12)` — matches rest of site
@@ -214,30 +214,30 @@ Links row: "More about me →" (text link) + LinkedIn icon link (`https://www.li
 `src/app/about/page.js`
 
 - Card: `rounded-4xl bg-white dark:bg-slate-900 p-8 md:p-12 lg:p-16`
-- h1: `text-2xl tracking-tight md:text-3xl` (uses globals Jost font-semibold, not a custom override)
+- h1: `text-2xl tracking-tight md:text-3xl` (uses globals DM Sans font-semibold, not a custom override)
 - Philosophy cards: `bg-[#EDE7DD] dark:bg-slate-800/50` with `bg-[#E4DDD2] dark:bg-slate-700/50` image placeholders
 - Hobbies image gallery is present in code but commented out — enable when `/public/hobbies/` images are ready
 
 ## Typographic scale
-Single font: **Jost** (`--font-jost`) for all text. Hierarchy is created through weight and size alone.
+Single font: **DM Sans** (`--font-dm-sans`) for all text. Hierarchy is created through weight and size alone.
 
 | Role | Font | Size | Weight | Color | Leading |
 |------|------|------|--------|-------|---------|
-| Page title (h1) | Jost | `text-4xl` (globals default) | `font-semibold` | `text-slate-950 dark:text-white` | `leading-tight` |
-| Section heading (h2) | Jost | `text-xl` (case studies override) / `text-2xl→3xl` (globals) | `font-semibold` | `text-slate-950 dark:text-white` | `tracking-tight` |
-| Sub-heading (h3) | Jost | `text-xl` | `font-semibold` | `text-slate-950 dark:text-white` | — |
-| Body / muted text | Jost | `text-base` | `font-normal` | `text-slate-600 dark:text-slate-400` | `leading-relaxed` |
-| Small / caption | Jost | `text-sm` or `text-xs` | — | — | — |
+| Page title (h1) | DM Sans | `text-4xl` (globals default) | `font-semibold` | `text-slate-950 dark:text-white` | `leading-tight` |
+| Section heading (h2) | DM Sans | `text-xl` (case studies override) / `text-2xl→3xl` (globals) | `font-semibold` | `text-slate-950 dark:text-white` | `tracking-tight` |
+| Sub-heading (h3) | DM Sans | `text-xl` | `font-semibold` | `text-slate-950 dark:text-white` | — |
+| Body / muted text | DM Sans | `text-base` | `font-normal` | `text-slate-600 dark:text-slate-400` | `leading-relaxed` |
+| Small / caption | DM Sans | `text-sm` or `text-xs` | — | — | — |
 
 **Rule**: All body/muted `<p>` text must use `text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400`. Do NOT use `font-medium`, `text-slate-700`, `leading-7`, or `text-lg` for regular body copy.
 
-**Jost on non-heading elements**: apply via `style={{ fontFamily: 'var(--font-jost), system-ui, sans-serif' }}` — there is no Tailwind utility class for it.
+**DM Sans on non-heading elements**: apply via `style={{ fontFamily: 'var(--font-dm-sans), system-ui, sans-serif' }}` — there is no Tailwind utility class for it.
 
 ## globals.css base styles
 ```css
-h1    { font-family: Jost; text-4xl font-semibold leading-tight tracking-tight dark:text-white }
-h2    { font-family: Jost; text-2xl→text-3xl font-semibold tracking-tight text-slate-950 dark:text-white }
-h3    { font-family: Jost; text-xl font-semibold tracking-tight text-slate-950 dark:text-white }
+h1    { font-family: DM Sans; text-4xl font-semibold leading-tight tracking-tight dark:text-white }
+h2    { font-family: DM Sans; text-2xl→text-3xl font-semibold tracking-tight text-slate-950 dark:text-white }
+h3    { font-family: DM Sans; text-xl font-semibold tracking-tight text-slate-950 dark:text-white }
 p     { text-base font-normal leading-relaxed mb-4 text-slate-600 dark:text-slate-400 }
 blockquote { italic border-l-4 border-accent-300 dark:border-accent-600 pl-4 text-slate-600 dark:text-slate-400 my-6 }
 blockquote cite { block mt-2 not-italic text-sm text-slate-400 dark:text-slate-500 }
