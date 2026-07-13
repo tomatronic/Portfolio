@@ -44,7 +44,7 @@ export default function AboutMeSection() {
           </motion.div>
 
           <motion.div variants={item} className="flex flex-col justify-center">
-            <h2 className="mb-8 text-3xl font-normal leading-tight tracking-tight text-slate-950 dark:text-white md:text-4xl">
+            <h2 className="mb-8 text-2xl font-normal leading-tight tracking-tight text-slate-950 dark:text-white md:text-3xl">
               A little about me
             </h2>
             <div className="mb-10 space-y-4 text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400">

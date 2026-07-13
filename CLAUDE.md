@@ -250,15 +250,21 @@ Links row: "More about me →" (text link) + LinkedIn icon link (`https://www.li
 - No philosophy cards or hobbies gallery exist in the current code (both were removed or never built past an earlier draft this doc had described) — `/public/hobbies/travelling-1.png` is a real, unused photo sitting there if a hobbies section ever gets built
 
 ## Typographic scale
+
+Harmonized 2026-07-13: the primary heading was inconsistent across pages (Home hero peaked at 60px desktop, case-study h1s were a flat 36px with no mobile step, About's h1 was smaller at 24→30px, and AboutMeSection's h2 was accidentally bigger than About's own h1 at 30→36px). All primary headings now converge on one shared responsive step — 30px mobile → 36px tablet+ — with no page exceeding a 36px ceiling. Section headings similarly converge on 24px→30px.
+
 Single font: **DM Sans** (`--font-dm-sans`) for all text. Hierarchy is created through weight and size alone.
 
 | Role | Font | Size | Weight | Color | Leading |
 |------|------|------|--------|-------|---------|
-| Page title (h1) | DM Sans | `text-4xl` (globals default) | `font-semibold` | `text-slate-950 dark:text-white` | `leading-tight` |
-| Section heading (h2) | DM Sans | `text-xl` (case studies override) / `text-2xl→3xl` (globals) | `font-semibold` | `text-slate-950 dark:text-white` | `tracking-tight` |
-| Sub-heading (h3) | DM Sans | `text-xl` | `font-semibold` | `text-slate-950 dark:text-white` | — |
+| Page title (h1) — Home hero, About, all 4 case studies | DM Sans | `text-3xl md:text-4xl` (30px → 36px) | `font-semibold` (globals default; Home/About override to `font-normal`) | `text-slate-950 dark:text-white` | `leading-tight` |
+| Section heading (h2) — "A little about me", "What colleagues say.", globals default | DM Sans | `text-2xl md:text-3xl` (24px → 30px) | `font-semibold` (globals default; AboutMeSection overrides to `font-normal`) | `text-slate-950 dark:text-white` | `tracking-tight` |
+| Case-study in-page section heading (h2) — Challenge/Solution/etc. | DM Sans | `text-xl` (20px, flat) | inherits `font-semibold` from globals `h3`-adjacent override in each case study page | `text-slate-950 dark:text-white` | — |
+| Sub-heading (h3) | DM Sans | `text-xl` (20px, flat) | `font-semibold` | `text-slate-950 dark:text-white` | — |
 | Body / muted text | DM Sans | `text-base` | `font-normal` | `text-slate-600 dark:text-slate-400` | `leading-relaxed` |
 | Small / caption | DM Sans | `text-sm` or `text-xs` | — | — | — |
+
+**Rule going forward**: any new primary page heading should use `text-3xl md:text-4xl` (matching the shared h1 default — most pages don't need an explicit override at all, since the global `h1` rule already applies this). Any new section heading should use `text-2xl md:text-3xl` (the shared h2 default). Don't introduce a third one-off size for either role — that's exactly the drift this pass just cleaned up.
 
 **Rule**: All body/muted `<p>` text must use `text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400`. Do NOT use `font-medium`, `text-slate-700`, `leading-7`, or `text-lg` for regular body copy.
 
@@ -266,7 +272,7 @@ Single font: **DM Sans** (`--font-dm-sans`) for all text. Hierarchy is created t
 
 ## globals.css base styles
 ```css
-h1    { font-family: DM Sans; text-4xl font-semibold leading-tight tracking-tight dark:text-white }
+h1    { font-family: DM Sans; text-3xl md:text-4xl font-semibold leading-tight tracking-tight dark:text-white }
 h2    { font-family: DM Sans; text-2xl→text-3xl font-semibold tracking-tight text-slate-950 dark:text-white }
 h3    { font-family: DM Sans; text-xl font-semibold tracking-tight text-slate-950 dark:text-white }
 p     { text-base font-normal leading-relaxed mb-4 text-slate-600 dark:text-slate-400 }

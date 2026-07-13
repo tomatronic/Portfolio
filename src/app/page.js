@@ -59,7 +59,7 @@ export default function Home() {
 
             {/* Headline */}
             <h1
-              className="mb-8 w-full max-w-[800px] text-balance text-4xl font-normal tracking-tight md:text-left md:text-5xl lg:text-6xl"
+              className="mb-8 w-full max-w-[800px] text-balance text-3xl font-normal tracking-tight md:text-left md:text-4xl"
               style={{ lineHeight: 1.05, color: dark ? '#ffffff' : '#020617' }}
             >
               Making complex products{' '}

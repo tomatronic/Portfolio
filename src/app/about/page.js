@@ -19,7 +19,7 @@ export default function About() {
 
                         {/* Left: heading + body copy */}
                         <div>
-                            <h1 className="mb-8 text-balance text-2xl font-normal leading-snug tracking-tight text-slate-950 dark:text-white md:text-3xl">
+                            <h1 className="mb-8 text-balance text-3xl font-normal leading-snug tracking-tight text-slate-950 dark:text-white md:text-4xl">
                                 I design complex software so it feels easy to use – especially where people rely on data to make fast, high-impact decisions.
                             </h1>
                             <div className="space-y-4 text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400">

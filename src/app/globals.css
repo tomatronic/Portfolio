@@ -57,7 +57,7 @@ body {
 @layer base {
   h1 {
     font-family: var(--font-dm-sans), system-ui, sans-serif;
-    @apply text-4xl font-semibold leading-tight tracking-tight dark:text-white;
+    @apply text-3xl md:text-4xl font-semibold leading-tight tracking-tight dark:text-white;
   }
 
   h2 {
