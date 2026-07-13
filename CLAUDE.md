@@ -2,11 +2,42 @@
 
 ## Versions
 
-### Current version (active — June 2026)
-- **Hero**: Left-aligned, full-bleed noise + gradient background. DM Sans headline (`text-4xl md:text-5xl lg:text-6xl`, `line-height: 1.05`) with amber gradient highlight on "easy to use". Short one-sentence sub-copy. Rounded-full CTA with smooth scroll to `#work`. Defined inline in `page.js` — there is no separate hero component.
-- **Background**: Fixed fractal noise SVG (`feTurbulence baseFrequency 0.9`) + 3 radial gradient blobs over `#EDE7DD` light / `#0F1623` dark. Both layers at `z-index: 0`; page content at `z-index: 1`.
-- **Palette**: amber `#B84010` accent, warm cream `#EDE7DD` (page + hero base) light, deep navy `#0F1623` dark
+### Current version (active — July 2026)
+- **Hero**: Left-aligned, full-bleed noise background (no gradient blobs — removed 2026-07-01). DM Sans headline (`text-4xl md:text-5xl lg:text-6xl`, `line-height: 1.05`) with amber gradient highlight on "easy to use". Short one-sentence sub-copy. Rounded-full CTA with smooth scroll to `#work`. Defined inline in `page.js` — there is no separate hero component.
+- **Background**: Fixed fractal noise SVG only (`feTurbulence baseFrequency 0.9`) over flat `#ffffff` light / `#0F1623` dark. The 3 radial gradient blobs that used to sit under the noise were removed 2026-07-01 — they were creating a visible colour band near the top of the viewport plus a faint wash across the hero. `PageBackground.js` was updated to match (`light: '#ffffff'`, was `#EDE7DD`).
+- **Palette**: amber `#B84010` accent, flat white page bg light / deep navy `#0F1623` dark. Warm cream (`#EDE7DD`/`#E4DDD2`) is still used for card image containers, the casestudyShowcase outer tan container (`#C4B09A`), and testimonial cards — just not the page background itself anymore.
 - Older hero experiments (SolarHero solar-arc chart, `/testHome` route, `hero.safe.js`/`hero.original.js` centred violet layout) were deleted in June 2026 — recover from git history if ever needed (safe baseline commit `ce8b3de`).
+
+### Code audit fixes (2026-07-13)
+Ran the `improve` skill (`.agents/skills/improve/SKILL.md`) as a read-only audit, then implemented the findings directly:
+- **Fixed**: `globals.css`'s `body` selector still had the pre-2026-07-01 cream default (`#EDE7DD`) — `PageBackground.js` only overwrites it in a `useEffect` (post-mount), so About, all 4 case-study pages, and 404 flashed cream→white on every light-mode load (Home was accidentally spared since its own wrapper div sets background inline). Now `#ffffff` to match.
+- **Fixed**: `ThemeProvider.js` resolved the real theme (localStorage/system) inside a plain `useEffect`, which fires after first paint — dark-theme visitors briefly saw light-mode hero colours (`page.js`'s Home reads `theme` via JS, not Tailwind `dark:` classes) before the correction landed. Now uses an isomorphic `useLayoutEffect` (falls back to `useEffect` during SSR) so the correction happens before paint. Verified with Playwright (emulated dark color-scheme, cleared localStorage): resolves to `dark` immediately, no hydration warnings, no console errors.
+- **Fixed**: bumped `next` to `^15.5.20` and the `tar` override to `^7.5.20` — closed all `npm audit` findings (was 2 moderate + 1 high on Next.js, none of the vulnerable surfaces were actually in use here, but the patched version was a free minor-patch bump). Verified `npm run build` still succeeds.
+- **Removed**: ~8.9MB / 22 files of dead images from the deleted Brewtiful/DesignFlows case studies (`brewtiful*`, `designflows.png`, `dfbg.png`, `dfFinal.png`, `brandID.png`, `crit.png`, `poa.png`, etc.) — confirmed zero references anywhere in `src/app` before deleting.
+- **Fixed**: stale doc references — removed the "hobbies gallery commented out" and "philosophy cards" claims from this file (neither exists in the current `about/page.js`; `/public/hobbies/travelling-1.png` is a real unused photo if that section ever gets built) and the outdated "InfluencerCampaigns hero is a placeholder" note (it's `/influencerHero.png`, already real). Reworded a comment in `CardImageStack.js` that referenced `dialkit` (removed as a dependency in June 2026).
+
+### Design review + accessibility fixes (2026-07-13, later same day)
+Ran `/design-review` against the **live** production site (not local), with Playwright screenshot capture across breakpoints/themes plus axe-core automated WCAG2A/AA scans. Full review at `.design/review-2026-07-13/DESIGN_REVIEW.md`. Found and fixed real contrast failures the earlier code audit didn't catch (that audit was code-reading only, not a rendered/automated accessibility scan):
+- **Fixed**: `globals.css`'s global `blockquote cite` rule was `text-slate-400 dark:text-slate-500` — 2.51:1 light-mode contrast against Prompt's 3 testimonial cards (needs 4.5:1). Now `text-slate-600 dark:text-slate-400`, matching the site's existing muted-body-text convention (verified 7.26:1 light / 6.96:1 dark against the actual card backgrounds).
+- **Fixed**: footer copyright text (`footer.js`) was `text-slate-500 dark:text-slate-500` (i.e. no real dark variant) — 3.8:1 in dark mode against the site's navy `#0F1623` (needs 4.5:1). Now `dark:text-slate-400` (7.06:1). This is global (every page), so it was failing site-wide in dark mode.
+- **Fixed**: `InfluencerContent.js` persona cards had 3 more real contrast fails only surfaced by scanning that specific page (not covered by the earlier code audit or the first pass of this review): role/name line (`text-slate-500` → `text-slate-600` light), "Goals"/"Pain points" labels (`text-slate-400 dark:text-slate-500` → `text-slate-600 dark:text-slate-400`), and the Advertiser/Creator badge in dark mode (`dark:text-accent-400` → `dark:text-accent-300`). All verified against axe's actual computed/blended background colors, not assumed Tailwind defaults.
+- **Verified clean**: re-ran axe-core (wcag2a/wcag2aa) against all 6 pages × both themes after the fixes — zero `color-contrast` violations remain anywhere.
+- **Known, not fixed this pass**: `aria-valid-attr-value` (critical) on InfluencerCampaigns, `<div aria-owns="rmiz-modal-...">` — generated by the `react-medium-image-zoom` library (v5.3.0, latest is 5.4.8) around the `Zoom`-wrapped prototype image, referencing a modal element that doesn't exist in the DOM until zoom is activated. Didn't bump the library mid-deploy since a version bump carries different risk (behavior change) than a color-value fix and wasn't verified to resolve it — flagged as a follow-up, not blocking.
+- **Content flag (not code)**: the Rakuten homepage card screenshot (`offer_2.png`) visibly shows a third-party "Nexus Commerce" product UI, not Tom's work — already tracked in the backlog below as needing a real replacement, but elevated in urgency after seeing it rendered live (portfolio credibility risk, not just a content gap).
+
+### Interface polish pass (2026-07-01)
+Applied the `make-interfaces-feel-better` skill (`.agents/skills/make-interfaces-feel-better/SKILL.md`) across the whole site — commit `af47a1b`, pushed. Re-run this skill for future UI work; it covers:
+- **Staggered entrance animations**: `casestudyShowcase.js` (4 cards), `Testimonials.js` (2 cards), `AboutMeSection.js` (photo + text as 2 chunks) each now animate their own children via Framer Motion `variants`/`staggerChildren` instead of fading in as one block. `page.js` no longer wraps these in a page-level `fadeUp` — each component owns its own `whileInView`.
+- **40×44px minimum hit areas**: footer mail/LinkedIn buttons, `ThemeToggle` Sun/Moon targets, nav mobile toggle + full-screen close button.
+- **Scale on press** (`active:scale-[0.96]`): hero CTA, nav Resume pill, footer icon buttons, about-page resume/LinkedIn pills, modal close button, mobile menu toggle/close, theme toggle.
+- **Icon cross-fade**: nav mobile Menu/X swap now animates (opacity/scale/blur, spring `duration:0.3 bounce:0`) instead of an instant swap.
+- **No `transition-all`**: replaced with explicit property lists (`ThemeToggle.js`, modal close button).
+- **Text wrapping**: `text-wrap: pretty` added to the global `p` base style (site-wide); `text-balance` added to card titles, About h1, and 3 case-study h1s.
+- **Font smoothing**: `-webkit-font-smoothing: antialiased` added to `body` in `globals.css`.
+- **Neutral image outlines**: `ring-1 ring-black/10 dark:ring-white/10` added to casestudyShowcase card screenshots and the "Additional work" gallery (`examples.js`) — these had no outline before.
+- **Concentric radius**: casestudyShowcase outer tan container bumped `rounded-3xl` → `rounded-4xl` to match its `rounded-2xl` cards + padding.
+- **Known tension, left as-is**: the amber-tinted rings on the About photo and `CardImageStack` (documented under "Card interactions" below) technically conflict with the skill's "pure neutral outline only" rule, but that tint is a deliberate brand accent — didn't override it.
+- **Not done**: the ~15 inline images across the 4 case-study content pages (Prompt/ACJ/Rakuten/InfluencerCampaigns) still have no outline — skipped as repetitive/lower-value; ask if Tom wants the same treatment there.
 
 ## Project
 Tom Spencer's portfolio site. Next.js 15 + Tailwind CSS v4 + Framer Motion.
@@ -34,12 +65,13 @@ src/app/
   components/
     casestudyShowcase.js      — work cards: individual white cards (rounded-2xl, ring border, hover shadow) in a warm tan outer container (#C4B09A light / #0D1927 dark, rounded-3xl, p-4/5). Each card: image left (46%, padded inset, rounded-xl screenshot with shadow) / text right (54%): title, body, bullets, CTA arrow.
     navigation.js             — top nav: "Tom Spencer" wordmark, desktop links, Resume pill, mobile full-screen menu. No background (fixed noise/gradient shows through).
-    PageBackground.js         — sets body bg from theme: #EDE7DD light / #0F1623 dark
-    AboutMeSection.js         — open editorial layout: large DM Sans headline + 2 body paragraphs + "More about me →" + LinkedIn link
+    PageBackground.js         — sets body bg from theme: #ffffff light / #0F1623 dark (was #EDE7DD light, changed 2026-07-01)
+    AboutMeSection.js         — open editorial layout: large DM Sans headline + 2 body paragraphs + "More about me →" + LinkedIn link. Photo + text animate in as 2 staggered chunks.
+    Testimonials.js           — "What colleagues say" — heading/sub-copy left, 2 stacked quote cards right (staggered entrance)
     examples.js               — ExampleGallery: hover-expand 4-image grid ("Extra Pixels" section)
     CardImageStack.js         — fanned/spread image stack, used by OtherCaseStudies
     ThemeProvider.js          — context for dark/light theme; toggle() persists to localStorage
-    ThemeToggle.js            — pill toggle (Sun/Moon icons) in footer — cream/teal branded, no Tailwind dark: classes (uses inline styles)
+    ThemeToggle.js            — pill toggle (Sun/Moon icons) in footer — cream/teal branded, no Tailwind dark: classes (uses inline styles). Sun/Moon targets are 40×40px.
     OtherCaseStudies.js       — compact cards at bottom of each case study (title left, image stack right)
     footer.js                 — footer with ThemeToggle + copyright
   casestudy/                  — 4 individual case study pages (Prompt, InfluencerCampaigns, ACJ, Rakuten)
@@ -90,11 +122,13 @@ Hover shadows (amber-tinted):
 hover:shadow-[0_4px_24px_rgba(184,64,16,0.10)] dark:hover:shadow-[0_4px_24px_rgba(238,159,104,0.12)]
 ```
 
+Outer tan container is `rounded-4xl` (was `rounded-3xl` — bumped 2026-07-01 to stay concentric with the `rounded-2xl` cards + padding). Cards stagger in individually (~100ms delay) on scroll rather than fading in as one block. Card screenshot containers have a neutral `ring-1 ring-black/10 dark:ring-white/10` outline (added 2026-07-01).
+
 ## Colour palette — Experimental (current)
 | Role | Light | Dark |
 |------|-------|------|
-| Hero / page bg | `#EDE7DD` + noise + gradient blobs | `#0F1623` + noise + gradient blobs |
-| Page body bg | `#EDE7DD` | `#0F1623` |
+| Hero / page bg | `#ffffff` + noise texture only (no gradient blobs — removed 2026-07-01) | `#0F1623` + noise texture only |
+| Page body bg | `#ffffff` | `#0F1623` |
 | Case study image containers | `#EDE7DD` | `slate-800/50` |
 | Nav bg | none (transparent) | none (transparent) |
 | Modal bg | `#2A6B6B/12%` | `#051F1F/90%` |
@@ -191,13 +225,11 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 ```
 
 **Known content gaps (not code issues):**
-- InfluencerCampaigns: hero image is `/brewtifulBg.png` placeholder — needs replacing
-- InfluencerCampaigns: outcome metrics missing — needs Tom's input
+- InfluencerCampaigns: outcome/adoption metrics missing — needs Tom's input (hero image is `/influencerHero.png`, already real, not a placeholder)
 - Rakuten: Solution section is one sentence — needs expanding; no outcome metrics
 - ACJ: "35 DAU" metric needs context (total eligible users)
 - Prompt: `Prompt-userflow.png` (customer journey map) added to Approach section 2026-05-26. Still missing: before/after comparison copy + section header for `Prompt-old2.png`
 - ACJ: "35 daily active users" metric removed from Impact section 2026-05-26 (no denominator; removed rather than reframed)
-- About page: philosophy cards show `"Image placeholder"` — awaiting real images from Tom
 
 **Unused images in /public/ ready to add to case studies:**
 - `Prompt-suggestion.png`, `Prompt-error.png` — UI states; add to Prompt Challenge/Solution
@@ -213,10 +245,9 @@ Links row: "More about me →" (text link) + LinkedIn icon link (`https://www.li
 ## About page
 `src/app/about/page.js`
 
-- Card: `rounded-4xl bg-white dark:bg-slate-900 p-8 md:p-12 lg:p-16`
+- Two cards, both `rounded-4xl bg-zinc-50 dark:bg-slate-900 p-8 md:p-12 lg:p-16`: a bio card (headline + body copy + resume/LinkedIn links, left; photo `/bio.png`, right) and a "What I do outside of work" card (Travelling + Hiking & running blurbs, `/aboutBanner.png` banner image below)
 - h1: `text-2xl tracking-tight md:text-3xl` (uses globals DM Sans font-semibold, not a custom override)
-- Philosophy cards: `bg-[#EDE7DD] dark:bg-slate-800/50` with `bg-[#E4DDD2] dark:bg-slate-700/50` image placeholders
-- Hobbies image gallery is present in code but commented out — enable when `/public/hobbies/` images are ready
+- No philosophy cards or hobbies gallery exist in the current code (both were removed or never built past an earlier draft this doc had described) — `/public/hobbies/travelling-1.png` is a real, unused photo sitting there if a hobbies section ever gets built
 
 ## Typographic scale
 Single font: **DM Sans** (`--font-dm-sans`) for all text. Hierarchy is created through weight and size alone.
@@ -272,3 +303,10 @@ blockquote cite { block mt-2 not-italic text-sm text-slate-400 dark:text-slate-5
 - Image containers in case studies use `bg-[#EDE7DD] dark:bg-slate-800/50` — do NOT use `bg-purple-100` (old palette).
 - All case study metadata rows use `text-slate-600 dark:text-slate-400` — do NOT use `text-gray-600`.
 - `<cite>` inside `<blockquote>` renders as a new line automatically (styled in globals.css as `block mt-2 not-italic text-sm`).
+- Icon-only buttons need a **40×40px minimum hit area** (44×44px for nav/mobile toggles) — don't rely on icon size + small padding alone.
+- Buttons/links get press feedback via `active:scale-[0.96]` — never go below `0.95`, it reads as exaggerated.
+- Never use `transition-all` — list exact properties, e.g. `transition-[background-color,color,transform]`.
+- Headings use `text-balance`; the global `p` base style has `text-wrap: pretty` (set in `globals.css`) so body copy avoids orphans everywhere without per-instance classes.
+- `body` has `-webkit-font-smoothing: antialiased` (added 2026-07-01).
+- Design-engineering polish skill lives at `.agents/skills/make-interfaces-feel-better/SKILL.md` — re-run it for future UI/animation work rather than re-deriving these principles from scratch.
+- Additional project-scoped skills (pulled in from job-monitor, 2026-07-13; registered in `skills-lock.json`): `animation-vocabulary`, `apple-design`, `emil-design-eng`, `improve`, `improve-animations`, `review-animations` (all `emilkowalski/skills` except `improve`, which is `shadcn/improve`). Some overlap with `make-interfaces-feel-better` on animation/polish principles — check both before assuming one is authoritative.
