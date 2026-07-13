@@ -50,7 +50,7 @@ Project root: `/Users/thomasspencer/Documents/Portfolio2.0/portfolio2.0/`
 - **Styling**: Tailwind CSS v4 (`globals.css` — uses `@import "tailwindcss"`, no PostCSS config needed)
 - **Animation**: Framer Motion
 - **Icons**: Lucide React (`lucide-react`)
-- **Fonts**: DM Sans only (`--font-dm-sans`) via `next/font/google` — single font across all text; headings at `font-semibold` (600), body at `font-normal` (400)
+- **Fonts**: DM Sans only (`--font-dm-sans`) via `next/font/google` — single font across all text; headings and body both `font-normal` (400) as of 2026-07-13 (was `font-semibold`/600 — see Typographic scale section). Home hero is the one exception, at `font-medium` (500).
 - **Deployment**: Vercel (Analytics integrated)
 
 ## Key files
@@ -184,7 +184,7 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 - **Gallery cards** (examples.js): rest shadow `rgba(184,64,16,0.07)`, hover `rgba(184,64,16,0.14)`
 
 ## OtherCaseStudies cards
-- Layout: title (DM Sans, text-base, font-semibold) left — image stack right
+- Layout: title (DM Sans, text-base, font-normal — globals h3 default) left — image stack right
 - Padding: `px-5 py-8`, image container `h-16 w-28 mr-6`
 - Border: `border-[#C8BEB0] dark:border-[#2A3A4A]` — matches main card borders
 - Hover shadow: amber-tinted `rgba(184,64,16,0.10)` / `rgba(238,159,104,0.12)` — matches rest of site
@@ -246,25 +246,27 @@ Links row: "More about me →" (text link) + LinkedIn icon link (`https://www.li
 `src/app/about/page.js`
 
 - Two cards, both `rounded-4xl bg-zinc-50 dark:bg-slate-900 p-8 md:p-12 lg:p-16`: a bio card (headline + body copy + resume/LinkedIn links, left; photo `/bio.png`, right) and a "What I do outside of work" card (Travelling + Hiking & running blurbs, `/aboutBanner.png` banner image below)
-- h1: `text-2xl tracking-tight md:text-3xl` (uses globals DM Sans font-semibold, not a custom override)
+- h1: `text-3xl md:text-4xl` (30px → 36px, matches the shared h1 default — see Typographic scale)
 - No philosophy cards or hobbies gallery exist in the current code (both were removed or never built past an earlier draft this doc had described) — `/public/hobbies/travelling-1.png` is a real, unused photo sitting there if a hobbies section ever gets built
 
 ## Typographic scale
 
-Harmonized 2026-07-13: the primary heading was inconsistent across pages (Home hero peaked at 60px desktop, case-study h1s were a flat 36px with no mobile step, About's h1 was smaller at 24→30px, and AboutMeSection's h2 was accidentally bigger than About's own h1 at 30→36px). All primary headings now converge on one shared responsive step — 30px mobile → 36px tablet+ — with no page exceeding a 36px ceiling. Section headings similarly converge on 24px→30px.
+Harmonized 2026-07-13 in two passes:
+1. **Size**: the primary heading was inconsistent across pages (Home hero peaked at 60px desktop, case-study h1s were a flat 36px with no mobile step, About's h1 was smaller at 24→30px, and AboutMeSection's h2 was accidentally bigger than About's own h1 at 30→36px). All primary headings now converge on one shared responsive step — 30px mobile → 36px tablet+. Case-study in-page section headings (Challenge/Solution/etc.) were bumped from a flat 20px up to the shared 24px→30px h2 size, and h3 sub-points were normalized to always use tighter `pt-6` spacing (was a mix of `pt-6`/`pt-10`, which sometimes made an h3 read identically to an h2).
+2. **Weight**: the shared `h1`/`h2`/`h3` default in `globals.css` was still `font-semibold` (600) — a legacy value nothing actually matched anymore, since every deliberately-styled heading (Home hero, About h1, AboutMeSection's h2, card titles) already overrode it to `font-normal` (400). This left "What colleagues say." (an unstyled `<h2>`, inheriting the stale 600 default) visibly heavier than its sibling headings once they were all the same size. Fixed by changing the shared default itself to `font-normal` — this also lightened every case-study h1/h2/h3, which had the same problem. Home's hero is the one deliberate exception, bumped to `font-medium` (500) as the single heaviest text on the site.
 
-Single font: **DM Sans** (`--font-dm-sans`) for all text. Hierarchy is created through weight and size alone.
+Single font: **DM Sans** (`--font-dm-sans`) for all text. Hierarchy is now created primarily through size and spacing, with weight mostly uniform except the Home hero.
 
 | Role | Font | Size | Weight | Color | Leading |
 |------|------|------|--------|-------|---------|
-| Page title (h1) — Home hero, About, all 4 case studies | DM Sans | `text-3xl md:text-4xl` (30px → 36px) | `font-semibold` (globals default; Home/About override to `font-normal`) | `text-slate-950 dark:text-white` | `leading-tight` |
-| Section heading (h2) — "A little about me", "What colleagues say.", globals default | DM Sans | `text-2xl md:text-3xl` (24px → 30px) | `font-semibold` (globals default; AboutMeSection overrides to `font-normal`) | `text-slate-950 dark:text-white` | `tracking-tight` |
-| Case-study in-page section heading (h2) — Challenge/Solution/etc. | DM Sans | `text-xl` (20px, flat) | inherits `font-semibold` from globals `h3`-adjacent override in each case study page | `text-slate-950 dark:text-white` | — |
-| Sub-heading (h3) | DM Sans | `text-xl` (20px, flat) | `font-semibold` | `text-slate-950 dark:text-white` | — |
+| Home hero h1 (the one exception) | DM Sans | `text-3xl md:text-4xl` (30px → 36px) | `font-medium` (500) | inline (`#ffffff` dark / `#020617` light) | `lineHeight: 1.05` inline |
+| Page title (h1) — About, all 4 case studies | DM Sans | `text-3xl md:text-4xl` (30px → 36px, globals default) | `font-normal` (400, globals default) | `text-slate-950 dark:text-white` | `leading-tight` |
+| Section heading (h2) — "A little about me", "What colleagues say.", case-study Challenge/Solution/etc. | DM Sans | `text-2xl md:text-3xl` (24px → 30px, globals default) | `font-normal` (400, globals default) | `text-slate-950 dark:text-white` | `tracking-tight` |
+| Sub-heading (h3) — case-study sub-points, always `pt-6` above (never `pt-10`, which is h2-only) | DM Sans | `text-xl` (20px, flat, globals default) | `font-normal` (400, globals default) | `text-slate-950 dark:text-white` | — |
 | Body / muted text | DM Sans | `text-base` | `font-normal` | `text-slate-600 dark:text-slate-400` | `leading-relaxed` |
 | Small / caption | DM Sans | `text-sm` or `text-xs` | — | — | — |
 
-**Rule going forward**: any new primary page heading should use `text-3xl md:text-4xl` (matching the shared h1 default — most pages don't need an explicit override at all, since the global `h1` rule already applies this). Any new section heading should use `text-2xl md:text-3xl` (the shared h2 default). Don't introduce a third one-off size for either role — that's exactly the drift this pass just cleaned up.
+**Rule going forward**: any new primary page heading or section heading should use a plain `<h1>`/`<h2>`/`<h3>` with no size or weight override at all — the globals defaults now match the site's actual design intent, so most new headings need zero custom classes. The only sanctioned exception is the Home hero's `font-medium`. Don't introduce a third one-off weight or size for any heading role — that's exactly the drift these two passes just cleaned up.
 
 **Rule**: All body/muted `<p>` text must use `text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400`. Do NOT use `font-medium`, `text-slate-700`, `leading-7`, or `text-lg` for regular body copy.
 
@@ -272,9 +274,9 @@ Single font: **DM Sans** (`--font-dm-sans`) for all text. Hierarchy is created t
 
 ## globals.css base styles
 ```css
-h1    { font-family: DM Sans; text-3xl md:text-4xl font-semibold leading-tight tracking-tight dark:text-white }
-h2    { font-family: DM Sans; text-2xl→text-3xl font-semibold tracking-tight text-slate-950 dark:text-white }
-h3    { font-family: DM Sans; text-xl font-semibold tracking-tight text-slate-950 dark:text-white }
+h1    { font-family: DM Sans; text-3xl md:text-4xl font-normal leading-tight tracking-tight dark:text-white }
+h2    { font-family: DM Sans; text-2xl→text-3xl font-normal tracking-tight text-slate-950 dark:text-white }
+h3    { font-family: DM Sans; text-xl font-normal tracking-tight text-slate-950 dark:text-white }
 p     { text-base font-normal leading-relaxed mb-4 text-slate-600 dark:text-slate-400 }
 blockquote { italic border-l-4 border-accent-300 dark:border-accent-600 pl-4 text-slate-600 dark:text-slate-400 my-6 }
 blockquote cite { block mt-2 not-italic text-sm text-slate-400 dark:text-slate-500 }

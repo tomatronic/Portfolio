@@ -57,17 +57,17 @@ body {
 @layer base {
   h1 {
     font-family: var(--font-dm-sans), system-ui, sans-serif;
-    @apply text-3xl md:text-4xl font-semibold leading-tight tracking-tight dark:text-white;
+    @apply text-3xl md:text-4xl font-normal leading-tight tracking-tight dark:text-white;
   }
 
   h2 {
     font-family: var(--font-dm-sans), system-ui, sans-serif;
-    @apply text-2xl font-semibold tracking-tight text-slate-950 md:text-3xl dark:text-white;
+    @apply text-2xl font-normal tracking-tight text-slate-950 md:text-3xl dark:text-white;
   }
 
   h3 {
     font-family: var(--font-dm-sans), system-ui, sans-serif;
-    @apply text-xl font-semibold tracking-tight text-slate-950 dark:text-white;
+    @apply text-xl font-normal tracking-tight text-slate-950 dark:text-white;
   }
 
   p {
