@@ -124,7 +124,7 @@ export default function Navigation() {
               className="flex items-center"
               aria-label="Tom Spencer — home"
             >
-              <span className="text-2xl font-normal tracking-tight text-slate-950 dark:text-white">Tom Spencer</span>
+              <span className="text-base font-medium tracking-tight text-slate-950 dark:text-white">Tom Spencer</span>
             </Link>
 
             <button
