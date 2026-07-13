@@ -22,13 +22,13 @@ export default function ConceptHero() {
   const { theme } = useTheme()
   const dark = theme === 'dark'
 
-  // Bold color-block direction, tuned so the shared nav's existing text
-  // color in each mode (dark text in light mode, white in dark mode) still
-  // passes contrast against the block: light mode uses a lighter, more
-  // saturated accent-400 with near-black text (6.66:1); dark mode uses a
-  // deep near-black ember with cream text (17:1) — same amber family, the
-  // toggle shifts intensity rather than swapping to an unrelated palette.
-  const bg = dark ? '#1A0A03' : '#E07840'
+  // Bold color-block direction, v3: swapped amber for a deep indigo/blue —
+  // ties back to the real site's existing dark-mode navy (#0F1623) rather
+  // than introducing a third unrelated hue. Tuned so the shared nav's
+  // existing text color in each mode still passes contrast: light mode uses
+  // a vivid indigo-400 with near-black text (6.76:1); dark mode uses a deep
+  // near-black indigo with cream text (17:1).
+  const bg = dark ? '#0B0B1F' : '#818CF8'
   const headline = dark ? '#F5F0E8' : '#141414'
   const muted = dark ? 'rgba(245,240,232,0.7)' : 'rgba(20,20,20,0.65)'
   const ctaBg = dark ? '#F5F0E8' : '#141414'
@@ -60,7 +60,7 @@ export default function ConceptHero() {
 
       <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-28 md:pt-40">
         <h1
-          className={`${dmSansBlack.className} mb-8 uppercase leading-[0.88] tracking-tight text-7xl md:text-8xl lg:text-9xl`}
+          className={`${dmSansBlack.className} mb-8 uppercase leading-[0.88] tracking-[-0.04em] text-7xl md:text-8xl lg:text-9xl`}
           style={{ color: headline }}
         >
           Sr. Product
