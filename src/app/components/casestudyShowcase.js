@@ -41,17 +41,6 @@ const CARDS = [
     ],
     image: { src: '/touchpoints.png', position: 'top' },
   },
-  {
-    href:  '/casestudy/Rakuten',
-    title: 'Offer Management Dashboard',
-    body:  'Overhauled a complex and underperforming internal tool used to manage affiliate offers.',
-    bullets: [
-      { text: 'Simplified navigation and reduced user confusion' },
-      { text: 'Lowered support ticket volume post-launch' },
-      { text: "Freed up account managers' time from fielding queries" },
-    ],
-    image: { src: '/offer_2.png', position: 'top' },
-  },
 ]
 
 // ─── Card ─────────────────────────────────────────────────────────────────────

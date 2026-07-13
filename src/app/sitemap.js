@@ -7,7 +7,6 @@ export default function sitemap() {
     '/casestudy/Prompt',
     '/casestudy/InfluencerCampaigns',
     '/casestudy/ACJ',
-    '/casestudy/Rakuten',
   ]
 
   return routes.map((route) => ({

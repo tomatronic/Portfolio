@@ -46,15 +46,6 @@ const CARDS = [
       '/acj_3.png',
     ],
   },
-  {
-    href: '/casestudy/Rakuten',
-    title: 'Enhancing offer management',
-    images: [
-      '/offer_1.png',
-      '/offer_2.png',
-      '/offer_3.png',
-    ],
-  },
 ]
 
 function CompactCard({ card }) {
