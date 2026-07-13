@@ -40,7 +40,7 @@
 
 body {
   color: #020617;
-  background: #EDE7DD;
+  background: #ffffff;
   font-family: var(--font-dm-sans), system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.7;
@@ -84,6 +84,6 @@ body {
   }
 
   blockquote cite {
-    @apply block mt-2 not-italic text-sm text-slate-400 dark:text-slate-500;
+    @apply block mt-2 not-italic text-sm text-slate-600 dark:text-slate-400;
   }
 }

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 // Left → right layering: right card sits on top, like a real card spread
 const Z_ORDERS = [1, 2, 3]
 
-// DialKit returns { type: 'easing', duration, ease } — strip the type key
+// Spring params are defined as { type: 'easing', duration, ease } — strip the type key
 // so Framer Motion receives a plain { duration, ease } transition
 function toFramerTransition(spring) {
   if (!spring) return {}

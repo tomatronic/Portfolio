@@ -85,7 +85,7 @@ function CaseStudyContent() {
 
                 {/* Advertiser */}
                 <div className="rounded-2xl border border-[#C8BEB0] bg-[#EDE7DD] p-6 dark:border-[#2A3A4A] dark:bg-slate-800/50">
-                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-xs font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-400">
+                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-xs font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-300">
                     Advertiser
                   </span>
                   <div className="mb-5 flex items-center gap-3">
@@ -97,12 +97,12 @@ function CaseStudyContent() {
                     </div>
                     <div>
                       <p className="mb-0 max-w-none text-sm font-semibold text-slate-950 dark:text-white">Sarah Chen</p>
-                      <p className="mb-0 max-w-none text-xs text-slate-500 dark:text-slate-400">Performance Marketing Manager</p>
+                      <p className="mb-0 max-w-none text-xs text-slate-600 dark:text-slate-400">Performance Marketing Manager</p>
                     </div>
                   </div>
                   <div className="space-y-4">
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">Goals</p>
+                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-600 dark:text-slate-400">Goals</p>
                       <ul className="max-w-none space-y-1.5">
                         <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
@@ -119,7 +119,7 @@ function CaseStudyContent() {
                       </ul>
                     </div>
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">Pain points</p>
+                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-600 dark:text-slate-400">Pain points</p>
                       <ul className="max-w-none space-y-1.5">
                         <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
@@ -140,7 +140,7 @@ function CaseStudyContent() {
 
                 {/* Creator */}
                 <div className="rounded-2xl border border-[#C8BEB0] bg-[#EDE7DD] p-6 dark:border-[#2A3A4A] dark:bg-slate-800/50">
-                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-xs font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-400">
+                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-xs font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-300">
                     Creator
                   </span>
                   <div className="mb-5 flex items-center gap-3">
@@ -152,12 +152,12 @@ function CaseStudyContent() {
                     </div>
                     <div>
                       <p className="mb-0 max-w-none text-sm font-semibold text-slate-950 dark:text-white">Marcus Reid</p>
-                      <p className="mb-0 max-w-none text-xs text-slate-500 dark:text-slate-400">Lifestyle Content Creator · 85k followers</p>
+                      <p className="mb-0 max-w-none text-xs text-slate-600 dark:text-slate-400">Lifestyle Content Creator · 85k followers</p>
                     </div>
                   </div>
                   <div className="space-y-4">
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">Goals</p>
+                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-600 dark:text-slate-400">Goals</p>
                       <ul className="max-w-none space-y-1.5">
                         <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
@@ -174,7 +174,7 @@ function CaseStudyContent() {
                       </ul>
                     </div>
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">Pain points</p>
+                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-600 dark:text-slate-400">Pain points</p>
                       <ul className="max-w-none space-y-1.5">
                         <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />

@@ -34,7 +34,7 @@ export default function Footer() {
                   <Linkedin size={14} strokeWidth={2} />
                 </a>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Designed and built by Tom Spencer © {year}
               </p>
             </div>
