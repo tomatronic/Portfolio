@@ -35,17 +35,17 @@ function ACJ() {
 
                         <div className="grid auto-rows-auto grid-cols-1 gap-5 md:grid-cols-4 md:gap-10">
                             <div className="col-span-4 mb-12">
-                                <h2 className="pt-10 text-xl tracking-tight">Challenge</h2>
+                                <h2 className="pt-10 tracking-tight">Challenge</h2>
                                 <ul className="mb-8 space-y-2">
                                     <li><b>Data complexity</b>: A single customer journey could have up to 15 touchpoints across 30 days. Multiply that by thousands of conversions, and you have overlapping, non-linear paths that are nearly impossible to parse visually.</li>
                                     <li><b>Dual audiences</b>: Publishers needed to see "Where do I contribute?", Advertisers needed "Which publishers work together to drive conversions?". Same data, different questions and mental models.</li>
                                     <li><b>Trust</b>: Users needed confidence to make budget decisions, which meant explaining the complex attribution logic without overwhelming them.</li>
                                 </ul>
-                                <h2 className="pt-10 text-xl tracking-tight">Approach</h2>
+                                <h2 className="pt-10 tracking-tight">Approach</h2>
                                 <p>Through interviews with both internal account managers and external users, I learned that users wanted answers to specific questions with the ability to dig deeper when needed, not open ended data exploration.</p>
 
                                 <p><b>Key insight</b>: Start with answers, allow exploration.</p>
-                                <h3 className="pt-10">Key design decisions</h3>
+                                <h3 className="pt-6">Key design decisions</h3>
                                 <ul className="mb-8 space-y-2">
                                     <li><b>Three-phase framework (Awareness → Consideration → Conversion)</b>: Rather than showing raw click sequences, I organised journeys based around purchase phases. This created a mental model: "Am I/a Publisher driving discovery, research, or final purchase?"
                                         This framework solved two critical problems:
@@ -58,7 +58,7 @@ function ACJ() {
                                     </li>
                                     <li><b>Dual-audience design</b>: Publishers see their own contribution. Advertisers see all publishers in each journey. Same data structure, different views. The core visualisation is adapted to work for both user types, without increasing engineering efforts.</li>
                                 </ul>
-                                <h2 className="pt-10 text-xl tracking-tight">Solution</h2>
+                                <h2 className="pt-10 tracking-tight">Solution</h2>
                                 <div className="space-y-6">
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
                                         <Image src="/ACJ-activity-summary.png" width={1000} height={774} alt="Users first see an activity summary with total clicks across phases, average clicks to conversion, and their baseline contribution footprint—providing context before diving into detailed journeys." />
@@ -79,7 +79,7 @@ function ACJ() {
                                     <p><b>Dual-audience view</b>: Rather than building two separate tools, one core visualization adapted based on user type. Publishers filtered by their own SIDs and saw "you" language. Advertisers filtered by campaign or publisher group and saw top contributors. Same data structure, different views, serving both audiences without doubling engineering effort.</p>
                                 </div>
                                 <div className="max-w-full mb-12">
-                                    <h2 className="pt-10 text-xl tracking-tight">Outcome</h2>
+                                    <h2 className="pt-10 tracking-tight">Outcome</h2>
                                     <ul className="mb-8 space-y-2">
                                         <li>8-month development from concept to production (October 2022 – June 2023)</li>
                                         <li>Sole designer on a cross-functional team</li>
@@ -104,7 +104,7 @@ function ACJ() {
                                     </ul>
                                     <p>Users engaged more with the high-level summaries than the detailed paths. They wanted answers to specific questions, not open-ended data exploration. The more I added context around the numbers, the more confident they were making decisions from them.</p>
                                 </div>
-                                <h2 className="pt-10 text-xl tracking-tight">What I learned</h2>
+                                <h2 className="pt-10 tracking-tight">What I learned</h2>
                                 <p>The dual-audience constraint pushed me somewhere I wouldn't have gone otherwise. Rather than building two separate tools, sharing a data structure with different views turned out to be a cleaner solution than I expected. The same data really can tell different stories depending on what question you're starting with.</p>
                                 <p>Users engaged more readily with the attribution data once the logic was explained upfront — not simplified away. They didn't need less information, they needed better framing. That's something I've kept in mind since.</p>
                                 <OtherCaseStudies currentHref="/casestudy/ACJ" />

@@ -68,7 +68,7 @@ function Prompt() {
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
                                     <Image src="/Prompt-userflow.png" width={1754} height={1240} alt="Customer journey map comparing the current multi-step report creation flow with the proposed natural language search flow" />
                                 </div>
-                                <h3 className="pt-10">Key decisions</h3>
+                                <h3 className="pt-6">Key decisions</h3>
                                 <ul className="mb-8 space-y-2">
                                     <li><b>Tags/Tokens</b>: Users were able to include 'quick selected' tags to help direct a prompt better.</li>
                                     <li><b>Manual override</b>: Every search generated report could be edited, saved, scheduled for a future date or rebuilt from scratch</li>
@@ -89,7 +89,7 @@ function Prompt() {
 
                                     <p>Based on the initial few months of usage we have determined that we have reduced the report creation time by up to 90% (measured using Fullstory during the beta phase) This translates to around $10 million in annual time saving potential when fully adopted by all users (both internal account managers and external users).</p>
 
-                                    <h3 className="pt-10">User feedback</h3>
+                                    <h3 className="pt-6">User feedback</h3>
 
                                     <blockquote>"Super helpful to put in the prompts and get the reporting answers right away instead of having to sometimes pull a few different reports to get the answer." <cite>Account Manager</cite></blockquote>
 

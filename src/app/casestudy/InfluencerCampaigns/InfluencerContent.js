@@ -69,7 +69,7 @@ function CaseStudyContent() {
               </p>
 
               {/* Challenge */}
-              <h2 className="pt-10 text-xl tracking-tight">Challenge</h2>
+              <h2 className="pt-10 tracking-tight">Challenge</h2>
               <p>This project had many constraints that can make design hard:</p>
               <ul className="mb-8 space-y-2">
                 <li><b>Extreme time pressure</b> — a prospect demo within a week of project initiation</li>
@@ -195,7 +195,7 @@ function CaseStudyContent() {
 
               </div>
 
-              <h3 className="pt-10">My approach: Prototype first, validate fast</h3>
+              <h3 className="pt-6">My approach: Prototype first, validate fast</h3>
               <p>
                 On Tuesday morning, I joined a briefing call with the VP of Product. The big question
                 was asked: "Can we demonstrate a compelling vision of this product to a prospect by
@@ -234,13 +234,13 @@ function CaseStudyContent() {
               </div>
 
               {/* Key Decisions */}
-              <h2 className="pt-10 text-xl tracking-tight">Key Decisions</h2>
+              <h2 className="pt-10 tracking-tight">Key Decisions</h2>
               <p>
                 With the prototype validated, I moved into detailed design and scoping. Here are the
                 critical decisions that helped shape the product.
               </p>
 
-              <h3 className="pt-10">Ruthless V1 scoping: ship a complete story, not everything</h3>
+              <h3 className="pt-6">Ruthless V1 scoping: ship a complete story, not everything</h3>
               <p>
                 With only five months to production, I worked with the PM to make hard choices about
                 what to include in MVP versus what to defer.
@@ -298,7 +298,7 @@ function CaseStudyContent() {
                 influencers apply and complete them. Everything else is enhancement.
               </p>
 
-              <h3 className="pt-10">Dual-audience UI</h3>
+              <h3 className="pt-6">Dual-audience UI</h3>
               <p>
                 Advertisers and influencers needed fundamentally different experiences from the same
                 underlying campaign system.
@@ -319,7 +319,7 @@ function CaseStudyContent() {
                 "Campaign Management." Influencers see "Opportunities."
               </p>
 
-              <h3 className="pt-10">Social post verification</h3>
+              <h3 className="pt-6">Social post verification</h3>
               <p>
                 The most critical — and most uncertain — piece was social post detection. The external
                 partner would detect when an influencer posted about a campaign, but the exact mechanism
@@ -332,7 +332,7 @@ function CaseStudyContent() {
                 <li><b>Build in flexibility</b> — card-based layouts that can accommodate variable data, whether posts have images, videos, or just text</li>
               </ul>
 
-              <h3 className="pt-10">Influencer profile design</h3>
+              <h3 className="pt-6">Influencer profile design</h3>
               <p>
                 Advertisers needed to evaluate influencers before approving applications. We suddenly
                 had access to social data we'd never dealt with — follower counts, engagement rates, post
@@ -342,7 +342,7 @@ function CaseStudyContent() {
                 profile clean and the story immediate.
               </p>
 
-              <h3 className="pt-10">Campaign details page</h3>
+              <h3 className="pt-6">Campaign details page</h3>
               <p>
                 After clicking a campaign thumbnail, influencers needed comprehensive information
                 presented persuasively. I shifted my thinking from "display campaign details" to
@@ -353,7 +353,7 @@ function CaseStudyContent() {
               </p>
 
               {/* Testing */}
-              <h2 className="pt-10 text-xl tracking-tight">Testing and iteration</h2>
+              <h2 className="pt-10 tracking-tight">Testing and iteration</h2>
               <div className="mb-12 space-y-6">
                 <p><b>Internal validation (Weeks 2–3)</b> — tested with 8 PMs and engineers; advertiser flows were clear, but influencer outcome messaging needed clarification and workflows were adjusted accordingly.</p>
                 <p><b>MVP scope refinement (Weeks 3–8)</b> — weekly reviews with VP and engineering; continuously cutting scope to hit December, with every cut documented with rationale for potential V2.</p>
@@ -362,7 +362,7 @@ function CaseStudyContent() {
 
 
               {/* Solution */}
-              <h2 className="pt-10 text-xl tracking-tight">Solution</h2>
+              <h2 className="pt-10 tracking-tight">Solution</h2>
               <p>
                 The final MVP design focused on the core workflow: advertisers create campaigns,
                 influencers discover and apply, content gets posted and verified, incentives get
@@ -374,7 +374,7 @@ function CaseStudyContent() {
               </p>
 
               {/* Outcome */}
-              <h2 className="pt-10 text-xl tracking-tight">Outcome</h2>
+              <h2 className="pt-10 tracking-tight">Outcome</h2>
               <ul className="mb-8 space-y-2">
                 <li><b>Complete clickable prototype</b> — 5 days</li>
                 <li><b>Prospect demo and buy-in</b> — Day 6</li>
@@ -391,7 +391,7 @@ function CaseStudyContent() {
               </p>
 
               {/* What I learned */}
-              <h2 className="pt-10 text-xl tracking-tight">What I learned</h2>
+              <h2 className="pt-10 tracking-tight">What I learned</h2>
               <p>Having a prototype that looked and felt real made a concrete difference. A VP could show it to a prospect with confidence — wireframes wouldn't have done that. Fidelity bought credibility faster than I expected.</p>
               <p>The five-month deadline forced a kind of clarity I rarely have on longer projects. Every feature had to earn its place in V1. I ended up cutting things I would normally have kept, and the product was tighter for it.</p>
               <p>I built the layouts to be flexible from the start — cards that could handle variable data, components that could be extended without breaking. That wasn't over-engineering; it was the only practical way to ship something that could grow once real users showed up with real feedback.</p>
