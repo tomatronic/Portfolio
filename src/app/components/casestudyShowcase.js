@@ -124,21 +124,19 @@ export default function CasestudyShowcase() {
   return (
     <div id="work" className="pb-24 pt-10">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className="rounded-4xl bg-[#C4B09A] p-4 dark:bg-[#0D1927] md:p-5">
-          <motion.div
-            className="flex flex-col gap-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={container}
-          >
-            {CARDS.map((card, i) => (
-              <motion.div key={card.href} variants={item}>
-                <Card card={card} isFirst={i === 0} />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+        <motion.div
+          className="flex flex-col gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={container}
+        >
+          {CARDS.map((card, i) => (
+            <motion.div key={card.href} variants={item}>
+              <Card card={card} isFirst={i === 0} />
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </div>
   )
