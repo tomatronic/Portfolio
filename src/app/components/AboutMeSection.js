@@ -23,7 +23,7 @@ export default function AboutMeSection() {
 
   return (
     <section className="py-16">
-      <div className="container mx-auto max-w-6xl px-4">
+      <div className="container mx-auto max-w-6xl px-6">
 
         <motion.div
           className="grid grid-cols-1 gap-10 md:grid-cols-[300px_1fr] md:gap-16"

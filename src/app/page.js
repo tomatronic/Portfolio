@@ -55,7 +55,7 @@ export default function Home() {
 
         {/* ── Hero ──────────────────────────────────────────────────────────── */}
         <section style={{ marginTop: `-${NAV_HEIGHT}px`, paddingTop: `${NAV_HEIGHT}px` }}>
-          <div className="container mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-10 text-center md:items-start md:py-16 md:text-left">
+          <div className="container mx-auto flex w-full max-w-6xl flex-col items-center px-6 py-10 text-center md:items-start md:py-16 md:text-left">
 
             {/* Headline */}
             <h1

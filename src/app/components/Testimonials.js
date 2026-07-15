@@ -31,7 +31,7 @@ export default function Testimonials() {
 
   return (
     <section className="py-24">
-      <div className="container mx-auto max-w-6xl px-4">
+      <div className="container mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-16">
 
           {/* Left: heading + sub-copy */}

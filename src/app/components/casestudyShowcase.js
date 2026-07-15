@@ -123,7 +123,7 @@ export default function CasestudyShowcase() {
 
   return (
     <div id="work" className="pb-24 pt-10">
-      <div className="container mx-auto max-w-6xl px-4">
+      <div className="container mx-auto max-w-6xl px-6">
         <motion.div
           className="flex flex-col gap-6"
           initial="hidden"
