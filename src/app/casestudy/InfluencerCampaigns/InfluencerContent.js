@@ -16,6 +16,7 @@ function CaseStudyContent() {
           {/* Hero */}
           <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
             <Image
+              className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10"
               src="/influencerHero.png"
               width={1600}
               height={927}
@@ -225,7 +226,7 @@ function CaseStudyContent() {
                 <Zoom>
                   <Image
                     src="/prototypeScreens.png"
-                    className="w-full rounded-2xl"
+                    className="w-full rounded-2xl ring-1 ring-black/10 dark:ring-white/10"
                     width={1400}
                     height={800}
                     alt="High-fidelity prototype screens delivered in five days showing the end-to-end influencer campaign flow for the prospect demo"
