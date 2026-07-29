@@ -4,9 +4,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { useTheme } from '../../components/ThemeProvider'
-import ConceptNav from '../ConceptNav'
-import ConceptFooter from '../ConceptFooter'
+import { useTheme } from '../ThemeProvider'
+import ConceptNav from './ConceptNav'
+import ConceptFooter from './ConceptFooter'
 import {
   TEXT,
   INK,
@@ -16,7 +16,7 @@ import {
   CARD_RADIUS,
   BUTTON_RADIUS,
   CONTAINER,
-} from '../tokens'
+} from './tokens'
 
 /**
  * Concept-route About page — copy from Tom's copywriter (July 2026), on this

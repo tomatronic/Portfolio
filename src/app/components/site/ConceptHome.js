@@ -1,6 +1,6 @@
 'use client'
 
-import { useTheme } from '../components/ThemeProvider'
+import { useTheme } from '../ThemeProvider'
 import { CONTAINER } from './tokens'
 import CanvasReveal from './CanvasReveal'
 import ConceptNav from './ConceptNav'

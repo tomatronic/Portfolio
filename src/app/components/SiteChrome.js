@@ -1,27 +1,21 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import ConceptNav from '../concept-9f2k/ConceptNav'
-import ConceptFooter from '../concept-9f2k/ConceptFooter'
-import { CONTAINER } from '../concept-9f2k/tokens'
+import ConceptNav from './site/ConceptNav'
+import ConceptFooter from './site/ConceptFooter'
+import { CONTAINER } from './site/tokens'
 
 /**
  * Nav and footer for routes that don't supply their own.
  *
  * Home can't take its nav from the layout: the scroll reveal clips the sheet,
  * and a nav rendered outside that sheet would end up floating over the dark
- * section once the sheet scrolls past. So home (and About, and the sandbox)
+ * section once the sheet scrolls past. So home and About
  * render chrome themselves, and this fills it in everywhere else — currently
  * the case studies and 404.
  */
 
-const SELF_CHROME = new Set([
-  '/',
-  '/about',
-  '/concept-9f2k',
-  '/concept-9f2k/about',
-  '/concept-9f2k/casestudy',
-])
+const SELF_CHROME = new Set(['/', '/about'])
 
 const REVEAL_BG = '#050505'
 

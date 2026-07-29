@@ -1,6 +1,6 @@
 import Image from "next/image"
 import OtherCaseStudies from "../../components/OtherCaseStudies"
-import { PROSE } from '../../concept-9f2k/tokens'
+import { PROSE } from '../../components/site/tokens'
 
 export async function generateMetadata() {
     return {

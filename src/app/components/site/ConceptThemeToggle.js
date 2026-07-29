@@ -2,7 +2,7 @@
 
 import { Sun, Moon } from 'lucide-react'
 import { play } from 'cuelume'
-import { useTheme } from '../components/ThemeProvider'
+import { useTheme } from '../ThemeProvider'
 import { ICON_NAV, BUTTON_RADIUS } from './tokens'
 
 /**

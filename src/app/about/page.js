@@ -1,4 +1,4 @@
-import ConceptAbout from '../concept-9f2k/about/ConceptAbout'
+import ConceptAbout from '../components/site/ConceptAbout'
 
 export async function generateMetadata() {
   return {

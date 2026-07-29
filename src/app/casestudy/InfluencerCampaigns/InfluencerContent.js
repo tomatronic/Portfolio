@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 import OtherCaseStudies from '../../components/OtherCaseStudies'
-import { PROSE } from '../../concept-9f2k/tokens'
+import { PROSE } from '../../components/site/tokens'
 
 // ─── Case study content ────────────────────────────────────────────────────────
 

@@ -1,4 +1,4 @@
-import ConceptHome from './concept-9f2k/ConceptHome'
+import ConceptHome from './components/site/ConceptHome'
 
 /**
  * Home. The previous version (noise hero, gradient headline, CasestudyShowcase,

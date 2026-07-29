@@ -11,7 +11,7 @@ See "Design direction overhaul" below — that is the live design. Everything in
 - Older hero experiments (SolarHero solar-arc chart, `/testHome`, `hero.safe.js`/`hero.original.js`) were deleted in June 2026; the noise/gradient hero this replaced is in git history (safe baseline commit `ce8b3de`).
 
 ### Design direction overhaul — new home + about promoted live (2026-07-29)
-The `/concept-9f2k` direction was adopted as the site's real design. `/` and `/about` now render `ConceptHome` / `ConceptAbout`; the new nav and footer are global via `components/SiteChrome.js`; case study **bodies** keep their own layout but were brought onto the new type scale.
+The `/concept-9f2k` exploration was adopted as the site's real design and the sandbox route was then removed; its components live in `src/app/components/site/`. `/` and `/about` now render `ConceptHome` / `ConceptAbout`; the new nav and footer are global via `components/SiteChrome.js`; case study **bodies** keep their own layout but were brought onto the new type scale.
 
 **Type system** lives in `src/app/concept-9f2k/tokens.js`: sizes 12/13/14/24 only, ink `#292929` / `#5D5D5D` / `#9E9E9E` (dark: `#F2F2F2` / `#B0B0B0` / `#8A8A8A`), 16px card radius, fully-round buttons, 14px nav icons / 20px card icons. `PROSE` in the same file applies it to long-form bodies via descendant selectors — needed because `globals.css` styles `h1`/`h2`/`p`/`blockquote` as *elements*, which beats anything inherited from a wrapper. `:not([data-keep])` on the `p` rule is the escape hatch for deliberately-sized paragraphs (Prompt's stat row).
 
@@ -25,7 +25,7 @@ The `/concept-9f2k` direction was adopted as the site's real design. `/` and `/a
 - `components/Testimonials.js` — quotes copied into `ConceptAbout.js` with real names; component unused
 - `components/ClosingCTA.js`, `components/examples.js` — already orphaned before this session
 
-**2. Rename `src/app/concept-9f2k/` — it is now load-bearing for production.** The obscure name was chosen to hide a sandbox route; eight live files import from it (`page.js`, `about/page.js`, `components/SiteChrome.js`, and all four case studies). **These files are in use — do not delete them.** The fix is to move the shared components to something like `components/site/` and update imports. `/concept-9f2k` itself is kept deliberately as a noindexed sandbox for trying changes before promoting them.
+**2. ~~Rename `concept-9f2k/`~~ — done 2026-07-29.** The shared components moved to `src/app/components/site/` and the `/concept-9f2k` sandbox routes were deleted entirely. Nothing in the codebase references that path any more; the `robots.js` disallow for it was removed with it. There is no staging route now — changes to `components/site/*` go straight to the live pages.
 
 **3. Known accessibility exception.** `#9E9E9E` on white is 2.68:1 — fails AA (4.5:1) for the 13px "About" eyebrow and testimonial roles, and the 3:1 large-text threshold for the 24px "Senior Product Designer". It is the specified tertiary ink; clearing AA below 24px would need roughly `#767676`. Deliberate, undecided.
 
@@ -60,10 +60,8 @@ Ran `/design-review` against the **live** production site (not local), with Play
 - **Removed** the tan/navy wrapper around the home page case study cards (commit `2c066c1`) — cards now sit directly on the page background with `gap-6` between them.
 - **Fixed** horizontal alignment (commit `e932fb2`): nav, footer and case-study/about pages used `px-6` while the home hero, case study cards, about-me and testimonials used `px-4` — an 8px inset mismatch that made the nav look misaligned against home content. All standardised on `px-6`.
 
-### Hidden concept explorations (`/concept-9f2k`, 2026-07-13)
-Four commits of unused visual-direction exploration — a bolder type/grain/contrast take on the hero (v1 amber, v2 all-caps weight-900 colour-block, v3 indigo/blue tightened tracking) plus a case-study concept (bold hero, calm long-form body). Files: `src/app/concept-9f2k/{page.js,ConceptHero.js,casestudy/{page.js,CaseStudyConcept.js}}`.
-Properly hidden: `robots: { index: false, follow: false }` in its `generateMetadata`, `disallow: '/concept-9f2k'` in `robots.js`, absent from `sitemap.js`, and linked from nowhere in the site.
-**Status: undecided.** This is dormant code pending Tom's review — either adopt a direction from it or delete the route. Don't leave it indefinitely.
+### Hidden concept explorations (`/concept-9f2k`, 2026-07-13 → resolved 2026-07-29)
+Four commits of visual-direction exploration behind a hidden, noindexed route. **Resolved:** the direction was adopted (see "Design direction overhaul" above), its components moved to `src/app/components/site/`, and the route deleted. The earlier bold experiments it also held — weight-900 all-caps hero in amber / colour-block / indigo, and a matching case-study concept — were *not* adopted and exist only in git history.
 
 ### Interface polish pass (2026-07-01)
 Applied the `make-interfaces-feel-better` skill (`.agents/skills/make-interfaces-feel-better/SKILL.md`) across the whole site — commit `af47a1b`, pushed. Re-run this skill for future UI work; it covers:
