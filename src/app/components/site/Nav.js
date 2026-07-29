@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { play } from 'cuelume'
-import ConceptThemeToggle from './ConceptThemeToggle'
+import ThemeToggle from './ThemeToggle'
 import { TEXT, INK, BUTTON_RADIUS } from './tokens'
 
 // Confetti burst, ported from the confetti-demo prototype. Particles spread
@@ -40,7 +40,7 @@ const ITEMS = [
   { label: 'Resume', href: '/resume.pdf', external: true },
 ]
 
-export default function ConceptNav({ active = 'Home' }) {
+export default function Nav({ active = 'Home' }) {
   const avatarRef = useRef(null)
   const reduceMotion = useRef(false)
 
@@ -180,7 +180,7 @@ export default function ConceptNav({ active = 'Home' }) {
           avatar opposite it and keeps the grid's 1fr/auto/1fr symmetry, so the
           pill stays on the container's true centre. */}
       <div className="justify-self-end">
-        <ConceptThemeToggle />
+        <ThemeToggle />
       </div>
     </nav>
   )

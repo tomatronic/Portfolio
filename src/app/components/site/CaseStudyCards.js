@@ -134,7 +134,7 @@ function Card({ card, isFirst }) {
   )
 }
 
-export default function ConceptCaseStudyCards() {
+export default function CaseStudyCards() {
   const prefersReducedMotion = useReducedMotion()
 
   const container = {

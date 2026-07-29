@@ -2,7 +2,7 @@
 
 import { ArrowUpRight } from 'lucide-react'
 import { TEXT, INK, FAINT, ICON_NAV, BUTTON_RADIUS, CONTAINER } from './tokens'
-import ConceptCaseStudyCards from './ConceptCaseStudyCards'
+import CaseStudyCards from './CaseStudyCards'
 
 // Both open in a new tab, so there's no `external` flag any more — it only
 // existed to special-case the mailto link that's now gone.
@@ -26,7 +26,7 @@ function InlineLink({ href, children }) {
   )
 }
 
-export default function ConceptHero() {
+export default function Hero() {
   return (
     <div>
       {/* No px-6 here — CanvasReveal's --canvas-gutter is the side spacing, and
@@ -104,7 +104,7 @@ export default function ConceptHero() {
         </div>
       </div>
 
-      <ConceptCaseStudyCards />
+      <CaseStudyCards />
     </div>
   )
 }

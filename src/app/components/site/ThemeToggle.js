@@ -14,7 +14,7 @@ import { ICON_NAV, BUTTON_RADIUS } from './tokens'
  * Lives on the sheet rather than the dark footer, so unlike the old footer
  * version it needs light and dark treatments.
  */
-export default function ConceptThemeToggle() {
+export default function ThemeToggle() {
   const { theme, toggle } = useTheme()
   const isDark = theme === 'dark'
 

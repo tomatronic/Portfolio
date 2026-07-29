@@ -1,8 +1,8 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import ConceptNav from './site/ConceptNav'
-import ConceptFooter from './site/ConceptFooter'
+import Nav from './site/Nav'
+import Footer from './site/Footer'
 import { CONTAINER } from './site/tokens'
 
 /**
@@ -26,7 +26,7 @@ export function SiteNav() {
   return (
     <div className="px-6">
       <div className={`${CONTAINER} mx-auto`}>
-        <ConceptNav active={pathname?.startsWith('/casestudy') ? 'Work' : undefined} />
+        <Nav active={pathname?.startsWith('/casestudy') ? 'Work' : undefined} />
       </div>
     </div>
   )
@@ -36,11 +36,11 @@ export function SiteFooter() {
   const pathname = usePathname()
   if (SELF_CHROME.has(pathname)) return null
 
-  // ConceptFooter is built for a near-black ground, so it needs the dark band
+  // Footer is built for a near-black ground, so it needs the dark band
   // around it on pages that are otherwise light.
   return (
     <div style={{ background: REVEAL_BG }}>
-      <ConceptFooter />
+      <Footer />
     </div>
   )
 }

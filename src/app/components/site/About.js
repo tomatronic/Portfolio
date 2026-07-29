@@ -5,8 +5,8 @@ import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { useTheme } from '../ThemeProvider'
-import ConceptNav from './ConceptNav'
-import ConceptFooter from './ConceptFooter'
+import Nav from './Nav'
+import Footer from './Footer'
 import {
   TEXT,
   INK,
@@ -78,7 +78,7 @@ const TESTIMONIALS = [
   },
 ]
 
-export default function ConceptAbout() {
+export default function About() {
   const { theme } = useTheme()
   const dark = theme === 'dark'
   const prefersReducedMotion = useReducedMotion()
@@ -112,7 +112,7 @@ export default function ConceptAbout() {
           line up. */}
       <div style={{ background: sheetBg }} className="px-6">
         <div className={`${CONTAINER} mx-auto`}>
-          <ConceptNav active="About" />
+          <Nav active="About" />
         </div>
 
         <div className={`${CONTAINER} mx-auto pb-28 pt-8`}>
@@ -287,7 +287,7 @@ export default function ConceptAbout() {
       </div>
 
       <div style={{ background: REVEAL_BG }}>
-        <ConceptFooter />
+        <Footer />
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import ConceptAbout from '../components/site/ConceptAbout'
+import AboutContent from '../components/site/About'
 
 export async function generateMetadata() {
   return {
@@ -8,6 +8,6 @@ export async function generateMetadata() {
   }
 }
 
-export default function About() {
-  return <ConceptAbout />
+export default function AboutPage() {
+  return <AboutContent />
 }

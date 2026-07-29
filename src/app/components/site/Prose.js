@@ -19,6 +19,6 @@ import { PROSE } from './tokens'
  */
 
 
-export default function ConceptProse({ className = '', children }) {
+export default function Prose({ className = '', children }) {
   return <div className={`${PROSE} ${className}`}>{children}</div>
 }

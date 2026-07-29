@@ -15,17 +15,22 @@ The `/concept-9f2k` exploration was adopted as the site's real design and the sa
 
 **Type system** lives in `src/app/concept-9f2k/tokens.js`: sizes 12/13/14/24 only, ink `#292929` / `#5D5D5D` / `#9E9E9E` (dark: `#F2F2F2` / `#B0B0B0` / `#8A8A8A`), 16px card radius, fully-round buttons, 14px nav icons / 20px card icons. `PROSE` in the same file applies it to long-form bodies via descendant selectors — needed because `globals.css` styles `h1`/`h2`/`p`/`blockquote` as *elements*, which beats anything inherited from a wrapper. `:not([data-keep])` on the `p` rule is the escape hatch for deliberately-sized paragraphs (Prompt's stat row).
 
+### Component map (from 2026-07-29)
+`src/app/components/site/` holds the design system and every page-level block:
+`tokens.js` (scale, ink, radii, icon sizes, `PROSE`), `Nav`, `Footer`,
+`ThemeToggle`, `CanvasReveal`, `Home`, `Hero`, `CaseStudyCards`,
+`ExperimentsLab`, `About`, `Prose`.
+`src/app/components/` keeps the framework-level pieces: `SiteChrome` (renders
+`Nav`/`Footer` on routes that don't render their own), `ThemeProvider`,
+`PageBackground`, `OtherCaseStudies`, `CardImageStack`.
+Route files (`page.js`) are thin: they set metadata and render the matching
+block, e.g. `app/page.js` → `components/site/Home`.
+
 ## Outstanding clean-up (2026-07-29)
 
-**1. Orphaned components — safe to delete, zero imports.** Verified by grep across `src/app`:
-- `components/navigation.js` — previous nav, replaced by `concept-9f2k/ConceptNav.js`
-- `components/footer.js` — previous footer, replaced by `concept-9f2k/ConceptFooter.js`
-- `components/casestudyShowcase.js` — previous work cards, replaced by `ConceptCaseStudyCards.js`
-- `components/AboutMeSection.js` — previous home about section, no longer rendered
-- `components/Testimonials.js` — quotes copied into `ConceptAbout.js` with real names; component unused
-- `components/ClosingCTA.js`, `components/examples.js` — already orphaned before this session
+**1. ~~Orphaned components~~ — deleted 2026-07-29.** `navigation.js`, `footer.js`, `casestudyShowcase.js`, `AboutMeSection.js`, `Testimonials.js`, `ClosingCTA.js`, `examples.js`, and `ThemeToggle.js` (a chain orphan — its only importer was `footer.js`). All in git history.
 
-**2. ~~Rename `concept-9f2k/`~~ — done 2026-07-29.** The shared components moved to `src/app/components/site/` and the `/concept-9f2k` sandbox routes were deleted entirely. Nothing in the codebase references that path any more; the `robots.js` disallow for it was removed with it. There is no staging route now — changes to `components/site/*` go straight to the live pages.
+**2. ~~Rename `concept-9f2k/`~~ — done 2026-07-29.** Shared components live in `src/app/components/site/` and the sandbox routes were deleted; nothing references that path any more, and the `robots.js` disallow went with it. The components also dropped their `Concept*` prefixes (`ConceptNav` → `Nav`, and so on) now that nothing collides. **There is no staging route** — changes to `components/site/*` go straight to the live pages.
 
 **3. Known accessibility exception.** `#9E9E9E` on white is 2.68:1 — fails AA (4.5:1) for the 13px "About" eyebrow and testimonial roles, and the 3:1 large-text threshold for the 24px "Senior Product Designer". It is the specified tertiary ink; clearing AA below 24px would need roughly `#767676`. Deliberate, undecided.
 

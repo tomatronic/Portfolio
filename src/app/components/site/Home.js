@@ -3,10 +3,10 @@
 import { useTheme } from '../ThemeProvider'
 import { CONTAINER } from './tokens'
 import CanvasReveal from './CanvasReveal'
-import ConceptNav from './ConceptNav'
-import ConceptHero from './ConceptHero'
+import Nav from './Nav'
+import Hero from './Hero'
 import ExperimentsLab from './ExperimentsLab'
-import ConceptFooter from './ConceptFooter'
+import Footer from './Footer'
 
 // The grain layer that was here has gone: at 0.14 alpha it washed the white sheet
 // to roughly #EDEDED, which read as grey rather than white. The intro is meant to
@@ -17,7 +17,7 @@ import ConceptFooter from './ConceptFooter'
 // draws a hairline along the sheet's top edge to keep the boundary legible.
 const REVEAL_BG = '#050505'
 
-export default function ConceptHome() {
+export default function Home() {
   const { theme } = useTheme()
   const dark = theme === 'dark'
 
@@ -36,16 +36,16 @@ export default function ConceptHome() {
         {/* Nav lives inside the sheet so the clip-path carries it — a nav outside
             would sit over the dark section once the sheet scrolls past. */}
         <div id="top" className={`${CONTAINER} mx-auto`}>
-          <ConceptNav />
+          <Nav />
         </div>
-        <ConceptHero />
+        <Hero />
       </CanvasReveal>
 
       {/* Footer shares this block rather than sitting in its own — it reads as a
           continuation of the lab section, which is the point. */}
       <div style={{ background: REVEAL_BG, minHeight: '100vh' }}>
         <ExperimentsLab />
-        <ConceptFooter />
+        <Footer />
       </div>
     </div>
   )

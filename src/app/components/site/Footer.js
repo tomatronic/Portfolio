@@ -9,7 +9,7 @@ import { TEXT, DARK_INK, DARK_FAINT, ICON_NAV, BUTTON_RADIUS, CONTAINER } from '
  * It is dark in both themes, exactly like that section.
  *
  * The theme toggle moved out of here and into the nav's right zone
- * (ConceptThemeToggle).
+ * (ThemeToggle).
  *
  * This is now the site's only footer. components/footer.js is the previous
  * design and no longer imported anywhere. The theme toggle is rebuilt here
@@ -27,7 +27,7 @@ const CONTACTS = [
   },
 ]
 
-export default function ConceptFooter() {
+export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
