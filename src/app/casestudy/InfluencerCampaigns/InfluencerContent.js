@@ -16,7 +16,7 @@ function CaseStudyContent() {
 
           {/* Hero */}
           <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
-            <Image
+            <Image sizes="(max-width: 768px) 100vw, 1008px" priority
               className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10"
               src="/influencerHero.png"
               width={1600}
@@ -225,7 +225,7 @@ function CaseStudyContent() {
 
               <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
                 <Zoom>
-                  <Image
+                  <Image sizes="(max-width: 768px) 100vw, 1008px"
                     src="/prototypeScreens.png"
                     className="w-full rounded-2xl ring-1 ring-black/10 dark:ring-white/10"
                     width={1400}

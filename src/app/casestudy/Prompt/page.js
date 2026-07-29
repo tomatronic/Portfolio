@@ -16,7 +16,7 @@ function Prompt() {
                 <div className="container mx-auto max-w-6xl px-6">
                     <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
                         <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                            <Image className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-hero.png" width={1600} height={927} alt="Natural language search interface for Rakuten Advertising custom reports" />
+                            <Image sizes="(max-width: 768px) 100vw, 1008px" priority className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-hero.png" width={1600} height={927} alt="Natural language search interface for Rakuten Advertising custom reports" />
                         </div>
                         <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
                             <div className="md:col-span-2">
@@ -65,12 +65,12 @@ function Prompt() {
                                     <li><b>Fallback</b>: Some users prefer manual control over search based automation. How can we ensure this option is still available to them?</li>
                                 </ul>
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                    <Image className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-old2.png" width={1920} height={1142} alt="Original manual report builder showing the complex dropdown-based interface before natural language search" />
+                                    <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-old2.png" width={1920} height={1142} alt="Original manual report builder showing the complex dropdown-based interface before natural language search" />
                                 </div>
                                 <h2 className="pt-10 tracking-tight">Approach</h2>
                                 <p>I started by analyzing existing reports to understand common patterns: What metrics did users combine? What date ranges mattered? What questions were they trying to answer? This informed the natural language query design. Instead of just free-form text, I included suggested questions to help a user get started and understand the mechanics of the input box. We also included a 'tag' system in a later iteration to help users find and include certain data points that were harder to remember.</p>
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                    <Image className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-userflow.png" width={1754} height={1240} alt="Customer journey map comparing the current multi-step report creation flow with the proposed natural language search flow" />
+                                    <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-userflow.png" width={1754} height={1240} alt="Customer journey map comparing the current multi-step report creation flow with the proposed natural language search flow" />
                                 </div>
                                 <h3 className="pt-6">Key decisions</h3>
                                 <ul className="mb-8 space-y-2">
@@ -85,7 +85,7 @@ function Prompt() {
                                     The final solution combined natural language prompts, structured tags, and suggested queries to give users both speed and control. Every search generated report remained fully editable, could be saved as a template, or rebuilt from scratch, this preserved the manual workflow for users who preferred it.
                                 </p>
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                    <Image className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-tags-alt.png" width={2390} height={1206} alt="Tag and token system allowing users to refine and direct natural language search queries" />
+                                    <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-tags-alt.png" width={2390} height={1206} alt="Tag and token system allowing users to refine and direct natural language search queries" />
                                 </div>
                                 <div className="max-w-full mb-12">
                                     <h2 className="pt-10 tracking-tight">Outcome</h2>

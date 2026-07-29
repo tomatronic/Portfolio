@@ -16,7 +16,7 @@ function ACJ() {
                 <div className="container mx-auto max-w-6xl px-6">
                     <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
                     <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                            <Image className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-hero.png" width={1600} height={927} alt="Affiliate Conversion Journey dashboard showing multi-touch attribution across awareness, consideration, and conversion phases" />
+                            <Image sizes="(max-width: 768px) 100vw, 1008px" priority className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-hero.png" width={1600} height={927} alt="Affiliate Conversion Journey dashboard showing multi-touch attribution across awareness, consideration, and conversion phases" />
                         </div>
                         <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
                             <div className="md:col-span-2">
@@ -62,20 +62,20 @@ function ACJ() {
                                 <h2 className="pt-10 tracking-tight">Solution</h2>
                                 <div className="space-y-6">
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                        <Image className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-activity-summary.png" width={1000} height={774} alt="Users first see an activity summary with total clicks across phases, average clicks to conversion, and their baseline contribution footprint—providing context before diving into detailed journeys." />
+                                        <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-activity-summary.png" width={1000} height={774} alt="Users first see an activity summary with total clicks across phases, average clicks to conversion, and their baseline contribution footprint—providing context before diving into detailed journeys." />
                                     </div>
                                     <p>The Activity Summary presents raw data up front, total clicks, across phases, average clicks to conversion and baseline contributions. It allows users to quickly understand perforb before diving into complex journeys.</p>
                                     <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                        <Image className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-contributions.png" width={1000} height={774} alt="The Contributions tab breaks down publisher involvement across awareness, consideration, and conversion phases—giving users clear language to discuss their value beyond last-click attribution." />
+                                        <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-contributions.png" width={1000} height={774} alt="The Contributions tab breaks down publisher involvement across awareness, consideration, and conversion phases—giving users clear language to discuss their value beyond last-click attribution." />
                                     </div>
                                     <p>The three-phase framework transformed abstract click sequences into a clear narrative. Publishers could now say "I drive 40% of awareness conversions" instead of struggling to explain their role. Advertisers could identify which publishers were performing well at different stages of the journey.</p>
                                     <p>For deeper analyses the Touchpoints tab revealed detailed conversion paths, presenting which sequences benefitted them most.</p>
                                     <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                        <Image className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-filter-selected.png" width={1000} height={774} alt="Users could adjust order period and lookback window to see how attribution changed—with smart defaults (30-day lookback, month-to-date) and inline helper text preventing confusion." />
+                                        <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-filter-selected.png" width={1000} height={774} alt="Users could adjust order period and lookback window to see how attribution changed—with smart defaults (30-day lookback, month-to-date) and inline helper text preventing confusion." />
                                     </div>
                                     <p>The default filters prevented cognitive overload while still giving users control. As users updated filter choices the report updates seamlessly.</p>
                                     <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                            <Image className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-comparison.png" width={1600} height={927} alt="Side-by-side comparison of publisher and advertiser views of the same attribution data, demonstrating the dual-audience design" />
+                            <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-comparison.png" width={1600} height={927} alt="Side-by-side comparison of publisher and advertiser views of the same attribution data, demonstrating the dual-audience design" />
                         </div>
                                     <p><b>Dual-audience view</b>: Rather than building two separate tools, one core visualization adapted based on user type. Publishers filtered by their own SIDs and saw "you" language. Advertisers filtered by campaign or publisher group and saw top contributors. Same data structure, different views, serving both audiences without doubling engineering effort.</p>
                                 </div>
