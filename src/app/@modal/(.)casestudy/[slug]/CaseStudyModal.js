@@ -29,9 +29,10 @@ export default function CaseStudyModal({ children }) {
 
   return (
     <>
-      {/* Backdrop — fades in/out independently */}
+      {/* Backdrop — fades in/out independently. Primary ink rather than the
+          amber it used to tint with (#B84010 / #3D1204); same opacities. */}
       <motion.div
-        className="fixed inset-0 z-50 bg-[#B84010]/[0.08] dark:bg-[#3D1204]/90 backdrop-blur-sm pointer-events-none"
+        className="fixed inset-0 z-50 bg-[#292929]/[0.08] dark:bg-[#292929]/90 backdrop-blur-sm pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: isClosing ? 0 : 1 }}
         transition={isClosing

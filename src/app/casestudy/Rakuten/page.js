@@ -1,5 +1,6 @@
 import Image from "next/image"
 import OtherCaseStudies from "../../components/OtherCaseStudies"
+import { PROSE } from '../../concept-9f2k/tokens'
 
 export async function generateMetadata() {
     return {
@@ -13,7 +14,7 @@ function Offer() {
         <>
             <div className="relative min-h-screen">
                 <div className="container mx-auto max-w-6xl px-6">
-                    <div className="rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900">
+                    <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
 
                         {/* Hero section */}
                         <div className="relative h-[55vh] overflow-hidden rounded-2xl mb-8 bg-[url('/offerBG.png')] bg-cover">
@@ -25,14 +26,14 @@ function Offer() {
                         {/* Title grid */}
                         <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
                             <div className="md:col-span-2">
-                                <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">Rakuten Advertising &bull; June 2021 &ndash; August 2021</p>
+                                <p className="text-sm font-medium text-[#5D5D5D] dark:text-[#B0B0B0]">Rakuten Advertising &bull; June 2021 &ndash; August 2021</p>
                                 <h1>Offer management</h1>
                             </div>
                             <div className="md:col-span-2">
                                 <p>Rakuten Advertising&apos;s offer management dashboard lets publishers view, compare and accept affiliate offers from advertisers. It hadn&apos;t been touched in years — the UI was cluttered, the terminology was unclear, and users were avoiding it rather than working with it.</p>
-                                <div className="text-slate-600 dark:text-slate-400 space-y-1">
-                                    <p className="text-sm"><span className="font-normal">Role:</span> <span className="font-semibold">Sole UX designer</span></p>
-                                    <p className="text-sm"><span className="font-normal">Skills:</span> <span className="font-semibold">UX/UI, Research, Prototyping, User testing</span></p>
+                                <div className="text-[#5D5D5D] dark:text-[#B0B0B0] space-y-1">
+                                    <p className="text-sm"><span className="font-normal">Role:</span> <span className="font-medium">Sole UX designer</span></p>
+                                    <p className="text-sm"><span className="font-normal">Skills:</span> <span className="font-medium">UX/UI, Research, Prototyping, User testing</span></p>
                                 </div>
                             </div>
                         </div>

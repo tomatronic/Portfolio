@@ -1,4 +1,4 @@
-import ConceptHero from './ConceptHero'
+import ConceptHome from './ConceptHome'
 
 export async function generateMetadata() {
   return {
@@ -8,5 +8,5 @@ export async function generateMetadata() {
 }
 
 export default function ConceptPage() {
-  return <ConceptHero />
+  return <ConceptHome />
 }

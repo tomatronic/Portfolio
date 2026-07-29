@@ -1,6 +1,5 @@
 import "./globals.css";
-import Navigation from './components/navigation';
-import Footer from "./components/footer";
+import { SiteNav, SiteFooter } from './components/SiteChrome';
 import PageBackground from './components/PageBackground';
 import ThemeProvider from './components/ThemeProvider';
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -63,9 +62,9 @@ export default function RootLayout({ children, modal }) {
       <body>
         <ThemeProvider>
           <PageBackground />
-          <Navigation />
+          <SiteNav />
           {children}
-          <Footer />
+          <SiteFooter />
           {modal}
         </ThemeProvider>
         <GoogleAnalytics gaId="G-CCDKVM70NV" />

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 import OtherCaseStudies from '../../components/OtherCaseStudies'
+import { PROSE } from '../../concept-9f2k/tokens'
 
 // ─── Case study content ────────────────────────────────────────────────────────
 
@@ -11,7 +12,7 @@ function CaseStudyContent() {
   return (
     <div className="relative min-h-screen">
       <div className="container mx-auto max-w-6xl px-6">
-        <div className="rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900">
+        <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
 
           {/* Hero */}
           <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
@@ -27,7 +28,7 @@ function CaseStudyContent() {
           {/* Header grid */}
           <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-12">
             <div className="md:col-span-2">
-              <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+              <p className="text-sm font-medium text-[#5D5D5D] dark:text-[#B0B0B0]">
                 Rakuten Advertising &bull; Sept 2025 – Ongoing
               </p>
               <h1 className="text-balance">From Concept to Production in 5 Months</h1>
@@ -39,14 +40,14 @@ function CaseStudyContent() {
                 within their existing affiliate program. Aware that competitors offered this,
                 Rakuten Advertising risked losing high-value, strategic accounts.
               </p>
-              <div className="space-y-1 text-slate-600 dark:text-slate-400">
+              <div className="space-y-1 text-[#5D5D5D] dark:text-[#B0B0B0]">
                 <p className="text-sm">
                   <span className="font-normal">Role:</span>{' '}
-                  <span className="font-semibold">Sole UX designer</span>
+                  <span className="font-medium">Sole UX designer</span>
                 </p>
                 <p className="text-sm">
                   <span className="font-normal">Skills:</span>{' '}
-                  <span className="font-semibold">UX/UI, User Research, Prototyping, User Testing</span>
+                  <span className="font-medium">UX/UI, User Research, Prototyping, User Testing</span>
                 </p>
               </div>
             </div>
@@ -97,40 +98,40 @@ function CaseStudyContent() {
                       S
                     </div>
                     <div>
-                      <p className="mb-0 max-w-none text-sm font-semibold text-slate-950 dark:text-white">Sarah Chen</p>
-                      <p className="mb-0 max-w-none text-xs text-slate-600 dark:text-slate-400">Performance Marketing Manager</p>
+                      <p className="mb-0 max-w-none text-sm font-medium text-[#292929] dark:text-[#F2F2F2]">Sarah Chen</p>
+                      <p className="mb-0 max-w-none text-xs text-[#5D5D5D] dark:text-[#B0B0B0]">Performance Marketing Manager</p>
                     </div>
                   </div>
                   <div className="space-y-4">
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-600 dark:text-slate-400">Goals</p>
+                      <p className="mb-2 max-w-none text-xs font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Goals</p>
                       <ul className="max-w-none space-y-1.5">
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Retain influencer partners within one platform
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Prove influencer ROI to stakeholders
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Manage deliverables without switching tools
                         </li>
                       </ul>
                     </div>
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-600 dark:text-slate-400">Pain points</p>
+                      <p className="mb-2 max-w-none text-xs font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Pain points</p>
                       <ul className="max-w-none space-y-1.5">
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           Fragmented tools for affiliate and influencer management
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           No way to verify posts were published as agreed
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           Social metrics don't connect to affiliate performance data
                         </li>
@@ -152,40 +153,40 @@ function CaseStudyContent() {
                       M
                     </div>
                     <div>
-                      <p className="mb-0 max-w-none text-sm font-semibold text-slate-950 dark:text-white">Marcus Reid</p>
-                      <p className="mb-0 max-w-none text-xs text-slate-600 dark:text-slate-400">Lifestyle Content Creator · 85k followers</p>
+                      <p className="mb-0 max-w-none text-sm font-medium text-[#292929] dark:text-[#F2F2F2]">Marcus Reid</p>
+                      <p className="mb-0 max-w-none text-xs text-[#5D5D5D] dark:text-[#B0B0B0]">Lifestyle Content Creator · 85k followers</p>
                     </div>
                   </div>
                   <div className="space-y-4">
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-600 dark:text-slate-400">Goals</p>
+                      <p className="mb-2 max-w-none text-xs font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Goals</p>
                       <ul className="max-w-none space-y-1.5">
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Find brand partnerships that match their niche
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Understand exactly what's required before committing
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Get paid reliably with clear terms upfront
                         </li>
                       </ul>
                     </div>
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-semibold uppercase tracking-widest text-slate-600 dark:text-slate-400">Pain points</p>
+                      <p className="mb-2 max-w-none text-xs font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Pain points</p>
                       <ul className="max-w-none space-y-1.5">
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           Vague campaign briefs with unclear deliverables
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           Platforms built for advertisers, not creators
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           No visibility on payment status after posting
                         </li>
@@ -251,8 +252,8 @@ function CaseStudyContent() {
               <div className="my-8 grid grid-cols-1 gap-4 md:grid-cols-2">
                 {/* Shipped in V1 */}
                 <div className="rounded-2xl bg-[#EDE7DD] p-6 dark:bg-slate-800/50">
-                  <p className="mb-4 text-sm font-semibold text-slate-950 dark:text-white">Shipped in V1</p>
-                  <ul className="space-y-2.5 text-base font-normal text-slate-600 dark:text-slate-400">
+                  <p className="mb-4 text-sm font-medium text-[#292929] dark:text-[#F2F2F2]">Shipped in V1</p>
+                  <ul className="space-y-2.5 text-[14px] font-normal text-[#5D5D5D] dark:text-[#B0B0B0]">
                     <li className="flex items-start gap-2">
                       <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                       <span>Campaign creation</span>
@@ -274,8 +275,8 @@ function CaseStudyContent() {
 
                 {/* Deferred to V2 */}
                 <div className="rounded-2xl bg-[#EDE7DD] p-6 dark:bg-slate-800/50">
-                  <p className="mb-4 text-sm font-semibold text-slate-950 dark:text-white">Deferred to V2 — genuinely useful, but not necessary to ship a complete story</p>
-                  <ul className="space-y-2.5 text-base font-normal text-slate-600 dark:text-slate-400">
+                  <p className="mb-4 text-sm font-medium text-[#292929] dark:text-[#F2F2F2]">Deferred to V2 — genuinely useful, but not necessary to ship a complete story</p>
+                  <ul className="space-y-2.5 text-[14px] font-normal text-[#5D5D5D] dark:text-[#B0B0B0]">
                     <li className="flex items-start gap-2">
                       <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400 dark:bg-slate-500" />
                       <span>In-app negotiation</span>

@@ -1,5 +1,6 @@
 import Image from "next/image"
 import OtherCaseStudies from "../../components/OtherCaseStudies"
+import { PROSE } from '../../concept-9f2k/tokens'
 
 export async function generateMetadata() {
     return {
@@ -13,22 +14,22 @@ function ACJ() {
         <>
             <div className="relative min-h-screen">
                 <div className="container mx-auto max-w-6xl px-6">
-                    <div className="rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900">
+                    <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
                     <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
                             <Image className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-hero.png" width={1600} height={927} alt="Affiliate Conversion Journey dashboard showing multi-touch attribution across awareness, consideration, and conversion phases" />
                         </div>
                         <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
                             <div className="md:col-span-2">
-                                <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">Rakuten Advertising &bull; Oct 2022 – Jun 2023</p>
-                                <h1 className="text-balance"><span className="text-slate-600 dark:text-slate-400">Affiliate Conversion Journey</span> — Multi-Touch Attribution for Affiliate</h1>
+                                <p className="text-sm font-medium text-[#5D5D5D] dark:text-[#B0B0B0]">Rakuten Advertising &bull; Oct 2022 – Jun 2023</p>
+                                <h1 className="text-balance"><span className="text-[#5D5D5D] dark:text-[#B0B0B0]">Affiliate Conversion Journey</span> — Multi-Touch Attribution for Affiliate</h1>
                             </div>
                             <div className="md:col-span-2">
                                 <p>Publishers and advertisers on Rakuten's affiliate network needed to understand their contribution to sales beyond last-click attribution. When a customer discovers a product through Publisher A's blog, researches it via Publisher B's review site, then purchases after clicking Publisher C's discount link, who deserves credit?</p>
                                 <p>Without this visibility, publishers couldn't prove their value in earlier phases of the funnels, and advertisers couldn't optimize their partnerships. Competitors like CJ Affiliate and Impact offered journey tracking, putting Rakuten at a strategic disadvantage.</p>
 
-                                <div className="text-slate-600 dark:text-slate-400 space-y-1">
-                                    <p className="text-sm"><span className="font-normal">Role:</span> <span className="font-semibold">Sole UX designer</span></p>
-                                    <p className="text-sm"><span className="font-normal">Skills:</span> <span className="font-semibold">UX/UI, User Research, Prototyping, User testing</span></p>
+                                <div className="text-[#5D5D5D] dark:text-[#B0B0B0] space-y-1">
+                                    <p className="text-sm"><span className="font-normal">Role:</span> <span className="font-medium">Sole UX designer</span></p>
+                                    <p className="text-sm"><span className="font-normal">Skills:</span> <span className="font-medium">UX/UI, User Research, Prototyping, User testing</span></p>
                                 </div>
                             </div>
                         </div>

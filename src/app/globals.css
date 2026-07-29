@@ -44,8 +44,38 @@ body {
   font-family: var(--font-dm-sans), system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.7;
-  transition: background-color 250ms ease-out;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Dark body colours in CSS, not only via PageBackground's post-mount effect.
+   Without this, a dark-mode visitor loads on the white default and the JS
+   repaints it after hydration — invisible at 250ms, but an obvious white flash
+   once the theme transition is slowed down. The FOUC script sets .dark before
+   paint, so this lands first. */
+html.dark body {
+  color: #ededed;
+  background: #0F1623;
+}
+
+/* Theme crossfade. Applied broadly so the sheet, text, borders and icons move
+   together rather than the background fading while everything else snaps.
+
+   Must sit in @layer base. Unlayered CSS outranks anything in a layer no matter
+   the specificity, so leaving this unlayered beat every Tailwind
+   `transition-*` utility — it retimed all of them to 450ms and dropped
+   properties they declared but this rule doesn't, which silently killed the
+   avatar's filter fade. In `base` the utilities layer wins, so components keep
+   the timings they ask for. */
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    *,
+    *::before,
+    *::after {
+      transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+      transition-duration: 450ms;
+      transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  }
 }
 
 @layer utilities {

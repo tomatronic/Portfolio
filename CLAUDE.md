@@ -2,11 +2,32 @@
 
 ## Versions
 
-### Current version (active — July 2026)
-- **Hero**: Left-aligned, full-bleed noise background (no gradient blobs — removed 2026-07-01). DM Sans headline (`text-4xl md:text-5xl lg:text-6xl`, `line-height: 1.05`) with amber gradient highlight on "easy to use". Short one-sentence sub-copy. Rounded-full CTA with smooth scroll to `#work`. Defined inline in `page.js` — there is no separate hero component.
-- **Background**: Fixed fractal noise SVG only (`feTurbulence baseFrequency 0.9`) over flat `#ffffff` light / `#0F1623` dark. The 3 radial gradient blobs that used to sit under the noise were removed 2026-07-01 — they were creating a visible colour band near the top of the viewport plus a faint wash across the hero. `PageBackground.js` was updated to match (`light: '#ffffff'`, was `#EDE7DD`).
-- **Palette**: amber `#B84010` accent, flat white page bg light / deep navy `#0F1623` dark. Warm cream (`#EDE7DD`/`#E4DDD2`) is still used for card image containers, the casestudyShowcase outer tan container (`#C4B09A`), and testimonial cards — just not the page background itself anymore.
-- Older hero experiments (SolarHero solar-arc chart, `/testHome` route, `hero.safe.js`/`hero.original.js` centred violet layout) were deleted in June 2026 — recover from git history if ever needed (safe baseline commit `ce8b3de`).
+### Current version (active — from 2026-07-29)
+See "Design direction overhaul" below — that is the live design. Everything in the dated sections beneath it describes the **previous** version and is kept as history.
+- **Home**: `ConceptHome` — a white sheet that clips inward on scroll (`CanvasReveal`) to reveal a near-black Experiments & Lab section beneath. Intro (name / role / copy / Resume + LinkedIn), image-forward case study cards, lab tiles, footer.
+- **Nav**: avatar left (home link, greyscale→colour, confetti burst + `cuelume` sound on click), centred pill, theme toggle right. Rendered inside the sheet on `/` and `/about`; supplied by `components/SiteChrome.js` everywhere else.
+- **Background**: flat `#ffffff` light / `#0F1623` dark, set in `globals.css` (including `html.dark body`) and by `PageBackground.js`. The noise texture and gradient headline of the previous version are gone.
+- **Palette**: amber `#B84010` accent retained for active/emphasis; ink scale is now `#292929` / `#5D5D5D` / `#9E9E9E`. Warm cream is no longer used anywhere on `/` or `/about`.
+- Older hero experiments (SolarHero solar-arc chart, `/testHome`, `hero.safe.js`/`hero.original.js`) were deleted in June 2026; the noise/gradient hero this replaced is in git history (safe baseline commit `ce8b3de`).
+
+### Design direction overhaul — new home + about promoted live (2026-07-29)
+The `/concept-9f2k` direction was adopted as the site's real design. `/` and `/about` now render `ConceptHome` / `ConceptAbout`; the new nav and footer are global via `components/SiteChrome.js`; case study **bodies** keep their own layout but were brought onto the new type scale.
+
+**Type system** lives in `src/app/concept-9f2k/tokens.js`: sizes 12/13/14/24 only, ink `#292929` / `#5D5D5D` / `#9E9E9E` (dark: `#F2F2F2` / `#B0B0B0` / `#8A8A8A`), 16px card radius, fully-round buttons, 14px nav icons / 20px card icons. `PROSE` in the same file applies it to long-form bodies via descendant selectors — needed because `globals.css` styles `h1`/`h2`/`p`/`blockquote` as *elements*, which beats anything inherited from a wrapper. `:not([data-keep])` on the `p` rule is the escape hatch for deliberately-sized paragraphs (Prompt's stat row).
+
+## Outstanding clean-up (2026-07-29)
+
+**1. Orphaned components — safe to delete, zero imports.** Verified by grep across `src/app`:
+- `components/navigation.js` — previous nav, replaced by `concept-9f2k/ConceptNav.js`
+- `components/footer.js` — previous footer, replaced by `concept-9f2k/ConceptFooter.js`
+- `components/casestudyShowcase.js` — previous work cards, replaced by `ConceptCaseStudyCards.js`
+- `components/AboutMeSection.js` — previous home about section, no longer rendered
+- `components/Testimonials.js` — quotes copied into `ConceptAbout.js` with real names; component unused
+- `components/ClosingCTA.js`, `components/examples.js` — already orphaned before this session
+
+**2. Rename `src/app/concept-9f2k/` — it is now load-bearing for production.** The obscure name was chosen to hide a sandbox route; eight live files import from it (`page.js`, `about/page.js`, `components/SiteChrome.js`, and all four case studies). **These files are in use — do not delete them.** The fix is to move the shared components to something like `components/site/` and update imports. `/concept-9f2k` itself is kept deliberately as a noindexed sandbox for trying changes before promoting them.
+
+**3. Known accessibility exception.** `#9E9E9E` on white is 2.68:1 — fails AA (4.5:1) for the 13px "About" eyebrow and testimonial roles, and the 3:1 large-text threshold for the 24px "Senior Product Designer". It is the specified tertiary ink; clearing AA below 24px would need roughly `#767676`. Deliberate, undecided.
 
 ### Code audit fixes (2026-07-13)
 Ran the `improve` skill (`.agents/skills/improve/SKILL.md`) as a read-only audit, then implemented the findings directly:

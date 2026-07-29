@@ -1,5 +1,6 @@
 import Image from "next/image"
 import OtherCaseStudies from "../../components/OtherCaseStudies"
+import { PROSE } from '../../concept-9f2k/tokens'
 
 export async function generateMetadata() {
     return {
@@ -13,20 +14,20 @@ function Prompt() {
         <>
             <div className="relative min-h-screen">
                 <div className="container mx-auto max-w-6xl px-6">
-                    <div className="rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900">
+                    <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
                         <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
                             <Image className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-hero.png" width={1600} height={927} alt="Natural language search interface for Rakuten Advertising custom reports" />
                         </div>
                         <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
                             <div className="md:col-span-2">
-                                <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">Rakuten Advertising &bull; Jan 2025 - Ongoing</p>
+                                <p className="text-sm font-medium text-[#5D5D5D] dark:text-[#B0B0B0]">Rakuten Advertising &bull; Jan 2025 - Ongoing</p>
                                 <h1 className="text-balance">Intelligent Search for Custom Reports — Natural Language Search & AI</h1>
                             </div>
                             <div className="md:col-span-2">
                                 <p>Advertisers on Rakuten&apos;s platform create custom reports monthly — sometimes weekly — to track campaign performance across 170+ metrics. Building one manually meant 15–20 minutes of clicking through dropdowns and configuring data points. With 1,000+ active advertisers and dozens of account managers doing this regularly, the time loss was significant. It also landed on support when people couldn&apos;t figure out the interface.</p>
-                                <div className="text-slate-600 dark:text-slate-400 space-y-1">
-                                    <p className="text-sm"><span className="font-normal">Role:</span> <span className="font-semibold">Sole UX designer</span></p>
-                                    <p className="text-sm"><span className="font-normal">Skills:</span> <span className="font-semibold">UX/UI, User Research, Prototyping, User testing</span></p>
+                                <div className="text-[#5D5D5D] dark:text-[#B0B0B0] space-y-1">
+                                    <p className="text-sm"><span className="font-normal">Role:</span> <span className="font-medium">Sole UX designer</span></p>
+                                    <p className="text-sm"><span className="font-normal">Skills:</span> <span className="font-medium">UX/UI, User Research, Prototyping, User testing</span></p>
                                 </div>
                             </div>
                         </div>
@@ -39,8 +40,11 @@ function Prompt() {
                                 { stat: '1,000+', label: 'active advertisers with access from open beta' },
                             ].map(({ stat, label }) => (
                                 <div key={stat}>
-                                    <p className="mb-1 text-4xl font-semibold tracking-tight text-accent-600 dark:text-accent-400">{stat}</p>
-                                    <p className="mb-0 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{label}</p>
+                                    {/* data-keep opts this out of the body size — 24px is the
+                                        scale's ceiling, so the stat leads on colour and weight
+                                        rather than on a display size. */}
+                                    <p data-keep className="mb-1 text-[24px] font-medium tracking-tight text-accent-600 dark:text-accent-300">{stat}</p>
+                                    <p className="mb-0 text-sm leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">{label}</p>
                                 </div>
                             ))}
                         </div>
