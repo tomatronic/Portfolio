@@ -133,11 +133,14 @@ export default function Nav({ active = 'Home' }) {
         className="group relative col-start-1 row-start-1 justify-self-start"
       >
         {/* Neutral ring only — no accent on hover or active state. The greyscale
-            to colour shift is the hover feedback on its own. */}
+            to colour shift and a small anticlockwise twist are the hover feedback.
+            The rotation goes on this span rather than the image: the image carries
+            its own scaleX(-1) inline, and a second transform on the same element
+            would replace it and un-mirror the face. */}
         {/* z-10 puts the avatar above the particles so the burst appears to come
             out from behind it. Particles are appended after this span in the DOM,
             so without an explicit z-index they'd paint on top. */}
-        <span className="relative z-10 block h-11 w-11 overflow-hidden rounded-full ring-1 ring-[#292929]/12 transition-transform duration-300 active:scale-[0.96] motion-reduce:transition-none dark:ring-white/15">
+        <span className="relative z-10 block h-11 w-11 overflow-hidden rounded-full ring-1 ring-[#292929]/12 transition-transform duration-300 group-hover:-rotate-2 active:scale-[0.96] motion-reduce:transition-none dark:ring-white/15">
           {/* Mirrored so the face turns toward the page rather than away from
               it. Set inline, not via a Tailwind scale utility — neither
               `scale-x-[-1]` nor `-scale-x-100` emitted a rule in this project's
