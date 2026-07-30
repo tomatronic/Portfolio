@@ -61,8 +61,14 @@ export default function CaseStudyModal({ children }) {
           </button>
         </div>
 
-        {/* Content */}
-        <div className="pt-6 md:pt-12">
+        {/* Content.
+            The sticky row above is in flow, so it already contributes 68px (its
+            24px inset plus the 44px button) before this padding is counted. That
+            put the card 116px down the viewport, which read as a dead band across
+            the top. Kept small deliberately: the card must still start below the
+            button's lower edge at 68px, since the two are within a few pixels of
+            each other horizontally once the content hits its max width. */}
+        <div className="pt-3 md:pt-4">
           {children}
         </div>
       </motion.div>
