@@ -35,3 +35,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# design review artefacts — screenshots and reports from past review passes.
+# Kept locally for reference, but they were 35MB of the repo and have no
+# runtime role, so they are no longer tracked or deployed.
+/.design/
+
+# playwright mcp scratch output
+/.playwright-mcp/
