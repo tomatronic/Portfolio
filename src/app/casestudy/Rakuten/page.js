@@ -26,14 +26,14 @@ function Offer() {
                         {/* Title grid */}
                         <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
                             <div className="md:col-span-2">
-                                <p className="text-sm font-medium text-[#5D5D5D] dark:text-[#B0B0B0]">Rakuten Advertising &bull; June 2021 &ndash; August 2021</p>
+                                <p data-keep className="text-[15px] font-medium text-[#737373] dark:text-[#8A8A8A]">Rakuten Advertising &bull; June 2021 &ndash; August 2021</p>
                                 <h1>Offer management</h1>
                             </div>
                             <div className="md:col-span-2">
                                 <p>Rakuten Advertising&apos;s offer management dashboard lets publishers view, compare and accept affiliate offers from advertisers. It hadn&apos;t been touched in years — the UI was cluttered, the terminology was unclear, and users were avoiding it rather than working with it.</p>
                                 <div className="text-[#5D5D5D] dark:text-[#B0B0B0] space-y-1">
-                                    <p className="text-sm"><span className="font-normal">Role:</span> <span className="font-medium">Sole UX designer</span></p>
-                                    <p className="text-sm"><span className="font-normal">Skills:</span> <span className="font-medium">UX/UI, Research, Prototyping, User testing</span></p>
+                                    <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]"><span className="text-[#737373] dark:text-[#8A8A8A]">Role:</span> <span className="font-medium">Sole UX designer</span></p>
+                                    <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]"><span className="text-[#737373] dark:text-[#8A8A8A]">Skills:</span> <span className="font-medium">UX/UI, Research, Prototyping, User testing</span></p>
                                 </div>
                             </div>
                         </div>

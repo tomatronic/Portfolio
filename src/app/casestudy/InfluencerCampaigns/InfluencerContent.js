@@ -28,7 +28,7 @@ function CaseStudyContent() {
           {/* Header grid */}
           <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-12">
             <div className="md:col-span-2">
-              <p className="text-sm font-medium text-[#5D5D5D] dark:text-[#B0B0B0]">
+              <p data-keep className="text-[15px] font-medium text-[#737373] dark:text-[#8A8A8A]">
                 Rakuten Advertising &bull; Sept 2025 – Ongoing
               </p>
               <h1 className="text-balance">From Concept to Production in 5 Months</h1>
@@ -41,12 +41,12 @@ function CaseStudyContent() {
                 Rakuten Advertising risked losing high-value, strategic accounts.
               </p>
               <div className="space-y-1 text-[#5D5D5D] dark:text-[#B0B0B0]">
-                <p className="text-sm">
-                  <span className="font-normal">Role:</span>{' '}
+                <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]">
+                  <span className="text-[#737373] dark:text-[#8A8A8A]">Role:</span>{' '}
                   <span className="font-medium">Sole UX designer</span>
                 </p>
-                <p className="text-sm">
-                  <span className="font-normal">Skills:</span>{' '}
+                <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]">
+                  <span className="text-[#737373] dark:text-[#8A8A8A]">Skills:</span>{' '}
                   <span className="font-medium">UX/UI, User Research, Prototyping, User Testing</span>
                 </p>
               </div>
@@ -87,7 +87,7 @@ function CaseStudyContent() {
 
                 {/* Advertiser */}
                 <div className="rounded-2xl border border-[#C8BEB0] bg-[#EDE7DD] p-6 dark:border-[#2A3A4A] dark:bg-slate-800/50">
-                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-xs font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-300">
+                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-[14px] font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-300">
                     Advertiser
                   </span>
                   <div className="mb-5 flex items-center gap-3">
@@ -98,40 +98,40 @@ function CaseStudyContent() {
                       S
                     </div>
                     <div>
-                      <p className="mb-0 max-w-none text-sm font-medium text-[#292929] dark:text-[#F2F2F2]">Sarah Chen</p>
-                      <p className="mb-0 max-w-none text-xs text-[#5D5D5D] dark:text-[#B0B0B0]">Performance Marketing Manager</p>
+                      <p data-keep className="mb-0 max-w-none text-[15px] font-medium text-[#292929] dark:text-[#F2F2F2]">Sarah Chen</p>
+                      <p data-keep className="mb-0 max-w-none text-[14px] text-[#5D5D5D] dark:text-[#B0B0B0]">Performance Marketing Manager</p>
                     </div>
                   </div>
                   <div className="space-y-4">
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Goals</p>
+                      <p data-keep className="mb-2 max-w-none text-[14px] font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Goals</p>
                       <ul className="max-w-none space-y-1.5">
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Retain influencer partners within one platform
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Prove influencer ROI to stakeholders
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Manage deliverables without switching tools
                         </li>
                       </ul>
                     </div>
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Pain points</p>
+                      <p data-keep className="mb-2 max-w-none text-[14px] font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Pain points</p>
                       <ul className="max-w-none space-y-1.5">
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           Fragmented tools for affiliate and influencer management
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           No way to verify posts were published as agreed
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           Social metrics don't connect to affiliate performance data
                         </li>
@@ -142,7 +142,7 @@ function CaseStudyContent() {
 
                 {/* Creator */}
                 <div className="rounded-2xl border border-[#C8BEB0] bg-[#EDE7DD] p-6 dark:border-[#2A3A4A] dark:bg-slate-800/50">
-                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-xs font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-300">
+                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-[14px] font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-300">
                     Creator
                   </span>
                   <div className="mb-5 flex items-center gap-3">
@@ -153,40 +153,40 @@ function CaseStudyContent() {
                       M
                     </div>
                     <div>
-                      <p className="mb-0 max-w-none text-sm font-medium text-[#292929] dark:text-[#F2F2F2]">Marcus Reid</p>
-                      <p className="mb-0 max-w-none text-xs text-[#5D5D5D] dark:text-[#B0B0B0]">Lifestyle Content Creator · 85k followers</p>
+                      <p data-keep className="mb-0 max-w-none text-[15px] font-medium text-[#292929] dark:text-[#F2F2F2]">Marcus Reid</p>
+                      <p data-keep className="mb-0 max-w-none text-[14px] text-[#5D5D5D] dark:text-[#B0B0B0]">Lifestyle Content Creator · 85k followers</p>
                     </div>
                   </div>
                   <div className="space-y-4">
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Goals</p>
+                      <p data-keep className="mb-2 max-w-none text-[14px] font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Goals</p>
                       <ul className="max-w-none space-y-1.5">
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Find brand partnerships that match their niche
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Understand exactly what's required before committing
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                           Get paid reliably with clear terms upfront
                         </li>
                       </ul>
                     </div>
                     <div>
-                      <p className="mb-2 max-w-none text-xs font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Pain points</p>
+                      <p data-keep className="mb-2 max-w-none text-[14px] font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Pain points</p>
                       <ul className="max-w-none space-y-1.5">
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           Vague campaign briefs with unclear deliverables
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           Platforms built for advertisers, not creators
                         </li>
-                        <li className="flex items-start gap-2 text-sm text-[#5D5D5D] dark:text-[#B0B0B0]">
+                        <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
                           <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400 dark:bg-slate-600" />
                           No visibility on payment status after posting
                         </li>
@@ -252,7 +252,7 @@ function CaseStudyContent() {
               <div className="my-8 grid grid-cols-1 gap-4 md:grid-cols-2">
                 {/* Shipped in V1 */}
                 <div className="rounded-2xl bg-[#EDE7DD] p-6 dark:bg-slate-800/50">
-                  <p className="mb-4 text-sm font-medium text-[#292929] dark:text-[#F2F2F2]">Shipped in V1</p>
+                  <p data-keep className="mb-4 text-[15px] font-medium text-[#292929] dark:text-[#F2F2F2]">Shipped in V1</p>
                   <ul className="space-y-2.5 text-[16px] font-normal text-[#5D5D5D] dark:text-[#B0B0B0]">
                     <li className="flex items-start gap-2">
                       <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
@@ -275,7 +275,7 @@ function CaseStudyContent() {
 
                 {/* Deferred to V2 */}
                 <div className="rounded-2xl bg-[#EDE7DD] p-6 dark:bg-slate-800/50">
-                  <p className="mb-4 text-sm font-medium text-[#292929] dark:text-[#F2F2F2]">Deferred to V2 — genuinely useful, but not necessary to ship a complete story</p>
+                  <p data-keep className="mb-4 text-[15px] font-medium text-[#292929] dark:text-[#F2F2F2]">Deferred to V2 — genuinely useful, but not necessary to ship a complete story</p>
                   <ul className="space-y-2.5 text-[16px] font-normal text-[#5D5D5D] dark:text-[#B0B0B0]">
                     <li className="flex items-start gap-2">
                       <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400 dark:bg-slate-500" />

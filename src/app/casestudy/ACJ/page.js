@@ -20,7 +20,7 @@ function ACJ() {
                         </div>
                         <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
                             <div className="md:col-span-2">
-                                <p className="text-sm font-medium text-[#5D5D5D] dark:text-[#B0B0B0]">Rakuten Advertising &bull; Oct 2022 – Jun 2023</p>
+                                <p data-keep className="text-[15px] font-medium text-[#737373] dark:text-[#8A8A8A]">Rakuten Advertising &bull; Oct 2022 – Jun 2023</p>
                                 <h1 className="text-balance"><span className="text-[#5D5D5D] dark:text-[#B0B0B0]">Affiliate Conversion Journey</span> — Multi-Touch Attribution for Affiliate</h1>
                             </div>
                             <div className="md:col-span-2">
@@ -28,8 +28,8 @@ function ACJ() {
                                 <p>Without this visibility, publishers couldn't prove their value in earlier phases of the funnels, and advertisers couldn't optimize their partnerships. Competitors like CJ Affiliate and Impact offered journey tracking, putting Rakuten at a strategic disadvantage.</p>
 
                                 <div className="text-[#5D5D5D] dark:text-[#B0B0B0] space-y-1">
-                                    <p className="text-sm"><span className="font-normal">Role:</span> <span className="font-medium">Sole UX designer</span></p>
-                                    <p className="text-sm"><span className="font-normal">Skills:</span> <span className="font-medium">UX/UI, User Research, Prototyping, User testing</span></p>
+                                    <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]"><span className="text-[#737373] dark:text-[#8A8A8A]">Role:</span> <span className="font-medium">Sole UX designer</span></p>
+                                    <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]"><span className="text-[#737373] dark:text-[#8A8A8A]">Skills:</span> <span className="font-medium">UX/UI, User Research, Prototyping, User testing</span></p>
                                 </div>
                             </div>
                         </div>

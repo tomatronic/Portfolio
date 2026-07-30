@@ -71,9 +71,12 @@ function CompactCard({ card }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* data-flush: this card renders inside a case study's PROSE wrapper, which
+          gives headings a bottom margin. Here the title is a centred flex item,
+          so that margin pushes it off the card's vertical centre. */}
       <h3
+        data-flush
         className="flex-1 truncate text-base tracking-tight text-slate-950 dark:text-white"
-
       >
         {card.title}
       </h3>

@@ -20,14 +20,14 @@ function Prompt() {
                         </div>
                         <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
                             <div className="md:col-span-2">
-                                <p className="text-sm font-medium text-[#5D5D5D] dark:text-[#B0B0B0]">Rakuten Advertising &bull; Jan 2025 - Ongoing</p>
+                                <p data-keep className="text-[15px] font-medium text-[#737373] dark:text-[#8A8A8A]">Rakuten Advertising &bull; Jan 2025 - Ongoing</p>
                                 <h1 className="text-balance">Intelligent Search for Custom Reports — Natural Language Search & AI</h1>
                             </div>
                             <div className="md:col-span-2">
                                 <p>Advertisers on Rakuten&apos;s platform create custom reports monthly — sometimes weekly — to track campaign performance across 170+ metrics. Building one manually meant 15–20 minutes of clicking through dropdowns and configuring data points. With 1,000+ active advertisers and dozens of account managers doing this regularly, the time loss was significant. It also landed on support when people couldn&apos;t figure out the interface.</p>
                                 <div className="text-[#5D5D5D] dark:text-[#B0B0B0] space-y-1">
-                                    <p className="text-sm"><span className="font-normal">Role:</span> <span className="font-medium">Sole UX designer</span></p>
-                                    <p className="text-sm"><span className="font-normal">Skills:</span> <span className="font-medium">UX/UI, User Research, Prototyping, User testing</span></p>
+                                    <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]"><span className="text-[#737373] dark:text-[#8A8A8A]">Role:</span> <span className="font-medium">Sole UX designer</span></p>
+                                    <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]"><span className="text-[#737373] dark:text-[#8A8A8A]">Skills:</span> <span className="font-medium">UX/UI, User Research, Prototyping, User testing</span></p>
                                 </div>
                             </div>
                         </div>
@@ -40,11 +40,13 @@ function Prompt() {
                                 { stat: '1,000+', label: 'active advertisers with access from open beta' },
                             ].map(({ stat, label }) => (
                                 <div key={stat}>
-                                    {/* data-keep opts this out of the body size — 24px is the
+                                    {/* data-keep opts this out of the body size — 27px is the
                                         scale's ceiling, so the stat leads on colour and weight
                                         rather than on a display size. */}
                                     <p data-keep className="mb-1 text-[27px] font-medium tracking-tight text-accent-600 dark:text-accent-300">{stat}</p>
-                                    <p className="mb-0 text-sm leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">{label}</p>
+                                    {/* MUTED, not FAINT: these sit on the cream #EDE7DD card, where #737373
+                                        measures 3.85:1. #5D5D5D is 5.35:1 on the same ground. */}
+                                    <p data-keep className="mb-0 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">{label}</p>
                                 </div>
                             ))}
                         </div>

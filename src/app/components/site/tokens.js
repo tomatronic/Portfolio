@@ -87,20 +87,40 @@ export const CONTAINER = 'max-w-4xl'
  * anything inherited from a wrapper, so these descendant selectors compile to
  * `.wrapper h2 { … }` and outrank the bare rule.
  *
- * `:not([data-keep])` on `p` is an escape hatch: a descendant selector (0,1,1)
- * also outranks a plain utility class (0,1,0), so without it a paragraph that
- * deliberately sets its own size — the Prompt stat row — would be flattened
- * back to body size. Mark those with `data-keep`.
+ * `:not([data-keep])` on `p` and `li` is an escape hatch, and it is not
+ * optional: a descendant selector also outranks a plain utility class, so any
+ * `<p className="text-sm">` inside this wrapper is silently ignored and renders
+ * at body size. Anything that deliberately sets its own size — metadata rows,
+ * card labels, the Prompt stat row — must carry `data-keep` or the class does
+ * nothing. Before this was applied consistently, every intended small size in
+ * the case studies was inert, so the pages ran at two sizes (16 and 27) rather
+ * than the four in the scale.
  *
  * Written as literal class strings: Tailwind only emits what it can find whole
  * in the source.
  */
 export const PROSE = [
-  '[&_h1]:text-[27px] [&_h1]:font-medium [&_h1]:leading-[1.35] [&_h1]:tracking-tight [&_h1]:text-[#292929] dark:[&_h1]:text-[#F2F2F2]',
+  // h1 is semibold where h2 is medium. Both are 27px — the scale has one
+  // heading step — so without a weight difference the case study title rendered
+  // identically to every "Challenge"/"Approach" heading below it and stopped
+  // reading as the page title.
+  '[&_h1]:text-[27px] [&_h1]:font-semibold [&_h1]:leading-[1.35] [&_h1]:tracking-tight [&_h1]:text-[#292929] dark:[&_h1]:text-[#F2F2F2]',
+  // Headings had generous space above (pt-10 / pt-6 at the call sites) and none
+  // below, so they sat flush on their own body copy and bound upward as much as
+  // down. A small margin under each keeps roughly a 3:1 ratio with the space
+  // above, so the heading reads as belonging to what follows it.
+  //
+  // `data-flush` opts out, for headings that are not stacked above body copy —
+  // the OtherCaseStudies card titles sit in a centred flex row, where a bottom
+  // margin pushes them off the card's vertical centre.
   '[&_h2]:text-[27px] [&_h2]:font-medium [&_h2]:leading-[1.25] [&_h2]:tracking-tight [&_h2]:text-[#292929] dark:[&_h2]:text-[#F2F2F2]',
   '[&_h3]:text-[16px] [&_h3]:font-medium [&_h3]:tracking-tight [&_h3]:text-[#292929] dark:[&_h3]:text-[#F2F2F2]',
+  '[&_h2:not([data-flush])]:mb-3 [&_h3:not([data-flush])]:mb-2',
   '[&_p:not([data-keep])]:text-[16px] [&_p:not([data-keep])]:leading-relaxed [&_p:not([data-keep])]:text-[#5D5D5D] dark:[&_p:not([data-keep])]:text-[#B0B0B0]',
-  '[&_li]:text-[16px] [&_li]:leading-relaxed [&_li]:text-[#5D5D5D] dark:[&_li]:text-[#B0B0B0]',
+  // `li` takes the same data-keep opt-out as `p`. Without it, compact lists
+  // inside cards — the persona goals and pain points — were pinned to body size
+  // however they were classed, which flattened those cards to a single size.
+  '[&_li:not([data-keep])]:text-[16px] [&_li:not([data-keep])]:leading-relaxed [&_li:not([data-keep])]:text-[#5D5D5D] dark:[&_li:not([data-keep])]:text-[#B0B0B0]',
   '[&_strong]:font-medium [&_strong]:text-[#292929] dark:[&_strong]:text-[#F2F2F2]',
   '[&_b]:font-medium [&_b]:text-[#292929] dark:[&_b]:text-[#F2F2F2]',
   '[&_blockquote]:my-6 [&_blockquote]:border-0 [&_blockquote]:p-0 [&_blockquote]:not-italic',
