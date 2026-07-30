@@ -28,7 +28,36 @@ export const TEXT = {
 // counterparts for the navy sheet and the near-black reveal.
 export const INK = 'text-[#292929] dark:text-[#F2F2F2]'
 export const MUTED = 'text-[#5D5D5D] dark:text-[#B0B0B0]'
-export const FAINT = 'text-[#9E9E9E] dark:text-[#8A8A8A]'
+
+/**
+ * The tertiary ink is two values, split by the contrast threshold that applies
+ * at each size. It was one value, #9E9E9E, which measured 2.68:1 on white —
+ * under the 4.5:1 required for body text and under even the 3:1 allowed for
+ * large text, so every use of it failed.
+ *
+ * Darkening everything to #767676 would have cleared AA but flattened the ramp:
+ * in perceptual lightness the three inks step 16.6 → 39.5 → 65.1, and moving the
+ * third to 49.6 turns even steps of 22.9/25.6 into 22.9/10.1, so the tertiary
+ * level stops reading as its own level. Since this system takes its hierarchy
+ * from colour rather than size, that matters.
+ *
+ * Splitting keeps the display line light. Only text below 24px owes 4.5:1;
+ * at 24px and above the bar is 3:1, and TEXT.title is 27px.
+ *
+ * Both values are set against #fafafa, not #ffffff. The page ground is white,
+ * but case study bodies sit on a bg-zinc-50 card, and the quote attributions
+ * land there — #767676 measured 4.54:1 on white and only 4.35:1 on the card,
+ * which axe-core caught. Sizing to the darker of the two grounds means one
+ * value works everywhere rather than one value with an exception.
+ *
+ * Dark mode is unchanged — #8A8A8A already measures 5.25:1 on the navy sheet
+ * and 5.90:1 on the near-black reveal. This was only ever a light-mode problem.
+ */
+// Text below 24px — 4.74:1 on white, 4.54:1 on the zinc-50 card.
+export const FAINT = 'text-[#737373] dark:text-[#8A8A8A]'
+// TEXT.title and above only — 3.19:1 on white, 3.06:1 on the card. L* 59.8
+// against the original 65.1, so the display line keeps most of its lightness.
+export const FAINT_DISPLAY = 'text-[#909090] dark:text-[#8A8A8A]'
 
 // Fixed ink for the always-dark Experiments & Lab section, which doesn't flip
 // with the theme — it is dark in both.
@@ -76,5 +105,6 @@ export const PROSE = [
   '[&_b]:font-medium [&_b]:text-[#292929] dark:[&_b]:text-[#F2F2F2]',
   '[&_blockquote]:my-6 [&_blockquote]:border-0 [&_blockquote]:p-0 [&_blockquote]:not-italic',
   '[&_blockquote]:text-[16px] [&_blockquote]:leading-relaxed [&_blockquote]:text-[#5D5D5D] dark:[&_blockquote]:text-[#B0B0B0]',
-  '[&_cite]:mt-2 [&_cite]:block [&_cite]:text-[15px] [&_cite]:not-italic [&_cite]:text-[#9E9E9E] dark:[&_cite]:text-[#8A8A8A]',
+  // 15px, so it takes the 4.5:1 value rather than the display one.
+  '[&_cite]:mt-2 [&_cite]:block [&_cite]:text-[15px] [&_cite]:not-italic [&_cite]:text-[#737373] dark:[&_cite]:text-[#8A8A8A]',
 ].join(' ')

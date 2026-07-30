@@ -1,7 +1,7 @@
 'use client'
 
 import { ArrowUpRight } from 'lucide-react'
-import { TEXT, INK, FAINT, ICON_NAV, BUTTON_RADIUS, CONTAINER } from './tokens'
+import { TEXT, INK, FAINT_DISPLAY, ICON_NAV, BUTTON_RADIUS, CONTAINER } from './tokens'
 import CaseStudyCards from './CaseStudyCards'
 
 // Both open in a new tab, so there's no `external` flag any more — it only
@@ -36,12 +36,15 @@ export default function Hero() {
           together. Now 96 above / 144 below — the break is the larger space. */}
       <div id="about" className={`${CONTAINER} relative mx-auto pb-36 pt-12 md:pt-16`}>
         <div className="max-w-[560px]">
-          {/* Name and role are the same 24px and sit flush as one stacked block.
-              Only colour separates them — the whole point of the scale. */}
+          {/* Name and role are the same 27px and sit flush as one stacked block.
+              Only colour separates them — the whole point of the scale.
+              FAINT_DISPLAY, not FAINT: at 27px this only owes the 3:1 large-text
+              bar, so it keeps its lightness, where the 4.5:1 value would darken
+              it needlessly and close the gap to the name above. */}
           <h1 className={`${TEXT.title} ${INK} font-bold leading-[1.25] tracking-tight`}>
             Tom Spencer
           </h1>
-          <p className={`${TEXT.title} ${FAINT} mb-8 font-normal leading-[1.25] tracking-tight`}>
+          <p className={`${TEXT.title} ${FAINT_DISPLAY} mb-8 font-normal leading-[1.25] tracking-tight`}>
             Senior Product Designer
           </p>
 
