@@ -216,11 +216,15 @@ export default function About() {
             </h2>
 
             <motion.div variants={stagger} className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              {/* Grid rows stretch both cards to the taller one's height, so with
+                  the shorter quote the attribution floated mid-card and the two
+                  names sat on different lines. flex + mt-auto on the figcaption
+                  pins both to the bottom edge, so they align across the pair. */}
               {TESTIMONIALS.map((t) => (
                 <motion.figure
                   key={t.name}
                   variants={fade}
-                  className={`${CARD_RADIUS} mb-0 border border-[#292929]/10 p-5 dark:border-white/10`}
+                  className={`${CARD_RADIUS} mb-0 flex h-full flex-col border border-[#292929]/10 p-5 dark:border-white/10`}
                 >
                   <blockquote
                     className={`${TEXT.base} ${MUTED} mb-3 border-0 p-0 not-italic leading-relaxed`}
@@ -229,7 +233,7 @@ export default function About() {
                   </blockquote>
                   {/* Name steps up to primary ink, role stays tertiary — the
                       attribution is the point now that these are real people. */}
-                  <figcaption>
+                  <figcaption className="mt-auto">
                     <span className={`${TEXT.sm} ${INK} block font-medium`}>{t.name}</span>
                     <span className={`${TEXT.sm} ${FAINT} block`}>{t.role}</span>
                   </figcaption>
@@ -256,11 +260,17 @@ export default function About() {
                 ground, so a ring and radius framed the whitespace rather than
                 the picture. */}
             <div>
+              {/* height is the file's real 529, not 600 — the wrong ratio made
+                  Next reserve a box 71px taller than the image, so the section
+                  shifted on load. sizes was missing entirely, so the browser had
+                  no basis to pick a candidate and fetched the 1200px original for
+                  a 327px slot on mobile. */}
               <Image
                 src="/aboutBanner.png"
-                alt="Outside of work"
+                alt="Tom hiking, travelling, and on a bridge"
                 width={1200}
-                height={600}
+                height={529}
+                sizes="(max-width: 768px) 100vw, 896px"
                 className="h-auto w-full object-cover"
               />
             </div>
