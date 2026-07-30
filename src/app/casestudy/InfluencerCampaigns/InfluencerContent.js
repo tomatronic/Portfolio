@@ -253,7 +253,7 @@ function CaseStudyContent() {
                 {/* Shipped in V1 */}
                 <div className="rounded-2xl bg-[#EDE7DD] p-6 dark:bg-slate-800/50">
                   <p className="mb-4 text-sm font-medium text-[#292929] dark:text-[#F2F2F2]">Shipped in V1</p>
-                  <ul className="space-y-2.5 text-[14px] font-normal text-[#5D5D5D] dark:text-[#B0B0B0]">
+                  <ul className="space-y-2.5 text-[16px] font-normal text-[#5D5D5D] dark:text-[#B0B0B0]">
                     <li className="flex items-start gap-2">
                       <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
                       <span>Campaign creation</span>
@@ -276,7 +276,7 @@ function CaseStudyContent() {
                 {/* Deferred to V2 */}
                 <div className="rounded-2xl bg-[#EDE7DD] p-6 dark:bg-slate-800/50">
                   <p className="mb-4 text-sm font-medium text-[#292929] dark:text-[#F2F2F2]">Deferred to V2 — genuinely useful, but not necessary to ship a complete story</p>
-                  <ul className="space-y-2.5 text-[14px] font-normal text-[#5D5D5D] dark:text-[#B0B0B0]">
+                  <ul className="space-y-2.5 text-[16px] font-normal text-[#5D5D5D] dark:text-[#B0B0B0]">
                     <li className="flex items-start gap-2">
                       <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400 dark:bg-slate-500" />
                       <span>In-app negotiation</span>

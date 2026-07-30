@@ -102,22 +102,24 @@ export default function Nav({ active = 'Home' }) {
   }, [burst])
 
   return (
-    // From 420px up: three zones, so the pill stays centred on the container
+    // From 480px up: three zones, so the pill stays centred on the container
     // axis regardless of how wide the side zones are — with justify-between it
     // would drift whenever left and right differ in width.
     //
-    // Below 420px: two rows, pill underneath. At 360px the pill needed 193.1px
-    // and the three-column grid could spare exactly 193, so it wrapped on a
-    // rounding error and Resume dropped to a second line inside the pill — a
-    // 150px-tall blob. Shaving gaps only moves that knife-edge; at 320px a 44px
-    // avatar, three text items and a 44px toggle genuinely do not fit on one
-    // line. A row of its own means the pill always has the full measure, and the
-    // break is a deliberate layout rather than a flex accident.
+    // Below 480px: two rows, pill underneath. Squeezed onto one row the pill
+    // wrapped internally and Resume dropped to a second line — one control
+    // becoming a two-line blob. A row of its own means it always has the full
+    // measure, and the break is a deliberate layout rather than a flex accident.
     //
-    // 420 rather than Tailwind's `sm`: the single row fits comfortably from
-    // ~400px, and holding the stacked layout to 640px would strand it across
-    // every large phone.
-    <nav className="relative z-50 grid grid-cols-2 items-center gap-x-4 gap-y-5 py-8 min-[420px]:grid-cols-[1fr_auto_1fr] min-[420px]:gap-y-0">
+    // 480 is set by measurement, not by Tailwind's breakpoints. On the 16px type
+    // scale the pill needs 259.3px, so one row needs 259.3 + 44 avatar + 44
+    // toggle + 32 grid gaps + 48 page padding = 428px. The threshold sits above
+    // that with headroom, and clear of 428/430 — both real iPhone widths, and a
+    // bad place to put a boundary. Every phone stacks; tablets up get one row.
+    //
+    // This moves with the type scale: it was 420 when the base was 14px. If the
+    // scale changes again, re-measure the pill rather than assuming.
+    <nav className="relative z-50 grid grid-cols-2 items-center gap-x-4 gap-y-5 py-8 min-[480px]:grid-cols-[1fr_auto_1fr] min-[480px]:gap-y-0">
       {/* Particles mount here, not on the inner span — that one is
           overflow-hidden to clip the avatar into a circle, which would clip the
           burst too. `relative` gives them a positioning context. */}
@@ -152,12 +154,12 @@ export default function Nav({ active = 'Home' }) {
         </span>
       </Link>
 
-      {/* Spans both columns on its own row below 420px, then returns to the
+      {/* Spans both columns on its own row below 480px, then returns to the
           middle column of the three-column grid. flex-wrap stays as a last-resort
           valve so an overflow can never force a horizontal scroll, which this
           repo bans — but with a full row to itself it no longer fires. */}
       <div
-        className={`${BUTTON_RADIUS} col-span-2 row-start-2 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 justify-self-center border border-[#292929]/12 bg-white px-7 py-3.5 dark:border-white/12 dark:bg-white/[0.04] min-[420px]:col-span-1 min-[420px]:col-start-2 min-[420px]:row-start-1`}
+        className={`${BUTTON_RADIUS} col-span-2 row-start-2 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 justify-self-center border border-[#292929]/12 bg-white px-7 py-3.5 dark:border-white/12 dark:bg-white/[0.04] min-[480px]:col-span-1 min-[480px]:col-start-2 min-[480px]:row-start-1`}
       >
         {ITEMS.map((item) => {
           const isActive = active === item.label
@@ -195,7 +197,7 @@ export default function Nav({ active = 'Home' }) {
       {/* Right zone — the theme toggle, moved here from the footer. Balances the
           avatar opposite it and keeps the grid's 1fr/auto/1fr symmetry, so the
           pill stays on the container's true centre. */}
-      <div className="col-start-2 row-start-1 justify-self-end min-[420px]:col-start-3">
+      <div className="col-start-2 row-start-1 justify-self-end min-[480px]:col-start-3">
         <ThemeToggle />
       </div>
     </nav>

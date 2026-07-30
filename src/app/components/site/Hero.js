@@ -52,7 +52,7 @@ export default function Hero() {
           {/* Written out in full rather than interpolated from TEXT/MUTED:
               Tailwind only emits classes it finds as complete literals in the
               source, so a runtime-assembled `[&>p]:${TEXT.base}` produces nothing. */}
-          <div className="mb-10 [&>p:last-child]:mb-0 [&>p]:text-[14px] [&>p]:leading-relaxed [&>p]:text-[#5D5D5D] dark:[&>p]:text-[#B0B0B0]">
+          <div className="mb-10 [&>p:last-child]:mb-0 [&>p]:text-[16px] [&>p]:leading-relaxed [&>p]:text-[#5D5D5D] dark:[&>p]:text-[#B0B0B0]">
             <p>
               Thirteen years designing software, currently at{' '}
               <InlineLink href="https://rakutenadvertising.com">

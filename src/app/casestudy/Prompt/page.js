@@ -43,7 +43,7 @@ function Prompt() {
                                     {/* data-keep opts this out of the body size — 24px is the
                                         scale's ceiling, so the stat leads on colour and weight
                                         rather than on a display size. */}
-                                    <p data-keep className="mb-1 text-[24px] font-medium tracking-tight text-accent-600 dark:text-accent-300">{stat}</p>
+                                    <p data-keep className="mb-1 text-[27px] font-medium tracking-tight text-accent-600 dark:text-accent-300">{stat}</p>
                                     <p className="mb-0 text-sm leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">{label}</p>
                                 </div>
                             ))}

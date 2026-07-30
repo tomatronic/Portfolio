@@ -131,7 +131,7 @@ export default function About() {
             <motion.div
               {...inView}
               variants={fade}
-              className="[&>p:last-child]:mb-0 [&>p]:mb-4 [&>p]:text-[14px] [&>p]:leading-relaxed [&>p]:text-[#5D5D5D] dark:[&>p]:text-[#B0B0B0]"
+              className="[&>p:last-child]:mb-0 [&>p]:mb-4 [&>p]:text-[16px] [&>p]:leading-relaxed [&>p]:text-[#5D5D5D] dark:[&>p]:text-[#B0B0B0]"
             >
               <p>
                 For the past 8 years at Rakuten Advertising, I&apos;ve worked on

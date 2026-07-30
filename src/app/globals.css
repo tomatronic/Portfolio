@@ -45,6 +45,14 @@ body {
   font-size: 1rem;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  /* Long unbroken tokens break rather than push the page sideways. Slashes are
+     not break opportunities in CSS, so "awareness/consideration/conversion" in
+     the ACJ body measured 273px inside a 208px column at 320px wide and forced
+     a horizontal scroll — which this repo bans. It overflowed its box on the
+     14px scale too, just not far enough to escape the card's padding. Inherited,
+     so it covers every text element, and it only engages for tokens that would
+     otherwise overflow. */
+  overflow-wrap: break-word;
 }
 
 /* Dark body colours in CSS, not only via PageBackground's post-mount effect.

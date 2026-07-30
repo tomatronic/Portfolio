@@ -1,21 +1,27 @@
 /**
- * Concept-route type + colour system.
+ * Site type + colour system.
  *
- * Scale is deliberately tiny — 12 / 13 / 14 / 24 only. Nothing else. Hierarchy
+ * Scale is deliberately tiny — 14 / 15 / 16 / 27 only. Nothing else. Hierarchy
  * comes from colour, not size, which is why there are three ink levels and only
  * one heading step.
  *
+ * Bumped from 12 / 13 / 14 / 24 in July 2026: the 14px body was reported as too
+ * small to read comfortably. Every step is the old value × 16/14, rounded to the
+ * nearest pixel, so the relationships between them are unchanged — only the
+ * whole scale moved up. 27 rather than 28 for the title keeps the title-to-body
+ * ratio (1.69) nearest the original 1.71.
+ *
  * The three greys are specified for the white sheet. The dark equivalents are
  * chosen to hold the same relationship against #0F1623 (dark-mode sheet) and
- * #050505 (the reveal section) while clearing WCAG AA at 12px.
+ * #050505 (the reveal section) while clearing WCAG AA at the smallest size.
  */
 
-// Type scale — the only sizes allowed on this route.
+// Type scale — the only sizes allowed.
 export const TEXT = {
-  xs: 'text-[12px]',
-  sm: 'text-[13px]',
-  base: 'text-[14px]',
-  title: 'text-[24px]',
+  xs: 'text-[14px]',
+  sm: 'text-[15px]',
+  base: 'text-[16px]',
+  title: 'text-[27px]',
 }
 
 // Ink levels. Light values are the specified hexes; dark values are their
@@ -61,14 +67,14 @@ export const CONTAINER = 'max-w-4xl'
  * in the source.
  */
 export const PROSE = [
-  '[&_h1]:text-[24px] [&_h1]:font-medium [&_h1]:leading-[1.35] [&_h1]:tracking-tight [&_h1]:text-[#292929] dark:[&_h1]:text-[#F2F2F2]',
-  '[&_h2]:text-[24px] [&_h2]:font-medium [&_h2]:leading-[1.25] [&_h2]:tracking-tight [&_h2]:text-[#292929] dark:[&_h2]:text-[#F2F2F2]',
-  '[&_h3]:text-[14px] [&_h3]:font-medium [&_h3]:tracking-tight [&_h3]:text-[#292929] dark:[&_h3]:text-[#F2F2F2]',
-  '[&_p:not([data-keep])]:text-[14px] [&_p:not([data-keep])]:leading-relaxed [&_p:not([data-keep])]:text-[#5D5D5D] dark:[&_p:not([data-keep])]:text-[#B0B0B0]',
-  '[&_li]:text-[14px] [&_li]:leading-relaxed [&_li]:text-[#5D5D5D] dark:[&_li]:text-[#B0B0B0]',
+  '[&_h1]:text-[27px] [&_h1]:font-medium [&_h1]:leading-[1.35] [&_h1]:tracking-tight [&_h1]:text-[#292929] dark:[&_h1]:text-[#F2F2F2]',
+  '[&_h2]:text-[27px] [&_h2]:font-medium [&_h2]:leading-[1.25] [&_h2]:tracking-tight [&_h2]:text-[#292929] dark:[&_h2]:text-[#F2F2F2]',
+  '[&_h3]:text-[16px] [&_h3]:font-medium [&_h3]:tracking-tight [&_h3]:text-[#292929] dark:[&_h3]:text-[#F2F2F2]',
+  '[&_p:not([data-keep])]:text-[16px] [&_p:not([data-keep])]:leading-relaxed [&_p:not([data-keep])]:text-[#5D5D5D] dark:[&_p:not([data-keep])]:text-[#B0B0B0]',
+  '[&_li]:text-[16px] [&_li]:leading-relaxed [&_li]:text-[#5D5D5D] dark:[&_li]:text-[#B0B0B0]',
   '[&_strong]:font-medium [&_strong]:text-[#292929] dark:[&_strong]:text-[#F2F2F2]',
   '[&_b]:font-medium [&_b]:text-[#292929] dark:[&_b]:text-[#F2F2F2]',
   '[&_blockquote]:my-6 [&_blockquote]:border-0 [&_blockquote]:p-0 [&_blockquote]:not-italic',
-  '[&_blockquote]:text-[14px] [&_blockquote]:leading-relaxed [&_blockquote]:text-[#5D5D5D] dark:[&_blockquote]:text-[#B0B0B0]',
-  '[&_cite]:mt-2 [&_cite]:block [&_cite]:text-[13px] [&_cite]:not-italic [&_cite]:text-[#9E9E9E] dark:[&_cite]:text-[#8A8A8A]',
+  '[&_blockquote]:text-[16px] [&_blockquote]:leading-relaxed [&_blockquote]:text-[#5D5D5D] dark:[&_blockquote]:text-[#B0B0B0]',
+  '[&_cite]:mt-2 [&_cite]:block [&_cite]:text-[15px] [&_cite]:not-italic [&_cite]:text-[#9E9E9E] dark:[&_cite]:text-[#8A8A8A]',
 ].join(' ')
