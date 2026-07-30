@@ -63,7 +63,11 @@ function CompactCard({ card }) {
     <Link
       href={card.href}
       replace
-      className="group relative flex w-full items-center gap-6 rounded-2xl border border-[#C8BEB0] dark:border-[#2A3A4A] px-5 py-8 transition-shadow duration-200 hover:shadow-[0_4px_24px_rgba(184,64,16,0.10)] dark:hover:shadow-[0_4px_24px_rgba(238,159,104,0.12)]"
+      // Purple lift on hover, matching components/site/CaseStudyCards.js so the
+      // cards behave the same wherever they appear. Blur and alpha are scaled
+      // down from the home tiles: the same 44px/0.28 under a ~110px-tall row
+      // reads as a glow rather than a lift.
+      className="group relative flex w-full items-center gap-6 rounded-2xl border border-[#C8BEB0] dark:border-[#2A3A4A] px-5 py-8 transition-shadow duration-200 hover:shadow-[0_10px_32px_rgba(88,28,160,0.20)] dark:hover:shadow-[0_12px_36px_rgba(155,105,240,0.42)]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
