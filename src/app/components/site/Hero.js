@@ -58,12 +58,12 @@ export default function Hero() {
               <InlineLink href="https://rakutenadvertising.com">
                 Rakuten Advertising
               </InlineLink>{' '}
-              — enterprise tools used by advertisers, publishers, analysts, and
+              I design enterprise tools used by advertisers, publishers, analysts, and
               account teams, built on large datasets, detailed reporting, and
               multi-step workflows.
             </p>
             <p>
-              My approach prioritises outcome: fewer support tickets, faster
+              I design for outcomes: fewer support tickets, faster
               workflows, and happier, more decisive users.
             </p>
             <p>
