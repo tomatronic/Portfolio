@@ -53,6 +53,27 @@ function CaseStudyContent() {
             </div>
           </div>
 
+          {/* Headline outcomes — velocity, not adoption. Every figure here is
+              already stated in the Outcome section further down; this row just
+              promotes them to the top. */}
+          <div className="mb-12 grid grid-cols-1 gap-8 rounded-2xl bg-[#EDE7DD] p-8 sm:grid-cols-3 md:p-10 dark:bg-slate-800/50">
+            {[
+              { stat: '5 days', label: 'from brief to a complete clickable prototype' },
+              { stat: 'Day 6', label: 'prospect demo, and the buy-in that came with it' },
+              { stat: '5 months', label: 'concept to production, September 2025 to February 2026' },
+            ].map(({ stat, label }) => (
+              <div key={stat}>
+                {/* data-keep opts this out of the body size — 27px is the
+                    scale's ceiling, so the stat leads on colour and weight
+                    rather than on a display size. */}
+                <p data-keep className="mb-1 text-[27px] font-medium tracking-tight text-accent-600 dark:text-accent-300">{stat}</p>
+                {/* MUTED, not FAINT: these sit on the cream #EDE7DD card, where #737373
+                    measures 3.85:1. #5D5D5D is 5.35:1 on the same ground. */}
+                <p data-keep className="mb-0 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">{label}</p>
+              </div>
+            ))}
+          </div>
+
           {/* Content */}
           <div className="grid auto-rows-auto grid-cols-1 gap-5 md:grid-cols-4 md:gap-10">
             <div className="col-span-4 mb-12">
