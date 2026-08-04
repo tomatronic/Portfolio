@@ -1,9 +1,7 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
 import { useTheme } from '../ThemeProvider'
 import Nav from './Nav'
 import Footer from './Footer'
@@ -13,9 +11,7 @@ import {
   INK,
   MUTED,
   FAINT,
-  ICON_NAV,
   CARD_RADIUS,
-  BUTTON_RADIUS,
   CONTAINER,
 } from './tokens'
 
@@ -321,23 +317,6 @@ export default function About({ running = null }) {
             </div>
           </motion.div>
 
-          {/* ── Closing CTA ──────────────────────────────────────── */}
-          <motion.div {...inView} variants={fade} className="mt-24">
-            <p className={`${TEXT.base} ${MUTED} mb-4`}>
-              Want to see how this plays out in practice?
-            </p>
-            <Link
-              href="/#work"
-              className={`${TEXT.base} ${BUTTON_RADIUS} group inline-flex items-center gap-2 bg-[#292929] px-5 py-3 font-medium text-white transition-[background-color,color,transform] hover:bg-accent-600 active:scale-[0.96] dark:bg-[#F2F2F2] dark:text-[#292929] dark:hover:bg-accent-400`}
-            >
-              See my work
-              <ArrowRight
-                size={ICON_NAV}
-                strokeWidth={2}
-                className="transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transition-none"
-              />
-            </Link>
-          </motion.div>
         </div>
       </div>
 
