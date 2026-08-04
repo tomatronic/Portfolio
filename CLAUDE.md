@@ -287,11 +287,59 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 Links row: "More about me →" (text link) + LinkedIn icon link (`https://www.linkedin.com/in/thomas-spencer/`). Both are inline-flex items in a flex row. LinkedIn link uses `<Linkedin size={14} />` from lucide-react.
 
 ## About page
-`src/app/about/page.js`
+`src/app/about/page.js` → `components/site/About.js`
 
-- Two cards, both `rounded-4xl bg-zinc-50 dark:bg-slate-900 p-8 md:p-12 lg:p-16`: a bio card (headline + body copy + resume/LinkedIn links, left; photo `/bio.png`, right) and a "What I do outside of work" card (Travelling + Hiking & running blurbs, `/aboutBanner.png` banner image below)
-- h1: `text-3xl md:text-4xl` (30px → 36px, matches the shared h1 default — see Typographic scale)
-- No philosophy cards or hobbies gallery exist in the current code (both were removed or never built past an earlier draft this doc had described) — `/public/hobbies/travelling-1.png` is a real, unused photo sitting there if a hobbies section ever gets built
+Sections, in order: lead + bio photo, "Where I add value" (5 cards), "What
+colleagues say" (2 testimonials), "Outside of work", closing CTA. All cards use
+the shared outlined treatment — `CARD_RADIUS` + `border-[#292929]/10
+dark:border-white/10`, no fill.
+
+### Outside of work (rebuilt 2026-07-31)
+Two-column on `lg`: copy card and a Running stat card stacked left,
+`components/site/ImageWall.js` right. Both left cards are `flex-1` so the column
+fills the photo area's height and all three blocks sit on the same 12px gutter;
+the stat card is additionally `justify-between`, which drops the figure to its
+foot however tall it ends up.
+
+- **`ImageWall`** is nine photos scattered over the area, each its own Framer
+  `drag` with `dragConstraints={areaRef}`, so they can be pushed around and
+  re-stacked but never leave the block. `onPointerDown` raises the grabbed photo
+  above the resting stack (`LIFT_FROM`, an incrementing counter) — on pointer
+  down rather than drag start, so it comes forward the instant it's grabbed.
+  - Placement, size, rotation and stack order are **hand-authored in `PHOTOS`,
+    not randomised**. Runtime random would differ between the server and client
+    renders and would reshuffle on every navigation.
+  - Coordinates are px against a **442×520** area — the width the right column
+    settles at once the page hits `lg` and the container caps at `max-w-4xl`.
+    That is why the scatter is gated on `lg` as well as pointer type: below it
+    the area goes full-width and fixed coordinates would leave the right bare.
+  - **Two layouts, switched on `(pointer: fine)` and `(min-width: 1024px)`.**
+    Anything else — touch, pen, narrow desktop — gets a plain 2-column grid with
+    no drag: dragging by finger fights the page's vertical scroll, and the
+    scatter hides too much of each photo at phone width. Both queries are read
+    in a layout effect, so the swap lands before paint and mouse users never see
+    the grid flash.
+  - Rotation means a photo can rest ~10px outside the area (Framer clamps the
+    layout box, not the rotated one). Deliberate — a pile spilling its notional
+    box is the point.
+  - Photos are dummy gradients at `/public/outside/dummy-1..9.jpg` — replace the
+    `src`/`width`/`height` in `PHOTOS`.
+- **Running stat** comes from `src/app/lib/strava.js`. `FALLBACK_KM` in
+  `About.js` is a placeholder (1,234) used whenever the API returns nothing —
+  **it is not a real figure**; wire Strava up or replace it before deploying.
+- `/aboutBanner.png` is no longer referenced (the wall replaced it). Still in
+  `public/`.
+
+### Strava
+`lib/strava.js`, called from the About route with `revalidate = 86400`, so the
+page stays static and refreshes once a day. Needs `STRAVA_CLIENT_ID`,
+`STRAVA_CLIENT_SECRET`, `STRAVA_REFRESH_TOKEN`; with any missing it returns
+`null` and the fallback renders. There is no rolling-365-day endpoint — the
+`/athletes/{id}/stats` totals are 4-week / year-to-date / all-time only, and YTD
+resets in January — so it pages `/athlete/activities` with an `after` timestamp
+and sums locally. One-off instructions for minting the refresh token are in a
+comment at the foot of that file. Strava's brand guidelines require visible
+attribution, hence the "via Strava" link on the stat card.
 
 ## Typographic scale
 

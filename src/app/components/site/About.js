@@ -7,6 +7,7 @@ import { ArrowRight } from 'lucide-react'
 import { useTheme } from '../ThemeProvider'
 import Nav from './Nav'
 import Footer from './Footer'
+import ImageWall from './ImageWall'
 import {
   TEXT,
   INK,
@@ -78,7 +79,49 @@ const TESTIMONIALS = [
   },
 ]
 
-export default function About() {
+/**
+ * Placeholder distance, used only until the Strava credentials are set — see
+ * `lib/strava.js`. Replace it with a real figure or wire Strava up before this
+ * goes live; it is a made-up number, not Tom's.
+ */
+const FALLBACK_KM = 1234
+
+function RunningCard({ km, live }) {
+  return (
+    // flex-1 + justify-between: the card grows to take its share of the column,
+    // and the figure sits at the foot of whatever height that turns out to be.
+    <div
+      className={`${CARD_RADIUS} flex flex-1 flex-col justify-between border border-[#292929]/10 p-6 md:p-8 dark:border-white/10`}
+    >
+      <div className="mb-8 flex items-baseline justify-between gap-3">
+        <p className={`${TEXT.xs} ${FAINT} mb-0 font-medium`}>Running</p>
+        {live && (
+          <a
+            href="https://www.strava.com"
+            target="_blank"
+            rel="noreferrer"
+            className={`${TEXT.xs} ${FAINT} transition-colors hover:text-[#292929] dark:hover:text-[#F2F2F2]`}
+          >
+            via Strava
+          </a>
+        )}
+      </div>
+      <div>
+        <p
+          className={`${TEXT.title} ${INK} mb-1 font-medium leading-none tracking-tight tabular-nums`}
+        >
+          {km.toLocaleString('en-GB')}
+          <span className={`${TEXT.base} ${FAINT} ml-1.5 font-normal`}>km</span>
+        </p>
+        <p className={`${TEXT.xs} ${FAINT} mb-0`}>ran in the last 365 days</p>
+      </div>
+    </div>
+  )
+}
+
+export default function About({ running = null }) {
+  const runningKm = running?.km ?? FALLBACK_KM
+  const runningIsLive = Boolean(running)
   const { theme } = useTheme()
   const dark = theme === 'dark'
   const prefersReducedMotion = useReducedMotion()
@@ -247,32 +290,34 @@ export default function About() {
             <h2 className={`${TEXT.title} ${INK} mb-6 font-medium leading-[1.25] tracking-tight`}>
               Outside of work
             </h2>
-            <p
-              className={`${TEXT.base} mb-8 max-w-[62ch] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]`}
-            >
-              I run, hike, and travel, not because it makes me a better designer in
-              any neat, quotable way, but because switching off completely is the
-              only thing that actually works. Some of my clearest thinking on hard
-              UX problems has happened somewhere between kilometre 8 and 12.
-            </p>
 
-            {/* No card frame — the banner is a flattened collage on a white
-                ground, so a ring and radius framed the whitespace rather than
-                the picture. */}
-            <div>
-              {/* height is the file's real 529, not 600 — the wrong ratio made
-                  Next reserve a box 71px taller than the image, so the section
-                  shifted on load. sizes was missing entirely, so the browser had
-                  no basis to pick a candidate and fetched the 1200px original for
-                  a 327px slot on mobile. */}
-              <Image
-                src="/aboutBanner.png"
-                alt="Tom hiking, travelling, and on a bridge"
-                width={1200}
-                height={529}
-                sizes="(max-width: 768px) 100vw, 896px"
-                className="h-auto w-full object-cover"
-              />
+            {/* Copy and stat stack left, photo wall right. The left column is a
+                flex column so the running card can be pinned to the bottom with
+                mt-auto and its baseline lines up with the foot of the wall. */}
+            <div className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2">
+              <div className="flex flex-col gap-3">
+                <div
+                  className={`${CARD_RADIUS} flex-1 border border-[#292929]/10 p-6 md:p-8 dark:border-white/10`}
+                >
+                  <p
+                    className={`${TEXT.base} mb-4 leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]`}
+                  >
+                    I enjoy being outside. I find it helps me mentally unload, and it
+                    throws up all sorts of thoughts and ideas along the way.
+                  </p>
+                  <p
+                    className={`${TEXT.base} mb-0 leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]`}
+                  >
+                    In particular I enjoy running, hiking and seeing the world —
+                    travelling to places and trying my hardest to experience the real
+                    culture of somewhere rather than the version put on for visitors.
+                  </p>
+                </div>
+
+                <RunningCard km={runningKm} live={runningIsLive} />
+              </div>
+
+              <ImageWall />
             </div>
           </motion.div>
 
