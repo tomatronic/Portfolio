@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { CARD_RADIUS, FAINT, TEXT } from './tokens'
+import { CARD_RADIUS } from './tokens'
 
 /**
  * Scattered, individually draggable photos.
@@ -136,16 +136,6 @@ export default function ImageWall() {
           />
         </motion.div>
       ))}
-
-
-      {/* Affordance. Above every photo, and takes no pointer events so it can
-          never eat the first drag. */}
-      <span
-        aria-hidden="true"
-        className={`${TEXT.xs} ${FAINT} pointer-events-none absolute bottom-0 right-0 z-[100] rounded-full bg-white/70 px-2 py-0.5 backdrop-blur-sm dark:bg-[#0F1623]/70`}
-      >
-        Drag the photos
-      </span>
     </div>
   )
 }
