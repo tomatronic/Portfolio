@@ -10,25 +10,33 @@ See "Design direction overhaul" below — that is the live design. Everything in
 - **Palette**: amber `#B84010` accent retained for active/emphasis; ink scale is now `#292929` / `#5D5D5D` / `#9E9E9E`. Warm cream is no longer used anywhere on `/` or `/about`.
 - Older hero experiments (SolarHero solar-arc chart, `/testHome`, `hero.safe.js`/`hero.original.js`) were deleted in June 2026; the noise/gradient hero this replaced is in git history (safe baseline commit `ce8b3de`).
 
-### Case study stat rows (2026-08-04)
-Prompt and InfluencerCampaigns each open with a cream `#EDE7DD` card holding
-three headline figures, sitting between the header grid and the content grid.
-The markup is identical in both — copy it rather than re-deriving:
-`sm:grid-cols-3`, stat at `text-[27px] font-medium text-accent-600
-dark:text-accent-300`, label at `text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]`.
-Both `<p>`s need `data-keep` to opt out of `PROSE`'s body sizing.
-- **Label ink is `#5D5D5D` (MUTED), not `#737373` (FAINT)** — on the cream
-  ground `#737373` measures 3.85:1 and fails AA. `#5D5D5D` is 5.35:1.
-- **27px is the scale's ceiling**, so the stat leads on colour and weight
-  rather than on a display size. Don't introduce a larger step for it.
-- Figures stay in the Outcome section as well — the row promotes them, it
-  doesn't move them. Prompt repeats its 90%/$10M in Outcome prose too.
-- **ACJ deliberately has no stat row** (Tom's call, 2026-08-04). Its Outcome and
-  Impact are qualitative and the only hard number is the 8-month timeline; a row
-  padded out with "sole designer" would read as filler. Don't add one unless a
-  real adoption figure turns up, and never promote the "40% of awareness-phase
-  conversions" line — it's an `e.g.` of what a publisher *could* claim, not a
-  measured result.
+### Case study stat rows — Prompt only (2026-08-04)
+**Only Prompt has one, and that is settled.** It opens with a cream `#EDE7DD`
+card of three headline figures between the header grid and the content grid.
+
+Both other case studies were considered and **both were rejected** — don't
+re-propose either:
+- **InfluencerCampaigns**: a row was built from its three timeline figures
+  (5 days / Day 6 / 5 months) and **removed the same day** — Tom's call. The
+  numbers are a schedule, not outcomes, and framed as headline metrics they
+  didn't make sense; they read correctly in the Outcome list where they sit
+  as narrative. The row itself is in `c4c39ab` if it's ever wanted back.
+- **ACJ**: Outcome and Impact are qualitative and the only hard number is the
+  8-month timeline; a row padded out with "sole designer" would read as filler.
+  Don't add one unless a real adoption figure turns up, and never promote the
+  "40% of awareness-phase conversions" line — it's an `e.g.` of what a
+  publisher *could* claim, not a measured result.
+
+The pattern that emerged: a stat row earns its place only when the figures are
+**measured outcomes**. Timelines and scope facts belong in Outcome prose.
+
+If a third case study ever does get one, copy Prompt's markup rather than
+re-deriving it: `sm:grid-cols-3`, stat at `text-[27px] font-medium
+text-accent-600 dark:text-accent-300`, label at `text-[15px] text-[#5D5D5D]
+dark:text-[#B0B0B0]`. Both `<p>`s need `data-keep` to opt out of `PROSE`'s body
+sizing. Label ink is `#5D5D5D` (MUTED), **not** `#737373` (FAINT) — on the cream
+ground `#737373` measures 3.85:1 and fails AA, `#5D5D5D` is 5.35:1. 27px is the
+scale's ceiling, so the stat leads on colour and weight, not a display size.
 
 ### Design direction overhaul — new home + about promoted live (2026-07-29)
 The `/concept-9f2k` exploration was adopted as the site's real design and the sandbox route was then removed; its components live in `src/app/components/site/`. `/` and `/about` now render `ConceptHome` / `ConceptAbout`; the new nav and footer are global via `components/SiteChrome.js`; case study **bodies** keep their own layout but were brought onto the new type scale.
@@ -289,7 +297,7 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 ```
 
 **Known content gaps (not code issues):**
-- ~~InfluencerCampaigns: outcome/adoption metrics missing~~ — **closed 2026-08-04.** Adoption metrics don't exist and aren't needed: the story is velocity, and the three timeline figures now lead the page as a stat row (see "Case study stat rows" above). Hero image is `/influencerHero.png`, already real.
+- ~~InfluencerCampaigns: outcome/adoption metrics missing~~ — **closed 2026-08-04.** Adoption metrics don't exist. The page stands on its narrative instead; a stat row built from its timeline figures was tried and rejected (see "Case study stat rows" above). Hero image is `/influencerHero.png`, already real.
 - Rakuten: Solution section is one sentence — needs expanding; no outcome metrics (lower priority now the case study is hidden — see Case study cards section)
 - ACJ: "35 DAU" metric needs context (total eligible users)
 - Prompt: `Prompt-userflow.png` (customer journey map) added to Approach section 2026-05-26. Still missing: before/after comparison copy + section header for `Prompt-old2.png`
