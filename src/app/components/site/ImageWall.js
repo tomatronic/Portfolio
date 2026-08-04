@@ -14,31 +14,34 @@ import { CARD_RADIUS, FAINT, TEXT } from './tokens'
  * runtime: random values would differ between the server and client render, and
  * would reshuffle on every navigation.
  *
- * Positions are in px against a ~442×520 area — the width the right-hand column
+ * Positions are in px against a ~442×430 area — the width the right-hand column
  * settles at once the page hits `lg` and the container caps at max-w-4xl. That
  * is why the scatter is gated on `lg` as well as pointer type; below it the area
  * goes full-width and the fixed coordinates would leave the right side bare.
+ *
+ * The layout is authored for exactly the seven photos below. Adding an eighth
+ * means re-authoring the coordinates, not appending to the array — seven tiles
+ * spread over the old 520px-tall frame left visible holes, which is why the
+ * frame came down to 430.
  */
 
 // The scatter's reference frame: coordinates below are authored against a
-// 442×520 area, and this is the floor that keeps it that tall.
-const AREA_H = 520
+// 442×430 area, and this is the floor that keeps it that tall.
+const AREA_H = 430
 
 // left/top/width in px; rotate in degrees; z is the resting stack order.
 // Aspect comes from width/height, as with any next/image.
 const PHOTOS = [
-  { src: '/outside/glendalough-boulder.jpg', alt: 'Tom standing on a boulder in the Glendalough valley, Wicklow', width: 800, height: 1000, left: 8, top: 14, w: 150, rotate: -6, z: 4 },
-  { src: '/outside/fuji-dusk.jpg', alt: 'Mount Fuji at dusk, seen across the lake', width: 1000, height: 800, left: 175, top: 6, w: 180, rotate: 4, z: 6 },
-  { src: '/outside/seoul-gyeongbokgung.jpg', alt: 'Tom and his partner at Gyeongbokgung Palace, Seoul', width: 900, height: 900, left: 300, top: 120, w: 140, rotate: -3, z: 5 },
-  { src: '/outside/seven-sisters.jpg', alt: 'The Seven Sisters cliffs and the coastguard cottages at Cuckmere Haven, Sussex', width: 1000, height: 800, left: 20, top: 210, w: 170, rotate: 5, z: 7 },
-  { src: '/outside/kinkakuji.jpg', alt: 'Kinkaku-ji, the Golden Pavilion, reflected in its pond in Kyoto', width: 800, height: 1000, left: 155, top: 175, w: 145, rotate: -8, z: 3 },
-  { src: '/outside/glendalough-lake.jpg', alt: 'The Upper Lake at Glendalough, seen from the ridge above', width: 900, height: 900, left: 265, top: 275, w: 155, rotate: 6, z: 8 },
-  { src: '/outside/south-downs-walk.jpg', alt: 'A group walking the South Downs with dogs on a summer afternoon', width: 1000, height: 800, left: 10, top: 370, w: 165, rotate: -4, z: 6 },
-  { src: '/outside/dummy-8.jpg', alt: 'Placeholder photo 8', width: 1000, height: 1250, left: 185, top: 330, w: 150, rotate: 3, z: 9 },
-  { src: '/outside/dummy-9.jpg', alt: 'Placeholder photo 9', width: 1000, height: 1000, left: 300, top: 20, w: 130, rotate: -7, z: 2 },
+  { src: '/outside/fuji-dusk.jpg', alt: 'Mount Fuji at dusk, seen across the lake', width: 1000, height: 800, left: 0, top: 8, w: 180, rotate: 4, z: 4 },
+  { src: '/outside/seoul-gyeongbokgung.jpg', alt: 'Tom and his partner at Gyeongbokgung Palace, Seoul', width: 900, height: 900, left: 158, top: 0, w: 140, rotate: -3, z: 3 },
+  { src: '/outside/glendalough-boulder.jpg', alt: 'Tom standing on a boulder in the Glendalough valley, Wicklow', width: 800, height: 1000, left: 290, top: 22, w: 150, rotate: -6, z: 6 },
+  { src: '/outside/kinkakuji.jpg', alt: 'Kinkaku-ji, the Golden Pavilion, reflected in its pond in Kyoto', width: 800, height: 1000, left: 12, top: 138, w: 145, rotate: 5, z: 5 },
+  { src: '/outside/glendalough-lake.jpg', alt: 'The Upper Lake at Glendalough, seen from the ridge above', width: 900, height: 900, left: 168, top: 152, w: 155, rotate: -8, z: 7 },
+  { src: '/outside/seven-sisters.jpg', alt: 'The Seven Sisters cliffs and the coastguard cottages at Cuckmere Haven, Sussex', width: 1000, height: 800, left: 258, top: 258, w: 170, rotate: 6, z: 2 },
+  { src: '/outside/south-downs-walk.jpg', alt: 'A group walking the South Downs with dogs on a summer afternoon', width: 1000, height: 800, left: 40, top: 296, w: 165, rotate: -4, z: 8 },
 ]
 
-// Dragged photos are raised above the resting range, which tops out at 9.
+// Dragged photos are raised above the resting range, which tops out at 8.
 const LIFT_FROM = 10
 
 // The server can't know the pointer type or, on first paint, the viewport.
