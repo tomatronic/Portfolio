@@ -132,7 +132,8 @@ export async function getRunningTotals() {
  * `activity:read_all` includes private activities. Use `activity:read` instead
  * if only public runs should count.
  *
- * Strava's brand guidelines require visible attribution wherever their data is
- * shown — the About page carries the official "Powered by Strava" logo for that
- * reason (`components/site/PoweredByStrava.js`).
+ * Note: Strava's brand guidelines require visible attribution wherever their
+ * data is shown. The About page carries none — a "via Strava" link and then the
+ * official "Powered by Strava" logo were both tried and removed on 2026-08-05.
+ * Tom's call; see CLAUDE.md's Strava section before re-adding either.
  */

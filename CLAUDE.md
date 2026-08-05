@@ -368,33 +368,27 @@ resets in January — so it pages `/athlete/activities` with an `after` timestam
 and sums locally. One-off instructions for minting the refresh token are in a
 comment at the foot of that file.
 
-Strava's brand guidelines require visible attribution, which the stat card
-carries as the official **"Powered by Strava"** horizontal logo at its foot,
-12px tall. It replaced a plain "via Strava" text link in the card's header row,
-2026-08-05.
+**The card currently carries no attribution, and that is Tom's call, not an
+oversight.** Two forms were tried and both removed on 2026-08-05:
+- a plain "via Strava" text link in the card's header row (the original);
+- the official **"Powered by Strava"** logo at the card's foot, 12px tall, from
+  Strava's API asset pack. Built at `components/site/PoweredByStrava.js`
+  (deleted; recover from `43cf760`). Notes if it ever comes back: the orange
+  file is **two-tone** — "POWERED BY" black, wordmark `#FC5200` — so dark mode
+  needs the black half bound to `currentColor` to flip white, since Strava ship
+  no orange-on-dark variant. Orange, black and white are the only sanctioned
+  colours; don't tint it into the site's ink scale or drop its resting opacity.
+  It was briefly linked to `strava.com/athletes/50591363`, which was removed
+  because Strava gates profiles behind a login wall — **don't re-add that link.**
 
-The artwork is inlined in `components/site/PoweredByStrava.js`, straight from
-Strava's API asset pack (`api_logo_pwrdBy_strava_horiz_orange.svg`). It is
-**two-tone**: "POWERED BY" black, the STRAVA wordmark `#FC5200`. Light mode is
-pixel-identical to the shipped file; the one adaptation is dark mode, where the
-"POWERED BY" half is bound to `currentColor` so it can flip to white — black on
-the navy is unreadable and Strava ship no orange-on-dark variant. **Orange,
-black and white are the only three sanctioned colours** — don't tint it into
-the site's ink scale and don't drop its resting opacity, which amounts to the
-same thing. The orange measures 3.29:1 on white and 5.46:1 on the navy;
-logotypes are exempt from WCAG 1.4.3, and the "POWERED BY" half carries the
-legibility either way.
-
-**It is deliberately not a link.** It pointed at Tom's athlete page
-(`strava.com/athletes/50591363`) for about an hour on 2026-08-05 before that was
-removed — Strava gates profiles behind a login wall, so signed-out visitors only
-ever got a "Log in to see Tom" prompt. Don't re-add the link.
-
-The badge renders **only when the figure is live**, on the same reasoning as the
-text link it replaced: `FALLBACK_KM` isn't Strava's data, so attributing it to
-them would be a false claim. It adds ~28px to the card, which pushes the left
-column past the photo wall's fixed 430px area — the columns still stretch to
-match, so the overhang shows as empty space under the wall, not misalignment.
+Two consequences to be aware of rather than fix unprompted:
+- Strava's guidelines require visible attribution wherever their data appears.
+  If it's ever wanted back in the least obtrusive form, their guidelines
+  explicitly permit **plain text** — the exact phrase "Powered by Strava" or
+  "Compatible with Strava" — which would sit in `FAINT` ink like any caption.
+- The attribution used to render only when the figure was live, so it doubled as
+  the one visual tell that `FALLBACK_KM` had fired. With it gone the fallback is
+  indistinguishable from a real figure. See the fallback note below.
 
 ## Typographic scale
 

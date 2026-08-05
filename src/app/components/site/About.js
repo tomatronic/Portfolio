@@ -6,7 +6,6 @@ import { useTheme } from '../ThemeProvider'
 import Nav from './Nav'
 import Footer from './Footer'
 import ImageWall from './ImageWall'
-import PoweredByStrava from './PoweredByStrava'
 import {
   TEXT,
   INK,
@@ -83,7 +82,7 @@ const TESTIMONIALS = [
  */
 const FALLBACK_KM = 1234
 
-function RunningCard({ km, live }) {
+function RunningCard({ km }) {
   return (
     // flex-1 + justify-between: the card grows to take its share of the column,
     // and the figure sits at the foot of whatever height that turns out to be.
@@ -99,11 +98,6 @@ function RunningCard({ km, live }) {
           <span className={`${TEXT.base} ${FAINT} ml-1.5 font-normal`}>km</span>
         </p>
         <p className={`${TEXT.xs} ${FAINT} mb-0`}>ran in the last 365 days</p>
-        {/* Only shown against a live figure — the fallback isn't Strava's data,
-            so attributing it to them would be a false claim. Not a link: it
-            used to point at Tom's athlete page, but Strava gates profiles
-            behind a login wall, so signed-out visitors only got a prompt. */}
-        {live && <PoweredByStrava className="mt-4 block h-3 w-auto text-black dark:text-white" />}
       </div>
     </div>
   )
@@ -111,7 +105,6 @@ function RunningCard({ km, live }) {
 
 export default function About({ running = null }) {
   const runningKm = running?.km ?? FALLBACK_KM
-  const runningIsLive = Boolean(running)
   const { theme } = useTheme()
   const dark = theme === 'dark'
   const prefersReducedMotion = useReducedMotion()
@@ -304,7 +297,7 @@ export default function About({ running = null }) {
                   </p>
                 </div>
 
-                <RunningCard km={runningKm} live={runningIsLive} />
+                <RunningCard km={runningKm} />
               </div>
 
               <ImageWall />
