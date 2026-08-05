@@ -6,6 +6,7 @@ import { useTheme } from '../ThemeProvider'
 import Nav from './Nav'
 import Footer from './Footer'
 import ImageWall from './ImageWall'
+import PoweredByStrava from './PoweredByStrava'
 import {
   TEXT,
   INK,
@@ -89,19 +90,7 @@ function RunningCard({ km, live }) {
     <div
       className={`${CARD_RADIUS} flex flex-1 flex-col justify-between border border-[#292929]/10 p-6 md:p-8 dark:border-white/10`}
     >
-      <div className="mb-8 flex items-baseline justify-between gap-3">
-        <p className={`${TEXT.xs} ${FAINT} mb-0 font-medium`}>Running</p>
-        {live && (
-          <a
-            href="https://www.strava.com"
-            target="_blank"
-            rel="noreferrer"
-            className={`${TEXT.xs} ${FAINT} transition-colors hover:text-[#292929] dark:hover:text-[#F2F2F2]`}
-          >
-            via Strava
-          </a>
-        )}
-      </div>
+      <p className={`${TEXT.xs} ${FAINT} mb-8 font-medium`}>Running</p>
       <div>
         <p
           className={`${TEXT.title} ${INK} mb-1 font-medium leading-none tracking-tight tabular-nums`}
@@ -110,6 +99,11 @@ function RunningCard({ km, live }) {
           <span className={`${TEXT.base} ${FAINT} ml-1.5 font-normal`}>km</span>
         </p>
         <p className={`${TEXT.xs} ${FAINT} mb-0`}>ran in the last 365 days</p>
+        {/* Only shown against a live figure — the fallback isn't Strava's data,
+            so attributing it to them would be a false claim. Not a link: it
+            used to point at Tom's athlete page, but Strava gates profiles
+            behind a login wall, so signed-out visitors only got a prompt. */}
+        {live && <PoweredByStrava className="mt-4 block h-3 w-auto text-black dark:text-white" />}
       </div>
     </div>
   )

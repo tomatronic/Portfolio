@@ -133,5 +133,6 @@ export async function getRunningTotals() {
  * if only public runs should count.
  *
  * Strava's brand guidelines require visible attribution wherever their data is
- * shown — the About page carries a "via Strava" link for that reason.
+ * shown — the About page carries the official "Powered by Strava" logo for that
+ * reason (`components/site/PoweredByStrava.js`).
  */

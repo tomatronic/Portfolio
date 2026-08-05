@@ -366,8 +366,35 @@ page stays static and refreshes once a day. Needs `STRAVA_CLIENT_ID`,
 `/athletes/{id}/stats` totals are 4-week / year-to-date / all-time only, and YTD
 resets in January — so it pages `/athlete/activities` with an `after` timestamp
 and sums locally. One-off instructions for minting the refresh token are in a
-comment at the foot of that file. Strava's brand guidelines require visible
-attribution, hence the "via Strava" link on the stat card.
+comment at the foot of that file.
+
+Strava's brand guidelines require visible attribution, which the stat card
+carries as the official **"Powered by Strava"** horizontal logo at its foot,
+12px tall. It replaced a plain "via Strava" text link in the card's header row,
+2026-08-05.
+
+The artwork is inlined in `components/site/PoweredByStrava.js`, straight from
+Strava's API asset pack (`api_logo_pwrdBy_strava_horiz_orange.svg`). It is
+**two-tone**: "POWERED BY" black, the STRAVA wordmark `#FC5200`. Light mode is
+pixel-identical to the shipped file; the one adaptation is dark mode, where the
+"POWERED BY" half is bound to `currentColor` so it can flip to white — black on
+the navy is unreadable and Strava ship no orange-on-dark variant. **Orange,
+black and white are the only three sanctioned colours** — don't tint it into
+the site's ink scale and don't drop its resting opacity, which amounts to the
+same thing. The orange measures 3.29:1 on white and 5.46:1 on the navy;
+logotypes are exempt from WCAG 1.4.3, and the "POWERED BY" half carries the
+legibility either way.
+
+**It is deliberately not a link.** It pointed at Tom's athlete page
+(`strava.com/athletes/50591363`) for about an hour on 2026-08-05 before that was
+removed — Strava gates profiles behind a login wall, so signed-out visitors only
+ever got a "Log in to see Tom" prompt. Don't re-add the link.
+
+The badge renders **only when the figure is live**, on the same reasoning as the
+text link it replaced: `FALLBACK_KM` isn't Strava's data, so attributing it to
+them would be a false claim. It adds ~28px to the card, which pushes the left
+column past the photo wall's fixed 430px area — the columns still stretch to
+match, so the overhang shows as empty space under the wall, not misalignment.
 
 ## Typographic scale
 
