@@ -56,17 +56,25 @@ function Card({ card, isFirst }) {
         // Purple-tinted lift on hover, picking up the card tints and the Rakuten
         // UI rather than the site's usual amber shadow. transition-shadow, not
         // transition-all — the repo bans the latter.
-        className={`${CARD_RADIUS} relative w-full overflow-hidden ring-1 ring-black/10 shadow-[0_2px_10px_rgba(88,28,160,0.08)] transition-shadow duration-300 group-hover:shadow-[0_14px_44px_rgba(88,28,160,0.28)] motion-reduce:transition-none dark:ring-white/10 dark:shadow-[0_2px_12px_rgba(120,60,200,0.25)] dark:group-hover:shadow-[0_20px_60px_rgba(155,105,240,0.55)]`}
-        // 3:2, matching the reference. Two of the three screenshots are
-        // full-page captures (0.26 and 0.54 natural ratio), so a wide card
+        //
+        // 3:2 from `md` up, matching the reference. Two of the three screenshots
+        // are full-page captures (0.26 and 0.54 natural ratio), so a wide card
         // cropped them to a thin strip of header; the taller card shows more of
         // each and leaves the scrim room to sit under the text.
-        style={{ aspectRatio: '3 / 2', background: card.tint }}
+        //
+        // Below `md` the card has NO fixed ratio and grows with its content —
+        // see the layout note on the text block for why.
+        className={`${CARD_RADIUS} relative w-full overflow-hidden ring-1 ring-black/10 shadow-[0_2px_10px_rgba(88,28,160,0.08)] transition-shadow duration-300 group-hover:shadow-[0_14px_44px_rgba(88,28,160,0.28)] motion-reduce:transition-none md:aspect-[3/2] dark:ring-white/10 dark:shadow-[0_2px_12px_rgba(120,60,200,0.25)] dark:group-hover:shadow-[0_20px_60px_rgba(155,105,240,0.55)]`}
+        style={{ background: card.tint }}
       >
-        {/* Inset on three sides and bleeding off the bottom, so there's no
-            bottom edge for the scrim to collide with. The tint is light, which
-            is what lets a light-UI screenshot sit on it cleanly. */}
-        <div className="absolute inset-x-6 top-6 bottom-0 overflow-hidden rounded-t-[8px] shadow-[0_8px_32px_rgba(41,41,41,0.18)] md:inset-x-8 md:top-8">
+        {/* From `md`: inset on three sides and bleeding off the bottom, so
+            there's no bottom edge for the scrim to collide with. The tint is
+            light, which is what lets a light-UI screenshot sit on it cleanly.
+
+            Below `md`: an in-flow 4:3 window with the text beneath it, so it
+            needs a bottom edge and a full radius. 4:3 rather than 3:2 because
+            the card no longer has to reserve room for an overlay. */}
+        <div className="relative mx-6 mt-6 aspect-[4/3] overflow-hidden rounded-[8px] shadow-[0_8px_32px_rgba(41,41,41,0.18)] md:absolute md:inset-x-8 md:top-8 md:bottom-0 md:mx-0 md:mt-0 md:aspect-auto md:rounded-b-none">
           <Image
             src={card.image.src}
             alt={`${card.title} — product screenshot`}
@@ -88,7 +96,9 @@ function Card({ card, isFirst }) {
             almost imperceptible through the upper half. Reference uses pure
             black; these use #292929 to stay on our palette. */}
         <div
-          className="pointer-events-none absolute inset-0"
+          // `md` and up only — below that the text sits on the tint, not on the
+          // screenshot, so there is nothing for a scrim to do.
+          className="pointer-events-none absolute inset-0 hidden md:block"
           style={{
             background: [
               'linear-gradient(#29292900 0%, #2929291a 22%, #29292942 44%, #29292970 66%, #29292994 84%, #292929ad 100%) bottom / 100% 50% no-repeat',
@@ -101,30 +111,54 @@ function Card({ card, isFirst }) {
         <ArrowUpRight
           size={ICON_CARD}
           strokeWidth={1.75}
-          className="absolute bottom-6 right-6 text-white/50 transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white motion-reduce:transition-none md:bottom-7 md:right-7"
+          className="absolute bottom-6 right-6 text-[#292929]/40 transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#292929] motion-reduce:transition-none md:bottom-7 md:right-7 md:text-white/50 md:group-hover:text-white"
         />
 
-        {/* pr-10 keeps the metrics row clear of the arrow when it wraps. */}
-        <div className="absolute inset-x-6 bottom-6 pr-10 md:inset-x-8 md:bottom-7">
-          {/* Brighter than the route's usual dark-mode ink: this text sits on a
-              translucent scrim over a light screenshot, not an opaque surface,
-              so #B0B0B0 dropped to ~2.3:1 once the scrim was lightened. */}
-          <h3 className={`${TEXT.title} mb-1 font-medium leading-[1.25] tracking-tight text-white`}>
+        {/* Two layouts, not one layout that shrinks.
+            · below `md`: in flow, under the image, on the card's own tint
+            · `md` and up: absolutely positioned over the scrim
+
+            The overlay cannot survive small widths. The block is content-height
+            and the card was a fixed 3:2, so at 375px the text ran 191–250px
+            inside a 205px card: titles were clipped off the top edge by the
+            card's own overflow-hidden, and up to 172px of white type sat above
+            the scrim on a bare, pale screenshot. Measured 2026-08-15.
+
+            pr-10 keeps the metrics row clear of the arrow when it wraps. */}
+        <div className="px-6 pt-5 pb-6 pr-10 md:absolute md:inset-x-8 md:bottom-7 md:px-0 md:pt-0 md:pb-0 md:pr-10">
+          {/* Ink below `md`, white above it. The tint is a fixed light value in
+              both themes, so the small-screen ink is fixed too — a `dark:`
+              variant here would put pale text on a pale card. Above `md` the
+              text is brighter than the route's usual dark-mode ink because it
+              sits on a translucent scrim over a light screenshot, not an opaque
+              surface: #B0B0B0 dropped to ~2.3:1 once the scrim was lightened. */}
+          <h3
+            className={`${TEXT.title} mb-1 font-medium leading-[1.25] tracking-tight text-[#292929] md:text-white`}
+          >
             {card.title}
           </h3>
-          <p className={`${TEXT.base} mb-0 text-white/90`}>{card.descriptor}</p>
+          <p className={`${TEXT.base} mb-0 text-[#5D5D5D] md:text-white/90`}>{card.descriptor}</p>
 
-          {/* Slash-separated rather than dotted. The separator is dimmed so it
-              divides without competing with the metrics either side of it. */}
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 pt-3">
+          {/* Slash-separated rather than dotted, from `md` up. The separator is
+              dimmed so it divides without competing with the metrics either
+              side of it.
+
+              Below `md` there is not room for both metrics on one line, and a
+              wrapped row left the slash dangling at the end of the first line.
+              So they stack and the separator goes away: on their own lines the
+              metrics are already divided. */}
+          <div className="flex flex-col items-start gap-y-1 pt-3 md:flex-row md:flex-wrap md:items-center md:gap-x-2">
             {card.metrics.map((m, i) => (
               <Fragment key={m}>
                 {i > 0 && (
-                  <span aria-hidden="true" className={`${TEXT.sm} text-white/35`}>
+                  <span
+                    aria-hidden="true"
+                    className={`${TEXT.sm} hidden text-[#292929]/35 md:inline md:text-white/35`}
+                  >
                     /
                   </span>
                 )}
-                <span className={`${TEXT.sm} font-medium text-white`}>{m}</span>
+                <span className={`${TEXT.sm} font-medium text-[#292929] md:text-white`}>{m}</span>
               </Fragment>
             ))}
           </div>
