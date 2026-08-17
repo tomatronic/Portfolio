@@ -31,8 +31,15 @@ const AREA_H = 430
 
 // left/top/width in px; rotate in degrees; z is the resting stack order.
 // Aspect comes from width/height, as with any next/image.
+//
+// Alt text confirmed with Tom on 2026-08-17 — the locations had been inferred
+// from the images until then, and the two photos he appears in are him. The
+// Fuji shot is from Nagasaki Park on the north shore of Lake Kawaguchi; the
+// alt names only the lake, because "Nagasaki Park" reads as the city in Kyushu
+// to anyone who doesn't know this one, which is the opposite of helpful when
+// the alt text is the whole picture.
 const PHOTOS = [
-  { src: '/outside/fuji-dusk.jpg', alt: 'Mount Fuji at dusk, seen across the lake', width: 1000, height: 800, left: 0, top: 8, w: 180, rotate: 4, z: 4 },
+  { src: '/outside/fuji-dusk.jpg', alt: 'Mount Fuji at dusk, seen across Lake Kawaguchi', width: 1000, height: 800, left: 0, top: 8, w: 180, rotate: 4, z: 4 },
   { src: '/outside/seoul-gyeongbokgung.jpg', alt: 'Tom and his partner at Gyeongbokgung Palace, Seoul', width: 900, height: 900, left: 158, top: 0, w: 140, rotate: -3, z: 3 },
   { src: '/outside/glendalough-boulder.jpg', alt: 'Tom standing on a boulder in the Glendalough valley, Wicklow', width: 800, height: 1000, left: 290, top: 22, w: 150, rotate: -6, z: 6 },
   { src: '/outside/kinkakuji.jpg', alt: 'Kinkaku-ji, the Golden Pavilion, reflected in its pond in Kyoto', width: 800, height: 1000, left: 12, top: 138, w: 145, rotate: 5, z: 5 },
