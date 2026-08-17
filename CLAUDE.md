@@ -2,6 +2,59 @@
 
 ## Versions
 
+### Review polish pass — findings 08/09/10 + 07 (2026-08-17)
+Four more items from `.design/review-2026-08-15/` shipped, all code-only.
+Commits `b83b5c5` (08/09/10) and `a1197b6` (07). What is left on that
+review is **finding 11** (the ragged lab grid, needs a content decision on
+the three "Coming soon" tiles) plus the Figma/copy items.
+
+- **08 — nav hit areas.** Items in the pill now claim a 44px-tall box
+  (`min-h-11` + `inline-flex items-center`); they were 27px, which clears
+  WCAG 2.5.8's 24px floor but not the 44px this repo asks of nav. The
+  pill's `py-3.5` came off to `py-1.5` to absorb it, so the pill is 58px
+  against the old 55 and — critically — **still exactly 259px wide**,
+  which the 480px breakpoint math in `Nav.js` is derived from. Widths are
+  untouched (Work is narrowest at 39px); padding them to 44 would widen
+  the pill and invalidate that measurement.
+- **09 — the 404 is on-system.** `not-found.js` was the last page
+  predating the current design: a 30px/600 heading outside the
+  14/15/16/27 scale, and the only filled CTA on a site whose home uses
+  ghost pills. Now built from `tokens.js` throughout, reusing the Hero's
+  ghost-pill treatment. Dark accent moved `accent-400` → `accent-300`.
+- **10 — work above the fold.** The intro's spacing was scaled by two
+  thirds, 96/144 → 64/96 (`Hero.js`). **The ratio is the rule, not the
+  numbers**: 96/64 is the same 1.5 the old 144/96 had, so the section
+  break stays the larger space — the thing an earlier pass deliberately
+  fixed. Note the "above" figure is the nav's own `pb-8` (32px) *plus*
+  the hero's `pt`, not the `pt` alone. First card moved y=840 → y=737, a
+  63px sliver at 1280×800.
+  - This needed a second change to work at all: `CaseStudyCards`'
+    `whileInView` used `viewport={{ margin: '-80px' }}`, so a card had to
+    be 80px inside the viewport before animating. The new sliver fell in
+    that dead band and rendered at `opacity: 0` — the space was made and
+    stayed blank. Now `'0px'`.
+- **07 — the dark-mode reveal.** See the note under CanvasReveal below.
+
+**Measured, so it doesn't get re-litigated:** in dark mode the reveal
+sheet and the section beneath it are 1.13:1 apart, against 20.38:1 in
+light. Pure black gets 1.16:1; lifting the sheet to `#26314C` gets
+1.58:1 and breaks the `#0F1623` ground shared with every other page.
+Colour cannot fix the dark reveal — don't re-propose it. The fix is a
+1px inset hairline on the sheet's **bottom** edge at 35% white
+(`CanvasReveal.js`); the pre-existing 28% hairline is on the *top* edge
+and never touched this boundary. Both must be inset — `clip-path` clips
+an outer shadow away entirely — and neither needs a `dark:` variant,
+since white-on-white is invisible in light mode.
+
+**Not a bug, recorded so it isn't chased again:** sampling the home page
+mid-`location.reload()` shows dark-mode text (`#F2F2F2`/`#B0B0B0`) over
+a still-light `#ffffff` sheet, and axe reports ~12 contrast violations
+from it. That is the inline FOUC script having applied `.dark` before
+React repaints, and it resolves before paint on a settled page.
+`ThemeProvider`'s `useLayoutEffect` already handles it. Verified correct
+on production and dev, at 1280 and 375, on fresh load / toggle / reload
+with dark persisted. **Always re-check contrast on a settled page.**
+
 ### Current version (active — from 2026-07-29)
 See "Design direction overhaul" below — that is the live design. Everything in the dated sections beneath it describes the **previous** version and is kept as history.
 - **Home**: `ConceptHome` — a white sheet that clips inward on scroll (`CanvasReveal`) to reveal a near-black Experiments & Lab section beneath. Intro (name / role / copy / Resume + LinkedIn), image-forward case study cards, lab tiles, footer.
