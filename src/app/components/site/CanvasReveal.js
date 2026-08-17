@@ -108,9 +108,33 @@ export default function CanvasReveal({ children, className = '', style }) {
         borderRadius: '0 0 var(--canvas-radius) var(--canvas-radius)',
         clipPath:
           'inset(0 var(--canvas-inset) 0 var(--canvas-inset) round 0 0 var(--canvas-radius) var(--canvas-radius))',
-        // A hairline along the top of the sheet's own edge, so the boundary reads
-        // even in dark mode where the sheet and the reveal are both near-black.
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.28)',
+        // Two hairlines on the sheet's own edges. The first is the original top
+        // one; the second is the bottom edge, added 2026-08-17 for review
+        // finding 07 — the reveal reading as a seam rather than a reveal in dark
+        // mode. The top hairline was already carrying that intent but sits on
+        // the wrong edge: the boundary the reveal actually turns on is where the
+        // sheet *ends*, which is the bottom.
+        //
+        // The finding offered lifting the sheet a step lighter as the other fix.
+        // It was measured and rejected — colour cannot do this job here:
+        //
+        //     sheet vs reveal, light (#ffffff / #050505)   20.38:1
+        //     sheet vs reveal, dark  (#0F1623 / #050505)    1.13:1
+        //     …if the reveal went pure black                1.16:1
+        //     …if the sheet lifted all the way to #26314C   1.58:1
+        //
+        // The tonal range simply isn't there in dark, and the lift that buys the
+        // least-bad number also stops the home page's ground matching the
+        // #0F1623 every other page uses. So the boundary is drawn rather than
+        // coloured: an edge that reads as deliberate is the honest version of an
+        // effect that can't have its light-mode drama back.
+        //
+        // Both must be *inset* — clip-path clips an outer shadow away entirely.
+        // Neither needs a dark: variant: white at low alpha on the white
+        // light-mode sheet is invisible, so this self-cancels rather than
+        // branching on theme.
+        boxShadow:
+          'inset 0 1px 0 rgba(255,255,255,0.28), inset 0 -1px 0 rgba(255,255,255,0.35)',
         backfaceVisibility: 'hidden',
         position: 'relative',
         zIndex: 1,
