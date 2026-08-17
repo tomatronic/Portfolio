@@ -76,13 +76,24 @@ const TESTIMONIALS = [
 ]
 
 /**
- * Placeholder distance, used only until the Strava credentials are set — see
- * `lib/strava.js`. Replace it with a real figure or wire Strava up before this
- * goes live; it is a made-up number, not Tom's.
+ * The figure shown when Strava returns nothing — see `lib/strava.js`.
+ *
+ * A **floor**, not an estimate, and rendered as "500+ km ran in a typical
+ * year" so it never states more than it can stand behind. It was 1,234 until
+ * 2026-08-17, which was a made-up number sitting in the same typography as the
+ * live one: a Strava outage produced a confident false claim, and an inflated
+ * one, with nothing on the card to give it away.
+ *
+ * Set it low enough to survive a bad year without anyone watching it. Tom's
+ * real trailing-365 figure was ~845km in August 2026, so 500 leaves room for
+ * the mileage to fall by a third and still be true. Don't creep it up towards
+ * whatever the live number happens to be — a floor set just under today's
+ * figure is a precise number wearing a plus sign, and this fallback is
+ * invisible until it fires, so nobody will notice when it goes stale.
  */
-const FALLBACK_KM = 1234
+const FALLBACK_KM = 500
 
-function RunningCard({ km }) {
+function RunningCard({ km, live }) {
   return (
     // flex-1 + justify-between: the card grows to take its share of the column,
     // and the figure sits at the foot of whatever height that turns out to be.
@@ -95,15 +106,27 @@ function RunningCard({ km }) {
           className={`${TEXT.title} ${INK} mb-1 font-medium leading-none tracking-tight tabular-nums`}
         >
           {km.toLocaleString('en-GB')}
+          {!live && '+'}
           <span className={`${TEXT.base} ${FAINT} ml-1.5 font-normal`}>km</span>
         </p>
-        <p className={`${TEXT.xs} ${FAINT} mb-0`}>ran in the last 365 days</p>
+        {/* The window softens with the figure. "the last 365 days" is a precise
+            claim and only the live number can make it; the fallback is a floor,
+            so it says what a floor can say. The pair also restores a visual
+            tell that the fallback has fired — the "Powered by Strava" badge
+            used to be that tell, and it was removed on 2026-08-05. */}
+        <p className={`${TEXT.xs} ${FAINT} mb-0`}>
+          {live ? 'ran in the last 365 days' : 'ran in a typical year'}
+        </p>
       </div>
     </div>
   )
 }
 
 export default function About({ running = null }) {
+  // `running` is null whenever the Strava env vars are missing or the call
+  // failed, so its presence is what tells the card whether it can make the
+  // precise claim or has to fall back to the floor.
+  const runningLive = running != null
   const runningKm = running?.km ?? FALLBACK_KM
   const { theme } = useTheme()
   const dark = theme === 'dark'
@@ -297,7 +320,7 @@ export default function About({ running = null }) {
                   </p>
                 </div>
 
-                <RunningCard km={runningKm} />
+                <RunningCard km={runningKm} live={runningLive} />
               </div>
 
               <ImageWall />

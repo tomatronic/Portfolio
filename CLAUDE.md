@@ -352,9 +352,10 @@ foot however tall it ends up.
     box is the point.
   - Photos are dummy gradients at `/public/outside/dummy-1..9.jpg` — replace the
     `src`/`width`/`height` in `PHOTOS`.
-- **Running stat** comes from `src/app/lib/strava.js`. `FALLBACK_KM` in
-  `About.js` is a placeholder (1,234) used whenever the API returns nothing —
-  **it is not a real figure**; wire Strava up or replace it before deploying.
+- **Running stat** comes from `src/app/lib/strava.js`. Strava is wired up and
+  live (838km when last checked, 2026-08-17). `FALLBACK_KM` in `About.js` is
+  what renders whenever the API returns nothing — see the fallback note under
+  Strava below for why it is a floor and why it should stay one.
 - `/aboutBanner.png` was deleted 2026-08-04 (the wall replaced it; zero
   references). In git history if the wall is ever reverted.
 
@@ -387,8 +388,38 @@ Two consequences to be aware of rather than fix unprompted:
   explicitly permit **plain text** — the exact phrase "Powered by Strava" or
   "Compatible with Strava" — which would sit in `FAINT` ink like any caption.
 - The attribution used to render only when the figure was live, so it doubled as
-  the one visual tell that `FALLBACK_KM` had fired. With it gone the fallback is
-  indistinguishable from a real figure. See the fallback note below.
+  the one visual tell that `FALLBACK_KM` had fired. Its removal is what made the
+  fallback indistinguishable from a real figure — addressed 2026-08-17, see
+  below.
+
+### The fallback figure (2026-08-17)
+`FALLBACK_KM` was **1,234** — a made-up placeholder rendering as "1,234 km ran
+in the last 365 days" in the same typography as the live figure. With the Strava
+badge gone there was nothing to give it away, so an outage would have produced a
+confident false claim, and an inflated one: the real number is ~838.
+
+Now **500**, and the card changes what it says when the figure isn't live:
+
+| | figure | caption |
+|---|---|---|
+| live | `838 km` | ran in the last 365 days |
+| fallback | `500+ km` | ran in a typical year |
+
+Both halves matter. The `+` makes it a floor rather than an estimate, and the
+looser window is a claim a floor can actually support — "the last 365 days" is
+precise and only live data earns it. Together they also restore the visual tell
+the Strava badge used to provide.
+
+**Keep the floor low.** 500 is set well under the real figure deliberately, so
+it stays true through a bad year. Don't creep it up towards whatever Strava is
+currently returning — a floor set just under today's number is a precise number
+wearing a plus sign, and because this path is invisible until it fires, nobody
+will notice when it goes stale.
+
+Hiding the card entirely when the figure isn't live is still the strictest fix
+if this ever needs revisiting. It was weighed on 2026-08-17 and the floor was
+chosen instead: the card keeps doing its job, and a true vague claim beats no
+claim.
 
 ## Typographic scale
 
