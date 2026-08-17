@@ -92,17 +92,26 @@ function Card({ card, isFirst }) {
               · base layer (45% tall): a soft wash starting higher up
             The offset heights are the point: the softer layer begins above where
             the stronger one does, so there's no visible line where darkening
-            starts. Multiplied together they reach ~75% at the base while staying
+            starts. Multiplied together they reach ~93% at the base while staying
             almost imperceptible through the upper half. Reference uses pure
-            black; these use #292929 to stay on our palette. */}
+            black; these use #292929 to stay on our palette.
+
+            Both ramps were strengthened 2026-08-17 (finding 02): the previous
+            set bottomed out at ad/38 — ~75% — and the screenshots underneath are
+            pale enough that the text bands measured 2.85:1 (title) and 3.6:1
+            (descriptor) against a white worst case. The stops that matter are
+            the middle ones, not the base: the text sits at roughly 55–80% of the
+            taller ramp, nowhere near its foot. Re-measure by hiding the text and
+            sampling the rendered pixels — axe reports zero violations either
+            way, because it cannot see text over an image. */}
         <div
           // `md` and up only — below that the text sits on the tint, not on the
           // screenshot, so there is nothing for a scrim to do.
           className="pointer-events-none absolute inset-0 hidden md:block"
           style={{
             background: [
-              'linear-gradient(#29292900 0%, #2929291a 22%, #29292942 44%, #29292970 66%, #29292994 84%, #292929ad 100%) bottom / 100% 50% no-repeat',
-              'linear-gradient(#29292900 0%, #29292917 42%, #2929292e 76%, #29292938 100%) bottom / 100% 45% no-repeat',
+              'linear-gradient(#29292900 0%, #29292926 22%, #2929295c 44%, #29292991 66%, #292929bd 84%, #292929e6 100%) bottom / 100% 50% no-repeat',
+              'linear-gradient(#29292900 0%, #29292921 42%, #2929293d 76%, #29292942 100%) bottom / 100% 45% no-repeat',
             ].join(', '),
           }}
           aria-hidden="true"
