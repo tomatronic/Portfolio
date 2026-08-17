@@ -33,8 +33,21 @@ export default function Hero() {
           doubling up squeezes the content below its natural width on mobile. */}
       {/* Gaps were inverted: 128px above the intro vs 80px below it, so the
           section break was smaller than the nav gap and the two sections ran
-          together. Now 96 above / 144 below — the break is the larger space. */}
-      <div id="about" className={`${CONTAINER} relative mx-auto pb-36 pt-12 md:pt-16`}>
+          together. That was fixed to 96 above / 144 below — the break is the
+          larger space.
+
+          2026-08-17 (review finding 10): both were scaled by two thirds, to 64
+          above / 96 below. At 1280×800 the "Case studies" heading sat at y=750
+          and the first card at y=840, so the opening screen was name, role and
+          three paragraphs of grey with no work in it at all. Taking 80px out
+          lifts the first card to y=737 — a 63px sliver in view, which is the
+          cheapest possible proof this is a designer's site.
+
+          The ratio is what matters and it is unchanged: 96/64 is the same 1.5
+          the old 144/96 had, so the break still reads as the larger space. Keep
+          that relationship if these ever move again — the "above" figure is the
+          nav's own pb-8 (32px) plus this pt, not the pt alone. */}
+      <div id="about" className={`${CONTAINER} relative mx-auto pb-24 pt-8`}>
         <div className="max-w-[560px]">
           {/* Name and role are the same 27px and sit flush as one stacked block.
               Only colour separates them — the whole point of the scale.

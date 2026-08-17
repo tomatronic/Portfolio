@@ -202,7 +202,14 @@ export default function CaseStudyCards() {
         className="flex flex-col gap-10"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
+        // margin was -80px, which shrinks the trigger area: a card had to be 80px
+        // inside the viewport before it animated. Once finding 10 lifted the first
+        // card to y=761 on a 1280×800 screen, its 39px sliver fell inside that
+        // dead band and sat at opacity 0 — the space had been made for it and it
+        // rendered blank, which is worse than not making the space at all. 0px
+        // fires as soon as the card's top edge crosses the fold, so the sliver is
+        // actually visible and the stagger plays on load.
+        viewport={{ once: true, margin: '0px' }}
         variants={container}
       >
         {CARDS.map((card, i) => (

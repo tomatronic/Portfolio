@@ -161,8 +161,14 @@ export default function Nav({ active = 'Home' }) {
           middle column of the three-column grid. flex-wrap stays as a last-resort
           valve so an overflow can never force a horizontal scroll, which this
           repo bans — but with a full row to itself it no longer fires. */}
+      {/* py-1.5, not py-3.5: the items below each claim a 44px-tall box, so the
+          pill's own vertical padding came off to absorb them. 44 + 12 = 56px
+          against the old 27 + 28 = 55, i.e. the pill keeps its height to within
+          a pixel while every target inside it doubles. Horizontal padding and
+          gap are untouched, so the 259.3px pill width the 480px threshold above
+          is derived from still holds. */}
       <div
-        className={`${BUTTON_RADIUS} col-span-2 row-start-2 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 justify-self-center border border-[#292929]/12 bg-white px-7 py-3.5 dark:border-white/12 dark:bg-white/[0.04] min-[480px]:col-span-1 min-[480px]:col-start-2 min-[480px]:row-start-1`}
+        className={`${BUTTON_RADIUS} col-span-2 row-start-2 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 justify-self-center border border-[#292929]/12 bg-white px-7 py-1.5 dark:border-white/12 dark:bg-white/[0.04] min-[480px]:col-span-1 min-[480px]:col-start-2 min-[480px]:row-start-1`}
       >
         {ITEMS.map((item) => {
           const isActive = active === item.label
@@ -172,7 +178,18 @@ export default function Nav({ active = 'Home' }) {
             ? 'text-accent-600 dark:text-accent-300'
             : `${INK} hover:text-accent-600 dark:hover:text-accent-300`
 
-          const className = `${TEXT.base} ${tone} font-medium transition-colors`
+          // min-h-11 is the whole fix for the 27px-tall targets the Aug 2026
+          // review flagged (finding 08): the text box is 27px on the 16px scale,
+          // which clears WCAG 2.5.8's 24px floor but sits well under the 44px
+          // both platform guidance and this repo's own convention ask of nav.
+          // inline-flex + items-center is what lets the label sit centred in the
+          // taller box rather than at its top.
+          //
+          // Height only. Widths stay as the labels set them (Work is the
+          // narrowest at 39px) — they are well clear of the 24px minimum, and
+          // padding them out to 44 would widen the pill and invalidate the
+          // measured 259.3px the breakpoint above depends on.
+          const className = `${TEXT.base} ${tone} inline-flex min-h-11 items-center font-medium transition-colors`
 
           return item.external ? (
             <a
