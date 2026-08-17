@@ -4,14 +4,14 @@ import Image from 'next/image'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 import OtherCaseStudies from '../../components/OtherCaseStudies'
-import { PROSE } from '../../components/site/tokens'
+import { PROSE, CASE_STUDY_CONTAINER } from '../../components/site/tokens'
 
 // ─── Case study content ────────────────────────────────────────────────────────
 
 function CaseStudyContent() {
   return (
     <div className="relative min-h-screen">
-      <div className="container mx-auto max-w-6xl px-6">
+      <div className={`container mx-auto ${CASE_STUDY_CONTAINER} px-6`}>
         <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
 
           {/* Hero */}

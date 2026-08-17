@@ -80,6 +80,30 @@ export const BUTTON_RADIUS = 'rounded-full'
 export const CONTAINER = 'max-w-4xl'
 
 /**
+ * Width for the case study wrappers, which run wider than the home route.
+ *
+ * 904px resolves to a 760px content column: 904 − 48 (the wrapper's own px-6)
+ * − 96 (the card's md:p-12).
+ *
+ * **This width is the measure.** Body copy has no cap (see PROSE below), so
+ * every character-per-line number on these pages comes from here — changing it
+ * changes how the case studies read, not just how wide they look.
+ *
+ * It was max-w-6xl (1152px → a 1008px column) until 2026-08-17, at 132
+ * characters a line. 760 brings that to ~100 while keeping the figures large
+ * and letting the copy run edge to edge with them.
+ *
+ * The scale, measured rather than estimated, if it ever needs a nudge:
+ *
+ *     content   chars/line
+ *     700       92
+ *     760      100   ← here
+ *     860      113
+ *    1008      132   (the original)
+ */
+export const CASE_STUDY_CONTAINER = 'max-w-[904px]'
+
+/**
  * Long-form type rules for case study bodies.
  *
  * Those pages are mostly bare `h2`/`p`/`ul`/`blockquote` inheriting from
@@ -114,8 +138,37 @@ export const PROSE = [
   // the OtherCaseStudies card titles sit in a centred flex row, where a bottom
   // margin pushes them off the card's vertical centre.
   '[&_h2]:text-[27px] [&_h2]:font-medium [&_h2]:leading-[1.25] [&_h2]:tracking-tight [&_h2]:text-[#292929] dark:[&_h2]:text-[#F2F2F2]',
+  // h3 stays at body size deliberately. It reads as a bold lead-in rather than
+  // a structural step, which the Aug 2026 review raised (finding 05) — the
+  // alternatives were tried on 17 Aug and Tom kept this. An eyebrow treatment
+  // (14px, uppercase, tracked) reads as structure but is louder than the rest
+  // of the site, and half the h3s are sentences rather than labels — "My
+  // approach: Prototype first, validate fast" — which uppercase strains.
   '[&_h3]:text-[16px] [&_h3]:font-medium [&_h3]:tracking-tight [&_h3]:text-[#292929] dark:[&_h3]:text-[#F2F2F2]',
   '[&_h2:not([data-flush])]:mb-3 [&_h3:not([data-flush])]:mb-2',
+  /* There is deliberately NO max-width on body copy here — findings 04/05,
+   * settled 2026-08-17. The measure is set by the card width alone
+   * (CASE_STUDY_CONTAINER above), so don't reintroduce a cap without moving
+   * that too.
+   *
+   * The history, because the obvious fix is the one that was rejected:
+   *
+   *   · The original 1008px column ran 132 characters a line, which is what the
+   *     review flagged.
+   *   · Capping the prose is the obvious answer and it looks broken. These
+   *     pages are screenshots, persona cards and decision tables as much as
+   *     prose, and all of those are siblings of the copy that keep the card's
+   *     full width. A capped paragraph beside a full-width card reads as
+   *     truncated, not measured — the copy looked cut short, most obviously in
+   *     the modal.
+   *   · So the card narrowed instead and the cap came off. Everything on the
+   *     page shares one edge, and the line length falls out of that width.
+   *
+   * On `ch`, if a cap is ever revisited: it is the width of "0", 10.95px in DM
+   * Sans against an average character of 7.63px — 43% wider. `ch` badly
+   * overstates the characters it buys, and the review's suggested 68ch would
+   * have been 98 characters, still outside the 45–75 range it was citing.
+   */
   '[&_p:not([data-keep])]:text-[16px] [&_p:not([data-keep])]:leading-relaxed [&_p:not([data-keep])]:text-[#5D5D5D] dark:[&_p:not([data-keep])]:text-[#B0B0B0]',
   // `li` takes the same data-keep opt-out as `p`. Without it, compact lists
   // inside cards — the persona goals and pain points — were pinned to body size
