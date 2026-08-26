@@ -2,6 +2,33 @@
 
 ## Versions
 
+### Prompt's screenshots span three generations of the UI (2026-08-26)
+Found while adding the Approach artefact. Read from the navigation chrome
+in each image, not from dates — treat the grouping as inferred:
+
+| where | image | chrome |
+|---|---|---|
+| Hero | `Prompt-hero.png` | toggle pill, dark purple panel — **gen B** |
+| Challenge | `Prompt-old2.png` | legacy manual builder — correct, it is the "before" |
+| Approach | `Prompt-suggestion.png` | full-bleed purple, no sidebar — **gen A** |
+| Solution | `Prompt-tags-alt.png` | toggle pill, no sidebar — **gen B** |
+| Home card | `prompt-report.png` | left sidebar — **gen C, shipped** |
+| (untracked) | `prompt-home.png` | left sidebar — **gen C, shipped** |
+
+A reader skimming won't audit this, but **any caption that claims
+currency obliges the rest of the page to hold to it** — a "What shipped"
+label in Approach is contradicted by the Solution image two screens
+later. That is why the concept/shipped pair was built and then parked on
+2026-08-26 (see below); the single undated concept image makes no such
+claim and is safe.
+
+**The fix is three gen-C exports from Tom**: the home screen (he is
+already replacing it), the tag/token state in the shipped sidebar layout,
+and a new hero. The shipped design does still have tokens — they are in
+the "Ask a follow up…" box at the foot of `prompt-report.png` — so the
+tags shot should exist. Do that pass before adding any dated or
+currency-claiming caption to this case study.
+
 ### Prompt's card image replaced (2026-08-26)
 Finding 06's first third, and it needed no crop. `report-generated.png`
 (1600×1222) is out and **`prompt-report.png`** (1287×867) is in — a new
@@ -27,6 +54,34 @@ ramp** — they are what 0.04 of margin now rests on.
 Still open on finding 06: `touchpoints.png` (1600×2985, ~36% visible) and
 `view-campaign.png` (1600×6088, ~17% visible) both still want a
 purpose-crop to 3:2.
+
+### The concept/shipped pair, built and parked (2026-08-26)
+A two-up comparison for the Approach section — `Prompt-suggestion.png`
+labelled "First concept" beside `prompt-home.png` labelled "What
+shipped", side by side from `md`, stacked below, one line of framing
+copy under it. Built, measured, then **deliberately not committed**: the
+"What shipped" label collides with the generation mismatch recorded
+above. Rebuild it after the gen-C exports land.
+
+Worth keeping from the build, because both were found the expensive way:
+- **The images need `ring-1 ring-black/10`.** `prompt-home.png` is
+  near-white and dissolved into the `#EDE7DD` ground — the same failure
+  the 2026-07-25 ring pass fixed for the other twenty inline images. The
+  ring has to sit on the `img`, which means sizing it with
+  `width`/`height` + `max-h-full w-auto` rather than `fill`, since a
+  ringed `fill` image rings the padding box instead of the picture.
+- **Any fixed aspect box must be `md:` only.** A bare `aspect-[4/3]`
+  constrained by height once the figures stacked, shrinking each frame to
+  227px inside a 263px column on a 390px phone. The box exists to make
+  two side-by-side frames agree on height; below `md` there is no row, so
+  there is nothing for it to do.
+
+**A reveal slider was considered and rejected.** It needs two spatially
+aligned frames — same crop, one variable changed. These differ in aspect
+(1.31 vs 1.71) and in layout (sidebar vs none), so a wipe would only ever
+show half of each. A slider is worst exactly when the layout is what
+changed. It would also need keyboard support and would fight page scroll
+on touch, which is the trap `ImageWall` already documents.
 
 ### Review polish pass — findings 08/09/10 + 07 (2026-08-17)
 Four more items from `.design/review-2026-08-15/` shipped, all code-only.
