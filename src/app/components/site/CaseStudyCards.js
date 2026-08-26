@@ -36,7 +36,7 @@ const CARDS = [
     title: 'Influencer Campaign Platform',
     descriptor: 'Concept to production in five months',
     metrics: ['Prototype in 5 days', 'Shipped in 5 months'],
-    image: { src: '/view-campaign.png', position: 'top' },
+    image: { src: '/influencer-campaign.png', position: 'top' },
     tint: '#F5E1EA',
   },
   {
@@ -44,7 +44,7 @@ const CARDS = [
     title: 'Multi-Touch Attribution for Affiliate',
     descriptor: 'How every channel contributes across 15 interactions',
     metrics: ['Clarified complex journeys', 'Key differentiator in pitches'],
-    image: { src: '/touchpoints.png', position: 'top' },
+    image: { src: '/acj-touchpoints.png', position: 'top' },
     tint: '#DEE5F7',
   },
 ]
@@ -57,10 +57,12 @@ function Card({ card, isFirst }) {
         // UI rather than the site's usual amber shadow. transition-shadow, not
         // transition-all — the repo bans the latter.
         //
-        // 3:2 from `md` up, matching the reference. Two of the three screenshots
-        // are full-page captures (0.26 and 0.54 natural ratio), so a wide card
-        // cropped them to a thin strip of header; the taller card shows more of
-        // each and leaves the scrim room to sit under the text.
+        // 3:2 from `md` up, matching the reference. All three sources are now
+        // 3:2 themselves (2026-08-26, finding 06), so `object-cover` trims
+        // nothing and each card shows the frame that was chosen for it. Before
+        // that they were full-page captures at 0.26 and 0.54, which the card
+        // cropped to a thin strip of header — which is how all three ended up
+        // showing the same purple dashboard chrome.
         //
         // Below `md` the card has NO fixed ratio and grows with its content —
         // see the layout note on the text block for why.
