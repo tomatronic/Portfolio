@@ -1,6 +1,7 @@
 import Image from "next/image"
 import OtherCaseStudies from "../../components/OtherCaseStudies"
 import { PROSE, CASE_STUDY_CONTAINER } from '../../components/site/tokens'
+import ZoomableImage from '../../components/site/ZoomableImage'
 
 export async function generateMetadata() {
     return {
@@ -49,7 +50,7 @@ function ACJ() {
                                 <h3 className="pt-6">The version that didn&apos;t work</h3>
                                 <p>The first attempt plotted touchpoints along an actual timeline, with the phase carried by the shape and colour of each marker. It reads cleanly here because this is one journey across fourteen days. At realistic volumes it stopped reading, and the design was already compensating in two places: the &lsquo;5&rsquo; is five events collapsed into a single dot because they would not fit, and the zoom control exists so you can escape the crowding. Both hide data to keep the picture legible, which is the opposite of what the screen is for.</p>
                                 <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                    <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/acj-timeline.png" width={2518} height={708} alt="An early exploration: one customer journey plotted along a date axis from 19 May to 2 June, with a green Recognition diamond, cyan Research circles including one marked 5 where five events are collapsed together, and an orange Conversion diamond" />
+                                    <ZoomableImage sizes="100vw" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/acj-timeline.png" width={2518} height={708} alt="An early exploration: one customer journey plotted along a date axis from 19 May to 2 June, with a green Recognition diamond, cyan Research circles including one marked 5 where five events are collapsed together, and an orange Conversion diamond" />
                                 </div>
                                 <p>The phases were already in the thinking, but only as a legend. The move that worked was to stop plotting time and let the phases become the structure instead — three columns, every journey the same shape, comparable at a glance. Recognition and Research became Awareness and Consideration on the way, landing on the language marketers already use.</p>
                                 <h3 className="pt-6">Key design decisions</h3>
