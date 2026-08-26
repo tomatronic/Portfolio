@@ -2,6 +2,32 @@
 
 ## Versions
 
+### Prompt's card image replaced (2026-08-26)
+Finding 06's first third, and it needed no crop. `report-generated.png`
+(1600×1222) is out and **`prompt-report.png`** (1287×867) is in — a new
+screenshot Tom supplied, showing the Insights & Analytics screen with the
+natural-language query and the generated chart, rather than another
+top-strip of the purple Rakuten dashboard that cards 2 and 3 both open
+with. `report-generated.png` was deleted, not left orphaned.
+
+The new file is **1.484**, against a desktop image box of 832×565
+(**1.472**) — `object-cover` trims ~3px a side, so nothing is lost. Below
+`md` the 4:3 window centre-crops ~5% off each edge and clips the sidebar
+label; unchanged behaviour, and it reads fine at that scale.
+
+**The descriptor band is now the site's tightest contrast margin.**
+Re-measured with the text hidden, sampling every pixel per band: title
+3.64:1 (needs 3), descriptor **4.54:1** (needs 4.5), metrics 7.34:1. The
+old three images gave 4.62–4.82 on the descriptor; this one is lower
+because it is pure white at the left edge under that band, which is the
+worst possible ground for white text — so 4.54 is the floor and no future
+screenshot can push it lower. **Don't soften the middle stops of the top
+ramp** — they are what 0.04 of margin now rests on.
+
+Still open on finding 06: `touchpoints.png` (1600×2985, ~36% visible) and
+`view-campaign.png` (1600×6088, ~17% visible) both still want a
+purpose-crop to 3:2.
+
 ### Review polish pass — findings 08/09/10 + 07 (2026-08-17)
 Four more items from `.design/review-2026-08-15/` shipped, all code-only.
 Commits `b83b5c5` (08/09/10) and `a1197b6` (07). What is left on that
@@ -357,6 +383,9 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 - ACJ: "35 daily active users" metric removed from Impact section 2026-05-26 (no denominator; removed rather than reframed)
 
 **Unused images in /public/ ready to add to case studies:**
+- `prompt-home.png` — **untracked on purpose** (2026-08-26). Tom added it
+  alongside `prompt-report.png` and is replacing it shortly; it isn't
+  referenced anywhere yet, so it's staying out of git until it has a job.
 - `Prompt-suggestion.png`, `Prompt-error.png` — UI states; add to Prompt Challenge/Solution
 - `ACJ-early-mock.png`, `ACJ-early-mock-touchpoints.png` — despite filename, these are final shipped UI not early mocks; hold until Tom provides a genuine early exploration artefact for the Approach section
 - `ACJ-pub-view.png`, `ACJ-advertiser-view.png` — final shipped UI; dual-audience angle already covered by `ACJ-comparison.png`; not needed

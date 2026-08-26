@@ -28,7 +28,7 @@ const CARDS = [
     title: 'Natural Language Search & AI',
     descriptor: 'Plain-English reporting for 1,000+ advertisers',
     metrics: ['90% faster report creation', 'Est. $10M annual time savings'],
-    image: { src: '/report-generated.png', position: 'top' },
+    image: { src: '/prompt-report.png', position: 'top' },
     tint: '#E6E0F5',
   },
   {
