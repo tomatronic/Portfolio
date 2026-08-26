@@ -81,7 +81,10 @@ function Prompt() {
                                     <li><b>Feedback</b>: Gathering feedback via Fullstory we were able to make further decisions in the UI and functionality to help continually improve the feature.</li>
                                     <li><b>Conservative defaults</b>: The system suggested safe, common queries rather than trying to be clever.</li>
                                 </ul>
-                                <p className="mb-12">I prototyped three interaction models and tested them with multiple users. The ability to select suggestions won over many participants and the addition of tags was identified as an extremely helpful approach to more complex report requirements.</p>
+                                <p>I prototyped three ways of getting a question into the system: free text alone, free text with suggested questions to start from, and a structured tag system for naming specific metrics. Testing showed users reached for the suggestions first, they made the mechanics of the input box obvious, while tags earned their place on the more complex requests, where remembering an exact metric name was the real barrier. Rather than pick one, the final design layered all three.</p>
+                                <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
+                                    <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-suggestion.png" width={2896} height={2212} alt="An early concept for the ask-a-question screen: a full-width purple page with a single 'Describe the report you want to see' box, three suggested questions as chips beneath it, and saved reports below" />
+                                </div>
                                 <h2 className="pt-10 tracking-tight">Solution</h2>
                                 <p>
                                     The final solution combined natural language prompts, structured tags, and suggested queries to give users both speed and control. Every search generated report remained fully editable, could be saved as a template, or rebuilt from scratch, this preserved the manual workflow for users who preferred it.
