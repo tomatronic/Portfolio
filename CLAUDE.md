@@ -144,7 +144,7 @@ See "Design direction overhaul" below — that is the live design. Everything in
 - **Home**: `ConceptHome` — a white sheet that clips inward on scroll (`CanvasReveal`) to reveal a near-black Experiments & Lab section beneath. Intro (name / role / copy / Resume + LinkedIn), image-forward case study cards, lab tiles, footer.
 - **Nav**: avatar left (home link, greyscale→colour, confetti burst + `cuelume` sound on click), centred pill, theme toggle right. Rendered inside the sheet on `/` and `/about`; supplied by `components/SiteChrome.js` everywhere else.
 - **Background**: flat `#ffffff` light / `#0F1623` dark, set in `globals.css` (including `html.dark body`) and by `PageBackground.js`. The noise texture and gradient headline of the previous version are gone.
-- **Palette**: amber `#B84010` accent retained for active/emphasis; ink scale is now `#292929` / `#5D5D5D` / `#9E9E9E`. Warm cream is no longer used anywhere on `/` or `/about`.
+- **Palette**: amber `#B84010` accent retained for active/emphasis; ink scale is `#292929` / `#5D5D5D` / `#737373` (the tertiary was `#9E9E9E` until the contrast split — see Outstanding clean-up 3). Warm cream is no longer used anywhere on `/` or `/about`.
 - Older hero experiments (SolarHero solar-arc chart, `/testHome`, `hero.safe.js`/`hero.original.js`) were deleted in June 2026; the noise/gradient hero this replaced is in git history (safe baseline commit `ce8b3de`).
 
 ### Case study stat rows — Prompt only (2026-08-04)
@@ -176,15 +176,16 @@ ground `#737373` measures 3.85:1 and fails AA, `#5D5D5D` is 5.35:1. 27px is the
 scale's ceiling, so the stat leads on colour and weight, not a display size.
 
 ### Design direction overhaul — new home + about promoted live (2026-07-29)
-The `/concept-9f2k` exploration was adopted as the site's real design and the sandbox route was then removed; its components live in `src/app/components/site/`. `/` and `/about` now render `ConceptHome` / `ConceptAbout`; the new nav and footer are global via `components/SiteChrome.js`; case study **bodies** keep their own layout but were brought onto the new type scale.
+The `/concept-9f2k` exploration was adopted as the site's real design and the sandbox route was then removed; its components live in `src/app/components/site/`. `/` and `/about` now render `components/site/Home` and `components/site/About` (they were `ConceptHome` / `ConceptAbout` until the prefixes were dropped, see 2 below); the new nav and footer are global via `components/SiteChrome.js`; case study **bodies** keep their own layout but were brought onto the new type scale.
 
-**Type system** lives in `src/app/concept-9f2k/tokens.js`: sizes 12/13/14/24 only, ink `#292929` / `#5D5D5D` / `#9E9E9E` (dark: `#F2F2F2` / `#B0B0B0` / `#8A8A8A`), 16px card radius, fully-round buttons, 14px nav icons / 20px card icons. `PROSE` in the same file applies it to long-form bodies via descendant selectors — needed because `globals.css` styles `h1`/`h2`/`p`/`blockquote` as *elements*, which beats anything inherited from a wrapper. `:not([data-keep])` on the `p` rule is the escape hatch for deliberately-sized paragraphs (Prompt's stat row).
+**Type system** lives in `src/app/components/site/tokens.js` (the `concept-9f2k` path this once gave was deleted with the sandbox route): sizes **14/15/16/27 only** — bumped from 12/13/14/24 in July 2026 when the 14px body was reported as too small, every step × 16/14 so the relationships are unchanged. Ink `#292929` / `#5D5D5D` / `#737373` light, `#F2F2F2` / `#B0B0B0` / `#8A8A8A` dark, with `FAINT_DISPLAY` (`#909090`) as a second tertiary for 24px-and-above only. 16px card radius, fully-round buttons, 14px nav icons / 20px card icons. `PROSE` in the same file applies it to long-form bodies via descendant selectors — needed because `globals.css` styles `h1`/`h2`/`p`/`blockquote` as *elements*, which beats anything inherited from a wrapper. `:not([data-keep])` on the `p` rule is the escape hatch for deliberately-sized paragraphs (Prompt's stat row).
 
 ### Component map (from 2026-07-29)
 `src/app/components/site/` holds the design system and every page-level block:
-`tokens.js` (scale, ink, radii, icon sizes, `PROSE`), `Nav`, `Footer`,
-`ThemeToggle`, `CanvasReveal`, `Home`, `Hero`, `CaseStudyCards`,
-`ExperimentsLab`, `About`, `Prose`.
+`tokens.js` (scale, ink, radii, icon sizes, `CONTAINER`, `CASE_STUDY_CONTAINER`,
+`PROSE`), `Nav`, `Footer`, `ThemeToggle`, `CanvasReveal`, `Home`, `Hero`,
+`CaseStudyCards`, `ExperimentsLab`, `About`, `ImageWall`, `ZoomableImage`
+(used by ACJ), `Prose`.
 `src/app/components/` keeps the framework-level pieces: `SiteChrome` (renders
 `Nav`/`Footer` on routes that don't render their own), `ThemeProvider`,
 `PageBackground`, `OtherCaseStudies`, `CardImageStack`.
@@ -197,7 +198,11 @@ block, e.g. `app/page.js` → `components/site/Home`.
 
 **2. ~~Rename `concept-9f2k/`~~ — done 2026-07-29.** Shared components live in `src/app/components/site/` and the sandbox routes were deleted; nothing references that path any more, and the `robots.js` disallow went with it. The components also dropped their `Concept*` prefixes (`ConceptNav` → `Nav`, and so on) now that nothing collides. **There is no staging route** — changes to `components/site/*` go straight to the live pages.
 
-**3. Known accessibility exception.** `#9E9E9E` on white is 2.68:1 — fails AA (4.5:1) for the 13px "About" eyebrow and testimonial roles, and the 3:1 large-text threshold for the 24px "Senior Product Designer". It is the specified tertiary ink; clearing AA below 24px would need roughly `#767676`. Deliberate, undecided.
+**3. ~~Known accessibility exception~~ — resolved.** `#9E9E9E` on white was 2.68:1 and failed AA at every size it was used at. It is gone from `src/` entirely; `tokens.js` now splits the tertiary in two rather than darkening it wholesale, which would have flattened the ramp (L\* 16.6 → 39.5 → 65.1 becoming 22.9/10.1 steps) in a system that takes its hierarchy from colour rather than size:
+- `FAINT` `#737373` for anything below 24px — 4.74:1 on white, 4.54:1 on the zinc-50 case study card.
+- `FAINT_DISPLAY` `#909090` for `TEXT.title` and above, where the bar is 3:1 — 3.19:1 / 3.06:1.
+
+Both are sized against `#fafafa` rather than `#ffffff`, because quote attributions land on the case study card and `#767676` measured 4.35:1 there. Dark mode never had the problem (`#8A8A8A` is 5.25:1 on the navy sheet).
 
 ### Code audit fixes (2026-07-13)
 Ran the `improve` skill (`.agents/skills/improve/SKILL.md`) as a read-only audit, then implemented the findings directly:
@@ -255,49 +260,48 @@ Project root: `/Users/thomasspencer/Documents/Portfolio2.0/portfolio2.0/`
 
 ## Stack
 - **Framework**: Next.js 15 (App Router)
-- **Styling**: Tailwind CSS v4 (`globals.css` — uses `@import "tailwindcss"`, no PostCSS config needed)
+- **Styling**: Tailwind CSS v4, configured **CSS-first** in `globals.css` (`@import "tailwindcss"` + an `@theme` block). `postcss.config.mjs` is required and real — it loads `@tailwindcss/postcss` and autoprefixer. There is no JS config: `tailwind.config.js` was deleted 2026-09-09 (see Dark mode).
 - **Animation**: Framer Motion
 - **Icons**: Lucide React (`lucide-react`)
 - **Fonts**: DM Sans only (`--font-dm-sans`) via `next/font/google` — single font across all text; headings and body both `font-normal` (400) as of 2026-07-13 (was `font-semibold`/600 — see Typographic scale section). Home hero is the one exception, at `font-medium` (500).
-- **Deployment**: Vercel (Analytics integrated)
+- **Deployment**: Vercel. `layout.js` mounts Vercel Analytics, Vercel Speed Insights, and `GoogleAnalytics` (`G-CCDKVM70NV`) from `@next/third-parties`.
 
 ## Key files
 ```
 src/app/
-  layout.js                   — root layout: Navigation, Footer, ThemeProvider, PageBackground, FOUC script, full OpenGraph/Twitter metadata (metadataBase https://www.tomspencer.design, /ogdata.png card)
-  page.js                     — home page: noise/gradient hero (inline) + CasestudyShowcase + AboutMeSection + Testimonials
-  sitemap.js                  — sitemap for home, about + the 4 linked case studies
-  robots.js                   — robots.txt, points at sitemap
-  not-found.js                — branded typographic 404 with back-home CTA
-  globals.css                 — Tailwind v4 config, @theme accent tokens, dark mode variant, base styles
+  layout.js        — root layout: SiteChrome (nav + footer), ThemeProvider, PageBackground,
+                     FOUC script, Vercel Analytics + Speed Insights + GoogleAnalytics, full
+                     OpenGraph/Twitter metadata (metadataBase https://www.tomspencer.design,
+                     /ogdata.png card)
+  page.js          — thirteen lines: renders components/site/Home. The old noise/gradient
+                     hero, CasestudyShowcase, AboutMeSection and Testimonials are in commit
+                     18e886c if any of it is ever wanted back
+  about/page.js    — renders components/site/About
+  sitemap.js       — home, about + the 3 *linked* case studies (Rakuten is unlisted)
+  robots.js        — robots.txt, points at sitemap
+  not-found.js     — 404, rebuilt on tokens.js 2026-08-17
+  globals.css      — @import "tailwindcss", @theme accent tokens, dark variant,
+                     :focus-visible ring, element base styles
+  lib/strava.js    — 365-day running total for the About page
   components/
-    casestudyShowcase.js      — work cards: individual white cards (rounded-2xl, ring border, hover shadow) sitting directly on the page background with `gap-6` between them. The warm tan outer container (#C4B09A light / #0D1927 dark) was removed 2026-07-15. Each card: image left (46%, padded inset, rounded-xl screenshot with shadow) / text right (54%): title, body, bullets, CTA arrow.
-    navigation.js             — top nav: "Tom Spencer" wordmark, desktop links, Resume pill, mobile full-screen menu. No background (fixed noise/gradient shows through).
-    PageBackground.js         — sets body bg from theme: #ffffff light / #0F1623 dark (was #EDE7DD light, changed 2026-07-01)
-    AboutMeSection.js         — open editorial layout: large DM Sans headline + 2 body paragraphs + "More about me →" + LinkedIn link. Photo + text animate in as 2 staggered chunks.
-    Testimonials.js           — "What colleagues say" — heading/sub-copy left, 2 stacked quote cards right (staggered entrance)
-    examples.js               — ExampleGallery: hover-expand 4-image grid ("Extra Pixels" section)
-    CardImageStack.js         — fanned/spread image stack, used by OtherCaseStudies
-    ThemeProvider.js          — context for dark/light theme; toggle() persists to localStorage
-    ThemeToggle.js            — pill toggle (Sun/Moon icons) in footer — cream/teal branded, no Tailwind dark: classes (uses inline styles). Sun/Moon targets are 40×40px.
-    OtherCaseStudies.js       — compact cards at bottom of each case study (title left, image stack right)
-    footer.js                 — footer with ThemeToggle + copyright
-  casestudy/                  — 4 individual case study pages (Prompt, InfluencerCampaigns, ACJ, Rakuten)
-  @modal/
-    default.js                — null default for modal slot
-    (.)casestudy/[slug]/
-      page.js                 — intercepts /casestudy/* navigation, renders content in modal
-      CaseStudyModal.js       — modal shell: spring slide-up, sticky close button, teal-tinted bg
-  about/
-  resume/
+    SiteChrome.js       — renders Nav/Footer on routes that don't render their own
+    ThemeProvider.js    — dark/light context; toggle() persists to localStorage
+    PageBackground.js   — sets body bg from theme (#ffffff / #0F1623)
+    OtherCaseStudies.js — compact cards at the foot of each case study
+    CardImageStack.js   — fanned image stack, used by OtherCaseStudies
+    site/               — the design system and every page-level block (see Component map)
+  casestudy/            — 4 case study pages (Prompt, InfluencerCampaigns, ACJ, Rakuten)
+  @modal/               — intercepting route that renders case studies in a modal
 public/
-  just_me.webp                — nav avatar + favicon
-  bio.png                     — about page photo
-  ogdata.png                  — 1200×630 OpenGraph share card (refreshed by Tom, June 2026)
-  resume.pdf
-  prompt_1.png, prompt_2.png, prompt_3.png  — Prompt case study card images
-  acj_1.png, acj_2.png, acj_3.png          — ACJ case study card images
+  just_me.webp     — nav avatar + favicon
+  bio.png          — about page photo
+  ogdata.png       — 1200×630 OpenGraph share card
+  resume.pdf       — linked from the nav and the Hero
+  outside/         — 7 photos for the About page ImageWall
+  prompt_1-3, acj_1-3, influencer_1-3 — OtherCaseStudies card images
 ```
+
+**There is no `/resume` route** — Resume is a direct link to `/resume.pdf`.
 
 ## ThemeProvider
 `src/app/components/ThemeProvider.js`
@@ -306,47 +310,84 @@ One theme-switching method in context:
 - `toggle()` — flips theme and writes to `localStorage`
 
 ## Navigation
-`src/app/components/navigation.js`
+`src/app/components/site/Nav.js` — the site's only nav. `components/navigation.js` (wordmark,
+desktop links, full-screen `bg-slate-950` mobile menu) was **deleted 2026-07-29**; nothing
+described here resembles it.
 
-- Left: "Tom Spencer" wordmark, `font-normal text-2xl` (no avatar image).
-- Desktop links: Work, About, Resume pill (hover → `accent-600` with white text)
-- Mobile: full-screen `bg-slate-950` overlay with Menu/X lucide icons. Links are `font-normal` (not bold).
-- `className="relative z-50"` — `relative` is required for `z-50` to take effect
-- **No background** — fixed noise/gradient layers show through nav area. This is intentional.
+A three-zone grid from 480px up — avatar left, pill centre, `ThemeToggle` right. Below 480px it
+becomes two rows with the pill alone on the second.
+
+- **The avatar is the home affordance** (`just_me.webp`, 44px). No wordmark and no "Home" item,
+  which keeps the pill down to three real destinations. Greyscale → colour and a 2°
+  anticlockwise twist on hover; a confetti burst (5 particles on hover, 10 on click, accent-scale
+  colours) and a `cuelume` `play('success')` cue on click. Both are skipped under
+  `prefers-reduced-motion`, and the audio is wrapped in try/catch so autoplay policy can never
+  block navigation.
+  - The image carries `scaleX(-1)` **inline** — neither `scale-x-[-1]` nor `-scale-x-100`
+    emitted a rule in this build — so the hover rotation must go on the wrapping span. A second
+    transform on the image itself would replace the mirror and turn the face away.
+  - Particles mount on the `Link`, not the inner span: that span is `overflow-hidden` to clip the
+    avatar circle and would clip the burst too.
+- **The pill** is one bordered control holding Work / About / Resume as plain text — Resume gets
+  no special treatment, which is what lets it read as a single unbroken control. Resume is
+  external, to `/resume.pdf`. Active item is `accent-600` / `dark:accent-300` (5.56:1 on white,
+  8.31:1 on the navy sheet). Items claim `min-h-11` and the pill's own padding is `py-1.5` to
+  absorb it — see finding 08 above.
+- **480px is measured, not a Tailwind breakpoint.** The pill needs 259.3px; one row needs
+  259.3 + 44 avatar + 44 toggle + 32 gaps + 48 page padding = 428px, and the threshold is set
+  above that and clear of 428/430, both real iPhone widths. **It moves with the type scale** —
+  it was 420 when the base was 14px. Re-measure the pill rather than assuming.
+- Item hrefs are absolute (`/#work`, not `#work`) because the nav renders on About too.
 
 ## Case study cards (home page)
-`src/app/components/casestudyShowcase.js`
+`src/app/components/site/CaseStudyCards.js` — `components/casestudyShowcase.js` was **deleted
+2026-07-29**.
 
 Card order (top to bottom):
-1. **Prompt** — Natural Language Search & AI (linked)
-2. **InfluencerCampaigns** — Influencer Campaign Management (linked — password removed)
-3. **ACJ** — Multi-Touch Attribution for Affiliate (linked)
+1. **Prompt** — Natural Language Search & AI
+2. **InfluencerCampaigns** — Influencer Campaign Platform
+3. **ACJ** — Multi-Touch Attribution for Affiliate
 
-**Rakuten hidden 2026-07-13** — Tom's call: it was the weakest case study (thin outcome metrics, one-sentence Solution section, and its card image showed a third-party "Nexus Commerce" product, not his own work — see the content flag above), and 3 case studies is fine for now given they're all Rakuten Advertising-based anyway. Removed from this array, from `OtherCaseStudies.js`'s `CARDS`, and from `sitemap.js` — but the page itself (`src/app/casestudy/Rakuten/page.js`) and the `@modal` route mapping are untouched, so it's still reachable at `/casestudy/Rakuten` by direct URL, just unlisted everywhere. Reversible: re-add the card object (still in git history — see commit that removed it) to bring it back.
+**These cards do not use the site's amber hover shadow.** They carry a purple lift
+(`rgba(88,28,160,0.08)` at rest → `rgba(88,28,160,0.28)` on hover; `rgba(120,60,200,0.25)` →
+`rgba(155,105,240,0.55)` dark), keyed to the product UI in the screenshots rather than to the
+palette. `transition-shadow`, not `transition-all`. Outline is a neutral `ring-1 ring-black/10
+dark:ring-white/10`, radius from `CARD_RADIUS`.
 
-No cards are locked — all password-gate code (the `PasswordGate` component and the inline gate in `InfluencerContent.js`) was deleted in June 2026.
+Cards stagger in individually on scroll. `whileInView` uses `viewport={{ margin: '0px' }}` — it
+was `'-80px'`, which left the first card blank when finding 10 moved it to a 63px sliver above
+the fold. Don't put that margin back without re-checking the fold.
 
-Hover shadows (amber-tinted):
-```
-hover:shadow-[0_4px_24px_rgba(184,64,16,0.10)] dark:hover:shadow-[0_4px_24px_rgba(238,159,104,0.12)]
-```
+**Rakuten hidden 2026-07-13** — Tom's call: it was the weakest case study (thin outcome metrics,
+one-sentence Solution section, and its card image showed a third-party "Nexus Commerce" product,
+not his own work — see the content flag below), and 3 case studies is fine given they're all
+Rakuten Advertising-based anyway. Removed from this array, from `OtherCaseStudies.js`'s `CARDS`,
+and from `sitemap.js` — but the page itself (`src/app/casestudy/Rakuten/page.js`) and the
+`@modal` slug mapping are untouched, so it's still reachable at `/casestudy/Rakuten` by direct
+URL, just unlisted everywhere. Reversible: re-add the card object, still in git history.
 
-Cards stagger in individually (~100ms delay) on scroll rather than fading in as one block. Card screenshot containers have a neutral `ring-1 ring-black/10 dark:ring-white/10` outline (added 2026-07-01). The tan outer container that used to wrap them is gone (2026-07-15) — cards sit on the page background, `gap-6` apart, so the `rounded-4xl` concentric-radius note from 2026-07-01 no longer applies.
+No cards are locked — all password-gate code was deleted in June 2026.
 
 ## Colour palette — Experimental (current)
+**There is no noise texture anywhere on the site.** It was removed with the
+2026-07-29 overhaul (`Home.js` records why: at 0.14 alpha it washed the white
+sheet to roughly `#EDEDED`, which read as grey). Don't reintroduce it from an
+older row of this table.
+
 | Role | Light | Dark |
 |------|-------|------|
-| Hero / page bg | `#ffffff` + noise texture only (no gradient blobs — removed 2026-07-01) | `#0F1623` + noise texture only |
-| Page body bg | `#ffffff` | `#0F1623` |
+| Page / intro sheet bg | `#ffffff` | `#0F1623` |
+| Reveal, lab and footer ground | `#050505` | `#050505` (same in both themes) |
+| Case study card | `bg-zinc-50` | `bg-slate-900` |
 | Case study image containers | `#EDE7DD` | `slate-800/50` |
-| Nav bg | none (transparent) | none (transparent) |
-| Modal bg | `#2A6B6B/12%` | `#051F1F/90%` |
+| Nav pill | `bg-white`, border `#292929`/12 | `bg-white/[0.04]`, border white/12 |
+| Modal backdrop | `#292929` @ 8% | `#292929` @ 90% |
 | Accent / CTA | `#B84010` (accent-600) | `#EE9F68` (accent-300) |
-| Body text | `#020617` | `#ededed` |
-| Card border | `#C8BEB0` | `#2A3A4A` |
-| Card image ring | `rgba(184,64,16,0.22)` | `rgba(238,159,104,0.30)` |
-| Card hover shadow | `rgba(184,64,16,0.10)` | `rgba(238,159,104,0.12)` |
-| Gallery hover shadow | `rgba(184,64,16,0.14)` | — |
+| Ink — primary / muted / faint | `#292929` / `#5D5D5D` / `#737373` | `#F2F2F2` / `#B0B0B0` / `#8A8A8A` |
+| Case study card border | `#C8BEB0` | `#2A3A4A` |
+| CardImageStack ring | `rgba(184,64,16,0.22)` | `rgba(238,159,104,0.30)` |
+| Home card hover shadow | `rgba(88,28,160,0.28)` | `rgba(155,105,240,0.55)` |
+| OtherCaseStudies hover shadow | `rgba(184,64,16,0.10)` | `rgba(238,159,104,0.12)` |
 | Blockquote border | `accent-300` | `accent-600` |
 
 ### Accent token scale (defined in `globals.css` `@theme`)
@@ -369,7 +410,7 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 
 ## Dark mode
 - **Tailwind v4** dark mode: configured via `@variant dark (&:is(.dark, .dark *))` in `globals.css`
-- **Do NOT use** `darkMode: 'class'` in `tailwind.config.js` — that's v3 syntax and is ignored
+- **There is no `tailwind.config.js`** — deleted 2026-09-09. Tailwind v4 only reads a JS config when `globals.css` names one with `@config`, and it never did, so the file's custom `fontSize` ramp (`base: 1.125rem`, `xl: 1.44rem`, …) had **never been in effect**: the built CSS resolves `--text-base: 1rem`, stock Tailwind. It was dead weight that read as live configuration. Configure in the `@theme` block instead; `darkMode: 'class'` is v3 syntax and would be ignored regardless.
 - ThemeProvider adds/removes `dark` class on `<html>`. `toggle()` persists to `localStorage`.
 - FOUC prevention: inline `<script>` in layout.js applies dark class before hydration
 - `<html>` has `suppressHydrationWarning` to avoid React mismatch warnings
@@ -377,28 +418,41 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 - `page.js` reads `useTheme()` directly and switches colour palette via JS (not Tailwind dark: classes)
 
 ## Case study modal (Parallel + Intercepting Routes)
-- Clicking a card triggers `@modal/(.)casestudy/[slug]/page.js` — URL updates, modal slides up
-- Direct URL (`/casestudy/Prompt`) still renders the full page normally
-- **Two separate layers**: backdrop (`motion.div` fade 0.28s open / 0.18s close) + panel (`motion.div` spring slide-up open / `easeIn` 0.22s close)
-- Backdrop: `bg-[#B84010]/[0.08] dark:bg-[#3D1204]/90 backdrop-blur-sm pointer-events-none` — fades independently
-- Panel: transparent container, handles scroll + close button + content
-- Close: sticky X button inside panel, Escape key. `router.back()` fires after panel animation completes.
-- OtherCaseStudies links use `replace` prop to avoid history stacking (close always returns home)
-- Scroll lock: `overflow: hidden` + `paddingRight` compensates for scrollbar width shift
+- Clicking a card triggers `@modal/(.)casestudy/[slug]/page.js` — URL updates, modal slides up.
+  Direct URL (`/casestudy/Prompt`) still renders the full page normally. The four slugs are a
+  fixed set and prerender at build.
+- **Two separate layers**: backdrop (`motion.div` fade 0.28s open / 0.18s close) + panel
+  (spring slide-up open / `easeIn` 0.22s close).
+- **Backdrop is neutral ink, not amber**: `bg-[#292929]/[0.08] dark:bg-[#292929]/90
+  backdrop-blur-sm pointer-events-none`. It used to tint with `#B84010` / `#3D1204` at the same
+  opacities — the note is in the component. Older docs claiming `#2A6B6B` / `#051F1F` are two
+  designs out of date.
+- Panel: transparent container, handles scroll + close button + content.
+- Close: sticky X button inside the panel, plus Escape. `router.back()` fires after the panel
+  animation completes.
+- Scroll lock: `overflow: hidden` + `paddingRight` compensates for scrollbar width shift.
 
 ## Card interactions
-- **Hover shadow**: `0 4px 24px rgba(184,64,16,0.10)` light / `rgba(238,159,104,0.12)` dark (amber-tinted)
-- **Border**: `border-[#C8BEB0]` light / `dark:border-[#2A3A4A]` — visible on cream bg
-- **Image stack ring**: `ring-2 ring-[rgba(184,64,16,0.22)] dark:ring-[rgba(238,159,104,0.30)]` — matches arc colour
-- **Gallery cards** (examples.js): rest shadow `rgba(184,64,16,0.07)`, hover `rgba(184,64,16,0.14)`
+- **Home case study cards**: purple shadow set, see the Case study cards section above.
+- **OtherCaseStudies cards**: amber hover shadow `rgba(184,64,16,0.10)` light /
+  `rgba(238,159,104,0.12)` dark, border `#C8BEB0` / `#2A3A4A`.
+- **CardImageStack ring**: `ring-2 ring-[rgba(184,64,16,0.22)] dark:ring-[rgba(238,159,104,0.30)]`.
+- **Inline case study images**: `rounded-2xl ring-1 ring-black/10 dark:ring-white/10` on the
+  `<Image>` itself (2026-07-25 pass).
+- The "Extra Pixels" gallery (`examples.js`) and its `rgba(184,64,16,0.07)` / `0.14` shadows were
+  **deleted 2026-07-29** with the rest of the previous home page.
 
 ## OtherCaseStudies cards
-- Layout: title (DM Sans, text-base, font-normal — globals h3 default) left — image stack right
-- Padding: `px-5 py-8`, image container `h-16 w-28 mr-6`
-- Border: `border-[#C8BEB0] dark:border-[#2A3A4A]` — matches main card borders
-- Hover shadow: amber-tinted `rgba(184,64,16,0.10)` / `rgba(238,159,104,0.12)` — matches rest of site
-- `replace` prop on Link prevents modal history stacking
-- Images: use real case study images (prompt_1-3, acj_1-3, offer_1-3)
+`src/app/components/OtherCaseStudies.js` — compact cards at the foot of each case study.
+
+- Layout: title left, `CardImageStack` right. Padding `px-5 py-8`, image container `h-16 w-28 mr-6`.
+- Images are `prompt_1-3`, `influencer_1-3` and `acj_1-3`. (**Not** `offer_1-3` — the Rakuten
+  set was deleted in `40f6df4` along with the case study's card entry.)
+- Border `border-[#C8BEB0] dark:border-[#2A3A4A]`; amber hover shadow `rgba(184,64,16,0.10)` /
+  `rgba(238,159,104,0.12)`.
+- `replace` on the Link prevents modal history stacking, so closing always returns home.
+- Titles carry `data-flush` to opt out of `PROSE`'s heading bottom-margin — they sit in a centred
+  flex row, where a bottom margin pushes them off the card's vertical centre.
 
 ## Case studies
 - `/casestudy/Prompt` — Natural Language Search & AI (2025)
@@ -410,8 +464,8 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 ### Case study layout template (all 4 use this)
 ```jsx
 <div className="relative min-h-screen">
-  <div className="container mx-auto max-w-6xl px-6">
-    <div className="rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900">
+  <div className={`container mx-auto ${CASE_STUDY_CONTAINER} px-6`}>
+    <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
       {/* Hero image container */}
       <div className="bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8 ...">
         <Image ... />
@@ -433,11 +487,18 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 </div>
 ```
 
+`CASE_STUDY_CONTAINER` is `max-w-[904px]`, a 760px content column. It was
+`max-w-6xl` (a 1008px column, 132 characters a line) until 2026-08-17 — see the
+token's own comment for the measured chars-per-line scale before changing it.
+`PROSE` on the inner card is what applies the type system to the bare
+`h2`/`p`/`ul`/`blockquote` inside; anything setting its own size needs
+`data-keep`.
+
 **Known content gaps (not code issues):**
 - ~~InfluencerCampaigns: outcome/adoption metrics missing~~ — **closed 2026-08-04.** Adoption metrics don't exist. The page stands on its narrative instead; a stat row built from its timeline figures was tried and rejected (see "Case study stat rows" above). Hero image is `/influencerHero.png`, already real.
 - Rakuten: Solution section is one sentence — needs expanding; no outcome metrics (lower priority now the case study is hidden — see Case study cards section)
 - ACJ: "35 DAU" metric needs context (total eligible users)
-- Prompt: `Prompt-userflow.png` (customer journey map) added to Approach section 2026-05-26. Still missing: before/after comparison copy + section header for `Prompt-old2.png`
+- ~~Prompt: missing before/after comparison copy + section header for `Prompt-old2.png`~~ — **closed.** The Challenge section now has an `<h3>The builder it replaced</h3>` and two paragraphs of before-copy above the image. (`Prompt-userflow.png`, the customer journey map, went into Approach 2026-05-26.)
 - ACJ: "35 daily active users" metric removed from Impact section 2026-05-26 (no denominator; removed rather than reframed)
 
 **Unused images in /public/ (audited 2026-09-09 — the list is now one item):**
@@ -458,11 +519,6 @@ The blobs are still in git history if any of the deleted set is wanted back
 (`git show 40f6df4^:public/<name>`), so nothing is unrecoverable — but they
 are deliberately not in the working tree.
 
-## AboutMeSection
-`src/app/components/AboutMeSection.js`
-
-Links row: "More about me →" (text link) + LinkedIn icon link (`https://www.linkedin.com/in/thomas-spencer/`). Both are inline-flex items in a flex row. LinkedIn link uses `<Linkedin size={14} />` from lucide-react.
-
 ## About page
 `src/app/about/page.js` → `components/site/About.js`
 
@@ -478,7 +534,7 @@ fills the photo area's height and all three blocks sit on the same 12px gutter;
 the stat card is additionally `justify-between`, which drops the figure to its
 foot however tall it ends up.
 
-- **`ImageWall`** is nine photos scattered over the area, each its own Framer
+- **`ImageWall`** is seven photos scattered over the area, each its own Framer
   `drag` with `dragConstraints={areaRef}`, so they can be pushed around and
   re-stacked but never leave the block. `onPointerDown` raises the grabbed photo
   above the resting stack (`LIFT_FROM`, an incrementing counter) — on pointer
@@ -499,8 +555,11 @@ foot however tall it ends up.
   - Rotation means a photo can rest ~10px outside the area (Framer clamps the
     layout box, not the rotated one). Deliberate — a pile spilling its notional
     box is the point.
-  - Photos are dummy gradients at `/public/outside/dummy-1..9.jpg` — replace the
-    `src`/`width`/`height` in `PHOTOS`.
+  - **The photos are real and in place** — seven of them under `/public/outside/`
+    (Fuji, Gyeongbokgung, two from Glendalough, Kinkaku-ji, the Seven Sisters, a
+    South Downs walk), each with descriptive alt text in `PHOTOS`. The dummy
+    gradients this file used to describe are long gone; the coordinates below were
+    hand-authored against the real set.
 - **Running stat** comes from `src/app/lib/strava.js`. Strava is wired up and
   live (838km when last checked, 2026-08-17). `FALLBACK_KM` in `About.js` is
   what renders whenever the API returns nothing — see the fallback note under
@@ -572,6 +631,14 @@ claim.
 
 ## Typographic scale
 
+**Scope, because two systems now coexist.** Everything below describes the
+`globals.css` *element* defaults, which still govern any bare heading or
+paragraph. But `/`, `/about` and everything in `components/site/` are built on
+`tokens.js`'s own scale (14/15/16/27), and case study bodies have `PROSE`
+applied on the wrapper, whose descendant selectors outrank these element rules.
+So this section is the fallback layer, not what the home page or a case study
+body actually renders at.
+
 Harmonized 2026-07-13 in two passes:
 1. **Size**: the primary heading was inconsistent across pages (Home hero peaked at 60px desktop, case-study h1s were a flat 36px with no mobile step, About's h1 was smaller at 24→30px, and AboutMeSection's h2 was accidentally bigger than About's own h1 at 30→36px). All primary headings now converge on one shared responsive step — 30px mobile → 36px tablet+. Case-study in-page section headings (Challenge/Solution/etc.) were bumped from a flat 20px up to the shared 24px→30px h2 size, and h3 sub-points were normalized to always use tighter `pt-6` spacing (was a mix of `pt-6`/`pt-10`, which sometimes made an h3 read identically to an h2).
 2. **Weight**: the shared `h1`/`h2`/`h3` default in `globals.css` was still `font-semibold` (600) — a legacy value nothing actually matched anymore, since every deliberately-styled heading (Home hero, About h1, AboutMeSection's h2, card titles) already overrode it to `font-normal` (400). This left "What colleagues say." (an unstyled `<h2>`, inheriting the stale 600 default) visibly heavier than its sibling headings once they were all the same size. Fixed by changing the shared default itself to `font-normal` — this also lightened every case-study h1/h2/h3, which had the same problem. Home's hero is the one deliberate exception, bumped to `font-medium` (500) as the single heaviest text on the site.
@@ -600,8 +667,15 @@ h2    { font-family: DM Sans; text-2xl→text-3xl font-normal tracking-tight tex
 h3    { font-family: DM Sans; text-xl font-normal tracking-tight text-slate-950 dark:text-white }
 p     { text-base font-normal leading-relaxed mb-4 text-slate-600 dark:text-slate-400 }
 blockquote { italic border-l-4 border-accent-300 dark:border-accent-600 pl-4 text-slate-600 dark:text-slate-400 my-6 }
-blockquote cite { block mt-2 not-italic text-sm text-slate-400 dark:text-slate-500 }
+blockquote cite { block mt-2 not-italic text-sm text-slate-600 dark:text-slate-400 }
+li    { text-slate-600 dark:text-slate-400 }
 ```
+
+**The `cite` values above are the fixed ones.** This block listed
+`text-slate-400 dark:text-slate-500` until 2026-09-09 — the pre-fix value that
+measured 2.51:1 on Prompt's testimonial cards and was corrected on 2026-07-13.
+Anyone restoring globals.css from this summary would have reintroduced the
+failure. Check the file, not this block, if they ever disagree again.
 
 ## Case study page spacing system
 - Main card padding: `p-8 md:p-12`
@@ -614,9 +688,16 @@ blockquote cite { block mt-2 not-italic text-sm text-slate-400 dark:text-slate-5
 - Section h3: `pt-10` (font-normal, size from globals); use `pt-6` for tighter sub-sections within a group
 
 ## Footer
-`src/app/components/footer.js`
-- Copyright: `text-xs text-center text-slate-500 dark:text-slate-500`
-- Format: `Designed and built by Tom Spencer © {year}`
+`src/app/components/site/Footer.js` — the site's only footer. `components/footer.js` was
+**deleted 2026-07-29**.
+
+Dark in both themes, so it reads as one continuous block with the Experiments & Lab section above
+it. Centred column: "Want to get in touch?" at `TEXT.title`, two 40×40 icon buttons (Email,
+LinkedIn — `hover:bg-accent-600`, `active:scale-[0.96]`), then `Designed and built by Tom Spencer
+© {year}` at `TEXT.xs` in `DARK_FAINT`.
+
+**The theme toggle is not here** — it moved into the nav's right zone. On otherwise-light routes
+`SiteChrome` wraps this footer in a `#050505` band so it keeps the ground it is built for.
 
 ## Important conventions
 - Dark mode uses Tailwind v4 `@variant dark` — all `dark:` classes work via `.dark` class on `<html>`.
@@ -625,7 +706,7 @@ blockquote cite { block mt-2 not-italic text-sm text-slate-400 dark:text-slate-5
 - Favicon: `icons: { icon: '/just_me.webp' }` in `generateMetadata()` in `layout.js`.
 - Image filenames in `/public` must be lowercase (e.g. `.png` not `.PNG`) — Vercel runs on Linux (case-sensitive).
 - `group-hover` animations require `group` class on the parent element — check this when adding arrow animations to links.
-- `ThemeToggle.js` uses inline `style` props (not Tailwind `dark:` classes) since it needs to respond to JS theme state at render time.
+- `components/site/ThemeToggle.js` is plain Tailwind `dark:` classes with **no inline styles** — the old cream/teal `components/ThemeToggle.js`, which did use inline `style` props, was deleted 2026-07-29.
 - Do NOT add `w-screen` to any element — use `w-full` to avoid horizontal scroll from scrollbar width.
 - Nav requires `relative` class for `z-50` to create a stacking context — without `relative`, z-index has no effect.
 - Shadow colours should use amber tint (`rgba(184,64,16,...)` light / `rgba(238,159,104,...)` dark) to stay consistent with the arc and accent palette.

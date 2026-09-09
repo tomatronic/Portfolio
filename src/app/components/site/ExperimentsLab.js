@@ -15,7 +15,8 @@ import { TEXT, DARK_INK, DARK_MUTED, DARK_FAINT, ICON_CARD, CARD_RADIUS, CONTAIN
  *
  * Give an entry an `image` and it renders a screenshot with a scrim; leave it
  * off and the tile falls back to its `tint` gradient as a placeholder. Job
- * Monitor is the only one with artwork so far.
+ * Monitor and From My Window have artwork; the other three are still on tints,
+ * which is the "Coming soon" state finding 11 wants a content decision on.
  */
 const EXPERIMENTS = [
   {
