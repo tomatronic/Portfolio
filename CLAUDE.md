@@ -51,9 +51,12 @@ worst possible ground for white text — so 4.54 is the floor and no future
 screenshot can push it lower. **Don't soften the middle stops of the top
 ramp** — they are what 0.04 of margin now rests on.
 
-Still open on finding 06: `touchpoints.png` (1600×2985, ~36% visible) and
-`view-campaign.png` (1600×6088, ~17% visible) both still want a
-purpose-crop to 3:2.
+~~Still open on finding 06: `touchpoints.png` and `view-campaign.png` want a
+purpose-crop to 3:2.~~ — **closed in `ba04d4b`** (2026-08-26), which this note
+predates. Both were cropped *and* renamed: `touchpoints.png` →
+`acj-touchpoints.png` and `view-campaign.png` → `influencer-campaign.png`,
+each now 1600×1067 — exactly 3:2. They are the ACJ and Influencer card images
+in `CaseStudyCards.js`. Finding 06 has nothing left open.
 
 ### The concept/shipped pair, built and parked (2026-08-26)
 A two-up comparison for the Approach section — `Prompt-suggestion.png`
@@ -437,14 +440,23 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 - Prompt: `Prompt-userflow.png` (customer journey map) added to Approach section 2026-05-26. Still missing: before/after comparison copy + section header for `Prompt-old2.png`
 - ACJ: "35 daily active users" metric removed from Impact section 2026-05-26 (no denominator; removed rather than reframed)
 
-**Unused images in /public/ ready to add to case studies:**
+**Unused images in /public/ (audited 2026-09-09 — the list is now one item):**
 - `prompt-home.png` — **untracked on purpose** (2026-08-26). Tom added it
   alongside `prompt-report.png` and is replacing it shortly; it isn't
   referenced anywhere yet, so it's staying out of git until it has a job.
-- `Prompt-suggestion.png`, `Prompt-error.png` — UI states; add to Prompt Challenge/Solution
-- `ACJ-early-mock.png`, `ACJ-early-mock-touchpoints.png` — despite filename, these are final shipped UI not early mocks; hold until Tom provides a genuine early exploration artefact for the Approach section
-- `ACJ-pub-view.png`, `ACJ-advertiser-view.png` — final shipped UI; dual-audience angle already covered by `ACJ-comparison.png`; not needed
-- `Campaign-application.png`, `Campaigns-approvals.png`, `Campaign-view-posts.png` — add to Influencer Solution section in a 3-col grid; skip `Campaigns-setup.png` (form too long at case study scale) and `Campaigns-all.png` (too simple)
+
+Everything else this list used to offer is **gone, not pending**. `40f6df4`
+(2026-07-30, "Drop 51MB of files the site does not use") deleted
+`Prompt-error.png`, `ACJ-early-mock*.png`, `ACJ-pub-view.png`,
+`ACJ-advertiser-view.png` and the whole `Campaign*.png` set — including the
+three earmarked for an Influencer 3-col grid. That plan cannot be actioned
+from `/public/`; it needs new exports from Tom, and is only worth reviving if
+he wants it. `Prompt-suggestion.png` also left the list by the other route:
+it is **in use**, in Prompt's Approach section (`casestudy/Prompt/page.js:89`).
+
+The blobs are still in git history if any of the deleted set is wanted back
+(`git show 40f6df4^:public/<name>`), so nothing is unrecoverable — but they
+are deliberately not in the working tree.
 
 ## AboutMeSection
 `src/app/components/AboutMeSection.js`
