@@ -109,11 +109,10 @@ export default function ExperimentsLab() {
           className="mb-14 md:mb-20"
         >
           <h2 className={`${TEXT.title} ${DARK_INK} mb-3 font-medium leading-[1.25] tracking-tight`}>
-            Experiments &amp; Lab
+            Experiments
           </h2>
           <p className={`${TEXT.base} ${DARK_MUTED} max-w-[52ch] leading-relaxed`}>
-            Side projects, half baked ideas and AI exploration. The following
-            projects demonstrate additional capabilities and are in varying states.
+            Side projects, half baked ideas and AI exploration.
           </p>
         </motion.div>
 
