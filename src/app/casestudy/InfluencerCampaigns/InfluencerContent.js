@@ -61,10 +61,10 @@ function CaseStudyContent() {
               <p>
                 The business case was clear: retain and win high-value advertisers who wanted influencer
                 and affiliate in one platform, grow the creator network by attracting influencers to the
-                ecosystem, and open new revenue streams from creator-focused campaigns.
+                ecosystem, and open new revenue streams from creator focused campaigns.
               </p>
               <p>
-                The challenge? Rakuten had never worked closely with influencers before. There was no
+                The challenge? Rakuten Advertising had never worked closely with influencers before. There was no
                 infrastructure to connect social accounts, no management tools for campaigns, and no
                 creator-facing UI. An added pressure was to meet a hard deadline for a prospect demo
                 the following Monday.
@@ -72,14 +72,14 @@ function CaseStudyContent() {
 
               {/* Challenge */}
               <h2 className="pt-10 tracking-tight">Challenge</h2>
-              <p>This project had many constraints that can make design hard:</p>
+              <p>This project had many constraints that could make the process difficult:</p>
               <ul className="mb-8 space-y-2">
-                <li><b>Extreme time pressure</b> — a prospect demo within a week of project initiation</li>
-                <li><b>New user type</b> — influencers think about content creation, brand partnerships and social engagement, not metrics and commission structures</li>
-                <li><b>New product category</b> — campaigns were a new concept; advertisers would create opportunities, set deliverables and offer incentives, then invite and manage influencers</li>
-                <li><b>Technical unknowns</b> — we were using a partner to authenticate social accounts and consolidate posts linked to campaigns</li>
-                <li><b>No existing patterns</b> — although some influencers were in the platform, there was no influencer-specific UI; everything needed designing from scratch</li>
-                <li><b>Cross-functional complexity</b> — working across timezones, coordinating with external partners, aligning with developers estimating effort on the fly</li>
+                <li><b>Extreme time pressure</b>: A prospect demo within a week of project initiation</li>
+                <li><b>New user type</b>: Influencers think about content creation, brand partnerships and social engagement, not metrics and commission structures.</li>
+                <li><b>New product category</b>: Campaigns were a new concept; advertisers would create opportunities, set deliverables and offer incentives, then invite and manage influencers.</li>
+                <li><b>Technical unknowns</b>: We would use a partner to authenticate social accounts and consolidate posts linked to campaigns.</li>
+                <li><b>No existing patterns</b>: Although some influencers were in the platform, there was no influencer-specific UI, everything needed designing from scratch.</li>
+                <li><b>Cross-functional complexity</b>: Working across timezones, coordinating with external partners, aligning with developers estimating effort on the fly</li>
               </ul>
 
               {/* Personas */}
@@ -209,18 +209,19 @@ function CaseStudyContent() {
                 high-fidelity mocks.
               </p>
               <p>
-                In five days I built a full clickable prototype covering the end-to-end experience:
-                campaign creation, influencer invites, and application review on the advertiser side;
-                campaign discovery, application flow, and deliverable submission on the influencer side;
-                social post display; and all key workflows connected and demonstrable.
+                By the end of the week I managed to build a full clickable prototype covering the
+                end-to-end experience: campaign creation, influencer invites, and application review on
+                the advertiser side and campaign discovery, application flow, and deliverable submission
+                on the influencer side. All key workflows connected and demonstrable.
               </p>
               <p>
-                Jumping straight to high-fidelity mockups — using existing design system components
-                where possible — meant the prototype moved fast without sacrificing credibility.
+                Jumping straight to high-fidelity mockups (using existing design system components
+                where possible) meant the prototype moved fast without sacrificing credibility.
                 Prototyping the complete flow, rather than individual screens, surfaced technical
-                questions early and gave engineering clear requirements to evaluate. When the VP of
-                Product saw it, she had enough confidence to demo the vision to the prospect directly.
-                Prototype delivered Friday, demo on Monday, project greenlit for December MVP.
+                questions early and gave engineering clear requirements to run through and understand.
+                When the VP of Product viewed it, she had enough confidence to demo the vision to the
+                prospect directly. Prototype delivered Friday, demo on Monday, project greenlit for
+                December MVP.
               </p>
 
               <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
@@ -294,23 +295,26 @@ function CaseStudyContent() {
               </div>
 
               <p>
-                If a user could complete that journey end-to-end, we had an MVP. The ruthless scoping
-                had an unexpected benefit — it forced me to identify the absolute core value proposition.
-                What's the one thing this product must do? Let advertisers create campaigns and let
-                influencers apply and complete them. Everything else is enhancement.
+                If a user could complete the journey end-to-end, we had an MVP. The ruthless scoping
+                had an unexpected benefit, it forced me to identify the absolute core value proposition.
+              </p>
+              <p>What's the one thing this product must do?</p>
+              <p>
+                Let advertisers create campaigns and let influencers apply and complete them. Everything
+                else is enhancement.
               </p>
 
               <h3 className="pt-6">Dual-audience UI</h3>
               <p>
                 Advertisers and influencers needed fundamentally different experiences from the same
-                underlying campaign system.
+                underlying system.
               </p>
               <p>
-                Advertisers needed business-focused tools: a management dashboard tracking applications
-                and completions, detailed influencer profiles with audience data and engagement rates,
-                and language around goals, deliverables, and compensation structures. Influencers needed
-                almost the opposite — opportunity-focused framing that answered "what's in it for me?"
-                before anything else. Campaigns needed to be sold, not specified. The application flow
+                Advertisers needed business-focused tools like a management dashboard tracking
+                applications and completions, detailed influencer profiles with audience data and
+                engagement rates, and language around goals, deliverables, and compensation structures.
+                Influencers instead needed almost the opposite, opportunity-focused framing that answered
+                "what's in it for me?" before anything else. Campaigns needed to be sold, not specified. The application flow
                 had to be quick and low-friction, with requirements framed as expectations rather than
                 obligations.
               </p>
@@ -323,56 +327,54 @@ function CaseStudyContent() {
 
               <h3 className="pt-6">Social post verification</h3>
               <p>
-                The most critical — and most uncertain — piece was social post detection. The external
+                The most critical and most uncertain piece was social post detection. The external
                 partner would detect when an influencer posted about a campaign, but the exact mechanism
                 wasn't finalised. How do you design a verification UI when you don't know exactly what
                 data you'll receive?
               </p>
               <ul className="mb-8 space-y-2">
-                <li><b>Design for the ideal state first</b> — what should it look like if everything works perfectly? Show the post preview, engagement metrics, verification status</li>
-                <li><b>Then design for failure states</b> — what if the post isn't detected? How does an advertiser manually review or flag issues?</li>
-                <li><b>Build in flexibility</b> — card-based layouts that can accommodate variable data, whether posts have images, videos, or just text</li>
+                <li><b>Design for the ideal state first</b>: What should it look like if everything works perfectly? Show the post preview, engagement metrics, verification status</li>
+                <li><b>Then design for failure states</b>: What if the post isn't detected? Can this be manually reviewed and issues flagged?</li>
+                <li><b>Build in flexibility</b>: Card based layouts that can accommodate variable data, whether posts have images, videos, or just text</li>
               </ul>
 
               <h3 className="pt-6">Influencer profile design</h3>
               <p>
-                Advertisers needed to evaluate influencers before approving applications. We suddenly
-                had access to social data we'd never dealt with — follower counts, engagement rates, post
-                frequency, audience demographics. It would be easy to show everything, but more data
-                isn't always better. I prioritised active socials, engagement quality over vanity
-                metrics, recent activity, and audience relevance. Everything else was cut to keep the
-                profile clean and the story immediate.
+                An Advertiser needs to evaluate influencers before approving applications. We suddenly
+                had access to social data we'd never dealt with. It would be easy to show everything,
+                but more data isn't always better. I prioritised active socials and engagement quality
+                over recent activity and audience relevance. Everything else was cut to keep the profile
+                clean.
               </p>
 
               <h3 className="pt-6">Campaign details page</h3>
               <p>
-                After clicking a campaign thumbnail, influencers needed comprehensive information
-                presented persuasively. I shifted my thinking from "display campaign details" to
-                "convert interested influencers into applicants." Key decisions: lead with deliverables
-                and compensation; frame requirements as opportunities, not obligations; clear primary
-                CTAs with minimal friction. The page needed to feel like an opportunity worth pursuing,
-                not a dry specification document.
+                After clicking a campaign thumbnail, influencers needed detailed information presented
+                clearly. I shifted my thinking from "display campaign details" to "convert interested
+                influencers into applicants." Key decisions included leading with deliverables and
+                compensation, frame requirements as opportunities and clear CTAs with minimal friction.
+                The page needed to feel like an opportunity worth pursuing, not a dry specification
+                document.
               </p>
 
               {/* Testing */}
               <h2 className="pt-10 tracking-tight">Testing and iteration</h2>
               <div className="mb-12 space-y-6">
-                <p><b>Internal validation (Weeks 2–3)</b> — tested with 8 PMs and engineers; advertiser flows were clear, but influencer outcome messaging needed clarification and workflows were adjusted accordingly.</p>
-                <p><b>MVP scope refinement (Weeks 3–8)</b> — weekly reviews with VP and engineering; continuously cutting scope to hit December, with every cut documented with rationale for potential V2.</p>
-                <p><b>The biggest surprise</b> — advertisers cared more about getting influencers onboard and carrying out campaigns than the outcomes. With a small initial advertiser pool of larger companies, the extras can come later.</p>
+                <p><b>Internal validation (Weeks 2–3)</b> Tested with 8 PMs and engineers. Findings showed that Advertiser flows were clear, but influencer outcome messaging needed clarification and workflows should be adjusted accordingly.</p>
+                <p><b>MVP scope refinement (Weeks 3–8)</b> Weekly reviews with VP and engineering where we continuously cut or reduced scope to hit the December deadline, every cut was documented with reason for potential V2 implementation.</p>
+                <p><b>The biggest surprise.</b> Advertisers cared more about getting influencers onboard and carrying out campaigns than the outcomes. With a small initial advertiser pool of larger companies, the extras can come later.</p>
               </div>
 
 
               {/* Solution */}
               <h2 className="pt-10 tracking-tight">Solution</h2>
               <p>
-                The final MVP design focused on the core workflow: advertisers create campaigns,
+                The final MVP design focused on the core workflow: Advertisers create campaigns,
                 influencers discover and apply, content gets posted and verified, incentives get
-                distributed. Key design elements: progressive disclosure to show essential info first;
-                card-based layouts flexible enough to handle variable data from external APIs; clear
-                primary CTAs on every screen; dual-audience framing with different language and
-                hierarchy for each user type; and visual hierarchy that makes incentives and
-                requirements unmissable.
+                distributed. Key design elements included progressive disclosure to show essential info
+                first, card-based layouts flexible enough to handle variable data from external APIs,
+                dual-audience framing with different language and hierarchy for each user type and
+                visual hierarchy that makes incentives and requirements unmissable.
               </p>
 
               {/* Outcome */}
@@ -387,18 +389,16 @@ function CaseStudyContent() {
                 Moving fast with a tangible prototype did more than hit a deadline. It secured the
                 prospect's commitment before competitors could respond, validated the concept before
                 any serious engineering investment, and aligned stakeholders around a shared vision
-                they could actually click through. The prototype also created its own momentum —
-                when people can see and interact with something real, it stays prioritised through
-                competing demands in a way that a slide deck never does.
+                they could actually click through. When people can see and interact with something
+                real, it provides context that a slide deck might not.
               </p>
 
               {/* What I learned */}
               <h2 className="pt-10 tracking-tight">What I learned</h2>
-              <p>Having a prototype that looked and felt real made a concrete difference. A VP could show it to a prospect with confidence — wireframes wouldn't have done that. Fidelity bought credibility faster than I expected.</p>
-              <p>The five-month deadline forced a kind of clarity I rarely have on longer projects. Every feature had to earn its place in V1. I ended up cutting things I would normally have kept, and the product was tighter for it.</p>
-              <p>I built the layouts to be flexible from the start — cards that could handle variable data, components that could be extended without breaking. That wasn't over-engineering; it was the only practical way to ship something that could grow once real users showed up with real feedback.</p>
-              <p>Prototyping end-to-end, rather than screen by screen, helped me catch gaps that would have been expensive to fix later. It's easy to design a screen that looks good in isolation. It's harder to design a journey that actually holds together.</p>
-              <p className="mb-12">And the deadline, oddly, helped. When you have to ship something complete in a tight timeframe, you stop defending nice-to-haves and focus on what the product actually needs to be usable.</p>
+              <p>Having a prototype that looked and felt real made a concrete difference. A VP could show it to a prospect with confidence, wireframes wouldn't have done that. Fidelity bought credibility fast.</p>
+              <p>The five-month deadline forced a kind of clarity I rarely have on longer projects. Every feature had to earn its place in V1. I ended up cutting things I would normally have kept, and the product was much tighter because of this.</p>
+              <p>I built the layouts to be flexible from the start, cards that could handle variable data, components that could be extended without breaking. It created a practical way to ship something that could grow once real users showed up with real feedback.</p>
+              <p className="mb-12">The deadline helped. When you have to ship something complete in a tight timeframe, you stop defending nice-to-haves and focus on what the user actually needs.</p>
 
               <OtherCaseStudies currentHref="/casestudy/InfluencerCampaigns" />
             </div>
