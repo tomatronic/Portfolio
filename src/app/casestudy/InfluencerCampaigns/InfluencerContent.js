@@ -297,8 +297,8 @@ function CaseStudyContent() {
               <p>
                 If a user could complete the journey end-to-end, we had an MVP. The ruthless scoping
                 had an unexpected benefit, it forced me to identify the absolute core value proposition.
+                What's the one thing this product must do?
               </p>
-              <p>What's the one thing this product must do?</p>
               <p>
                 Let advertisers create campaigns and let influencers apply and complete them. Everything
                 else is enhancement.
@@ -360,9 +360,9 @@ function CaseStudyContent() {
               {/* Testing */}
               <h2 className="pt-10 tracking-tight">Testing and iteration</h2>
               <div className="mb-12 space-y-6">
-                <p><b>Internal validation (Weeks 2–3)</b> Tested with 8 PMs and engineers. Findings showed that Advertiser flows were clear, but influencer outcome messaging needed clarification and workflows should be adjusted accordingly.</p>
-                <p><b>MVP scope refinement (Weeks 3–8)</b> Weekly reviews with VP and engineering where we continuously cut or reduced scope to hit the December deadline, every cut was documented with reason for potential V2 implementation.</p>
-                <p><b>The biggest surprise.</b> Advertisers cared more about getting influencers onboard and carrying out campaigns than the outcomes. With a small initial advertiser pool of larger companies, the extras can come later.</p>
+                <p><b>Internal validation (Weeks 2–3)</b>: Tested with 8 PMs and engineers. Findings showed that Advertiser flows were clear, but influencer outcome messaging needed clarification and workflows should be adjusted accordingly.</p>
+                <p><b>MVP scope refinement (Weeks 3–8)</b>: Weekly reviews with VP and engineering where we continuously cut or reduced scope to hit the December deadline, every cut was documented with reason for potential V2 implementation.</p>
+                <p><b>The biggest surprise</b>: Advertisers cared more about getting influencers onboard and carrying out campaigns than the outcomes. With a small initial advertiser pool of larger companies, the extras can come later.</p>
               </div>
 
 
