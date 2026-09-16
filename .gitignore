@@ -2,7 +2,8 @@
 
 # dependencies
 /node_modules
-package-lock.json
+# package-lock.json is tracked (since 2026-09-16) so Vercel installs exactly
+# what was tested locally. Don't re-ignore it.
 /.pnp
 .pnp.js
 .yarn/install-state.gz
