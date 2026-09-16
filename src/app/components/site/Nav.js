@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { play } from 'cuelume'
+import { playCue } from '../../lib/sound'
 import ThemeToggle from './ThemeToggle'
 import { TEXT, INK, BUTTON_RADIUS } from './tokens'
 
@@ -92,13 +92,7 @@ export default function Nav({ active = 'Home' }) {
 
   const handleClick = useCallback(() => {
     burst(BURST_ON_CLICK)
-    // Never let an audio failure block navigation — autoplay policy, an
-    // unsupported context, or a muted device should all fail silently.
-    try {
-      play('success')
-    } catch {
-      /* no-op */
-    }
+    playCue('success')
   }, [burst])
 
   return (

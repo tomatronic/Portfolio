@@ -5,19 +5,9 @@ import { motion } from 'framer-motion'
 // Left → right layering: right card sits on top, like a real card spread
 const Z_ORDERS = [1, 2, 3]
 
-// Spring params are defined as { type: 'easing', duration, ease } — strip the type key
-// so Framer Motion receives a plain { duration, ease } transition
-function toFramerTransition(spring) {
-  if (!spring) return {}
-  if (spring.type === 'easing') {
-    const { type: _t, ...rest } = spring
-    return rest
-  }
-  return spring
-}
-
 export default function CardImageStack({ images, isHovered, params }) {
-  const transition = toFramerTransition(params.spring)
+  // `params.transition` is a plain Framer Motion transition — { duration, ease }.
+  const transition = params.transition ?? {}
 
   // Rest: strongly fanned — outer cards rotated and spread
   // Hover: spread widens significantly, rotation reduces but doesn't flatten fully
@@ -38,7 +28,6 @@ export default function CardImageStack({ images, isHovered, params }) {
             className="overflow-hidden rounded-xl shadow-md ring-0.5 ring-[rgba(184,64,16,0.22)] dark:ring-[rgba(238,159,104,0.30)]"
             animate={{
               x:      isHovered ? hoverX[i]      : restX[i],
-              y:      0,
               rotate: isHovered ? hoverRotate[i] : restRotate[i],
             }}
             transition={transition}

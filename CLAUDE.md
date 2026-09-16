@@ -182,13 +182,20 @@ The `/concept-9f2k` exploration was adopted as the site's real design and the sa
 
 ### Component map (from 2026-07-29)
 `src/app/components/site/` holds the design system and every page-level block:
-`tokens.js` (scale, ink, radii, icon sizes, `CONTAINER`, `CASE_STUDY_CONTAINER`,
-`PROSE`), `Nav`, `Footer`, `ThemeToggle`, `CanvasReveal`, `Home`, `Hero`,
-`CaseStudyCards`, `ExperimentsLab`, `About`, `ImageWall`, `ZoomableImage`
-(used by ACJ), `Prose`.
+`tokens.js` (scale, ink, radii, icon sizes, `GHOST_PILL`, `CONTAINER`,
+`CASE_STUDY_CONTAINER`, `PROSE`), `Nav`, `Footer`, `ThemeToggle`, `CanvasReveal`,
+`Home`, `Hero`, `CaseStudyCards`, `ExperimentsLab`, `About`, `ImageWall`,
+`CaseStudyFigure`, `CaseStudyHeader`, `ZoomableImage`.
 `src/app/components/` keeps the framework-level pieces: `SiteChrome` (renders
 `Nav`/`Footer` on routes that don't render their own), `ThemeProvider`,
-`PageBackground`, `OtherCaseStudies`, `CardImageStack`.
+`OtherCaseStudies`, `CardImageStack`.
+`src/app/lib/` holds `caseStudies.js` (**the one list of case studies** — cards,
+compact cards and sitemap all read it), `sound.js` (`playCue`, the try/catch
+around `cuelume`), and `strava.js`.
+
+**Deleted 2026-09-16 in a duplication pass:** `Prose.js` (never imported) and
+`PageBackground.js` (set the body colour from a `useEffect`; `globals.css`'s
+`body` / `html.dark body` rules already did it before first paint).
 Route files (`page.js`) are thin: they set metadata and render the matching
 block, e.g. `app/page.js` → `components/site/Home`.
 
@@ -269,7 +276,7 @@ Project root: `/Users/thomasspencer/Documents/Portfolio2.0/portfolio2.0/`
 ## Key files
 ```
 src/app/
-  layout.js        — root layout: SiteChrome (nav + footer), ThemeProvider, PageBackground,
+  layout.js        — root layout: SiteChrome (nav + footer), ThemeProvider,
                      FOUC script, Vercel Analytics + Speed Insights + GoogleAnalytics, full
                      OpenGraph/Twitter metadata (metadataBase https://www.tomspencer.design,
                      /ogdata.png card)
@@ -282,14 +289,16 @@ src/app/
   not-found.js     — 404, rebuilt on tokens.js 2026-08-17
   globals.css      — @import "tailwindcss", @theme accent tokens, dark variant,
                      :focus-visible ring, element base styles
-  lib/strava.js    — 365-day running total for the About page
   components/
     SiteChrome.js       — renders Nav/Footer on routes that don't render their own
     ThemeProvider.js    — dark/light context; toggle() persists to localStorage
-    PageBackground.js   — sets body bg from theme (#ffffff / #0F1623)
     OtherCaseStudies.js — compact cards at the foot of each case study
     CardImageStack.js   — fanned image stack, used by OtherCaseStudies
     site/               — the design system and every page-level block (see Component map)
+  lib/
+    caseStudies.js      — the case study list: slug, title, listed, card + stack data
+    sound.js            — playCue(): cuelume, never allowed to throw
+    strava.js           — 365-day running total for the About page
   casestudy/            — 4 case study pages (Prompt, InfluencerCampaigns, ACJ, Rakuten)
   @modal/               — intercepting route that renders case studies in a modal
 public/
@@ -340,8 +349,10 @@ becomes two rows with the pill alone on the second.
 - Item hrefs are absolute (`/#work`, not `#work`) because the nav renders on About too.
 
 ## Case study cards (home page)
-`src/app/components/site/CaseStudyCards.js` — `components/casestudyShowcase.js` was **deleted
-2026-07-29**.
+`src/app/components/site/CaseStudyCards.js` is the presentation only — **the
+data is `lib/caseStudies.js`**, shared with `OtherCaseStudies` and `sitemap.js`.
+Hide or reorder a case study there, in one place. (`components/casestudyShowcase.js`
+was **deleted 2026-07-29**.)
 
 Card order (top to bottom):
 1. **Prompt** — Natural Language Search & AI
@@ -361,10 +372,10 @@ the fold. Don't put that margin back without re-checking the fold.
 **Rakuten hidden 2026-07-13** — Tom's call: it was the weakest case study (thin outcome metrics,
 one-sentence Solution section, and its card image showed a third-party "Nexus Commerce" product,
 not his own work — see the content flag below), and 3 case studies is fine given they're all
-Rakuten Advertising-based anyway. Removed from this array, from `OtherCaseStudies.js`'s `CARDS`,
-and from `sitemap.js` — but the page itself (`src/app/casestudy/Rakuten/page.js`) and the
+Rakuten Advertising-based anyway. It is `listed: false` in `lib/caseStudies.js`, which drops it
+from the home cards, the compact cards and the sitemap at once — but the page itself (`src/app/casestudy/Rakuten/page.js`) and the
 `@modal` slug mapping are untouched, so it's still reachable at `/casestudy/Rakuten` by direct
-URL, just unlisted everywhere. Reversible: re-add the card object, still in git history.
+URL, just unlisted everywhere. Reversible: flip `listed` and give it a `card` and `stack`.
 
 No cards are locked — all password-gate code was deleted in June 2026.
 
@@ -414,7 +425,6 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 - ThemeProvider adds/removes `dark` class on `<html>`. `toggle()` persists to `localStorage`.
 - FOUC prevention: inline `<script>` in layout.js applies dark class before hydration
 - `<html>` has `suppressHydrationWarning` to avoid React mismatch warnings
-- PageBackground.js only reacts to theme changes (NOT pathname — avoids flash on modal open)
 - `page.js` reads `useTheme()` directly and switches colour palette via JS (not Tailwind dark: classes)
 
 ## Case study modal (Parallel + Intercepting Routes)
@@ -446,8 +456,8 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 `src/app/components/OtherCaseStudies.js` — compact cards at the foot of each case study.
 
 - Layout: title left, `CardImageStack` right. Padding `px-5 py-8`, image container `h-16 w-28 mr-6`.
-- Images are `prompt_1-3`, `influencer_1-3` and `acj_1-3`. (**Not** `offer_1-3` — the Rakuten
-  set was deleted in `40f6df4` along with the case study's card entry.)
+- Images come from each entry's `stack` in `lib/caseStudies.js` — `prompt_1-3`,
+  `influencer_1-3`, `acj_1-3`. (**Not** `offer_1-3`; that set was deleted in `40f6df4`.)
 - Border `border-[#C8BEB0] dark:border-[#2A3A4A]`; amber hover shadow `rgba(184,64,16,0.10)` /
   `rgba(238,159,104,0.12)`.
 - `replace` on the Link prevents modal history stacking, so closing always returns home.
@@ -466,19 +476,10 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 <div className="relative min-h-screen">
   <div className={`container mx-auto ${CASE_STUDY_CONTAINER} px-6`}>
     <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
-      {/* Hero image container */}
-      <div className="bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8 ...">
-        <Image ... />
-      </div>
-      {/* Header grid */}
-      <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
-        <div className="md:col-span-2">
-          <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">Brand • Date</p>
-          <h1>Title</h1>
-        </div>
-        <div className="md:col-span-2">[intro + role/skills metadata]</div>
-      </div>
-      {/* Content */}
+      <CaseStudyFigure priority src="/hero.png" width={1600} height={927} alt="…" />
+      <CaseStudyHeader eyebrow="Rakuten Advertising • Date" title="Title" role="…" skills="…">
+        <p>[intro]</p>
+      </CaseStudyHeader>
       <div className="grid auto-rows-auto grid-cols-1 gap-5 md:grid-cols-4 md:gap-10">
         <div className="col-span-4 mb-12">[sections]</div>
       </div>
@@ -486,6 +487,14 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
   </div>
 </div>
 ```
+
+**Every inline image is a `CaseStudyFigure`** (`components/site/CaseStudyFigure.js`):
+it owns the cream ground, the ring and the `sizes` hint, so don't write the
+wrapper out by hand — that markup was duplicated 21 times before 2026-09-16.
+`zoom` makes it a `ZoomableImage`; pass `sizes="100vw"` with it. The only
+exception is Rakuten's hero, which sits on a `bg-[url('/offerBG.png')]` panel.
+**The header is a `CaseStudyHeader`**; `title` accepts a node for ACJ's tinted
+product name.
 
 `CASE_STUDY_CONTAINER` is `max-w-[904px]`, a 760px content column. It was
 `max-w-6xl` (a 1008px column, 132 characters a line) until 2026-08-17 — see the
@@ -702,10 +711,11 @@ LinkedIn — `hover:bg-accent-600`, `active:scale-[0.96]`), then `Designed and b
 ## Important conventions
 - Dark mode uses Tailwind v4 `@variant dark` — all `dark:` classes work via `.dark` class on `<html>`.
 - `CardImageStack.js` is a shared component — changes affect all card layouts.
-- `PageBackground.js` must NOT use pathname logic — causes flash when modal intercepts route.
 - Favicon: `icons: { icon: '/just_me.webp' }` in `generateMetadata()` in `layout.js`.
 - Image filenames in `/public` must be lowercase (e.g. `.png` not `.PNG`) — Vercel runs on Linux (case-sensitive).
 - `group-hover` animations require `group` class on the parent element — check this when adding arrow animations to links.
+- The Hero's Resume/LinkedIn pills and the 404's CTA share `GHOST_PILL` from `tokens.js`. The 404 adds `min-h-11`; the Hero pills don't — a 44px hit-area inconsistency worth settling one way or the other.
+- UI sounds go through `lib/sound.js`'s `playCue()`, never `cuelume`'s `play()` directly — the try/catch is what stops autoplay policy from blocking the click.
 - `components/site/ThemeToggle.js` is plain Tailwind `dark:` classes with **no inline styles** — the old cream/teal `components/ThemeToggle.js`, which did use inline `style` props, was deleted 2026-07-29.
 - Do NOT add `w-screen` to any element — use `w-full` to avoid horizontal scroll from scrollbar width.
 - Nav requires `relative` class for `z-50` to create a stacking context — without `relative`, z-index has no effect.

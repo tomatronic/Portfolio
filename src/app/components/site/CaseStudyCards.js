@@ -6,48 +6,19 @@ import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { TEXT, INK, ICON_CARD, CARD_RADIUS, CONTAINER } from './tokens'
+import { LISTED_CASE_STUDIES } from '../../lib/caseStudies'
 
 /**
  * Image-forward case study tiles: a tinted card with the screenshot filling it,
  * title and one-line descriptor overlaid on a scrim at the bottom, arrow top
  * right. Same idea as the Shopify Design card used as reference.
  *
- * These are now the live home page's work cards.
- * components/casestudyShowcase.js is the previous design and is no longer
- * imported anywhere.
- *
- * `tint` is the light ground the screenshot sits on, picked to sit near the
- * Rakuten purple in the shots rather than introducing an unrelated hue. It has
- * to stay light: the scrim darkens the bottom to charcoal, and the contrast
- * between a pale top and a dark base is what gives the card its shape.
+ * The cards' content — title, descriptor, metrics, screenshot, tint — lives in
+ * lib/caseStudies.js, which the compact cards and the sitemap also read. This
+ * file is only the presentation.
  */
 
-const CARDS = [
-  {
-    href: '/casestudy/Prompt',
-    title: 'Natural Language Search & AI',
-    descriptor: 'Plain-English reporting for 1,000+ advertisers',
-    metrics: ['90% faster report creation', 'Est. $10M annual time savings'],
-    image: { src: '/prompt-report.png', position: 'top' },
-    tint: '#E6E0F5',
-  },
-  {
-    href: '/casestudy/InfluencerCampaigns',
-    title: 'Influencer Campaign Platform',
-    descriptor: 'Concept to production in five months',
-    metrics: ['Prototype in 5 days', 'Shipped in 5 months'],
-    image: { src: '/influencer-campaign.png', position: 'top' },
-    tint: '#F5E1EA',
-  },
-  {
-    href: '/casestudy/ACJ',
-    title: 'Multi-Touch Attribution for Affiliate',
-    descriptor: 'How every channel contributes across 15 interactions',
-    metrics: ['Clarified complex journeys', 'Key differentiator in pitches'],
-    image: { src: '/acj-touchpoints.png', position: 'top' },
-    tint: '#DEE5F7',
-  },
-]
+const CARDS = LISTED_CASE_STUDIES.map(({ href, title, card }) => ({ href, title, ...card }))
 
 function Card({ card, isFirst }) {
   return (

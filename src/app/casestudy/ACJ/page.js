@@ -1,7 +1,7 @@
-import Image from "next/image"
+import CaseStudyFigure from "../../components/site/CaseStudyFigure"
+import CaseStudyHeader from "../../components/site/CaseStudyHeader"
 import OtherCaseStudies from "../../components/OtherCaseStudies"
 import { PROSE, CASE_STUDY_CONTAINER } from '../../components/site/tokens'
-import ZoomableImage from '../../components/site/ZoomableImage'
 
 export async function generateMetadata() {
     return {
@@ -16,24 +16,16 @@ function ACJ() {
             <div className="relative min-h-screen">
                 <div className={`container mx-auto ${CASE_STUDY_CONTAINER} px-6`}>
                     <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
-                    <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                            <Image sizes="(max-width: 768px) 100vw, 1008px" priority className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-hero.png" width={1600} height={927} alt="Affiliate Conversion Journey dashboard showing multi-touch attribution across awareness, consideration, and conversion phases" />
-                        </div>
-                        <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
-                            <div className="md:col-span-2">
-                                <p data-keep className="text-[15px] font-medium text-[#737373] dark:text-[#8A8A8A]">Rakuten Advertising &bull; Oct 2022 – Jun 2023</p>
-                                <h1 className="text-balance"><span className="text-[#5D5D5D] dark:text-[#B0B0B0]">Affiliate Conversion Journey</span> — Multi-Touch Attribution for Affiliate</h1>
-                            </div>
-                            <div className="md:col-span-2">
-                                <p>Publishers and advertisers on Rakuten's affiliate network needed to understand their contribution to sales beyond last-click attribution. When a customer discovers a product through Publisher A's blog, researches it via Publisher B's review site, then purchases after clicking Publisher C's discount link, who deserves credit?</p>
-                                <p>Without this visibility, publishers couldn't prove their value in earlier phases of the funnels, and advertisers couldn't optimize their partnerships. Competitors like CJ Affiliate and Impact offered journey tracking, putting Rakuten at a strategic disadvantage.</p>
-
-                                <div className="text-[#5D5D5D] dark:text-[#B0B0B0] space-y-1">
-                                    <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]"><span className="text-[#737373] dark:text-[#8A8A8A]">Role:</span> <span className="font-medium">Sole UX designer</span></p>
-                                    <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]"><span className="text-[#737373] dark:text-[#8A8A8A]">Skills:</span> <span className="font-medium">UX/UI, User Research, Prototyping, User testing</span></p>
-                                </div>
-                            </div>
-                        </div>
+                    <CaseStudyFigure priority src="/ACJ-hero.png" width={1600} height={927} alt="Affiliate Conversion Journey dashboard showing multi-touch attribution across awareness, consideration, and conversion phases" />
+                        <CaseStudyHeader
+                            eyebrow="Rakuten Advertising • Oct 2022 – Jun 2023"
+                            title={<><span className="text-[#5D5D5D] dark:text-[#B0B0B0]">Affiliate Conversion Journey</span> — Multi-Touch Attribution for Affiliate</>}
+                            role="Sole UX designer"
+                            skills="UX/UI, User Research, Prototyping, User testing"
+                        >
+                                    <p>Publishers and advertisers on Rakuten's affiliate network needed to understand their contribution to sales beyond last-click attribution. When a customer discovers a product through Publisher A's blog, researches it via Publisher B's review site, then purchases after clicking Publisher C's discount link, who deserves credit?</p>
+                                    <p>Without this visibility, publishers couldn't prove their value in earlier phases of the funnels, and advertisers couldn't optimize their partnerships. Competitors like CJ Affiliate and Impact offered journey tracking, putting Rakuten at a strategic disadvantage.</p>
+                        </CaseStudyHeader>
 
                         <div className="grid auto-rows-auto grid-cols-1 gap-5 md:grid-cols-4 md:gap-10">
                             <div className="col-span-4 mb-12">
@@ -49,9 +41,7 @@ function ACJ() {
                                 <p><b>Key insight</b>: Start with answers, allow exploration.</p>
                                 <h3 className="pt-6">The version that didn&apos;t work</h3>
                                 <p>The first attempt plotted touchpoints along an actual timeline, with the phase carried by the shape and colour of each marker. It reads cleanly here because this is one journey across fourteen days. At realistic volumes it stopped reading, and the design was already compensating in two places: the &lsquo;5&rsquo; is five events collapsed into a single dot because they would not fit, and the zoom control exists so you can escape the crowding. Both hide data to keep the picture legible, which is the opposite of what the screen is for.</p>
-                                <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                    <ZoomableImage sizes="100vw" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/acj-timeline.png" width={2518} height={708} alt="An early exploration: one customer journey plotted along a date axis from 19 May to 2 June, with a green Recognition diamond, cyan Research circles including one marked 5 where five events are collapsed together, and an orange Conversion diamond" />
-                                </div>
+                                <CaseStudyFigure zoom sizes="100vw" src="/acj-timeline.png" width={2518} height={708} alt="An early exploration: one customer journey plotted along a date axis from 19 May to 2 June, with a green Recognition diamond, cyan Research circles including one marked 5 where five events are collapsed together, and an orange Conversion diamond" />
                                 <p>The phases were already in the thinking, but only as a legend. The move that worked was to stop plotting time and let the phases become the structure instead — three columns, every journey the same shape, comparable at a glance. Recognition and Research became Awareness and Consideration on the way, landing on the language marketers already use.</p>
                                 <h3 className="pt-6">Key design decisions</h3>
                                 <ul className="mb-8 space-y-2">
@@ -68,22 +58,14 @@ function ACJ() {
                                 </ul>
                                 <h2 className="pt-10 tracking-tight">Solution</h2>
                                 <div className="space-y-6">
-                                <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                        <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-activity-summary.png" width={1000} height={774} alt="Users first see an activity summary with total clicks across phases, average clicks to conversion, and their baseline contribution footprint—providing context before diving into detailed journeys." />
-                                    </div>
+                                <CaseStudyFigure src="/ACJ-activity-summary.png" width={1000} height={774} alt="Users first see an activity summary with total clicks across phases, average clicks to conversion, and their baseline contribution footprint—providing context before diving into detailed journeys." />
                                     <p>The Activity Summary presents raw data up front, total clicks, across phases, average clicks to conversion and baseline contributions. It allows users to quickly understand perforb before diving into complex journeys.</p>
-                                    <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                        <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-contributions.png" width={1000} height={774} alt="The Contributions tab breaks down publisher involvement across awareness, consideration, and conversion phases—giving users clear language to discuss their value beyond last-click attribution." />
-                                    </div>
+                                    <CaseStudyFigure src="/ACJ-contributions.png" width={1000} height={774} alt="The Contributions tab breaks down publisher involvement across awareness, consideration, and conversion phases—giving users clear language to discuss their value beyond last-click attribution." />
                                     <p>The three-phase framework transformed abstract click sequences into a clear narrative. Publishers could now say "I drive 40% of awareness conversions" instead of struggling to explain their role. Advertisers could identify which publishers were performing well at different stages of the journey.</p>
                                     <p>For deeper analyses the Touchpoints tab revealed detailed conversion paths, presenting which sequences benefitted them most.</p>
-                                    <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                        <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-filter-selected.png" width={1000} height={774} alt="Users could adjust order period and lookback window to see how attribution changed—with smart defaults (30-day lookback, month-to-date) and inline helper text preventing confusion." />
-                                    </div>
+                                    <CaseStudyFigure src="/ACJ-filter-selected.png" width={1000} height={774} alt="Users could adjust order period and lookback window to see how attribution changed—with smart defaults (30-day lookback, month-to-date) and inline helper text preventing confusion." />
                                     <p>The default filters prevented cognitive overload while still giving users control. As users updated filter choices the report updates seamlessly.</p>
-                                    <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                            <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/ACJ-comparison.png" width={1600} height={927} alt="Side-by-side comparison of publisher and advertiser views of the same attribution data, demonstrating the dual-audience design" />
-                        </div>
+                                    <CaseStudyFigure src="/ACJ-comparison.png" width={1600} height={927} alt="Side-by-side comparison of publisher and advertiser views of the same attribution data, demonstrating the dual-audience design" />
                                     <p><b>Dual-audience view</b>: Rather than building two separate tools, one core visualization adapted based on user type. Publishers filtered by their own SIDs and saw "you" language. Advertisers filtered by campaign or publisher group and saw top contributors. Same data structure, different views, serving both audiences without doubling engineering effort.</p>
                                 </div>
                                 <div className="max-w-full mb-12">

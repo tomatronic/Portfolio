@@ -20,7 +20,7 @@ export default function ThemeProvider({ children }) {
   // the 'dark' class synchronously, so this only needs to sync React state to match —
   // doing it in a layout effect (not a regular effect) avoids a one-frame flash of
   // light-mode colors for dark-theme visitors on components that read theme via JS
-  // (Home's hero, PageBackground, ThemeToggle) rather than Tailwind's dark: class.
+  // (Home's hero, ThemeToggle) rather than Tailwind's dark: class.
   useIsomorphicLayoutEffect(() => {
     const stored = localStorage.getItem('theme')
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches

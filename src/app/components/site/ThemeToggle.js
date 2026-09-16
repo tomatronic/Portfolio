@@ -1,7 +1,7 @@
 'use client'
 
 import { Sun, Moon } from 'lucide-react'
-import { play } from 'cuelume'
+import { playCue } from '../../lib/sound'
 import { useTheme } from '../ThemeProvider'
 import { ICON_NAV, BUTTON_RADIUS } from './tokens'
 
@@ -20,13 +20,7 @@ export default function ThemeToggle() {
 
   const handleClick = () => {
     toggle()
-    // Sound must never block the theme change — autoplay policy, an
-    // unsupported audio context or a muted device should all fail silently.
-    try {
-      play('toggle')
-    } catch {
-      /* no-op */
-    }
+    playCue('toggle')
   }
 
   return (

@@ -1,4 +1,5 @@
-import Image from "next/image"
+import CaseStudyFigure from "../../components/site/CaseStudyFigure"
+import CaseStudyHeader from "../../components/site/CaseStudyHeader"
 import OtherCaseStudies from "../../components/OtherCaseStudies"
 import { PROSE, CASE_STUDY_CONTAINER } from '../../components/site/tokens'
 
@@ -15,22 +16,15 @@ function Prompt() {
             <div className="relative min-h-screen">
                 <div className={`container mx-auto ${CASE_STUDY_CONTAINER} px-6`}>
                     <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
-                        <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                            <Image sizes="(max-width: 768px) 100vw, 1008px" priority className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-hero.png" width={1600} height={927} alt="Natural language search interface for Rakuten Advertising custom reports" />
-                        </div>
-                        <div className="mb-12 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-4">
-                            <div className="md:col-span-2">
-                                <p data-keep className="text-[15px] font-medium text-[#737373] dark:text-[#8A8A8A]">Rakuten Advertising &bull; Jan 2025 - Ongoing</p>
-                                <h1 className="text-balance">Intelligent Search for Custom Reports — Natural Language Search & AI</h1>
-                            </div>
-                            <div className="md:col-span-2">
-                                <p>Users of Rakuten Advertising create custom reports on a regular basis, as often as weekly, to track campaign performance across 170+ metrics. Building one manually meant 15 to 20 minutes of clicking through dropdowns and configuring data points. With 1,000+ active users and dozens of account managers doing this regularly, the time loss was significant. It also landed on support when people couldn&apos;t figure out the interface.</p>
-                                <div className="text-[#5D5D5D] dark:text-[#B0B0B0] space-y-1">
-                                    <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]"><span className="text-[#737373] dark:text-[#8A8A8A]">Role:</span> <span className="font-medium">Sole UX designer</span></p>
-                                    <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]"><span className="text-[#737373] dark:text-[#8A8A8A]">Skills:</span> <span className="font-medium">UX/UI, User Research, Prototyping, User testing</span></p>
-                                </div>
-                            </div>
-                        </div>
+                        <CaseStudyFigure priority src="/Prompt-hero.png" width={1600} height={927} alt="Natural language search interface for Rakuten Advertising custom reports" />
+                        <CaseStudyHeader
+                            eyebrow="Rakuten Advertising • Jan 2025 - Ongoing"
+                            title="Intelligent Search for Custom Reports — Natural Language Search & AI"
+                            role="Sole UX designer"
+                            skills="UX/UI, User Research, Prototyping, User testing"
+                        >
+                            <p>Users of Rakuten Advertising create custom reports on a regular basis, as often as weekly, to track campaign performance across 170+ metrics. Building one manually meant 15 to 20 minutes of clicking through dropdowns and configuring data points. With 1,000+ active users and dozens of account managers doing this regularly, the time loss was significant. It also landed on support when people couldn&apos;t figure out the interface.</p>
+                        </CaseStudyHeader>
 
                         {/* Headline outcomes */}
                         <div className="mb-12 grid grid-cols-1 gap-8 rounded-2xl bg-[#EDE7DD] p-8 sm:grid-cols-3 md:p-10 dark:bg-slate-800/50">
@@ -69,14 +63,10 @@ function Prompt() {
                                 <h3 className="pt-6">The builder it replaced</h3>
                                 <p>The existing report builder started empty and stayed that way until you told it what to measure. Picking columns meant working through more than a dozen collapsed categories (Metrics, Clicks, Commission, Geography etc.) where some combinations quietly aren&apos;t permitted, and nothing rendered at all until at least one metric was chosen. Fifteen to twenty minutes later you had a table. And if the question you started with needed a number the table didn&apos;t directly answer, you exported it and worked it out in Excel.</p>
                                 <p>That last step is the one that mattered: the tool produced data, not answers.</p>
-                                <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                    <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-old2.png" width={1920} height={1142} alt="The legacy report builder: an empty New Report tab warning that at least one metric column is required, with the Add and Remove Columns panel open on a scrolling list of collapsed categories" />
-                                </div>
+                                <CaseStudyFigure src="/Prompt-old2.png" width={1920} height={1142} alt="The legacy report builder: an empty New Report tab warning that at least one metric column is required, with the Add and Remove Columns panel open on a scrolling list of collapsed categories" />
                                 <h2 className="pt-10 tracking-tight">Approach</h2>
                                 <p>I started by analysing existing reports to understand common patterns: What metrics did users combine? What date ranges mattered? What questions were they trying to answer? This informed the natural language query design. Instead of just free-form text, I included suggested questions to help a user get started and understand the expectations of the input box. I included a 'tag' system in a later iteration to help users find and include certain data points that were harder to remember.</p>
-                                <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                    <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-userflow.png" width={1754} height={1240} alt="Customer journey map comparing the current multi-step report creation flow with the proposed natural language search flow" />
-                                </div>
+                                <CaseStudyFigure src="/Prompt-userflow.png" width={1754} height={1240} alt="Customer journey map comparing the current multi-step report creation flow with the proposed natural language search flow" />
                                 <h3 className="pt-6">Key decisions</h3>
                                 <ul className="mb-8 space-y-2">
                                     <li><b>Tags/Tokens</b>: Users were able to include 'quick selected' tags to help direct a prompt better.</li>
@@ -86,17 +76,13 @@ function Prompt() {
                                 </ul>
                                 <p>I prototyped three ways of getting a question into the system: free text alone, free text with suggested questions to start from, and a structured tag system for naming specific metrics. Testing showed users reached for the suggestions first, as they helped a user understand the purpose and use case for the input box, while tags earned their place on the more complex requests, where remembering an exact metric name was the real barrier. Rather than pick one, the first design layered all three.</p>
                                 <p>After being presented to our users, feedback was quickly gathered from internal teams and stakeholders in order to further steer the UI.</p>
-                                <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                    <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-suggestion.png" width={2896} height={2212} alt="An early concept for the ask-a-question screen: a full-width purple page with a single 'Describe the report you want to see' box, three suggested questions as chips beneath it, and saved reports below" />
-                                </div>
+                                <CaseStudyFigure src="/Prompt-suggestion.png" width={2896} height={2212} alt="An early concept for the ask-a-question screen: a full-width purple page with a single 'Describe the report you want to see' box, three suggested questions as chips beneath it, and saved reports below" />
                                 <h2 className="pt-10 tracking-tight">Solution</h2>
                                 <p>
                                     The solution combined natural language prompts, structured tags, and suggested queries to give users both speed and control. Every search generated report remained fully editable, could be saved as a template, or rebuilt from scratch, this preserved the manual workflow for users who preferred it.
                                 </p>
                                 <p>Amends were included based on the feedback gathered after the initial release and an iterative approach meant I could deliver variations quickly and efficiently.</p>
-                                <div className="flex flex-row flex-wrap place-content-center content-center bg-[#EDE7DD] dark:bg-slate-800/50 rounded-2xl mb-8">
-                                    <Image sizes="(max-width: 768px) 100vw, 1008px" className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10" src="/Prompt-tags-alt.png" width={2390} height={1206} alt="Tag and token system allowing users to refine and direct natural language search queries" />
-                                </div>
+                                <CaseStudyFigure src="/Prompt-tags-alt.png" width={2390} height={1206} alt="Tag and token system allowing users to refine and direct natural language search queries" />
                                 <div className="max-w-full mb-12">
                                     <h2 className="pt-10 tracking-tight">Outcome</h2>
                                     <p>Closed beta launched in May 2025 with select power users, followed by a full open beta in July 2025 to all users. With this staggered approach it has allowed us to begin gathering adoption data and user feedback before the full release.</p>

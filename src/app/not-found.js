@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { TEXT, INK, MUTED, ICON_NAV, BUTTON_RADIUS } from './components/site/tokens'
+import { TEXT, INK, MUTED, ICON_NAV, GHOST_PILL } from './components/site/tokens'
 
 export const metadata = {
   title: 'Page not found | Tom Spencer',
@@ -32,7 +32,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className={`${TEXT.sm} ${BUTTON_RADIUS} inline-flex min-h-11 items-center gap-1.5 bg-[#292929]/[0.06] px-3.5 py-2 font-medium text-[#5D5D5D] transition-[background-color,color,transform] hover:bg-accent-600 hover:text-white active:scale-[0.96] dark:bg-white/10 dark:text-[#B0B0B0] dark:hover:bg-accent-600 dark:hover:text-white`}
+          className={`${GHOST_PILL} min-h-11`}
         >
           <ArrowLeft size={ICON_NAV} strokeWidth={2} />
           Back to home

@@ -73,6 +73,13 @@ export const ICON_CARD = 20
 export const CARD_RADIUS = 'rounded-[16px]'
 export const BUTTON_RADIUS = 'rounded-full'
 
+/**
+ * The ghost pill: the Hero's Resume / LinkedIn links and the 404's way home.
+ * Quiet ink wash at rest, fills accent on hover. Sized at TEXT.sm; callers add
+ * their own hit-area class if the context asks for one (the 404 adds min-h-11).
+ */
+export const GHOST_PILL = `${TEXT.sm} ${BUTTON_RADIUS} inline-flex items-center gap-1.5 bg-[#292929]/[0.06] px-3.5 py-2 font-medium text-[#5D5D5D] transition-[background-color,color,transform] hover:bg-accent-600 hover:text-white active:scale-[0.96] dark:bg-white/10 dark:text-[#B0B0B0] dark:hover:bg-accent-600 dark:hover:text-white`
+
 // One content width for the whole route — nav, intro, cards, lab and footer.
 // Keeps every section on the same measure; before this token the sheet ran at
 // 1152px while the lab and footer ran at 1320px, so the dark section sat wider

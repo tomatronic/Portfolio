@@ -1,7 +1,7 @@
 'use client'
 
 import { ArrowUpRight } from 'lucide-react'
-import { TEXT, INK, FAINT_DISPLAY, ICON_NAV, BUTTON_RADIUS, CONTAINER } from './tokens'
+import { TEXT, INK, FAINT_DISPLAY, ICON_NAV, GHOST_PILL, CONTAINER } from './tokens'
 import CaseStudyCards from './CaseStudyCards'
 
 // Both open in a new tab, so there's no `external` flag any more — it only
@@ -110,7 +110,7 @@ export default function Hero() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${TEXT.sm} ${BUTTON_RADIUS} inline-flex items-center gap-1.5 bg-[#292929]/[0.06] px-3.5 py-2 font-medium text-[#5D5D5D] transition-[background-color,color,transform] hover:bg-accent-600 hover:text-white active:scale-[0.96] dark:bg-white/10 dark:text-[#B0B0B0] dark:hover:bg-accent-600 dark:hover:text-white`}
+                className={GHOST_PILL}
               >
                 {link.label}
                 <ArrowUpRight size={ICON_NAV} strokeWidth={2} />

@@ -1,8 +1,7 @@
 'use client'
 
-import Image from 'next/image'
-import Zoom from 'react-medium-image-zoom'
-import 'react-medium-image-zoom/dist/styles.css'
+import CaseStudyFigure from '../../components/site/CaseStudyFigure'
+import CaseStudyHeader from '../../components/site/CaseStudyHeader'
 import OtherCaseStudies from '../../components/OtherCaseStudies'
 import { PROSE, CASE_STUDY_CONTAINER } from '../../components/site/tokens'
 
@@ -15,43 +14,21 @@ function CaseStudyContent() {
         <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
 
           {/* Hero */}
-          <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
-            <Image sizes="(max-width: 768px) 100vw, 1008px" priority
-              className="rounded-2xl ring-1 ring-black/10 dark:ring-white/10"
-              src="/influencerHero.png"
-              width={1600}
-              height={927}
-              alt="Influencer Campaigns product overview — advertiser and influencer interface for managing affiliate influencer campaigns on Rakuten Advertising"
-            />
-          </div>
+          <CaseStudyFigure priority src="/influencerHero.png" width={1600} height={927} alt="Influencer Campaigns product overview — advertiser and influencer interface for managing affiliate influencer campaigns on Rakuten Advertising" />
 
-          {/* Header grid */}
-          <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-12">
-            <div className="md:col-span-2">
-              <p data-keep className="text-[15px] font-medium text-[#737373] dark:text-[#8A8A8A]">
-                Rakuten Advertising &bull; Sept 2025 – Ongoing
-              </p>
-              <h1 className="text-balance">From Concept to Production in 5 Months</h1>
-            </div>
-            <div className="md:col-span-2">
-              <p>
-                Rakuten Advertising needed to enter the influencer affiliate marketing space, fast.
-                High-value advertisers were requesting an influencer solution that could integrate
-                within their existing affiliate program. Aware that competitors offered this,
-                Rakuten Advertising risked losing high-value, strategic accounts.
-              </p>
-              <div className="space-y-1 text-[#5D5D5D] dark:text-[#B0B0B0]">
-                <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]">
-                  <span className="text-[#737373] dark:text-[#8A8A8A]">Role:</span>{' '}
-                  <span className="font-medium">Sole UX designer</span>
-                </p>
-                <p data-keep className="text-[15px] text-[#5D5D5D] dark:text-[#B0B0B0]">
-                  <span className="text-[#737373] dark:text-[#8A8A8A]">Skills:</span>{' '}
-                  <span className="font-medium">UX/UI, User Research, Prototyping, User Testing</span>
-                </p>
-              </div>
-            </div>
-          </div>
+          <CaseStudyHeader
+            eyebrow="Rakuten Advertising • Sept 2025 – Ongoing"
+            title="From Concept to Production in 5 Months"
+            role="Sole UX designer"
+            skills="UX/UI, User Research, Prototyping, User Testing"
+          >
+            <p>
+              Rakuten Advertising needed to enter the influencer affiliate marketing space, fast.
+              High-value advertisers were requesting an influencer solution that could integrate
+              within their existing affiliate program. Aware that competitors offered this,
+              Rakuten Advertising risked losing high-value, strategic accounts.
+            </p>
+          </CaseStudyHeader>
 
           {/* Content */}
           <div className="grid auto-rows-auto grid-cols-1 gap-5 md:grid-cols-4 md:gap-10">
@@ -224,17 +201,7 @@ function CaseStudyContent() {
                 December MVP.
               </p>
 
-              <div className="mb-8 flex flex-row flex-wrap place-content-center content-center rounded-2xl bg-[#EDE7DD] dark:bg-slate-800/50">
-                <Zoom>
-                  <Image sizes="(max-width: 768px) 100vw, 1008px"
-                    src="/prototypeScreens.png"
-                    className="w-full rounded-2xl ring-1 ring-black/10 dark:ring-white/10"
-                    width={1400}
-                    height={800}
-                    alt="High-fidelity prototype screens delivered in five days showing the end-to-end influencer campaign flow for the prospect demo"
-                  />
-                </Zoom>
-              </div>
+              <CaseStudyFigure zoom className="w-full" src="/prototypeScreens.png" width={1400} height={800} alt="High-fidelity prototype screens delivered in five days showing the end-to-end influencer campaign flow for the prospect demo" />
 
               {/* Key Decisions */}
               <h2 className="pt-10 tracking-tight">Key Decisions</h2>

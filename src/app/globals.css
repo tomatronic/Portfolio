@@ -19,24 +19,12 @@
 }
 
 /*
-  Typographic scale:
-  - Hero / page title:  h1, DM Sans 600, text-3xl → text-5xl, tracking-tight
-  - Section headings:   h2, DM Sans 600, text-2xl → text-3xl, tracking-tight
-  - Body:               DM Sans 400, text-base, leading-7
-  - Body muted:         text-slate-600 dark:text-slate-400
-  - Small / caption:    text-sm or text-xs
+  The element rules at the foot of this file are the fallback type layer:
+  h1/h2/h3 at 400 weight, body 16px slate-600. The home page, About and every
+  components/site/* block use tokens.js's own scale instead, and case study
+  bodies have PROSE on their wrapper, which outranks these. See CLAUDE.md's
+  "Typographic scale" for the split.
 */
-
-/* Class-based dark mode (toggle) */
-.dark body {
-  color: #ededed;
-  background: #0F1623;
-}
-
-/* System dark mode fallback (no JS / before hydration) */
-@media (prefers-color-scheme: dark) {
-  body { color: #ededed; }
-}
 
 body {
   color: #020617;
@@ -55,11 +43,10 @@ body {
   overflow-wrap: break-word;
 }
 
-/* Dark body colours in CSS, not only via PageBackground's post-mount effect.
-   Without this, a dark-mode visitor loads on the white default and the JS
-   repaints it after hydration — invisible at 250ms, but an obvious white flash
-   once the theme transition is slowed down. The FOUC script sets .dark before
-   paint, so this lands first. */
+/* Dark body colours. The FOUC script in layout.js sets .dark on <html> before
+   first paint, so this lands before anything renders — no post-mount repaint
+   and no white flash. (PageBackground.js used to set the same two colours
+   again from a useEffect; it was redundant with this rule and is gone.) */
 html.dark body {
   color: #ededed;
   background: #0F1623;

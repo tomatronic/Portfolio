@@ -1,6 +1,5 @@
 import "./globals.css";
 import { SiteNav, SiteFooter } from './components/SiteChrome';
-import PageBackground from './components/PageBackground';
 import ThemeProvider from './components/ThemeProvider';
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { DM_Sans } from 'next/font/google';
@@ -11,7 +10,8 @@ const dmSans = DM_Sans({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-dm-sans',
-  weight: ['300', '400', '500', '600', '700'],
+  // 400 body, 500 medium, 600 case study titles, 700 the hero. Nothing uses 300.
+  weight: ['400', '500', '600', '700'],
 });
 
 const SITE_URL = 'https://www.tomspencer.design'
@@ -61,7 +61,6 @@ export default function RootLayout({ children, modal }) {
       </head>
       <body>
         <ThemeProvider>
-          <PageBackground />
           <SiteNav />
           {children}
           <SiteFooter />

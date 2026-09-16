@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import CardImageStack from './CardImageStack'
+import { LISTED_CASE_STUDIES } from '../lib/caseStudies'
 
 const COMPACT_PARAMS = {
   restSpread:    16,
@@ -11,42 +12,13 @@ const COMPACT_PARAMS = {
   restRotation:   4,
   hoverRotation:  0,
   imageSize:     65,
-  spring: {
-    type:     'easing',
+  transition: {
     duration: 0.38,
     ease:     [0.22, 1, 0.36, 1],
   },
 }
 
-const CARDS = [
-  {
-    href: '/casestudy/Prompt',
-    title: 'Natural Language Search & AI',
-    images: [
-      '/prompt_1.png',
-      '/prompt_2.png',
-      '/prompt_3.png',
-    ],
-  },
-  {
-    href: '/casestudy/InfluencerCampaigns',
-    title: 'Influencer Campaign Platform',
-    images: [
-      '/influencer_1.png',
-      '/influencer_2.png',
-      '/influencer_3.png',
-    ],
-  },
-  {
-    href: '/casestudy/ACJ',
-    title: 'Multi-Touch Attribution for Affiliate',
-    images: [
-      '/acj_1.png',
-      '/acj_2.png',
-      '/acj_3.png',
-    ],
-  },
-]
+const CARDS = LISTED_CASE_STUDIES.map(({ href, title, stack }) => ({ href, title, images: stack }))
 
 function CompactCard({ card }) {
   const [isHovered, setIsHovered] = useState(false)

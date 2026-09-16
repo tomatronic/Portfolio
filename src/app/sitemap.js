@@ -1,13 +1,9 @@
+import { LISTED_CASE_STUDIES } from './lib/caseStudies'
+
 const BASE_URL = 'https://www.tomspencer.design'
 
 export default function sitemap() {
-  const routes = [
-    '',
-    '/about',
-    '/casestudy/Prompt',
-    '/casestudy/InfluencerCampaigns',
-    '/casestudy/ACJ',
-  ]
+  const routes = ['', '/about', ...LISTED_CASE_STUDIES.map((cs) => cs.href)]
 
   return routes.map((route) => ({
     url: `${BASE_URL}${route}`,
