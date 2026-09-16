@@ -122,7 +122,7 @@ function Prompt() {
                                     <ul className="mb-8 space-y-2">
                                         <li>Saving reports was used far less than expected, users found it easier to recreate reports on demand than to manage a saved library.</li>
                                         <li>The addition of tags was not an initial plan, I assumed free-form text would be enough, but data-heavy reporting required a more precise input mechanism.</li>
-                                        <li>Trust was the real challenge for adoption, not usability. Users who didn&apos;t trust the output verified everything manually, which negated the time saving entirely. Adoption followed trust, not the other way around</li>
+                                        <li>Trust was the real challenge for adoption, not usability. Users who didn&apos;t trust the output verified everything manually, which negated the time saving entirely. Adoption followed trust, not the other way around.</li>
                                     </ul>
 
                                 </div>

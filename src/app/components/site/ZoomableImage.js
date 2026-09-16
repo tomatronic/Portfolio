@@ -18,8 +18,12 @@ import 'react-medium-image-zoom/dist/styles.css'
  * prose names — a "5" cluster badge, the date axis, the legend — are gone.
  * A wide screenshot in a narrow column is the whole problem this solves.
  *
- * Props pass straight through to `next/image`, so `sizes`, `width`, `height`
- * and `alt` behave exactly as they do elsewhere.
+ * Props pass straight through to `next/image`, so `sizes`, `width` and
+ * `height` behave exactly as they do elsewhere. `alt` is pulled out and set
+ * explicitly: it always reached the image via the spread, but jsx-a11y can't
+ * see through `{...props}` and flagged every build. Naming it also makes the
+ * contract visible at the call site — this is a content image, so `alt` is
+ * required.
  *
  * **Give it `sizes="100vw"`, not the usual `(max-width: 768px) 100vw, 1008px`.**
  * The zoom reuses the inline image's `srcset`, so the `sizes` hint caps how
@@ -47,10 +51,10 @@ import 'react-medium-image-zoom/dist/styles.css'
  * stops closing the case study. It also means `[role="dialog"]` is no longer
  * a unique selector on any page using this.
  */
-export default function ZoomableImage(props) {
+export default function ZoomableImage({ alt, ...props }) {
   return (
     <Zoom>
-      <Image {...props} />
+      <Image alt={alt} {...props} />
     </Zoom>
   )
 }
