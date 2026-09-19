@@ -392,7 +392,7 @@ older row of this table.
 | Case study card | `bg-zinc-50` | `bg-slate-900` |
 | Case study figure ground, stat row, persona and scoping cards (`WASH`) | `#8529CD` @ 8% (≈ `#F5EEFB`) | `#8529CD` @ 15% |
 | Nav pill | `bg-white`, border `#292929`/12 | `bg-white/[0.04]`, border white/12 |
-| Modal backdrop | `#8529CD` @ 8%, no blur | `#050505` @ 80% |
+| Modal backdrop | `#EFEFEF` @ 80%, no blur | `#050505` @ 80% |
 | Accent / CTA | `#B84010` (accent-600) | `#EE9F68` (accent-300) |
 | Ink — primary / muted / faint | `#292929` / `#5D5D5D` / `#737373` | `#F2F2F2` / `#B0B0B0` / `#8A8A8A` |
 | Case study card border (`OUTLINE`) | `#292929`/10 | white/10 |
@@ -445,9 +445,10 @@ card, figure — and the home page smeared around the card's margins. Now:
 - **The case study drops its card inside the sheet.** `CaseStudyModal` wraps its children in
   `CaseStudySurface`; `CaseStudyShell` reads that context and renders only the padding. On a
   direct visit the same shell renders the tinted card. See `CaseStudyShell.js`.
-- **Backdrop is `#8529CD` at 8% in light** (Tom's spec, 2026-09-19), `#050505/80` in dark, no blur.
-  8% is barely a tint — the home page shows almost fully beside and above the sheet. Clicking the
-  scrim closes (`onScrimClick`, checked against `currentTarget`).
+- **Backdrop is a flat wash, not a blur**: `bg-[#EFEFEF]/80 dark:bg-[#050505]/80`. Tom called this
+  one "perfect" (2026-09-19) — a purple 8% version was shipped for a day on a misread and reverted.
+  The blur it replaced turned the strip above the sheet into a smear. Clicking the scrim closes
+  (`onScrimClick`, checked against `currentTarget`).
 - **Two close affordances.** The floating X (44px circle at the viewport's top-right, over the
   scrim, in a zero-height sticky row at panel level — where it was before the sheet) is the accessible close and
   the only one in the tab order. The handle pill at the sheet's top-centre also closes on click
@@ -526,8 +527,11 @@ The screenshot keeps its ring inside the band — three of the four heroes are
 near-white and would dissolve into a white sheet without it. The only page not
 using `hero` is Rakuten, whose hero sits on a `bg-[url('/offerBG.png')]` panel.
 **The header is a `CaseStudyHeader`**; `title` accepts a node for ACJ's tinted
-product name. **The hero has no ring and no ground**: it fills the surface
-edge-to-edge and is clipped by the top corners (Tom, 2026-09-19).
+product name. **The hero has no ring and fills the surface edge-to-edge**, clipped
+by the top corners; its band is the purple `WASH`, which shows through the hero
+PNGs' transparent regions (Tom, 2026-09-19). The three heroes are 1600×727,
+1600×727 and 1600×900 — the code said 927 for all three until 2026-09-19, which
+was a layout shift on load once the image went `h-auto`.
 
 `CASE_STUDY_CONTAINER` is `max-w-[904px]`, a 760px content column. It was
 `max-w-6xl` (a 1008px column, 132 characters a line) until 2026-08-17 — see the

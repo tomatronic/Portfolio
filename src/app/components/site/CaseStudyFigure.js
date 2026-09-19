@@ -13,12 +13,13 @@ import { WASH } from './tokens'
  * `hero` is the variant for the image at the top of the page. It bleeds to the
  * edges of the surface it sits on — the card on a direct visit, the sheet in
  * the modal — with negative margins that cancel `CaseStudyShell`'s padding,
- * and its top corners take the surface's radius, clipping the image. No
- * ground, no ring, no inner padding: the screenshot *is* the top of the sheet.
- * (A first cut kept the ring and a padded band around it; Tom dropped both on
- * 2026-09-19.) The trade is that a near-white hero meets a white sheet with
- * only the corner clip to separate them — worth a look if a hero is ever
- * replaced with a paler one.
+ * and its top corners take the surface's radius, clipping the image. No ring
+ * and no inner padding: the screenshot fills the band. The band itself is the
+ * purple WASH, and that is not decorative — all three hero PNGs have
+ * transparent regions (5–14% of their pixels, the corners around the
+ * overlapping windows), so the wash shows through them. Swap a hero for an
+ * opaque image and the band colour disappears with nothing lost. (A first cut
+ * kept a ring and a padded cream band; Tom dropped both on 2026-09-19.)
  *
  * `zoom` swaps the image for `ZoomableImage`, which opens it full-screen on
  * tap. Read that file before using it: it wants `sizes="100vw"`, and it does
@@ -30,7 +31,7 @@ import { WASH } from './tokens'
 
 const GROUND = `flex flex-row flex-wrap place-content-center content-center ${WASH} rounded-2xl mb-8`
 // Negative margins mirror SURFACE_PADDING in CaseStudyShell (p-8 md:p-12).
-const HERO_GROUND = '-mx-8 -mt-8 mb-8 overflow-hidden rounded-t-2xl md:-mx-12 md:-mt-12'
+const HERO_GROUND = `${WASH} -mx-8 -mt-8 mb-8 overflow-hidden rounded-t-2xl md:-mx-12 md:-mt-12`
 const IMAGE = 'rounded-2xl ring-1 ring-black/10 dark:ring-white/10'
 const HERO_IMAGE = 'w-full h-auto'
 const SIZES = '(max-width: 768px) 100vw, 1008px'

@@ -13,7 +13,7 @@ function CaseStudyContent() {
     <CaseStudyShell>
 
           {/* Hero */}
-          <CaseStudyFigure hero priority src="/influencerHero.png" width={1600} height={927} alt="Influencer Campaigns product overview — advertiser and influencer interface for managing affiliate influencer campaigns on Rakuten Advertising" />
+          <CaseStudyFigure hero priority src="/influencerHero.png" width={1600} height={900} alt="Influencer Campaigns product overview — advertiser and influencer interface for managing affiliate influencer campaigns on Rakuten Advertising" />
 
           <CaseStudyHeader
             eyebrow="Rakuten Advertising • Sept 2025 – Ongoing"

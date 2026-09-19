@@ -14,7 +14,7 @@ function ACJ() {
     return (
         <>
             <CaseStudyShell>
-                    <CaseStudyFigure hero priority src="/ACJ-hero.png" width={1600} height={927} alt="Affiliate Conversion Journey dashboard showing multi-touch attribution across awareness, consideration, and conversion phases" />
+                    <CaseStudyFigure hero priority src="/ACJ-hero.png" width={1600} height={727} alt="Affiliate Conversion Journey dashboard showing multi-touch attribution across awareness, consideration, and conversion phases" />
                         <CaseStudyHeader
                             eyebrow="Rakuten Advertising • Oct 2022 – Jun 2023"
                             title={<><span className="text-[#5D5D5D] dark:text-[#B0B0B0]">Affiliate Conversion Journey</span> — Multi-Touch Attribution for Affiliate</>}

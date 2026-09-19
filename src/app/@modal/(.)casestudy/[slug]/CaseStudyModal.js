@@ -123,14 +123,13 @@ export default function CaseStudyModal({ children }) {
 
   return (
     <>
-      {/* Backdrop. Rakuten purple at 8% in light mode — Tom's spec, 2026-09-19 —
-          which is barely a tint: the page behind shows almost fully. Not
-          blurred; a blur turned the strip above the sheet into a smear of the
-          home cards. Dark mode keeps a heavy ink wash, because the sheet is
-          navy on navy and an 8% tint would leave nothing but the hairline to
-          separate them. */}
+      {/* Backdrop. A flat wash, deliberately not blurred: the home cards behind
+          it are large purple screenshots, and a blur turned the strip above
+          the sheet into a smear. A plain tint reads as "the page you came
+          from", which is the point of leaving it visible. Tom: this one is
+          right — a purple tint was tried for a day and misread his note. */}
       <motion.div
-        className="fixed inset-0 z-50 bg-[#8529CD]/[0.08] dark:bg-[#050505]/80 pointer-events-none"
+        className="fixed inset-0 z-50 bg-[#EFEFEF]/80 dark:bg-[#050505]/80 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: isClosing ? 0 : 1 }}
         transition={isClosing
