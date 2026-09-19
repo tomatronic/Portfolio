@@ -187,7 +187,10 @@ The `/concept-9f2k` exploration was adopted as the site's real design and the sa
 `Home`, `Hero`, `CaseStudyCards`, `ExperimentsLab`, `About`, `ImageWall`,
 `CaseStudyFigure`, `CaseStudyHeader`, `ZoomableImage`.
 `src/app/components/` keeps the framework-level pieces: `SiteChrome` (renders
-`Nav`/`Footer` on routes that don't render their own), `ThemeProvider`,
+`Nav`/`Footer` on routes that don't render their own — decided by
+`useSelectedLayoutSegment`, **not the pathname**: with the modal open the URL is
+a case study but the page underneath is still home, and reading the URL put a
+second nav and footer around it, fixed 2026-09-19), `ThemeProvider`,
 `OtherCaseStudies`, `CardImageStack`.
 `src/app/lib/` holds `caseStudies.js` (**the one list of case studies** — cards,
 compact cards and sitemap all read it), `sound.js` (`playCue`, the try/catch
