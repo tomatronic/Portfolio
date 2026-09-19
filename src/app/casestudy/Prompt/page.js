@@ -1,5 +1,6 @@
 import CaseStudyFigure from "../../components/site/CaseStudyFigure"
 import CaseStudyHeader from "../../components/site/CaseStudyHeader"
+import { WASH } from '../../components/site/tokens'
 import OtherCaseStudies from "../../components/OtherCaseStudies"
 import CaseStudyShell from '../../components/site/CaseStudyShell'
 
@@ -25,7 +26,7 @@ function Prompt() {
                         </CaseStudyHeader>
 
                         {/* Headline outcomes */}
-                        <div className="mb-12 grid grid-cols-1 gap-8 rounded-2xl bg-[#EDE7DD] p-8 sm:grid-cols-3 md:p-10 dark:bg-slate-800/50">
+                        <div className={`mb-12 grid grid-cols-1 gap-8 rounded-2xl ${WASH} p-8 sm:grid-cols-3 md:p-10`}>
                             {[
                                 { stat: '90%', label: 'faster report creation, measured in Fullstory during beta' },
                                 { stat: '~$10M', label: 'annual time-saving potential at full adoption' },
@@ -36,8 +37,8 @@ function Prompt() {
                                         scale's ceiling, so the stat leads on colour and weight
                                         rather than on a display size. */}
                                     <p data-keep className="mb-1 text-[27px] font-medium tracking-tight text-accent-600 dark:text-accent-300">{stat}</p>
-                                    {/* MUTED, not FAINT: these sit on the cream #EDE7DD card, where #737373
-                                        measures 3.85:1. #5D5D5D is 5.35:1 on the same ground. */}
+                                    {/* MUTED, not FAINT: on the purple WASH ground #737373 measures 4.4:1 and
+                                        fails AA; #5D5D5D is 5.8:1. */}
                                     <p data-keep className="mb-0 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">{label}</p>
                                 </div>
                             ))}

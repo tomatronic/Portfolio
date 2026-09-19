@@ -2,6 +2,7 @@
 
 import CaseStudyFigure from '../../components/site/CaseStudyFigure'
 import CaseStudyHeader from '../../components/site/CaseStudyHeader'
+import { WASH, OUTLINE } from '../../components/site/tokens'
 import OtherCaseStudies from '../../components/OtherCaseStudies'
 import CaseStudyShell from '../../components/site/CaseStudyShell'
 
@@ -61,8 +62,8 @@ function CaseStudyContent() {
               <div className="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                 {/* Advertiser */}
-                <div className="rounded-2xl border border-[#C8BEB0] bg-[#EDE7DD] p-6 dark:border-[#2A3A4A] dark:bg-slate-800/50">
-                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-[14px] font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-300">
+                <div className={`rounded-2xl border ${OUTLINE} ${WASH} p-6`}>
+                  <span className="mb-5 inline-block rounded-full border border-[#292929]/10 bg-white/70 px-2.5 py-0.5 text-[14px] font-medium text-accent-600 dark:border-white/10 dark:bg-white/10 dark:text-accent-300">
                     Advertiser
                   </span>
                   <div className="mb-5 flex items-center gap-3">
@@ -116,8 +117,8 @@ function CaseStudyContent() {
                 </div>
 
                 {/* Creator */}
-                <div className="rounded-2xl border border-[#C8BEB0] bg-[#EDE7DD] p-6 dark:border-[#2A3A4A] dark:bg-slate-800/50">
-                  <span className="mb-5 inline-block rounded-full border border-[#C8BEB0] bg-white/70 px-2.5 py-0.5 text-[14px] font-medium text-accent-600 dark:border-[#2A3A4A] dark:bg-white/10 dark:text-accent-300">
+                <div className={`rounded-2xl border ${OUTLINE} ${WASH} p-6`}>
+                  <span className="mb-5 inline-block rounded-full border border-[#292929]/10 bg-white/70 px-2.5 py-0.5 text-[14px] font-medium text-accent-600 dark:border-white/10 dark:bg-white/10 dark:text-accent-300">
                     Creator
                   </span>
                   <div className="mb-5 flex items-center gap-3">
@@ -217,7 +218,7 @@ function CaseStudyContent() {
 
               <div className="my-8 grid grid-cols-1 gap-4 md:grid-cols-2">
                 {/* Shipped in V1 */}
-                <div className="rounded-2xl bg-[#EDE7DD] p-6 dark:bg-slate-800/50">
+                <div className={`rounded-2xl ${WASH} p-6`}>
                   <p data-keep className="mb-4 text-[15px] font-medium text-[#292929] dark:text-[#F2F2F2]">Shipped in V1</p>
                   <ul className="space-y-2.5 text-[16px] font-normal text-[#5D5D5D] dark:text-[#B0B0B0]">
                     <li className="flex items-start gap-2">
@@ -240,7 +241,7 @@ function CaseStudyContent() {
                 </div>
 
                 {/* Deferred to V2 */}
-                <div className="rounded-2xl bg-[#EDE7DD] p-6 dark:bg-slate-800/50">
+                <div className={`rounded-2xl ${WASH} p-6`}>
                   <p data-keep className="mb-4 text-[15px] font-medium text-[#292929] dark:text-[#F2F2F2]">Deferred to V2 — genuinely useful, but not necessary to ship a complete story</p>
                   <ul className="space-y-2.5 text-[16px] font-normal text-[#5D5D5D] dark:text-[#B0B0B0]">
                     <li className="flex items-start gap-2">

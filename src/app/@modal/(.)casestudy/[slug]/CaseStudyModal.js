@@ -123,12 +123,14 @@ export default function CaseStudyModal({ children }) {
 
   return (
     <>
-      {/* Backdrop. A flat wash, deliberately not blurred: the home cards behind
-          it are large purple screenshots, and a blur turned the strip above
-          the sheet into a smear. A plain tint reads as "the page you came
-          from", which is the point of leaving it visible. */}
+      {/* Backdrop. Rakuten purple at 8% in light mode — Tom's spec, 2026-09-19 —
+          which is barely a tint: the page behind shows almost fully. Not
+          blurred; a blur turned the strip above the sheet into a smear of the
+          home cards. Dark mode keeps a heavy ink wash, because the sheet is
+          navy on navy and an 8% tint would leave nothing but the hairline to
+          separate them. */}
       <motion.div
-        className="fixed inset-0 z-50 bg-[#EFEFEF]/80 dark:bg-[#050505]/80 pointer-events-none"
+        className="fixed inset-0 z-50 bg-[#8529CD]/[0.08] dark:bg-[#050505]/80 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: isClosing ? 0 : 1 }}
         transition={isClosing
@@ -154,6 +156,22 @@ export default function CaseStudyModal({ children }) {
           : { type: 'spring', stiffness: 320, damping: 38, mass: 0.9 }}
         onAnimationComplete={() => { if (isClosing) router.back() }}
       >
+        {/* The floating close, where it was before the sheet: top-right of the
+            viewport, over the scrim, not inside the sheet. A zero-height sticky
+            row keeps it out of flow so the gap above the sheet stays exact, and
+            pins it once the sheet scrolls under it. This is the accessible
+            close control; the handle on the sheet is pointer-only. */}
+        <div className="pointer-events-none sticky top-0 z-10 h-0">
+          <button
+            type="button"
+            onClick={close}
+            aria-label="Close case study"
+            className="pointer-events-auto absolute right-6 top-6 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-md transition-[transform,box-shadow] hover:scale-105 hover:shadow-lg active:scale-[0.96] dark:bg-slate-800"
+          >
+            <X size={16} strokeWidth={2.5} className="text-slate-700 dark:text-slate-200" />
+          </button>
+        </div>
+
         {/* The gap above the sheet is where the page behind shows through.
             min-h-full so a short case study still fills the viewport, and the
             sheet never ends with the scrim visible beneath it. */}
@@ -167,23 +185,6 @@ export default function CaseStudyModal({ children }) {
               both near-navy, so a hairline keeps the top edge legible — the
               same fix the home reveal needed (finding 07). */}
           <div className="relative mx-auto min-h-[calc(100vh-4rem)] max-w-[856px] rounded-t-2xl bg-white dark:bg-[#0F1623] dark:ring-1 dark:ring-white/10 md:min-h-[calc(100vh-5rem)]">
-            {/* The floating close. Tom's call (2026-09-19): the handle alone was
-                too quiet a cue, so the X is back. A zero-height sticky row keeps
-                it out of flow — it starts at the sheet's top-right corner, over
-                the hero band, and pins to the top of the viewport once the sheet
-                scrolls under it. This is the accessible close control; the
-                handle below is pointer-only. */}
-            <div className="pointer-events-none sticky top-0 z-10 h-0">
-              <button
-                type="button"
-                onClick={close}
-                aria-label="Close case study"
-                className="pointer-events-auto absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-md transition-[transform,box-shadow] hover:scale-105 hover:shadow-lg active:scale-[0.96] dark:bg-slate-800"
-              >
-                <X size={16} strokeWidth={2.5} className="text-slate-700 dark:text-slate-200" />
-              </button>
-            </div>
-
             {/* The handle. A bottom-sheet's grab affordance at the sheet's
                 top-centre, drawn as a 48×6 pill in a 44px-tall hit area.
                 Clicking it closes, but it is out of the tab order and hidden

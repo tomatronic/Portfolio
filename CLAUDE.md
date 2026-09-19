@@ -390,12 +390,12 @@ older row of this table.
 | Page / intro sheet bg | `#ffffff` | `#0F1623` |
 | Reveal, lab and footer ground | `#050505` | `#050505` (same in both themes) |
 | Case study card | `bg-zinc-50` | `bg-slate-900` |
-| Case study image containers | `#EDE7DD` | `slate-800/50` |
+| Case study figure ground, stat row, persona and scoping cards (`WASH`) | `#8529CD` @ 8% (≈ `#F5EEFB`) | `#8529CD` @ 15% |
 | Nav pill | `bg-white`, border `#292929`/12 | `bg-white/[0.04]`, border white/12 |
-| Modal backdrop | `#292929` @ 8% | `#292929` @ 90% |
+| Modal backdrop | `#8529CD` @ 8%, no blur | `#050505` @ 80% |
 | Accent / CTA | `#B84010` (accent-600) | `#EE9F68` (accent-300) |
 | Ink — primary / muted / faint | `#292929` / `#5D5D5D` / `#737373` | `#F2F2F2` / `#B0B0B0` / `#8A8A8A` |
-| Case study card border | `#C8BEB0` | `#2A3A4A` |
+| Case study card border (`OUTLINE`) | `#292929`/10 | white/10 |
 | CardImageStack ring | `rgba(184,64,16,0.22)` | `rgba(238,159,104,0.30)` |
 | Home card hover shadow | `rgba(88,28,160,0.28)` | `rgba(155,105,240,0.55)` |
 | OtherCaseStudies hover shadow | `rgba(184,64,16,0.10)` | `rgba(238,159,104,0.12)` |
@@ -445,11 +445,11 @@ card, figure — and the home page smeared around the card's margins. Now:
 - **The case study drops its card inside the sheet.** `CaseStudyModal` wraps its children in
   `CaseStudySurface`; `CaseStudyShell` reads that context and renders only the padding. On a
   direct visit the same shell renders the tinted card. See `CaseStudyShell.js`.
-- **Backdrop is a flat wash, not a blur**: `bg-[#EFEFEF]/80 dark:bg-[#050505]/80`. The blur it
-  replaced turned the strip above the sheet into a smear of the purple home cards. Clicking the
+- **Backdrop is `#8529CD` at 8% in light** (Tom's spec, 2026-09-19), `#050505/80` in dark, no blur.
+  8% is barely a tint — the home page shows almost fully beside and above the sheet. Clicking the
   scrim closes (`onScrimClick`, checked against `currentTarget`).
-- **Two close affordances.** The floating X (44px circle, top-right, in a zero-height sticky
-  row so it pins to the viewport once the sheet scrolls under it) is the accessible close and
+- **Two close affordances.** The floating X (44px circle at the viewport's top-right, over the
+  scrim, in a zero-height sticky row at panel level — where it was before the sheet) is the accessible close and
   the only one in the tab order. The handle pill at the sheet's top-centre also closes on click
   but is `aria-hidden` + `tabIndex={-1}` — it's the sheet cue, not a second button for screen
   readers. The X was dropped for a day and came back at Tom's request: the handle alone was too
@@ -526,7 +526,8 @@ The screenshot keeps its ring inside the band — three of the four heroes are
 near-white and would dissolve into a white sheet without it. The only page not
 using `hero` is Rakuten, whose hero sits on a `bg-[url('/offerBG.png')]` panel.
 **The header is a `CaseStudyHeader`**; `title` accepts a node for ACJ's tinted
-product name.
+product name. **The hero has no ring and no ground**: it fills the surface
+edge-to-edge and is clipped by the top corners (Tom, 2026-09-19).
 
 `CASE_STUDY_CONTAINER` is `max-w-[904px]`, a 760px content column. It was
 `max-w-6xl` (a 1008px column, 132 characters a line) until 2026-08-17 — see the
@@ -752,7 +753,8 @@ LinkedIn — `hover:bg-accent-600`, `active:scale-[0.96]`), then `Designed and b
 - Do NOT add `w-screen` to any element — use `w-full` to avoid horizontal scroll from scrollbar width.
 - Nav requires `relative` class for `z-50` to create a stacking context — without `relative`, z-index has no effect.
 - Shadow colours should use amber tint (`rgba(184,64,16,...)` light / `rgba(238,159,104,...)` dark) to stay consistent with the arc and accent palette.
-- Image containers in case studies use `bg-[#EDE7DD] dark:bg-slate-800/50` — do NOT use `bg-purple-100` (old palette).
+- **There is no beige on the site any more.** Figure grounds and case study cards use `WASH` from `tokens.js` (Rakuten purple at 8% / 15%); outlined cards use `OUTLINE`. `#EDE7DD` and `#C8BEB0` were retired 2026-09-19 — don't reintroduce them.
+- **Hover is ink, not amber.** `GHOST_PILL` fills to `#292929` (dark: `#F2F2F2`) on hover; Tom ruled out the amber accent as a hover colour. The footer icon buttons still hover amber — not yet changed.
 - All case study metadata rows use `text-slate-600 dark:text-slate-400` — do NOT use `text-gray-600`.
 - `<cite>` inside `<blockquote>` renders as a new line automatically (styled in globals.css as `block mt-2 not-italic text-sm`).
 - Icon-only buttons need a **40×40px minimum hit area** (44×44px for nav/mobile toggles) — don't rely on icon size + small padding alone.
