@@ -49,7 +49,7 @@ export default function Footer() {
                   href={href}
                   aria-label={label}
                   {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className={`${BUTTON_RADIUS} inline-flex h-10 w-10 items-center justify-center bg-white/[0.08] text-[#B0B0B0] transition-[background-color,color,transform] hover:bg-accent-600 hover:text-white active:scale-[0.96]`}
+                  className={`${BUTTON_RADIUS} inline-flex h-10 w-10 items-center justify-center bg-white/[0.08] text-[#B0B0B0] transition-[background-color,color,transform] hover:bg-[#F2F2F2] hover:text-[#292929] active:scale-[0.96]`}
                 >
                   <Icon size={ICON_NAV} strokeWidth={2} />
                 </a>

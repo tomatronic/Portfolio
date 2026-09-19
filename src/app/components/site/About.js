@@ -201,7 +201,7 @@ export default function About({ running = null }) {
               <ul className="mb-4 space-y-2">
                 {PRACTICAL.map((entry) => (
                   <li key={entry} className={`${TEXT.base} ${MUTED} flex items-start gap-2`}>
-                    <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                    <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
                     <span>{entry}</span>
                   </li>
                 ))}

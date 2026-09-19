@@ -1,21 +1,20 @@
-@import "tailwindcss";
+/* source("../") scopes Tailwind's class scanning to src/. Without it v4 scans
+   the whole project, and class names quoted in CLAUDE.md were being compiled
+   into the stylesheet — the retired amber ring survived in the CSS for a day
+   via a table row in the docs (2026-09-19). */
+@import "tailwindcss" source("../");
 
 /* Enable class-based dark mode (Tailwind v4) */
 @variant dark (&:is(.dark, .dark *));
 
-/* Custom accent colour — burnt amber */
+/* There is no accent colour. The burnt-amber `accent-*` scale that used to
+   live here was retired on 2026-09-19 — the site is the ink scale in
+   tokens.js plus the purple WASH under case study figures, and every former
+   accent use (nav active state, stat figures, badges, dots, focus ring) is now
+   primary ink. If `accent-` ever appears in a class name again it will render
+   nothing, which is the point: grep for it rather than re-adding the scale. */
 @theme {
   --ring-width-0\.5: 0.5px;
-
-  --color-accent-50:  #FDF4EE;
-  --color-accent-100: #FAE3D0;
-  --color-accent-200: #F5C4A0;
-  --color-accent-300: #EE9F68;
-  --color-accent-400: #E07840;
-  --color-accent-500: #C85A22;
-  --color-accent-600: #B84010;
-  --color-accent-800: #7A2808;
-  --color-accent-950: #3D1204;
 }
 
 /*
@@ -79,17 +78,16 @@ html.dark body {
   }
 }
 
-/* Keyboard focus — on-brand amber ring, replaces the browser default blue.
+/* Keyboard focus — a primary-ink ring, replaces the browser default blue.
    :focus-visible only, so mouse/touch presses don't show a ring. */
 :focus-visible {
-  outline: 2px solid var(--color-accent-600);
+  outline: 2px solid #292929;
   outline-offset: 2px;
   border-radius: 2px;
 }
 
-/* accent-600 is too dark against the navy page bg — step up the ramp */
 .dark :focus-visible {
-  outline-color: var(--color-accent-400);
+  outline-color: #F2F2F2;
 }
 
 @layer base {
@@ -118,7 +116,7 @@ html.dark body {
   }
 
   blockquote {
-    @apply italic border-l-4 border-accent-300 dark:border-accent-600 pl-4 text-slate-600 dark:text-slate-400 my-6;
+    @apply italic border-l-4 border-[#292929]/20 dark:border-white/20 pl-4 text-slate-600 dark:text-slate-400 my-6;
   }
 
   blockquote cite {

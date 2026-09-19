@@ -87,7 +87,7 @@ export const GHOST_PILL = `${TEXT.sm} ${BUTTON_RADIUS} inline-flex items-center 
  * faint wash — 8% on the white sheet, 15% on the navy one. It replaced the warm
  * cream `#EDE7DD` on 2026-09-19 (Tom: nothing else on the site is beige, and
  * the product screenshots it frames are all this purple). On white it lands at
- * `#F5EEFB`; MUTED `#5D5D5D` measures 5.8:1 on it, accent-600 5.8:1. Don't put
+ * `#F5EEFB`; MUTED `#5D5D5D` measures 5.8:1 on it, INK 13.9:1. Don't put
  * FAINT `#737373` on it — 4.4:1, under AA.
  */
 export const WASH = 'bg-[#8529CD]/[0.08] dark:bg-[#8529CD]/[0.15]'

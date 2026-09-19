@@ -396,31 +396,24 @@ older row of this table.
 | Case study figure ground, stat row, persona and scoping cards (`WASH`) | `#8529CD` @ 8% (≈ `#F5EEFB`) | `#8529CD` @ 15% |
 | Nav pill | `bg-white`, border `#292929`/12 | `bg-white/[0.04]`, border white/12 |
 | Modal backdrop | `#EFEFEF` @ 80%, no blur | `#050505` @ 80% |
-| Accent / CTA | `#B84010` (accent-600) | `#EE9F68` (accent-300) |
 | Ink — primary / muted / faint | `#292929` / `#5D5D5D` / `#737373` | `#F2F2F2` / `#B0B0B0` / `#8A8A8A` |
 | Case study card border (`OUTLINE`) | `#292929`/10 | white/10 |
-| CardImageStack ring | `rgba(184,64,16,0.22)` | `rgba(238,159,104,0.30)` |
+| CardImageStack ring | black/10 | white/10 |
 | Home card hover shadow | `rgba(88,28,160,0.28)` | `rgba(155,105,240,0.55)` |
-| OtherCaseStudies hover shadow | `rgba(184,64,16,0.10)` | `rgba(238,159,104,0.12)` |
-| Blockquote border | `accent-300` | `accent-600` |
+| Blockquote border | `#292929`/20 | white/20 |
+| Keyboard focus ring | `#292929` | `#F2F2F2` |
 
-### Accent token scale (defined in `globals.css` `@theme`)
-| Token | Value |
-|-------|-------|
-| `accent-50` | `#FDF4EE` |
-| `accent-100` | `#FAE3D0` |
-| `accent-200` | `#F5C4A0` |
-| `accent-300` | `#EE9F68` |
-| `accent-400` | `#E07840` |
-| `accent-500` | `#C85A22` |
-| `accent-600` | `#B84010` ← primary |
-| `accent-800` | `#7A2808` |
-| `accent-950` | `#3D1204` |
-
-Use `text-accent-600`, `bg-accent-600`, `border-accent-200`, etc. in Tailwind classes.
+### There is no accent colour (from 2026-09-19)
+The burnt-amber `accent-50…950` scale is gone from `globals.css` — Tom: orange
+was never part of the branding. Every former accent use is primary ink now:
+nav active state (ink against muted siblings), Prompt's stat figures (ink,
+semibold), the 404 eyebrow, persona badges and avatar circles, list dots, the
+focus ring, the blockquote border, the footer icon hover. The nav's confetti
+burst picks ink greys per theme at burst time. `accent-*` classes render
+nothing — grep for them rather than re-adding the scale.
 
 ## Button styles
-The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in June 2026 (their only consumers — the password gates and SolarHero — were deleted). CTAs now use plain Tailwind: `rounded-full bg-accent-600 ... hover:bg-accent-800 dark:bg-accent-400`.
+The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in June 2026. The only CTA treatment now is `GHOST_PILL` in `tokens.js`: ink wash at rest, fills to ink on hover.
 
 ## Dark mode
 - **Tailwind v4** dark mode: configured via `@variant dark (&:is(.dark, .dark *))` in `globals.css`
@@ -473,13 +466,12 @@ card, figure — and the home page smeared around the card's margins. Now:
 
 ## Card interactions
 - **Home case study cards**: purple shadow set, see the Case study cards section above.
-- **OtherCaseStudies cards**: amber hover shadow `rgba(184,64,16,0.10)` light /
-  `rgba(238,159,104,0.12)` dark, border `#C8BEB0` / `#2A3A4A`.
-- **CardImageStack ring**: `ring-2 ring-[rgba(184,64,16,0.22)] dark:ring-[rgba(238,159,104,0.30)]`.
+- **OtherCaseStudies cards**: purple hover lift scaled down from the home tiles (see the
+  component), border `OUTLINE`.
+- **CardImageStack ring**: neutral `ring-1 ring-black/10 dark:ring-white/10`, like every other image.
 - **Inline case study images**: `rounded-2xl ring-1 ring-black/10 dark:ring-white/10` on the
   `<Image>` itself (2026-07-25 pass).
-- The "Extra Pixels" gallery (`examples.js`) and its `rgba(184,64,16,0.07)` / `0.14` shadows were
-  **deleted 2026-07-29** with the rest of the previous home page.
+- The "Extra Pixels" gallery (`examples.js`) was **deleted 2026-07-29** with the rest of the previous home page.
 
 ## OtherCaseStudies cards
 `src/app/components/OtherCaseStudies.js` — compact cards at the foot of each case study.
@@ -487,8 +479,7 @@ card, figure — and the home page smeared around the card's margins. Now:
 - Layout: title left, `CardImageStack` right. Padding `px-5 py-8`, image container `h-16 w-28 mr-6`.
 - Images come from each entry's `stack` in `lib/caseStudies.js` — `prompt_1-3`,
   `influencer_1-3`, `acj_1-3`. (**Not** `offer_1-3`; that set was deleted in `40f6df4`.)
-- Border `border-[#C8BEB0] dark:border-[#2A3A4A]`; amber hover shadow `rgba(184,64,16,0.10)` /
-  `rgba(238,159,104,0.12)`.
+- Border `OUTLINE`; purple hover lift matching the home cards, scaled down.
 - `replace` on the Link prevents modal history stacking, so closing always returns home.
 - Titles carry `data-flush` to opt out of `PROSE`'s heading bottom-margin — they sit in a centred
   flex row, where a bottom margin pushes them off the card's vertical centre.
@@ -759,9 +750,9 @@ LinkedIn — `hover:bg-accent-600`, `active:scale-[0.96]`), then `Designed and b
 - `components/site/ThemeToggle.js` is plain Tailwind `dark:` classes with **no inline styles** — the old cream/teal `components/ThemeToggle.js`, which did use inline `style` props, was deleted 2026-07-29.
 - Do NOT add `w-screen` to any element — use `w-full` to avoid horizontal scroll from scrollbar width.
 - Nav requires `relative` class for `z-50` to create a stacking context — without `relative`, z-index has no effect.
-- Shadow colours should use amber tint (`rgba(184,64,16,...)` light / `rgba(238,159,104,...)` dark) to stay consistent with the arc and accent palette.
+- **Tailwind scans `src/` only** (`@import "tailwindcss" source("../")` in `globals.css`). Class names written in this file do not reach the stylesheet — they used to, and a retired colour lived on in the CSS through a doc table.
 - **There is no beige on the site any more.** Figure grounds and case study cards use `WASH` from `tokens.js` (Rakuten purple at 8% / 15%); outlined cards use `OUTLINE`. `#EDE7DD` and `#C8BEB0` were retired 2026-09-19 — don't reintroduce them.
-- **Hover is ink, not amber.** `GHOST_PILL` fills to `#292929` (dark: `#F2F2F2`) on hover; Tom ruled out the amber accent as a hover colour. The footer icon buttons still hover amber — not yet changed.
+- **Hover is ink.** `GHOST_PILL` fills to `#292929` (dark: `#F2F2F2`); the footer icons, which sit on the dark ground, fill to `#F2F2F2`. There is no accent colour to hover to.
 - All case study metadata rows use `text-slate-600 dark:text-slate-400` — do NOT use `text-gray-600`.
 - `<cite>` inside `<blockquote>` renders as a new line automatically (styled in globals.css as `block mt-2 not-italic text-sm`).
 - Icon-only buttons need a **40×40px minimum hit area** (44×44px for nav/mobile toggles) — don't rely on icon size + small padding alone.

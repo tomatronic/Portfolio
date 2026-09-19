@@ -5,13 +5,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { playCue } from '../../lib/sound'
 import ThemeToggle from './ThemeToggle'
-import { TEXT, INK, BUTTON_RADIUS } from './tokens'
+import { TEXT, INK, MUTED, BUTTON_RADIUS } from './tokens'
 
 // Confetti burst, ported from the confetti-demo prototype. Particles spread
 // evenly around a full circle with a little angular jitter, then fade and
-// shrink outward. Accent-scale colours rather than the demo's red/yellow, so
-// the burst stays on-palette.
-const PARTICLE_COLOURS = ['#B84010', '#E07840', '#EE9F68']
+// shrink outward. Ink-scale colours, picked per theme at burst time — the site
+// has no colour accent (amber was retired 2026-09-19), and a dark-grey burst
+// would vanish on the navy sheet.
+const PARTICLE_COLOURS = {
+  light: ['#292929', '#5D5D5D', '#8A8A8A'],
+  dark: ['#F2F2F2', '#B0B0B0', '#8A8A8A'],
+}
 const BURST_ON_CLICK = 10
 const BURST_ON_HOVER = 5
 
@@ -25,8 +29,8 @@ const BURST_ON_HOVER = 5
  * routes that don't render it themselves. components/navigation.js is the
  * previous design and no longer imported anywhere.
  *
- * Active state is the accent colour rather than the live nav's underline,
- * matching this route's hierarchy-by-colour rule.
+ * Active state is primary ink against muted siblings rather than an
+ * underline, matching this route's hierarchy-by-colour rule.
  */
 
 // Absolute paths, not bare hashes — the nav renders on both the concept home
@@ -58,6 +62,7 @@ export default function Nav({ active = 'Home' }) {
     const host = avatarRef.current
     if (!host || reduceMotion.current) return
 
+    const colours = PARTICLE_COLOURS[document.documentElement.classList.contains('dark') ? 'dark' : 'light']
     for (let i = 0; i < count; i++) {
       const particle = document.createElement('i')
       Object.assign(particle.style, {
@@ -68,7 +73,7 @@ export default function Nav({ active = 'Home' }) {
         height: '7px',
         borderRadius: '50%',
         pointerEvents: 'none',
-        background: PARTICLE_COLOURS[i % PARTICLE_COLOURS.length],
+        background: colours[i % colours.length],
       })
       host.appendChild(particle)
 
@@ -166,11 +171,13 @@ export default function Nav({ active = 'Home' }) {
       >
         {ITEMS.map((item) => {
           const isActive = active === item.label
-          // accent-600 on white is 5.56:1 and accent-300 on the navy sheet is
-          // 8.31:1, so the active item clears AA in both themes.
+          // Hierarchy by colour, from the ink scale: the active item is primary
+          // ink, the others muted and stepping up to ink on hover. Nothing
+          // here is amber any more. Same weight on both, so the pill's measured
+          // 259.3px width (see the 480px note above) is untouched.
           const tone = isActive
-            ? 'text-accent-600 dark:text-accent-300'
-            : `${INK} hover:text-accent-600 dark:hover:text-accent-300`
+            ? INK
+            : `${MUTED} hover:text-[#292929] dark:hover:text-[#F2F2F2]`
 
           // min-h-11 is the whole fix for the 27px-tall targets the Aug 2026
           // review flagged (finding 08): the text box is 27px on the 16px scale,

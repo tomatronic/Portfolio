@@ -21,9 +21,7 @@ export default function NotFound() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center px-6">
       <div className="flex flex-col items-center text-center">
-        {/* accent-300 in dark, not accent-400 — accent-300 on the navy sheet is
-            the site's dark-mode accent everywhere else, and measures 8.31:1. */}
-        <p className={`${TEXT.xs} mb-2 font-medium text-accent-600 dark:text-accent-300`}>404</p>
+        <p className={`${TEXT.xs} ${MUTED} mb-2 font-medium`}>404</p>
         <h1 className={`${TEXT.title} ${INK} mb-4 font-semibold leading-[1.25] tracking-tight`}>
           This page doesn&apos;t exist
         </h1>

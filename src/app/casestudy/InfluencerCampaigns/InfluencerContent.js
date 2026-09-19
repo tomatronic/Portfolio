@@ -63,12 +63,12 @@ function CaseStudyContent() {
 
                 {/* Advertiser */}
                 <div className={`rounded-2xl border ${OUTLINE} ${WASH} p-6`}>
-                  <span className="mb-5 inline-block rounded-full border border-[#292929]/10 bg-white/70 px-2.5 py-0.5 text-[14px] font-medium text-accent-600 dark:border-white/10 dark:bg-white/10 dark:text-accent-300">
+                  <span className="mb-5 inline-block rounded-full border border-[#292929]/10 bg-white/70 px-2.5 py-0.5 text-[14px] font-medium text-[#292929] dark:border-white/10 dark:bg-white/10 dark:text-[#F2F2F2]">
                     Advertiser
                   </span>
                   <div className="mb-5 flex items-center gap-3">
                     <div
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-200 text-accent-700 dark:bg-accent-950 dark:text-accent-400"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#292929]/[0.08] text-[#292929] dark:bg-white/10 dark:text-[#F2F2F2]"
                       style={{ fontSize: '1.1rem' }}
                     >
                       S
@@ -83,15 +83,15 @@ function CaseStudyContent() {
                       <p data-keep className="mb-2 max-w-none text-[14px] font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Goals</p>
                       <ul className="max-w-none space-y-1.5">
                         <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
                           Retain influencer partners within one platform
                         </li>
                         <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
                           Prove influencer ROI to stakeholders
                         </li>
                         <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
                           Manage deliverables without switching tools
                         </li>
                       </ul>
@@ -118,12 +118,12 @@ function CaseStudyContent() {
 
                 {/* Creator */}
                 <div className={`rounded-2xl border ${OUTLINE} ${WASH} p-6`}>
-                  <span className="mb-5 inline-block rounded-full border border-[#292929]/10 bg-white/70 px-2.5 py-0.5 text-[14px] font-medium text-accent-600 dark:border-white/10 dark:bg-white/10 dark:text-accent-300">
+                  <span className="mb-5 inline-block rounded-full border border-[#292929]/10 bg-white/70 px-2.5 py-0.5 text-[14px] font-medium text-[#292929] dark:border-white/10 dark:bg-white/10 dark:text-[#F2F2F2]">
                     Creator
                   </span>
                   <div className="mb-5 flex items-center gap-3">
                     <div
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-200 text-accent-700 dark:bg-accent-950 dark:text-accent-400"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#292929]/[0.08] text-[#292929] dark:bg-white/10 dark:text-[#F2F2F2]"
                       style={{ fontSize: '1.1rem' }}
                     >
                       M
@@ -138,15 +138,15 @@ function CaseStudyContent() {
                       <p data-keep className="mb-2 max-w-none text-[14px] font-medium uppercase tracking-widest text-[#5D5D5D] dark:text-[#B0B0B0]">Goals</p>
                       <ul className="max-w-none space-y-1.5">
                         <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
                           Find brand partnerships that match their niche
                         </li>
                         <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
                           Understand exactly what's required before committing
                         </li>
                         <li data-keep className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
                           Get paid reliably with clear terms upfront
                         </li>
                       </ul>
@@ -222,19 +222,19 @@ function CaseStudyContent() {
                   <p data-keep className="mb-4 text-[15px] font-medium text-[#292929] dark:text-[#F2F2F2]">Shipped in V1</p>
                   <ul className="space-y-2.5 text-[16px] font-normal text-[#5D5D5D] dark:text-[#B0B0B0]">
                     <li className="flex items-start gap-2">
-                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
                       <span>Campaign creation</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
                       <span>The influencer application flow</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
                       <span>Social post verification (the key differentiator)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-600 dark:bg-accent-400" />
+                      <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
                       <span>The basic management tools to run it all</span>
                     </li>
                   </ul>

@@ -1,6 +1,6 @@
 import CaseStudyFigure from "../../components/site/CaseStudyFigure"
 import CaseStudyHeader from "../../components/site/CaseStudyHeader"
-import { WASH } from '../../components/site/tokens'
+import { WASH, INK } from '../../components/site/tokens'
 import OtherCaseStudies from "../../components/OtherCaseStudies"
 import CaseStudyShell from '../../components/site/CaseStudyShell'
 
@@ -34,9 +34,11 @@ function Prompt() {
                             ].map(({ stat, label }) => (
                                 <div key={stat}>
                                     {/* data-keep opts this out of the body size — 27px is the
-                                        scale's ceiling, so the stat leads on colour and weight
-                                        rather than on a display size. */}
-                                    <p data-keep className="mb-1 text-[27px] font-medium tracking-tight text-accent-600 dark:text-accent-300">{stat}</p>
+                                        scale's ceiling, so the stat leads on weight rather than a
+                                        display size. Semibold, not medium: it used to lean on the
+                                        amber accent for emphasis, and with the site monochrome
+                                        (2026-09-19) weight has to carry that alone. */}
+                                    <p data-keep className={`mb-1 text-[27px] font-semibold tracking-tight ${INK}`}>{stat}</p>
                                     {/* MUTED, not FAINT: on the purple WASH ground #737373 measures 4.4:1 and
                                         fails AA; #5D5D5D is 5.8:1. */}
                                     <p data-keep className="mb-0 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">{label}</p>
