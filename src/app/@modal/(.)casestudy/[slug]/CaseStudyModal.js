@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { useState, useCallback, useEffect, useLayoutEffect, useRef } from 'react'
+import { X } from 'lucide-react'
 import { CaseStudySurface } from '../../../components/site/CaseStudyShell'
 
 const TITLE_ID = 'case-study-modal-title'
@@ -166,19 +167,38 @@ export default function CaseStudyModal({ children }) {
               both near-navy, so a hairline keeps the top edge legible — the
               same fix the home reveal needed (finding 07). */}
           <div className="relative mx-auto min-h-[calc(100vh-4rem)] max-w-[856px] rounded-t-2xl bg-white dark:bg-[#0F1623] dark:ring-1 dark:ring-white/10 md:min-h-[calc(100vh-5rem)]">
-            {/* The handle. A bottom-sheet's grab affordance, and the visible
-                close control — one button, 44px tall for the hit area, drawn as
-                a 48×6 pill. Sits over the hero band at the top of the sheet.
-                Not sticky: it belongs to the top of the sheet the way a real
-                one does, and Escape, the scrim and browser back all still close
-                once it has scrolled away. */}
+            {/* The floating close. Tom's call (2026-09-19): the handle alone was
+                too quiet a cue, so the X is back. A zero-height sticky row keeps
+                it out of flow — it starts at the sheet's top-right corner, over
+                the hero band, and pins to the top of the viewport once the sheet
+                scrolls under it. This is the accessible close control; the
+                handle below is pointer-only. */}
+            <div className="pointer-events-none sticky top-0 z-10 h-0">
+              <button
+                type="button"
+                onClick={close}
+                aria-label="Close case study"
+                className="pointer-events-auto absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-md transition-[transform,box-shadow] hover:scale-105 hover:shadow-lg active:scale-[0.96] dark:bg-slate-800"
+              >
+                <X size={16} strokeWidth={2.5} className="text-slate-700 dark:text-slate-200" />
+              </button>
+            </div>
+
+            {/* The handle. A bottom-sheet's grab affordance at the sheet's
+                top-centre, drawn as a 48×6 pill in a 44px-tall hit area.
+                Clicking it closes, but it is out of the tab order and hidden
+                from assistive tech — the X above is the one close control a
+                keyboard or screen reader user needs, and two buttons with the
+                same label would be noise. Not sticky: it belongs to the top of
+                the sheet the way a real one does. */}
             <button
               type="button"
               onClick={close}
-              aria-label="Close case study"
+              tabIndex={-1}
+              aria-hidden="true"
               className="absolute left-1/2 top-0 z-10 flex h-11 w-24 -translate-x-1/2 items-center justify-center"
             >
-              <span aria-hidden="true" className="h-1.5 w-12 rounded-full bg-[#292929]/25 transition-colors dark:bg-white/30" />
+              <span className="h-1.5 w-12 rounded-full bg-[#292929]/25 transition-colors dark:bg-white/30" />
             </button>
 
             <CaseStudySurface>

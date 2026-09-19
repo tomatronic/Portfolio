@@ -1,6 +1,9 @@
 'use client'
 
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { useTheme } from '../ThemeProvider'
+import { consumeDirectCaseStudyVisit } from '../../lib/interceptCache'
 import { CONTAINER } from './tokens'
 import CanvasReveal from './CanvasReveal'
 import Nav from './Nav'
@@ -20,6 +23,15 @@ const REVEAL_BG = '#050505'
 export default function Home() {
   const { theme } = useTheme()
   const dark = theme === 'dark'
+  const router = useRouter()
+
+  // If the visitor arrived here from a hard-loaded case study page, the router
+  // cache holds that page's full tree and the next card click would open it as
+  // a page instead of the modal. Clearing the cache here is what lets the
+  // interception happen — see lib/interceptCache.js.
+  useEffect(() => {
+    if (consumeDirectCaseStudyVisit()) router.refresh()
+  }, [router])
 
   // The intro sheet now uses the site's own page colours rather than the earlier
   // indigo colour-block — the reveal does the heavy lifting, so the sheet itself

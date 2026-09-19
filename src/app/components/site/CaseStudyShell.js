@@ -1,7 +1,8 @@
 'use client'
 
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useEffect } from 'react'
 import { PROSE, CASE_STUDY_CONTAINER } from './tokens'
+import { markDirectCaseStudyVisit } from '../../lib/interceptCache'
 
 /**
  * The surface a case study renders on. There are two, and the page itself
@@ -36,6 +37,12 @@ export const SURFACE_PADDING = 'p-8 md:p-12'
 
 export default function CaseStudyShell({ children }) {
   const inModal = useContext(SurfaceContext)
+
+  // A direct visit poisons the router cache for the modal — see
+  // lib/interceptCache.js. Home consumes this on its next mount.
+  useEffect(() => {
+    if (!inModal) markDirectCaseStudyVisit()
+  }, [inModal])
 
   if (inModal) {
     return <div className={`${SURFACE_PADDING} ${PROSE}`}>{children}</div>

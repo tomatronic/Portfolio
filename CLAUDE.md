@@ -448,9 +448,18 @@ card, figure — and the home page smeared around the card's margins. Now:
 - **Backdrop is a flat wash, not a blur**: `bg-[#EFEFEF]/80 dark:bg-[#050505]/80`. The blur it
   replaced turned the strip above the sheet into a smear of the purple home cards. Clicking the
   scrim closes (`onScrimClick`, checked against `currentTarget`).
-- **Close is the handle**: one `<button>` at the sheet's top-centre, 44px tall for the hit area,
-  drawn as a 48×6 pill. Not sticky — Escape, the scrim and browser back all still work once it
-  has scrolled away. The floating X is gone.
+- **Two close affordances.** The floating X (44px circle, top-right, in a zero-height sticky
+  row so it pins to the viewport once the sheet scrolls under it) is the accessible close and
+  the only one in the tab order. The handle pill at the sheet's top-centre also closes on click
+  but is `aria-hidden` + `tabIndex={-1}` — it's the sheet cue, not a second button for screen
+  readers. The X was dropped for a day and came back at Tom's request: the handle alone was too
+  quiet a cue.
+- **The modal has a router-cache workaround, and it is load-bearing.** Land on
+  `/casestudy/Prompt` directly, go home, click the card: without it the full page opens instead
+  of the modal, because the hard load cached the full tree and the soft navigation reused it
+  rather than asking the server, where interception happens. Present since the modal was added.
+  `lib/interceptCache.js`: a direct visit sets a flag in `CaseStudyShell`; `Home` calls
+  `router.refresh()` on mount if the flag is set. Don't remove either half.
 - Animation unchanged: backdrop fade 0.28s / 0.18s; panel spring up, `easeIn` 0.22s down.
   `router.back()` fires after the panel animation completes.
 - Scroll lock: `overflow: hidden` + `paddingRight` compensates for scrollbar width shift.
