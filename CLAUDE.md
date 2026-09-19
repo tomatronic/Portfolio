@@ -425,22 +425,38 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 - ThemeProvider adds/removes `dark` class on `<html>`. `toggle()` persists to `localStorage`.
 - FOUC prevention: inline `<script>` in layout.js applies dark class before hydration
 - `<html>` has `suppressHydrationWarning` to avoid React mismatch warnings
+- **Theme-switching by hand in a browser tool**: the global 450ms colour crossfade in `globals.css` means `getComputedStyle` read straight after toggling `.dark` returns a mid-transition value. Wait ~500ms before measuring.
 - `page.js` reads `useTheme()` directly and switches colour palette via JS (not Tailwind dark: classes)
 
 ## Case study modal (Parallel + Intercepting Routes)
-- Clicking a card triggers `@modal/(.)casestudy/[slug]/page.js` — URL updates, modal slides up.
-  Direct URL (`/casestudy/Prompt`) still renders the full page normally. The four slugs are a
-  fixed set and prerender at build.
-- **Two separate layers**: backdrop (`motion.div` fade 0.28s open / 0.18s close) + panel
-  (spring slide-up open / `easeIn` 0.22s close).
-- **Backdrop is neutral ink, not amber**: `bg-[#292929]/[0.08] dark:bg-[#292929]/90
-  backdrop-blur-sm pointer-events-none`. It used to tint with `#B84010` / `#3D1204` at the same
-  opacities — the note is in the component. Older docs claiming `#2A6B6B` / `#051F1F` are two
-  designs out of date.
-- Panel: transparent container, handles scroll + close button + content.
-- Close: sticky X button inside the panel, plus Escape. `router.back()` fires after the panel
-  animation completes.
+Rebuilt as a **bottom sheet** on 2026-09-19, measured against matt-evans.co.uk.
+The old version was a dialog: the case study's tinted card floated inside a
+blurred panel with a floating X, so a visitor saw three nested frames — panel,
+card, figure — and the home page smeared around the card's margins. Now:
+
+- Clicking a card triggers `@modal/(.)casestudy/[slug]/page.js` — URL updates, the sheet
+  slides up. Direct URL (`/casestudy/Prompt`) still renders the full page normally. The four
+  slugs are a fixed set and prerender at build.
+- **The sheet is the modal's own surface.** `max-w-[856px]`, centred, `rounded-t-2xl`, `bg-white
+  dark:bg-[#0F1623]`, with a 64px (`md:` 80px) gap above it where the page behind shows through.
+  856 not 904: the direct page loses 48px to its container's `px-6` before the card padding, so
+  the sheet is 48px narrower to keep the same 760px measure. Dark mode adds a `ring-1
+  ring-white/10` hairline — the sheet and scrim are both near-navy (finding 07 again).
+- **The case study drops its card inside the sheet.** `CaseStudyModal` wraps its children in
+  `CaseStudySurface`; `CaseStudyShell` reads that context and renders only the padding. On a
+  direct visit the same shell renders the tinted card. See `CaseStudyShell.js`.
+- **Backdrop is a flat wash, not a blur**: `bg-[#EFEFEF]/80 dark:bg-[#050505]/80`. The blur it
+  replaced turned the strip above the sheet into a smear of the purple home cards. Clicking the
+  scrim closes (`onScrimClick`, checked against `currentTarget`).
+- **Close is the handle**: one `<button>` at the sheet's top-centre, 44px tall for the hit area,
+  drawn as a 48×6 pill. Not sticky — Escape, the scrim and browser back all still work once it
+  has scrolled away. The floating X is gone.
+- Animation unchanged: backdrop fade 0.28s / 0.18s; panel spring up, `easeIn` 0.22s down.
+  `router.back()` fires after the panel animation completes.
 - Scroll lock: `overflow: hidden` + `paddingRight` compensates for scrollbar width shift.
+- **Don't trust the desktop app's Browser pane to screenshot this.** It captured a stale
+  compositor layer for the scrim and showed the dark backdrop as light; Playwright rendered it
+  correctly. Verify the modal with Playwright or the real site.
 
 ## Card interactions
 - **Home case study cards**: purple shadow set, see the Case study cards section above.
@@ -473,26 +489,33 @@ The `btn-violet-3d` / `btn-dark-3d` utilities were removed from `globals.css` in
 
 ### Case study layout template (all 4 use this)
 ```jsx
-<div className="relative min-h-screen">
-  <div className={`container mx-auto ${CASE_STUDY_CONTAINER} px-6`}>
-    <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
-      <CaseStudyFigure priority src="/hero.png" width={1600} height={927} alt="…" />
-      <CaseStudyHeader eyebrow="Rakuten Advertising • Date" title="Title" role="…" skills="…">
-        <p>[intro]</p>
-      </CaseStudyHeader>
-      <div className="grid auto-rows-auto grid-cols-1 gap-5 md:grid-cols-4 md:gap-10">
-        <div className="col-span-4 mb-12">[sections]</div>
-      </div>
-    </div>
+<CaseStudyShell>
+  <CaseStudyFigure hero priority src="/hero.png" width={1600} height={927} alt="…" />
+  <CaseStudyHeader eyebrow="Rakuten Advertising • Date" title="Title" role="…" skills="…">
+    <p>[intro]</p>
+  </CaseStudyHeader>
+  <div className="grid auto-rows-auto grid-cols-1 gap-5 md:grid-cols-4 md:gap-10">
+    <div className="col-span-4 mb-12">[sections]</div>
   </div>
-</div>
+</CaseStudyShell>
 ```
+
+`CaseStudyShell` (`components/site/CaseStudyShell.js`) is the surface: on a direct
+visit it is the `rounded-2xl bg-zinc-50 p-8 md:p-12` card inside
+`CASE_STUDY_CONTAINER`; inside the modal it is padding only, because the sheet
+is already the surface. Its `SURFACE_PADDING` is what the hero's negative
+margins are derived from — change one, change both. The card radius is 16px
+now, not the old `rounded-4xl` 32px, so it matches `CARD_RADIUS` and the sheet.
 
 **Every inline image is a `CaseStudyFigure`** (`components/site/CaseStudyFigure.js`):
 it owns the cream ground, the ring and the `sizes` hint, so don't write the
 wrapper out by hand — that markup was duplicated 21 times before 2026-09-16.
-`zoom` makes it a `ZoomableImage`; pass `sizes="100vw"` with it. The only
-exception is Rakuten's hero, which sits on a `bg-[url('/offerBG.png')]` panel.
+`zoom` makes it a `ZoomableImage`; pass `sizes="100vw"` with it. **`hero`** is
+for the first image: the cream band bleeds to the surface's edges and takes its
+top radius, so the hero is the top of the sheet rather than a picture inside it.
+The screenshot keeps its ring inside the band — three of the four heroes are
+near-white and would dissolve into a white sheet without it. The only page not
+using `hero` is Rakuten, whose hero sits on a `bg-[url('/offerBG.png')]` panel.
 **The header is a `CaseStudyHeader`**; `title` accepts a node for ACJ's tinted
 product name.
 

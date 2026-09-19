@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { useState, useCallback, useEffect, useLayoutEffect, useRef } from 'react'
-import { X } from 'lucide-react'
+import { CaseStudySurface } from '../../../components/site/CaseStudyShell'
 
 const TITLE_ID = 'case-study-modal-title'
 
@@ -113,12 +113,21 @@ export default function CaseStudyModal({ children }) {
     }
   }, [])
 
+  // Click on the scrim — the top gap or the margins beside the sheet — closes.
+  // Checked against currentTarget so a click that started inside the sheet
+  // and bubbled up doesn't count.
+  const onScrimClick = (e) => {
+    if (e.target === e.currentTarget) close()
+  }
+
   return (
     <>
-      {/* Backdrop — fades in/out independently. Primary ink rather than the
-          amber it used to tint with (#B84010 / #3D1204); same opacities. */}
+      {/* Backdrop. A flat wash, deliberately not blurred: the home cards behind
+          it are large purple screenshots, and a blur turned the strip above
+          the sheet into a smear. A plain tint reads as "the page you came
+          from", which is the point of leaving it visible. */}
       <motion.div
-        className="fixed inset-0 z-50 bg-[#292929]/[0.08] dark:bg-[#292929]/90 backdrop-blur-sm pointer-events-none"
+        className="fixed inset-0 z-50 bg-[#EFEFEF]/80 dark:bg-[#050505]/80 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: isClosing ? 0 : 1 }}
         transition={isClosing
@@ -126,7 +135,8 @@ export default function CaseStudyModal({ children }) {
           : { duration: 0.28, ease: 'easeOut' }}
       />
 
-      {/* Panel — slides up from bottom.
+      {/* Panel — the scroll container, sliding up from the bottom. The sheet
+          inside it is what the visitor sees as the modal.
           tabIndex -1 so focus can be moved here on open without adding a stop
           to the tab order. */}
       <motion.div
@@ -143,26 +153,38 @@ export default function CaseStudyModal({ children }) {
           : { type: 'spring', stiffness: 320, damping: 38, mass: 0.9 }}
         onAnimationComplete={() => { if (isClosing) router.back() }}
       >
-        {/* Floating close button */}
-        <div className="pointer-events-none sticky right-0 top-0 z-10 flex justify-end px-6 pt-6">
-          <button
-            onClick={close}
-            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-md transition-[transform,box-shadow] hover:scale-105 hover:shadow-lg active:scale-[0.96]"
-            aria-label="Close case study"
-          >
-            <X size={16} strokeWidth={2.5} className="text-slate-700 dark:text-slate-200" />
-          </button>
-        </div>
+        {/* The gap above the sheet is where the page behind shows through.
+            min-h-full so a short case study still fills the viewport, and the
+            sheet never ends with the scrim visible beneath it. */}
+        <div className="min-h-full pt-16 md:pt-20" onClick={onScrimClick}>
+          {/* The sheet. 856px, not CASE_STUDY_CONTAINER's 904: the direct page
+              loses 48px to its container's px-6 before the card's padding, and
+              the sheet has no such container, so it is 48px narrower to keep
+              the same 760px measure — see CASE_STUDY_CONTAINER in tokens.js.
+              Top corners only, at the site's 16px card radius; the bottom edge
+              runs off the viewport. In dark mode the sheet and the scrim are
+              both near-navy, so a hairline keeps the top edge legible — the
+              same fix the home reveal needed (finding 07). */}
+          <div className="relative mx-auto min-h-[calc(100vh-4rem)] max-w-[856px] rounded-t-2xl bg-white dark:bg-[#0F1623] dark:ring-1 dark:ring-white/10 md:min-h-[calc(100vh-5rem)]">
+            {/* The handle. A bottom-sheet's grab affordance, and the visible
+                close control — one button, 44px tall for the hit area, drawn as
+                a 48×6 pill. Sits over the hero band at the top of the sheet.
+                Not sticky: it belongs to the top of the sheet the way a real
+                one does, and Escape, the scrim and browser back all still close
+                once it has scrolled away. */}
+            <button
+              type="button"
+              onClick={close}
+              aria-label="Close case study"
+              className="absolute left-1/2 top-0 z-10 flex h-11 w-24 -translate-x-1/2 items-center justify-center"
+            >
+              <span aria-hidden="true" className="h-1.5 w-12 rounded-full bg-[#292929]/25 transition-colors dark:bg-white/30" />
+            </button>
 
-        {/* Content.
-            The sticky row above is in flow, so it already contributes 68px (its
-            24px inset plus the 44px button) before this padding is counted. That
-            put the card 116px down the viewport, which read as a dead band across
-            the top. Kept small deliberately: the card must still start below the
-            button's lower edge at 68px, since the two are within a few pixels of
-            each other horizontally once the content hits its max width. */}
-        <div className="pt-3 md:pt-4">
-          {children}
+            <CaseStudySurface>
+              {children}
+            </CaseStudySurface>
+          </div>
         </div>
       </motion.div>
     </>

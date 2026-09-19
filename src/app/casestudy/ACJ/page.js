@@ -1,7 +1,7 @@
 import CaseStudyFigure from "../../components/site/CaseStudyFigure"
 import CaseStudyHeader from "../../components/site/CaseStudyHeader"
 import OtherCaseStudies from "../../components/OtherCaseStudies"
-import { PROSE, CASE_STUDY_CONTAINER } from '../../components/site/tokens'
+import CaseStudyShell from '../../components/site/CaseStudyShell'
 
 export async function generateMetadata() {
     return {
@@ -13,10 +13,8 @@ export async function generateMetadata() {
 function ACJ() {
     return (
         <>
-            <div className="relative min-h-screen">
-                <div className={`container mx-auto ${CASE_STUDY_CONTAINER} px-6`}>
-                    <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
-                    <CaseStudyFigure priority src="/ACJ-hero.png" width={1600} height={927} alt="Affiliate Conversion Journey dashboard showing multi-touch attribution across awareness, consideration, and conversion phases" />
+            <CaseStudyShell>
+                    <CaseStudyFigure hero priority src="/ACJ-hero.png" width={1600} height={927} alt="Affiliate Conversion Journey dashboard showing multi-touch attribution across awareness, consideration, and conversion phases" />
                         <CaseStudyHeader
                             eyebrow="Rakuten Advertising • Oct 2022 – Jun 2023"
                             title={<><span className="text-[#5D5D5D] dark:text-[#B0B0B0]">Affiliate Conversion Journey</span> — Multi-Touch Attribution for Affiliate</>}
@@ -100,9 +98,7 @@ function ACJ() {
                                 <OtherCaseStudies currentHref="/casestudy/ACJ" />
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+            </CaseStudyShell>
         </>
     )
 }

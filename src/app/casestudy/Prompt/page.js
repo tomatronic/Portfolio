@@ -1,7 +1,7 @@
 import CaseStudyFigure from "../../components/site/CaseStudyFigure"
 import CaseStudyHeader from "../../components/site/CaseStudyHeader"
 import OtherCaseStudies from "../../components/OtherCaseStudies"
-import { PROSE, CASE_STUDY_CONTAINER } from '../../components/site/tokens'
+import CaseStudyShell from '../../components/site/CaseStudyShell'
 
 export async function generateMetadata() {
     return {
@@ -13,10 +13,8 @@ export async function generateMetadata() {
 function Prompt() {
     return (
         <>
-            <div className="relative min-h-screen">
-                <div className={`container mx-auto ${CASE_STUDY_CONTAINER} px-6`}>
-                    <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
-                        <CaseStudyFigure priority src="/Prompt-hero.png" width={1600} height={927} alt="Natural language search interface for Rakuten Advertising custom reports" />
+            <CaseStudyShell>
+                        <CaseStudyFigure hero priority src="/Prompt-hero.png" width={1600} height={927} alt="Natural language search interface for Rakuten Advertising custom reports" />
                         <CaseStudyHeader
                             eyebrow="Rakuten Advertising • Jan 2025 - Ongoing"
                             title="Intelligent Search for Custom Reports — Natural Language Search & AI"
@@ -119,9 +117,7 @@ function Prompt() {
                                 <OtherCaseStudies currentHref="/casestudy/Prompt" />
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+            </CaseStudyShell>
 
         </>
     )

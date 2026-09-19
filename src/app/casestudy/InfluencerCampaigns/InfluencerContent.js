@@ -3,18 +3,16 @@
 import CaseStudyFigure from '../../components/site/CaseStudyFigure'
 import CaseStudyHeader from '../../components/site/CaseStudyHeader'
 import OtherCaseStudies from '../../components/OtherCaseStudies'
-import { PROSE, CASE_STUDY_CONTAINER } from '../../components/site/tokens'
+import CaseStudyShell from '../../components/site/CaseStudyShell'
 
 // ─── Case study content ────────────────────────────────────────────────────────
 
 function CaseStudyContent() {
   return (
-    <div className="relative min-h-screen">
-      <div className={`container mx-auto ${CASE_STUDY_CONTAINER} px-6`}>
-        <div className={`rounded-4xl bg-zinc-50 p-8 md:p-12 dark:bg-slate-900 ${PROSE}`}>
+    <CaseStudyShell>
 
           {/* Hero */}
-          <CaseStudyFigure priority src="/influencerHero.png" width={1600} height={927} alt="Influencer Campaigns product overview — advertiser and influencer interface for managing affiliate influencer campaigns on Rakuten Advertising" />
+          <CaseStudyFigure hero priority src="/influencerHero.png" width={1600} height={927} alt="Influencer Campaigns product overview — advertiser and influencer interface for managing affiliate influencer campaigns on Rakuten Advertising" />
 
           <CaseStudyHeader
             eyebrow="Rakuten Advertising • Sept 2025 – Ongoing"
@@ -371,9 +369,7 @@ function CaseStudyContent() {
             </div>
           </div>
 
-        </div>
-      </div>
-    </div>
+    </CaseStudyShell>
   )
 }
 
