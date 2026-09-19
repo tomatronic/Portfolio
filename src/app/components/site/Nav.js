@@ -29,8 +29,8 @@ const BURST_ON_HOVER = 5
  * routes that don't render it themselves. components/navigation.js is the
  * previous design and no longer imported anywhere.
  *
- * Active state is primary ink against muted siblings, plus a 1px underline
- * that the other items grow in on hover.
+ * Active state is primary ink against muted siblings, on a faint ink fill
+ * that the other items fade in on hover — a segmented control.
  */
 
 // Absolute paths, not bare hashes — the nav renders on both the concept home
@@ -191,22 +191,26 @@ export default function Nav({ active = 'Home' }) {
           // padding them out to 44 would widen the pill and invalidate the
           // measured 259.3px the breakpoint above depends on.
           //
-          // `group` is for the underline on the label span below.
+          // `group` is for the hover fill on the label span below.
           const className = `${TEXT.base} ${tone} group inline-flex min-h-11 items-center font-medium transition-colors`
 
           // The hover cue, now that there is no accent colour to change to
-          // (2026-09-19): a 1px rule under the label that grows from the left
-          // on hover and is already there on the active item. It lives on a
-          // span around the label, not the link — the link is a 44px-tall box
-          // and a rule at its bottom edge would float 10px under the text. On
-          // its own line box the rule sits 2px below the text's descender.
-          // bg-current, so it takes whatever ink the label has at the time,
-          // including mid-transition. The site's own ease; motion-reduce
-          // snaps. It is a transform, not a width change, so the label never
-          // reflows and the pill's measured width can't move.
+          // (2026-09-19): a faint ink fill behind the label, fading in on hover
+          // and permanent on the active item — the pill becomes a segmented
+          // control. It is the theme toggle's own hover treatment, so the nav
+          // speaks the same language as the other controls; an underline was
+          // tried first and read as a prose-link cue on a control.
+          //
+          // Drawn by a pseudo-element with negative insets on a span around
+          // the label, so it is bigger than the text without any padding on
+          // the link — padding would widen the pill and break the measured
+          // 259.3px the 480px breakpoint depends on. The span is `z-0` so it
+          // forms a stacking context and the fill's `-z-10` puts it under the
+          // text but still above the pill's white ground. 12px either side
+          // leaves 4px between neighbouring fills at the pill's 28px gap.
           const label = (
             <span
-              className={`relative after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:after:scale-x-100 motion-reduce:after:transition-none ${isActive ? 'after:scale-x-100' : ''}`}
+              className={`relative z-0 before:absolute before:-inset-x-3 before:-inset-y-1.5 before:-z-10 before:rounded-full before:bg-[#292929]/[0.05] before:opacity-0 before:transition-opacity before:duration-300 group-hover:before:opacity-100 motion-reduce:before:transition-none dark:before:bg-white/[0.08] ${isActive ? 'before:opacity-100' : ''}`}
             >
               {item.label}
             </span>

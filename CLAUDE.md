@@ -342,10 +342,13 @@ becomes two rows with the pill alone on the second.
     avatar circle and would clip the burst too.
 - **The pill** is one bordered control holding Work / About / Resume as plain text — Resume gets
   no special treatment, which is what lets it read as a single unbroken control. Resume is
-  external, to `/resume.pdf`. **Active item is primary ink against muted siblings, with a 1px
-  underline**; the others step up to ink on hover and grow the same underline in from the left
-  (300ms, the site's ease, `motion-reduce` snaps). The underline is a scaled pseudo-element on a
-  span around the label — a transform, so nothing reflows and the pill stays exactly 259.3px.
+  external, to `/resume.pdf`. **The pill is a segmented control**: the active item is primary
+  ink on a faint ink fill (`#292929` at 5%, `white/8` dark — the theme toggle's own hover
+  treatment), and the others step up to ink and fade the same fill in on hover (300ms,
+  `motion-reduce` snaps). The fill is a pseudo-element with negative insets on a span around the
+  label, so there is no padding on the link and the pill stays exactly 259.3px. An underline was
+  tried first (2026-09-19) and dropped the same day: the site's controls signal hover by filling,
+  and an underline inside a bordered pill read as a prose-link cue on a control.
   Items claim `min-h-11` and the pill's own padding is `py-1.5` to absorb it — see finding 08
   above.
 - **480px is measured, not a Tailwind breakpoint.** The pill needs 259.3px; one row needs
