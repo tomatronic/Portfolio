@@ -29,8 +29,8 @@ const BURST_ON_HOVER = 5
  * routes that don't render it themselves. components/navigation.js is the
  * previous design and no longer imported anywhere.
  *
- * Active state is primary ink against muted siblings rather than an
- * underline, matching this route's hierarchy-by-colour rule.
+ * Active state is primary ink against muted siblings, plus a 1px underline
+ * that the other items grow in on hover.
  */
 
 // Absolute paths, not bare hashes — the nav renders on both the concept home
@@ -190,7 +190,27 @@ export default function Nav({ active = 'Home' }) {
           // narrowest at 39px) — they are well clear of the 24px minimum, and
           // padding them out to 44 would widen the pill and invalidate the
           // measured 259.3px the breakpoint above depends on.
-          const className = `${TEXT.base} ${tone} inline-flex min-h-11 items-center font-medium transition-colors`
+          //
+          // `group` is for the underline on the label span below.
+          const className = `${TEXT.base} ${tone} group inline-flex min-h-11 items-center font-medium transition-colors`
+
+          // The hover cue, now that there is no accent colour to change to
+          // (2026-09-19): a 1px rule under the label that grows from the left
+          // on hover and is already there on the active item. It lives on a
+          // span around the label, not the link — the link is a 44px-tall box
+          // and a rule at its bottom edge would float 10px under the text. On
+          // its own line box the rule sits 2px below the text's descender.
+          // bg-current, so it takes whatever ink the label has at the time,
+          // including mid-transition. The site's own ease; motion-reduce
+          // snaps. It is a transform, not a width change, so the label never
+          // reflows and the pill's measured width can't move.
+          const label = (
+            <span
+              className={`relative after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:after:scale-x-100 motion-reduce:after:transition-none ${isActive ? 'after:scale-x-100' : ''}`}
+            >
+              {item.label}
+            </span>
+          )
 
           return item.external ? (
             <a
@@ -200,7 +220,7 @@ export default function Nav({ active = 'Home' }) {
               rel="noopener noreferrer"
               className={className}
             >
-              {item.label}
+              {label}
             </a>
           ) : (
             <Link
@@ -209,7 +229,7 @@ export default function Nav({ active = 'Home' }) {
               aria-current={isActive ? 'page' : undefined}
               className={className}
             >
-              {item.label}
+              {label}
             </Link>
           )
         })}

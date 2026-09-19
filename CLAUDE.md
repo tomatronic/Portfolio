@@ -342,9 +342,12 @@ becomes two rows with the pill alone on the second.
     avatar circle and would clip the burst too.
 - **The pill** is one bordered control holding Work / About / Resume as plain text — Resume gets
   no special treatment, which is what lets it read as a single unbroken control. Resume is
-  external, to `/resume.pdf`. Active item is `accent-600` / `dark:accent-300` (5.56:1 on white,
-  8.31:1 on the navy sheet). Items claim `min-h-11` and the pill's own padding is `py-1.5` to
-  absorb it — see finding 08 above.
+  external, to `/resume.pdf`. **Active item is primary ink against muted siblings, with a 1px
+  underline**; the others step up to ink on hover and grow the same underline in from the left
+  (300ms, the site's ease, `motion-reduce` snaps). The underline is a scaled pseudo-element on a
+  span around the label — a transform, so nothing reflows and the pill stays exactly 259.3px.
+  Items claim `min-h-11` and the pill's own padding is `py-1.5` to absorb it — see finding 08
+  above.
 - **480px is measured, not a Tailwind breakpoint.** The pill needs 259.3px; one row needs
   259.3 + 44 avatar + 44 toggle + 32 gaps + 48 page padding = 428px, and the threshold is set
   above that and clear of 428/430, both real iPhone widths. **It moves with the type scale** —
