@@ -99,7 +99,8 @@ on touch, which is the trap `ImageWall` already documents.
 Four more items from `.design/review-2026-08-15/` shipped, all code-only.
 Commits `b83b5c5` (08/09/10) and `a1197b6` (07). What is left on that
 review is **finding 11** (the ragged lab grid, needs a content decision on
-the three "Coming soon" tiles) plus the Figma/copy items.
+the remaining "Coming soon" tiles — **two now**, Pulse and Hayku; Tarn got
+artwork 2026-09-23) plus the Figma/copy items.
 
 - **08 — nav hit areas.** Items in the pill now claim a 44px-tall box
   (`min-h-11` + `inline-flex items-center`); they were 27px, which clears

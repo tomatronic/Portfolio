@@ -14,9 +14,10 @@ import { TEXT, DARK_INK, DARK_MUTED, DARK_FAINT, ICON_CARD, CARD_RADIUS, CONTAIN
  * belong in a lab section.
  *
  * Give an entry an `image` and it renders a screenshot with a scrim; leave it
- * off and the tile falls back to its `tint` gradient as a placeholder. Job
- * Monitor and From My Window have artwork; the other three are still on tints,
- * which is the "Coming soon" state finding 11 wants a content decision on.
+ * off and the tile falls back to its `tint` gradient as a placeholder. Tarn,
+ * Job Monitor and From My Window have artwork; Pulse and Hayku are still on
+ * tints, which is the "Coming soon" state finding 11 wants a content decision
+ * on.
  */
 const EXPERIMENTS = [
   {
@@ -24,7 +25,10 @@ const EXPERIMENTS = [
     kind: 'iOS app',
     year: '2026',
     note: 'Peak-bagging for the UK fells — logging, maps, and a social feed.',
+    // Native 750×1000, which is exactly 3:4 — object-cover crops nothing. If
+    // the artwork is replaced, check the new ratio rather than assuming.
     ratio: '3 / 4',
+    image: '/tarn.png',
     tint: 'linear-gradient(155deg, #1E3A5F 0%, #0B1B2E 100%)',
   },
   {
