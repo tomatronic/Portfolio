@@ -8,7 +8,7 @@ in each image, not from dates — treat the grouping as inferred:
 
 | where | image | chrome |
 |---|---|---|
-| Hero | `Prompt-hero.png` | toggle pill, dark purple panel — **gen B** |
+| Hero | `prompt-header.png` | left sidebar — **gen C, shipped** ✅ replaced 2026-09-23 |
 | Challenge | `Prompt-old2.png` | legacy manual builder — correct, it is the "before" |
 | Approach | `Prompt-suggestion.png` | full-bleed purple, no sidebar — **gen A** |
 | Solution | `Prompt-tags-alt.png` | toggle pill, no sidebar — **gen B** |
@@ -22,12 +22,21 @@ later. That is why the concept/shipped pair was built and then parked on
 2026-08-26 (see below); the single undated concept image makes no such
 claim and is safe.
 
-**The fix is three gen-C exports from Tom**: the home screen (he is
-already replacing it), the tag/token state in the shipped sidebar layout,
-and a new hero. The shipped design does still have tokens — they are in
-the "Ask a follow up…" box at the foot of `prompt-report.png` — so the
+**The fix was three gen-C exports from Tom; one has landed.** The new hero
+`prompt-header.png` arrived 2026-09-23 — the shipped Create report screen, with
+the sidebar — and replaced `Prompt-hero.png`, which was deleted. **Two are still
+outstanding**: the tag/token state in the shipped sidebar layout, and a
+replacement for Approach's `Prompt-suggestion.png` (gen A) or Solution's
+`Prompt-tags-alt.png` (gen B). The shipped design does still have tokens — they
+are in the "Ask a follow up…" box at the foot of `prompt-report.png` — so the
 tags shot should exist. Do that pass before adding any dated or
 currency-claiming caption to this case study.
+
+**The new hero brings its own ground.** Its lavender is `#f3ebfa` against
+`WASH`'s `#f5eefb` — a 2/3/1 per-channel difference, invisible — and unlike the
+old hero it is only 19% semi-transparent with no fully clear pixels, so the band
+colour behind it barely shows. Don't take that as licence to drop `WASH` from
+`HERO_GROUND`: ACJ and Influencer's heroes still rely on it.
 
 ### Prompt's card image replaced (2026-08-26)
 Finding 06's first third, and it needed no crop. `report-generated.png`

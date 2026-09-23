@@ -15,7 +15,7 @@ function Prompt() {
     return (
         <>
             <CaseStudyShell>
-                        <CaseStudyFigure hero priority src="/Prompt-hero.png" width={1600} height={727} alt="Natural language search interface for Rakuten Advertising custom reports" />
+                        <CaseStudyFigure hero priority src="/prompt-header.png" width={1600} height={727} alt="The shipped Create report screen: a &quot;Describe the report you want to see…&quot; box above three suggested questions, with saved reports and collections listed in the left sidebar" />
                         <CaseStudyHeader
                             eyebrow="Rakuten Advertising • Jan 2025 - Ongoing"
                             title="Intelligent Search for Custom Reports — Natural Language Search & AI"
