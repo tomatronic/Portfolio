@@ -149,7 +149,11 @@ export default function ExperimentsLab() {
                       src={item.image}
                       alt={`${item.title} — screenshot`}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      // 33vw was a large over-fetch: the grid sits in a max-w-4xl
+                      // container, so a tile is never wider than 288px however wide the
+                      // viewport gets — at 1920 the old hint claimed 633px, and Next
+                      // served a variant to match (Lighthouse, 2026-09-25).
+                      sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1023px) calc((100vw - 64px) / 2), 288px"
                       className="object-cover object-top"
                     />
                     {/* Same two-layer scrim as the case study cards — needed here

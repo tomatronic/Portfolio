@@ -361,10 +361,23 @@ becomes two rows with the pill alone on the second.
   and an underline inside a bordered pill read as a prose-link cue on a control.
   Items claim `min-h-11` and the pill's own padding is `py-1.5` to absorb it — see finding 08
   above.
-- **480px is measured, not a Tailwind breakpoint.** The pill needs 259.3px; one row needs
-  259.3 + 44 avatar + 44 toggle + 32 gaps + 48 page padding = 428px, and the threshold is set
-  above that and clear of 428/430, both real iPhone widths. **It moves with the type scale** —
-  it was 420 when the base was 14px. Re-measure the pill rather than assuming.
+- **Two measured thresholds, and both move with the type scale.** Re-measure rather than
+  assuming if the scale ever changes again.
+  - **375px — one row starts.** Tom reported the pill sitting on its own row on his phone
+    (2026-09-25). At the generous padding one row needs 428px, which no phone has, so below
+    375px the pill tightens to `px-3` with `gap-x-4` between labels and `gap-x-3` between
+    zones: 203.3 + 44 + 44 + 24 = 315.3px, against 327px available on a 375px phone
+    (viewport less the `px-6` either side). Every common phone from 375 up gets one row with
+    11.7px to spare at the tightest. 360px and 320px miss it by 3.3px and 43.3px and keep the
+    two-row fallback — buying those back would need `px-2`, which reads as a collision
+    between the pill and the toggle.
+  - **480px — the pill relaxes** back to `px-7`/`gap-x-7` and the zones to `gap-x-4`,
+    which is where the **259.3px** desktop measurement comes from. That number is unchanged
+    by the mobile work, and everything below still derives from it.
+  - **The pill and the toggle must switch column at the same breakpoint.** They didn't, for one
+    build: the pill moved to `col-start-2` at 375 while the toggle still moved to
+    `col-start-3` at 480, so between those widths both sat in column 2 and the toggle rendered
+    on top of "Resume". If you change one, change the other.
 - Item hrefs are absolute (`/#work`, not `#work`) because the nav renders on About too.
 
 ## Case study cards (home page)
@@ -760,6 +773,13 @@ LinkedIn — `hover:bg-accent-600`, `active:scale-[0.96]`), then `Designed and b
 - `CardImageStack.js` is a shared component — changes affect all card layouts.
 - Favicon: `icons: { icon: '/just_me.webp' }` in `generateMetadata()` in `layout.js`.
 - Image filenames in `/public` must be lowercase (e.g. `.png` not `.PNG`) — Vercel runs on Linux (case-sensitive).
+- **`sizes` must describe the container, not the viewport.** Everything on this site sits in a
+  capped container, so `vw` units overstate badly on desktop and Next serves a variant to match.
+  Lighthouse caught it on 2026-09-25: the lab tiles said `33vw` but a tile is never wider than
+  288px, and the case study figures said `1008px` — a column width that stopped existing when
+  `CASE_STUDY_CONTAINER` narrowed on 2026-08-17. Correct values: lab tiles 288px at `lg`,
+  inline case study figures **760px**, heroes **856px** (they bleed past the card padding).
+  Measure `getBoundingClientRect().width` against the served `?w=` before trusting a hint.
 - `group-hover` animations require `group` class on the parent element — check this when adding arrow animations to links.
 - The Hero's Resume/LinkedIn pills and the 404's CTA share `GHOST_PILL` from `tokens.js`. The 404 adds `min-h-11`; the Hero pills don't — a 44px hit-area inconsistency worth settling one way or the other.
 - UI sounds go through `lib/sound.js`'s `playCue()`, never `cuelume`'s `play()` directly — the try/catch is what stops autoplay policy from blocking the click.

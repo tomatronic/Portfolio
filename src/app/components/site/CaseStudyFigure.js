@@ -34,13 +34,19 @@ const GROUND = `flex flex-row flex-wrap place-content-center content-center ${WA
 const HERO_GROUND = `${WASH} -mx-8 -mt-8 mb-8 overflow-hidden rounded-t-2xl md:-mx-12 md:-mt-12`
 const IMAGE = 'rounded-2xl ring-1 ring-black/10 dark:ring-white/10'
 const HERO_IMAGE = 'w-full h-auto'
-const SIZES = '(max-width: 768px) 100vw, 1008px'
+// The content column is 760px — CASE_STUDY_CONTAINER 904, less the wrapper's
+// px-6 and the card's md:p-12. The hero is wider because its negative margins
+// cancel that padding, so it spans the full 856px surface. Both claimed 1008px
+// until 2026-09-25, a width nothing has rendered at since the column narrowed
+// on 2026-08-17.
+const SIZES = '(max-width: 768px) 100vw, 760px'
+const HERO_SIZES = '(max-width: 768px) 100vw, 856px'
 
 export default function CaseStudyFigure({ hero = false, zoom = false, className = '', ...img }) {
   const Img = zoom ? ZoomableImage : Image
   return (
     <div className={hero ? HERO_GROUND : GROUND}>
-      <Img sizes={SIZES} className={`${hero ? HERO_IMAGE : IMAGE} ${className}`.trim()} {...img} />
+      <Img sizes={hero ? HERO_SIZES : SIZES} className={`${hero ? HERO_IMAGE : IMAGE} ${className}`.trim()} {...img} />
     </div>
   )
 }

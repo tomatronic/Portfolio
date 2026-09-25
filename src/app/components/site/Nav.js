@@ -118,7 +118,7 @@ export default function Nav({ active = 'Home' }) {
     //
     // This moves with the type scale: it was 420 when the base was 14px. If the
     // scale changes again, re-measure the pill rather than assuming.
-    <nav className="relative z-50 grid grid-cols-2 items-center gap-x-4 gap-y-5 py-8 min-[480px]:grid-cols-[1fr_auto_1fr] min-[480px]:gap-y-0">
+    <nav className="relative z-50 grid grid-cols-2 items-center gap-x-3 gap-y-5 py-8 min-[375px]:grid-cols-[1fr_auto_1fr] min-[375px]:gap-y-0 min-[480px]:gap-x-4">
       {/* Particles mount here, not on the inner span — that one is
           overflow-hidden to clip the avatar into a circle, which would clip the
           burst too. `relative` gives them a positioning context. */}
@@ -167,7 +167,7 @@ export default function Nav({ active = 'Home' }) {
           gap are untouched, so the 259.3px pill width the 480px threshold above
           is derived from still holds. */}
       <div
-        className={`${BUTTON_RADIUS} col-span-2 row-start-2 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 justify-self-center border border-[#292929]/12 bg-white px-7 py-1.5 dark:border-white/12 dark:bg-white/[0.04] min-[480px]:col-span-1 min-[480px]:col-start-2 min-[480px]:row-start-1`}
+        className={`${BUTTON_RADIUS} col-span-2 row-start-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 justify-self-center border border-[#292929]/12 bg-white px-3 py-1.5 dark:border-white/12 dark:bg-white/[0.04] min-[375px]:col-span-1 min-[375px]:col-start-2 min-[375px]:row-start-1 min-[480px]:gap-x-7 min-[480px]:px-7`}
       >
         {ITEMS.map((item) => {
           const isActive = active === item.label
@@ -242,7 +242,7 @@ export default function Nav({ active = 'Home' }) {
       {/* Right zone — the theme toggle, moved here from the footer. Balances the
           avatar opposite it and keeps the grid's 1fr/auto/1fr symmetry, so the
           pill stays on the container's true centre. */}
-      <div className="col-start-2 row-start-1 justify-self-end min-[480px]:col-start-3">
+      <div className="col-start-2 row-start-1 justify-self-end min-[375px]:col-start-3">
         <ThemeToggle />
       </div>
     </nav>
