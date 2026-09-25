@@ -591,10 +591,36 @@ are deliberately not in the working tree.
 ## About page
 `src/app/about/page.js` → `components/site/About.js`
 
-Sections, in order: lead + bio photo, "Where I add value" (5 cards), "What
-colleagues say" (2 testimonials), "Outside of work", closing CTA. All cards use
-the shared outlined treatment — `CARD_RADIUS` + `border-[#292929]/10
-dark:border-white/10`, no fill.
+**Restructured 2026-09-25** — Tom: it "feels disconnected from the rest of the
+site". Three things were causing that, and all three are fixed:
+
+1. **Every card was outline-only with no fill** — a treatment used nowhere else.
+   The value cards and testimonials now take `WASH` + `OUTLINE`, the same fill
+   the case studies' stat row, persona cards and figure grounds use, so the page
+   belongs to the same family. **Role lines moved `FAINT` → `MUTED`**: on the
+   wash `#737373` is 4.4:1 and fails AA where `#5D5D5D` is 5.8:1, the rule
+   Prompt's stat row already follows.
+2. **The page had none of the site's signature move.** It ran white all the way
+   down and the dark footer arrived as a hard edge. The sheet is now a
+   `CanvasReveal`, exactly as on home, and "Outside of work" sits on the
+   `#050505` band it reveals — professional work on the light sheet, personal on
+   the dark, mirroring home's case-studies/Experiments split. `RunningCard` and
+   the copy card are consequently **dark-only** now (fixed `DARK_*` ink, no
+   `dark:` variants), like `Footer` and `ExperimentsLab`.
+3. **The lead had an L-shaped void.** The copy column ran ~130px taller than the
+   fixed 3/4 photo; the photo is now `md:h-full` in an `items-stretch` row.
+
+Sections, in order — **lead + bio photo, "Where I add value" (5 cards), "What
+colleagues say" (2 testimonials)** on the light sheet, then **"Outside of work"**
+on the dark band, then the footer.
+
+The five value cards are **1 + 2×2**, not 2/2/1: five cards in two columns has to
+break somewhere, and a full-width *lead* card reads as hierarchy where a
+full-width orphan at the foot reads as a mistake. The first card spans.
+
+`bio.png` is **382px wide for a 300px slot** — only 1.27× where a retina screen
+wants 2×, and it is the one genuinely under-sized image on the site (audited
+2026-09-25). A ~900px re-export would fix it; everything else clears its slot.
 
 ### Outside of work (rebuilt 2026-07-31)
 Two-column on `lg`: copy card and a Running stat card stacked left,

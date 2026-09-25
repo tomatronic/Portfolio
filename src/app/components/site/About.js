@@ -6,11 +6,17 @@ import { useTheme } from '../ThemeProvider'
 import Nav from './Nav'
 import Footer from './Footer'
 import ImageWall from './ImageWall'
+import CanvasReveal from './CanvasReveal'
 import {
   TEXT,
   INK,
   MUTED,
   FAINT,
+  DARK_INK,
+  DARK_MUTED,
+  DARK_FAINT,
+  WASH,
+  OUTLINE,
   CARD_RADIUS,
   CONTAINER,
 } from './tokens'
@@ -97,24 +103,28 @@ function RunningCard({ km, live }) {
   return (
     // flex-1 + justify-between: the card grows to take its share of the column,
     // and the figure sits at the foot of whatever height that turns out to be.
+    //
+    // Fixed DARK_* ink, no `dark:` variants: since 2026-09-25 this card lives on
+    // the near-black band, which does not flip with the theme — the same reason
+    // Footer and ExperimentsLab use these tokens.
     <div
-      className={`${CARD_RADIUS} flex flex-1 flex-col justify-between border border-[#292929]/10 p-6 md:p-8 dark:border-white/10`}
+      className={`${CARD_RADIUS} flex flex-1 flex-col justify-between border border-white/10 bg-white/[0.03] p-6 md:p-8`}
     >
-      <p className={`${TEXT.xs} ${FAINT} mb-8 font-medium`}>Running</p>
+      <p className={`${TEXT.xs} ${DARK_FAINT} mb-8 font-medium`}>Running</p>
       <div>
         <p
-          className={`${TEXT.title} ${INK} mb-1 font-medium leading-none tracking-tight tabular-nums`}
+          className={`${TEXT.title} ${DARK_INK} mb-1 font-medium leading-none tracking-tight tabular-nums`}
         >
           {km.toLocaleString('en-GB')}
           {!live && '+'}
-          <span className={`${TEXT.base} ${FAINT} ml-1.5 font-normal`}>km</span>
+          <span className={`${TEXT.base} ${DARK_FAINT} ml-1.5 font-normal`}>km</span>
         </p>
         {/* The window softens with the figure. "the last 365 days" is a precise
             claim and only the live number can make it; the fallback is a floor,
             so it says what a floor can say. The pair also restores a visual
             tell that the fallback has fired — the "Powered by Strava" badge
             used to be that tell, and it was removed on 2026-08-05. */}
-        <p className={`${TEXT.xs} ${FAINT} mb-0`}>
+        <p className={`${TEXT.xs} ${DARK_FAINT} mb-0`}>
           {live ? 'ran in the last 365 days' : 'ran in a typical year'}
         </p>
       </div>
@@ -155,11 +165,18 @@ export default function About({ running = null }) {
   return (
     <div style={{ background: REVEAL_BG }}>
 
-      {/* px-6 sits outside the container, not on it — the same pattern as the
-          lab section and footer. With the padding on the container itself the
-          content measured 848px against home's 896px, so the two pages didn't
-          line up. */}
-      <div style={{ background: sheetBg }} className="px-6">
+      {/* The sheet is a CanvasReveal, exactly as on home (2026-09-25): About
+          used to run white all the way into the footer, so the site's one
+          signature move was missing and the dark footer arrived as a hard edge.
+          Now the sheet clips inward on scroll and reveals the dark "Outside of
+          work" band behind it — professional work on the light sheet, personal
+          on the dark, which is the same split home makes between case studies
+          and Experiments.
+
+          No px-6 in here: CanvasReveal's --canvas-gutter is the side spacing.
+          Putting padding on the container instead measured 848px against home's
+          896px and the two pages stopped lining up. */}
+      <CanvasReveal style={{ background: sheetBg }}>
         <div className={`${CONTAINER} mx-auto`}>
           <Nav active="About" />
         </div>
@@ -176,7 +193,10 @@ export default function About({ running = null }) {
             </h1>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-[1fr_300px] md:gap-14">
+          {/* items-stretch + h-full on the figure: the copy column runs ~130px
+              taller than a fixed 3/4 photo, which left an L-shaped void down the
+              right of the lead. The photo now takes the row's full height. */}
+          <div className="grid grid-cols-1 items-stretch gap-10 md:grid-cols-[1fr_300px] md:gap-14">
             <motion.div
               {...inView}
               variants={fade}
@@ -218,7 +238,7 @@ export default function About({ running = null }) {
             <motion.div
               {...inView}
               variants={fade}
-              className={`${CARD_RADIUS} relative aspect-[3/4] w-full overflow-hidden ring-1 ring-[#292929]/10 dark:ring-white/10`}
+              className={`${CARD_RADIUS} relative aspect-[3/4] w-full overflow-hidden ring-1 ring-[#292929]/10 md:aspect-auto md:h-full dark:ring-white/10`}
             >
               <Image
                 src="/bio.png"
@@ -241,14 +261,21 @@ export default function About({ running = null }) {
               variants={stagger}
               className="grid grid-cols-1 gap-3 sm:grid-cols-2"
             >
-              {VALUE.map((entry, i, arr) => (
+              {VALUE.map((entry, i) => (
                 <motion.div
                   key={entry.title}
                   variants={fade}
-                  // Last card spans both columns when the count is odd, so the
-                  // grid doesn't end on a ragged half-row.
-                  className={`${CARD_RADIUS} border border-[#292929]/10 p-5 transition-shadow duration-300 hover:shadow-[0_8px_28px_rgba(41,41,41,0.08)] motion-reduce:transition-none dark:border-white/10 dark:hover:shadow-[0_8px_28px_rgba(0,0,0,0.4)] ${
-                    i === arr.length - 1 && arr.length % 2 !== 0 ? 'sm:col-span-2' : ''
+                  // WASH + OUTLINE, the fill every card on the case studies uses.
+                  // These were outline-only with no ground, a treatment that
+                  // appeared nowhere else on the site and was the main reason the
+                  // page read as a different product (2026-09-25).
+                  //
+                  // The FIRST card spans, not the last: five cards in two columns
+                  // has to break somewhere, and a full-width lead card reads as
+                  // hierarchy where a full-width orphan at the foot reads as a
+                  // mistake. 1 + 2x2, no ragged edge either way.
+                  className={`${CARD_RADIUS} border ${OUTLINE} ${WASH} p-5 transition-shadow duration-300 hover:shadow-[0_8px_28px_rgba(41,41,41,0.08)] motion-reduce:transition-none dark:hover:shadow-[0_8px_28px_rgba(0,0,0,0.4)] ${
+                    i === 0 ? 'sm:col-span-2' : ''
                   }`}
                 >
                   <p className={`${TEXT.base} ${INK} mb-1 font-medium`}>{entry.title}</p>
@@ -273,7 +300,7 @@ export default function About({ running = null }) {
                 <motion.figure
                   key={t.name}
                   variants={fade}
-                  className={`${CARD_RADIUS} mb-0 flex h-full flex-col border border-[#292929]/10 p-5 dark:border-white/10`}
+                  className={`${CARD_RADIUS} ${WASH} mb-0 flex h-full flex-col border ${OUTLINE} p-5`}
                 >
                   <blockquote
                     className={`${TEXT.base} ${MUTED} mb-3 border-0 p-0 not-italic leading-relaxed`}
@@ -284,16 +311,27 @@ export default function About({ running = null }) {
                       attribution is the point now that these are real people. */}
                   <figcaption className="mt-auto">
                     <span className={`${TEXT.sm} ${INK} block font-medium`}>{t.name}</span>
-                    <span className={`${TEXT.sm} ${FAINT} block`}>{t.role}</span>
+                    {/* MUTED, not FAINT: on the WASH ground #737373 measures
+                        4.4:1 and fails AA, #5D5D5D is 5.8:1 — the same rule
+                        Prompt's stat row follows. */}
+                    <span className={`${TEXT.sm} ${MUTED} block`}>{t.role}</span>
                   </figcaption>
                 </motion.figure>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* ── Outside of work ──────────────────────────────────── */}
-          <motion.div {...inView} variants={fade} className="mt-24">
-            <h2 className={`${TEXT.title} ${INK} mb-6 font-medium leading-[1.25] tracking-tight`}>
+        </div>
+      </CanvasReveal>
+
+      {/* ── Outside of work — the dark band ───────────────────────────────
+          Same ground, padding and ink as ExperimentsLab, so the two pages'
+          second halves are the same thing. This is what the sheet above
+          reveals as it clips. */}
+      <section className="relative px-6 pb-32 pt-28 md:pt-36">
+        <div className={`${CONTAINER} mx-auto`}>
+          <motion.div {...inView} variants={fade}>
+            <h2 className={`${TEXT.title} ${DARK_INK} mb-6 font-medium leading-[1.25] tracking-tight`}>
               Outside of work
             </h2>
 
@@ -303,17 +341,13 @@ export default function About({ running = null }) {
             <div className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2">
               <div className="flex flex-col gap-3">
                 <div
-                  className={`${CARD_RADIUS} flex-1 border border-[#292929]/10 p-6 md:p-8 dark:border-white/10`}
+                  className={`${CARD_RADIUS} flex-1 border border-white/10 bg-white/[0.03] p-6 md:p-8`}
                 >
-                  <p
-                    className={`${TEXT.base} mb-4 leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]`}
-                  >
+                  <p className={`${TEXT.base} ${DARK_MUTED} mb-4 leading-relaxed`}>
                     I enjoy being outside. I find it helps me mentally unload, and it
                     throws up all sorts of thoughts and ideas along the way.
                   </p>
-                  <p
-                    className={`${TEXT.base} mb-0 leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]`}
-                  >
+                  <p className={`${TEXT.base} ${DARK_MUTED} mb-0 leading-relaxed`}>
                     In particular I enjoy running, hiking and seeing the world —
                     travelling to places and trying my hardest to experience the real
                     culture of somewhere rather than the version put on for visitors.
@@ -326,13 +360,10 @@ export default function About({ running = null }) {
               <ImageWall />
             </div>
           </motion.div>
-
         </div>
-      </div>
+      </section>
 
-      <div style={{ background: REVEAL_BG }}>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   )
 }
