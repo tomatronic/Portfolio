@@ -11,11 +11,10 @@ import {
   TEXT,
   INK,
   MUTED,
+  FAINT,
   DARK_INK,
   DARK_MUTED,
   DARK_FAINT,
-  WASH,
-  OUTLINE,
   CARD_RADIUS,
   CONTAINER,
 } from './tokens'
@@ -33,6 +32,30 @@ import {
  */
 
 const REVEAL_BG = '#050505'
+
+/**
+ * The card treatment from `CaseStudyCards`, with a white ground where those have
+ * a screenshot (Tom, 2026-09-25). What carries over is the chrome: the 16px
+ * radius, the neutral ring, and the purple lift on hover — so the cards on this
+ * page and the tiles on home read as the same component.
+ *
+ * The shadow is scaled down from the home tiles the way `OtherCaseStudies` does:
+ * the home values (44px blur, 0.28 alpha) are tuned to a ~600px-tall card, and
+ * under a ~120px one the same numbers read as a glow rather than a lift.
+ *
+ * Dark mode is `white/[0.04]`, not white — the home tiles stay a fixed light
+ * tint in both themes because a screenshot needs a light mount, but a plain
+ * white block on the navy sheet is just a hole. 0.04 is the nav pill's own dark
+ * surface. The resting shadow is light-only: it exists to separate a white card
+ * from the white sheet, and there is nothing to separate in dark.
+ */
+const CARD = [
+  'rounded-[16px] ring-1 ring-black/10 bg-white',
+  'shadow-[0_2px_10px_rgba(88,28,160,0.08)]',
+  'transition-shadow duration-300 hover:shadow-[0_10px_32px_rgba(88,28,160,0.20)]',
+  'motion-reduce:transition-none',
+  'dark:bg-white/[0.04] dark:ring-white/10 dark:shadow-none dark:hover:shadow-[0_12px_36px_rgba(155,105,240,0.42)]',
+].join(' ')
 
 const PRACTICAL = [
   'Simplifying dashboards and reporting tools',
@@ -271,7 +294,7 @@ export default function About({ running = null }) {
                   // orphan at the foot reads as a mistake. At an even count —
                   // four, since the "8+ years" card went — nothing spans and the
                   // grid tiles cleanly, so this is conditional rather than fixed.
-                  className={`${CARD_RADIUS} border ${OUTLINE} ${WASH} p-5 transition-shadow duration-300 hover:shadow-[0_8px_28px_rgba(41,41,41,0.08)] motion-reduce:transition-none dark:hover:shadow-[0_8px_28px_rgba(0,0,0,0.4)] ${
+                  className={`${CARD} p-5 ${
                     i === 0 && arr.length % 2 !== 0 ? 'sm:col-span-2' : ''
                   }`}
                 >
@@ -297,7 +320,7 @@ export default function About({ running = null }) {
                 <motion.figure
                   key={t.name}
                   variants={fade}
-                  className={`${CARD_RADIUS} ${WASH} mb-0 flex h-full flex-col border ${OUTLINE} p-5`}
+                  className={`${CARD} mb-0 flex h-full flex-col p-5`}
                 >
                   <blockquote
                     className={`${TEXT.base} ${MUTED} mb-3 border-0 p-0 not-italic leading-relaxed`}
@@ -308,10 +331,10 @@ export default function About({ running = null }) {
                       attribution is the point now that these are real people. */}
                   <figcaption className="mt-auto">
                     <span className={`${TEXT.sm} ${INK} block font-medium`}>{t.name}</span>
-                    {/* MUTED, not FAINT: on the WASH ground #737373 measures
-                        4.4:1 and fails AA, #5D5D5D is 5.8:1 — the same rule
-                        Prompt's stat row follows. */}
-                    <span className={`${TEXT.sm} ${MUTED} block`}>{t.role}</span>
+                    {/* FAINT again now the card is white — #737373 is 4.74:1 on
+                        white. It was MUTED for as long as these sat on the purple
+                        WASH, where FAINT measured 4.4:1 and failed AA. */}
+                    <span className={`${TEXT.sm} ${FAINT} block`}>{t.role}</span>
                   </figcaption>
                 </motion.figure>
               ))}

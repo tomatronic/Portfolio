@@ -595,11 +595,20 @@ are deliberately not in the working tree.
 site". Three things were causing that, and all three are fixed:
 
 1. **Every card was outline-only with no fill** — a treatment used nowhere else.
-   The value cards and testimonials now take `WASH` + `OUTLINE`, the same fill
-   the case studies' stat row, persona cards and figure grounds use, so the page
-   belongs to the same family. **Role lines moved `FAINT` → `MUTED`**: on the
-   wash `#737373` is 4.4:1 and fails AA where `#5D5D5D` is 5.8:1, the rule
-   Prompt's stat row already follows.
+   The value cards and testimonials now share a `CARD` constant at the top of
+   `About.js` that is **`CaseStudyCards`' chrome on a white ground** (Tom's call,
+   2026-09-25): the 16px radius, `ring-1 ring-black/10`, and the purple lift on
+   hover. They were briefly `WASH` + `OUTLINE` earlier the same day.
+   - The shadow is scaled down from the home tiles the way `OtherCaseStudies`
+     does — the home values (44px blur, 0.28 alpha) are tuned to a ~600px-tall
+     card and read as a glow under a ~120px one.
+   - **Dark is `white/[0.04]`, not white.** The home tiles keep a fixed light
+     tint in both themes because a screenshot needs a light mount; a plain white
+     block on the navy sheet is just a hole. 0.04 is the nav pill's dark surface.
+     The resting shadow is light-only — it exists to separate a white card from
+     the white sheet, and there is nothing to separate in dark.
+   - Role lines are `FAINT` (4.74:1 on white). They were `MUTED` only for as
+     long as the cards sat on the wash, where `FAINT` measured 4.4:1 and failed.
 2. **The page had none of the site's signature move.** It ran white all the way
    down and the dark footer arrived as a hard edge. The sheet is now a
    `CanvasReveal`, exactly as on home, and "Outside of work" sits on the
