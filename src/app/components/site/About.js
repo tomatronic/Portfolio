@@ -11,7 +11,6 @@ import {
   TEXT,
   INK,
   MUTED,
-  FAINT,
   DARK_INK,
   DARK_MUTED,
   DARK_FAINT,
@@ -42,11 +41,9 @@ const PRACTICAL = [
   'Reducing reliance on support teams by improving usability',
 ]
 
+// The "8+ years in enterprise UX" card was removed 2026-09-25 — Tom: it repeats
+// what the lead copy already says in its first sentence.
 const VALUE = [
-  {
-    title: '8+ years in enterprise UX',
-    body: 'Designing enterprise UX for data-heavy products, with experience across product design and user behaviour.',
-  },
   {
     title: 'Usability & clarity',
     body: 'Strong focus on usability, clarity, and fast, confident decision-making.',
@@ -184,7 +181,6 @@ export default function About({ running = null }) {
         <div className={`${CONTAINER} mx-auto pb-28 pt-8`}>
           {/* ── Lead ─────────────────────────────────────────────── */}
           <motion.div initial="hidden" animate="visible" variants={fade}>
-            <p className={`${TEXT.sm} ${FAINT} mb-3 font-medium`}>About</p>
             <h1
               className={`${TEXT.title} ${INK} mb-12 max-w-[46ch] text-balance font-medium leading-[1.35] tracking-tight`}
             >
@@ -261,7 +257,7 @@ export default function About({ running = null }) {
               variants={stagger}
               className="grid grid-cols-1 gap-3 sm:grid-cols-2"
             >
-              {VALUE.map((entry, i) => (
+              {VALUE.map((entry, i, arr) => (
                 <motion.div
                   key={entry.title}
                   variants={fade}
@@ -270,12 +266,13 @@ export default function About({ running = null }) {
                   // appeared nowhere else on the site and was the main reason the
                   // page read as a different product (2026-09-25).
                   //
-                  // The FIRST card spans, not the last: five cards in two columns
-                  // has to break somewhere, and a full-width lead card reads as
-                  // hierarchy where a full-width orphan at the foot reads as a
-                  // mistake. 1 + 2x2, no ragged edge either way.
+                  // An odd count has to break the two-column grid somewhere, and
+                  // the FIRST card spanning reads as hierarchy where a full-width
+                  // orphan at the foot reads as a mistake. At an even count —
+                  // four, since the "8+ years" card went — nothing spans and the
+                  // grid tiles cleanly, so this is conditional rather than fixed.
                   className={`${CARD_RADIUS} border ${OUTLINE} ${WASH} p-5 transition-shadow duration-300 hover:shadow-[0_8px_28px_rgba(41,41,41,0.08)] motion-reduce:transition-none dark:hover:shadow-[0_8px_28px_rgba(0,0,0,0.4)] ${
-                    i === 0 ? 'sm:col-span-2' : ''
+                    i === 0 && arr.length % 2 !== 0 ? 'sm:col-span-2' : ''
                   }`}
                 >
                   <p className={`${TEXT.base} ${INK} mb-1 font-medium`}>{entry.title}</p>

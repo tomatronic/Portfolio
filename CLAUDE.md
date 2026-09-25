@@ -610,13 +610,22 @@ site". Three things were causing that, and all three are fixed:
 3. **The lead had an L-shaped void.** The copy column ran ~130px taller than the
    fixed 3/4 photo; the photo is now `md:h-full` in an `items-stretch` row.
 
-Sections, in order — **lead + bio photo, "Where I add value" (5 cards), "What
+The **"About" eyebrow above the statement was removed** 2026-09-25 — the nav
+already marks About as the active page, so it labelled a page the visitor had
+just chosen. `FAINT` is consequently unused in this file: the running card took
+`DARK_FAINT` with the dark band, and the testimonial roles took `MUTED` for AA
+on the wash.
+
+Sections, in order — **lead + bio photo, "Where I add value" (4 cards), "What
 colleagues say" (2 testimonials)** on the light sheet, then **"Outside of work"**
 on the dark band, then the footer.
 
-The five value cards are **1 + 2×2**, not 2/2/1: five cards in two columns has to
-break somewhere, and a full-width *lead* card reads as hierarchy where a
-full-width orphan at the foot reads as a mistake. The first card spans.
+There were five value cards until 2026-09-25; **"8+ years in enterprise UX" was
+removed** because the lead copy opens with "For the past 8 years at Rakuten
+Advertising" and the card only restated it. Four tile 2×2 cleanly. The grid still
+spans the **first** card when the count is *odd* — an odd count has to break
+somewhere, and a full-width lead card reads as hierarchy where a full-width
+orphan at the foot reads as a mistake — but at an even count nothing spans.
 
 `bio.png` is **382px wide for a 300px slot** — only 1.27× where a retina screen
 wants 2×, and it is the one genuinely under-sized image on the site (audited
