@@ -566,9 +566,24 @@ token's own comment for the measured chars-per-line scale before changing it.
 **Known content gaps (not code issues):**
 - ~~InfluencerCampaigns: outcome/adoption metrics missing~~ — **closed 2026-08-04.** Adoption metrics don't exist. The page stands on its narrative instead; a stat row built from its timeline figures was tried and rejected (see "Case study stat rows" above). Hero image is `/influencerHero.png`, already real.
 - Rakuten: Solution section is one sentence — needs expanding; no outcome metrics (lower priority now the case study is hidden — see Case study cards section)
-- ACJ: "35 DAU" metric needs context (total eligible users)
+- ~~ACJ: "35 DAU" metric needs context (total eligible users)~~ — **moot.** The figure is not on the page; it was removed from Impact on 2026-05-26 rather than reframed, and Tom's 2026-09-26 copy pass did not bring it back.
 - ~~Prompt: missing before/after comparison copy + section header for `Prompt-old2.png`~~ — **closed.** The Challenge section now has an `<h3>The builder it replaced</h3>` and two paragraphs of before-copy above the image. (`Prompt-userflow.png`, the customer journey map, went into Approach 2026-05-26.)
 - ACJ: "35 daily active users" metric removed from Impact section 2026-05-26 (no denominator; removed rather than reframed)
+
+**Copy passes, so it is clear which pages have had one.** Tom rewrote **Prompt**
+and **InfluencerCampaigns** on 2026-09-16 (`7c81e35`, `f373327`, each with a
+same-day follow-up) and **ACJ** on 2026-09-26. Rakuten has never had one — it is
+`listed: false`, and its Solution section is still the one-sentence stub noted
+above.
+
+The ACJ pass, for the record: the network is named "Rakuten Advertising" rather
+than "Rakuten" throughout, spellings are British (`optimise`, `visualisation`),
+the "Key insight: Start with answers, allow exploration" line is gone, and the
+two long Key-design-decision bullets are condensed to single sentences. It also
+fixed a real typo — "understand perforb" → "understand performance" — that had
+been live in the Solution section. **The "40% of awareness-phase conversions"
+line survives, still framed as an `e.g.`**, which is what the warning above
+asks for; don't let a future pass promote it to a measured result.
 
 **Unused images in /public/ (audited 2026-09-09 — the list is now one item):**
 - `prompt-home.png` — **untracked on purpose** (2026-08-26). Tom added it

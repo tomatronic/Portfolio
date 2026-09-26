@@ -21,50 +21,42 @@ function ACJ() {
                             role="Sole UX designer"
                             skills="UX/UI, User Research, Prototyping, User testing"
                         >
-                                    <p>Publishers and advertisers on Rakuten's affiliate network needed to understand their contribution to sales beyond last-click attribution. When a customer discovers a product through Publisher A's blog, researches it via Publisher B's review site, then purchases after clicking Publisher C's discount link, who deserves credit?</p>
-                                    <p>Without this visibility, publishers couldn't prove their value in earlier phases of the funnels, and advertisers couldn't optimize their partnerships. Competitors like CJ Affiliate and Impact offered journey tracking, putting Rakuten at a strategic disadvantage.</p>
+                                    <p>Publishers and advertisers on the Rakuten Advertising network needed to understand their contribution to sales beyond last-click attribution. When a customer discovers a product through Publisher A's blog, researches it via Publisher B's review site, then purchases after clicking Publisher C's discount link, who deserves credit?</p>
+                                    <p>Without this visibility, publishers couldn't prove their value in earlier phases of the funnels, and advertisers couldn't optimise their partnerships. Competitors like CJ Affiliate and Impact offered journey tracking, putting Rakuten Advertising at a strategic disadvantage.</p>
                         </CaseStudyHeader>
 
                         <div className="grid auto-rows-auto grid-cols-1 gap-5 md:grid-cols-4 md:gap-10">
                             <div className="col-span-4 mb-12">
                                 <h2 className="pt-10 tracking-tight">Challenge</h2>
                                 <ul className="mb-8 space-y-2">
-                                    <li><b>Data complexity</b>: A single customer journey could have up to 15 touchpoints across 30 days. Multiply that by thousands of conversions, and you have overlapping, non-linear paths that are nearly impossible to parse visually.</li>
+                                    <li><b>Data complexity</b>: A single customer journey could have up to 15 touchpoints across 30 days. Multiply that by thousands of conversions, and you have overlapping, non-linear paths that are nearly impossible to show visually.</li>
                                     <li><b>Dual audiences</b>: Publishers needed to see "Where do I contribute?", Advertisers needed "Which publishers work together to drive conversions?". Same data, different questions and mental models.</li>
                                     <li><b>Trust</b>: Users needed confidence to make budget decisions, which meant explaining the complex attribution logic without overwhelming them.</li>
                                 </ul>
                                 <h2 className="pt-10 tracking-tight">Approach</h2>
                                 <p>Through interviews with both internal account managers and external users, I learned that users wanted answers to specific questions with the ability to dig deeper when needed, not open ended data exploration.</p>
 
-                                <p><b>Key insight</b>: Start with answers, allow exploration.</p>
                                 <h3 className="pt-6">The version that didn&apos;t work</h3>
-                                <p>The first attempt plotted touchpoints along an actual timeline, with the phase carried by the shape and colour of each marker. It reads cleanly here because this is one journey across fourteen days. At realistic volumes it stopped reading, and the design was already compensating in two places: the &lsquo;5&rsquo; is five events collapsed into a single dot because they would not fit, and the zoom control exists so you can escape the crowding. Both hide data to keep the picture legible, which is the opposite of what the screen is for.</p>
+                                <p>The first attempt plotted touchpoints along an actual timeline, with the phase carried by the shape and colour of each marker. It reads cleanly here because this is one journey across fourteen days. At realistic volumes it became hard to read, and the design was struggling in two places. One example is the &lsquo;5&rsquo; representing five events collapsed into a single dot because they would not fit, with a zoom control existing to help control crowding. This led to data being hidden, which is the opposite of what the screen is intended for.</p>
                                 <CaseStudyFigure zoom sizes="100vw" src="/acj-timeline.png" width={2518} height={708} alt="An early exploration: one customer journey plotted along a date axis from 19 May to 2 June, with a green Recognition diamond, cyan Research circles including one marked 5 where five events are collapsed together, and an orange Conversion diamond" />
-                                <p>The phases were already in the thinking, but only as a legend. The move that worked was to stop plotting time and let the phases become the structure instead — three columns, every journey the same shape, comparable at a glance. Recognition and Research became Awareness and Consideration on the way, landing on the language marketers already use.</p>
+                                <p>The phases were already in the thinking, but only as a legend. The move that worked was to stop plotting time and let the phases become the structure instead. Using three columns, every journey is the same shape, comparable at a glance. Recognition and Research was changed to Awareness and Consideration in recognition of the language marketers already use.</p>
                                 <h3 className="pt-6">Key design decisions</h3>
                                 <ul className="mb-8 space-y-2">
-                                    <li><b>Three-phase framework (Awareness → Consideration → Conversion)</b>: Rather than showing raw click sequences, I organised journeys based around purchase phases. This created a mental model: "Am I/a Publisher driving discovery, research, or final purchase?"
-                                        This framework solved two critical problems:
-                                        It simplified multi-touch attribution into digestible stages
-                                        It gave publishers language to prove their value beyond last-click: "I am strong in awareness" becomes a selling point, not a liability
-                                        Other frameworks considered (first/middle/last click, paid/organic/direct channels) didn't align as well with the awareness/consideration/conversion model, which aligned best with how marketers already think about funnels.
-                                    </li>
-                                    <li><b>Two-tab structure Contributions vs. Touchpoints</b>: Contributions tab: High-level summary ("You contributed to 45% of conversions in the awareness phase")
-                                        Touchpoints tab: Detailed journey paths for users who wanted to dig deeper
-                                    </li>
+                                    <li><b>Three-phase framework (Awareness → Consideration → Conversion)</b>: I organised journeys based around purchase phases. This created a mental model: "Am I a Publisher driving discovery, research, or final purchase?" This solved two problems, It simplified multi-touch attribution into digestible stages and it gave publishers an insight into how to prove their value beyond last-click. Other frameworks considered (first/middle/last click or paid/organic/direct channels) didn't align as well with the chosen model.</li>
+                                    <li><b>Two-tab structure Contributions vs. Touchpoints</b>: Contributions tab contains a high-level summary ("You contributed to 45% of conversions in the awareness phase") and the touchpoints tab detailed journey paths.</li>
                                     <li><b>Dual-audience design</b>: Publishers see their own contribution. Advertisers see all publishers in each journey. Same data structure, different views. The core visualisation is adapted to work for both user types, without increasing engineering efforts.</li>
                                 </ul>
                                 <h2 className="pt-10 tracking-tight">Solution</h2>
                                 <div className="space-y-6">
                                 <CaseStudyFigure src="/ACJ-activity-summary.png" width={1000} height={774} alt="Users first see an activity summary with total clicks across phases, average clicks to conversion, and their baseline contribution footprint—providing context before diving into detailed journeys." />
-                                    <p>The Activity Summary presents raw data up front, total clicks, across phases, average clicks to conversion and baseline contributions. It allows users to quickly understand perforb before diving into complex journeys.</p>
+                                    <p>The Activity Summary presents raw data up front, total clicks, across phases, average clicks to conversion and baseline contributions. It allows users to quickly understand performance before diving into complex journeys.</p>
                                     <CaseStudyFigure src="/ACJ-contributions.png" width={1000} height={774} alt="The Contributions tab breaks down publisher involvement across awareness, consideration, and conversion phases—giving users clear language to discuss their value beyond last-click attribution." />
                                     <p>The three-phase framework transformed abstract click sequences into a clear narrative. Publishers could now say "I drive 40% of awareness conversions" instead of struggling to explain their role. Advertisers could identify which publishers were performing well at different stages of the journey.</p>
                                     <p>For deeper analyses the Touchpoints tab revealed detailed conversion paths, presenting which sequences benefitted them most.</p>
                                     <CaseStudyFigure src="/ACJ-filter-selected.png" width={1000} height={774} alt="Users could adjust order period and lookback window to see how attribution changed—with smart defaults (30-day lookback, month-to-date) and inline helper text preventing confusion." />
-                                    <p>The default filters prevented cognitive overload while still giving users control. As users updated filter choices the report updates seamlessly.</p>
+                                    <p>The default filters allowed more control and enabled reports to be customisable.</p>
                                     <CaseStudyFigure src="/ACJ-comparison.png" width={1600} height={927} alt="Side-by-side comparison of publisher and advertiser views of the same attribution data, demonstrating the dual-audience design" />
-                                    <p><b>Dual-audience view</b>: Rather than building two separate tools, one core visualization adapted based on user type. Publishers filtered by their own SIDs and saw "you" language. Advertisers filtered by campaign or publisher group and saw top contributors. Same data structure, different views, serving both audiences without doubling engineering effort.</p>
+                                    <p><b>Dual-audience view</b>: Rather than building two separate tools, one core visualisation adapted based on user type. Publishers filtered by their own SIDs (accounts) and saw "you" language. Advertisers filtered by campaign or publisher group and saw top contributors.</p>
                                 </div>
                                 <div className="max-w-full mb-12">
                                     <h2 className="pt-10 tracking-tight">Outcome</h2>
@@ -80,21 +72,21 @@ function ACJ() {
                                     </ul>
                                     <h3 className="pt-6">What this enabled for publishers</h3>
                                     <ul className="mb-8 space-y-2">
-                                        <li>Proved value beyond last-click (e.g., &ldquo;I drive 40% of awareness-phase conversions&rdquo;)</li>
-                                        <li>Created new sales narratives when pitching to advertisers</li>
-                                        <li>Enabled data-backed conversations about their role in the funnel</li>
+                                        <li>Proved value beyond last-click (e.g., &ldquo;I drive 40% of awareness-phase conversions&rdquo;).</li>
+                                        <li>Created new sales narratives when pitching to advertisers.</li>
+                                        <li>Enabled data-backed conversations about their role in the funnel.</li>
                                     </ul>
                                     <h3 className="pt-6">What this enabled for advertisers</h3>
                                     <ul className="mb-8 space-y-2">
-                                        <li>Understood which publisher combinations drive the best results</li>
-                                        <li>Optimised partner mix based on full-funnel contribution</li>
-                                        <li>More informed budget allocation decisions across awareness, consideration, and conversion</li>
+                                        <li>Understand which publisher combinations drive the best results.</li>
+                                        <li>Optimised partner mix based on full-funnel contribution.</li>
+                                        <li>More informed budget allocation decisions across awareness, consideration, and conversion.</li>
                                     </ul>
                                     <p>Users engaged more with the high-level summaries than the detailed paths. They wanted answers to specific questions, not open-ended data exploration. The more I added context around the numbers, the more confident they were making decisions from them.</p>
                                 </div>
                                 <h2 className="pt-10 tracking-tight">What I learned</h2>
                                 <p>The dual-audience constraint pushed me somewhere I wouldn't have gone otherwise. Rather than building two separate tools, sharing a data structure with different views turned out to be a cleaner solution than I expected. The same data really can tell different stories depending on what question you're starting with.</p>
-                                <p>Users engaged more readily with the attribution data once the logic was explained upfront — not simplified away. They didn't need less information, they needed better framing. That's something I've kept in mind since.</p>
+                                <p>Users engaged more readily with the attribution data once the logic was explained upfront. They didn't need less information, they needed better framing. That's something I've kept in mind since.</p>
                                 <OtherCaseStudies currentHref="/casestudy/ACJ" />
                             </div>
                         </div>
