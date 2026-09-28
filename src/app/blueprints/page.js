@@ -1,6 +1,47 @@
+import CaseStudyFigure from '../components/site/CaseStudyFigure'
 import CaseStudyHeader from '../components/site/CaseStudyHeader'
 import CaseStudyShell from '../components/site/CaseStudyShell'
 import OtherCaseStudies from '../components/OtherCaseStudies'
+import { TEXT, FAINT } from '../components/site/tokens'
+
+/**
+ * Image 9, "the system in use" — the one figure that needed no new artwork.
+ * These are the three home card images, already in /public, one per product.
+ *
+ * Small multiples rather than three full-width screenshots: the claim is "these
+ * are the same components", which is a claim about resemblance, and resemblance
+ * reads better at a glance across a row than down a page. At 760px the three
+ * cells are ~245px each — too small to read a label, which is the point. Anyone
+ * wanting detail has the case study itself a click away.
+ *
+ * The labels name the product only. Naming which components appear in which
+ * screenshot would be a per-image claim, and the honest version of that is the
+ * framing line above the row, which is true by construction: all three products
+ * draw from one library.
+ */
+const IN_USE = [
+  {
+    src: '/prompt-report.png',
+    width: 1287,
+    height: 867,
+    product: 'Natural Language Search',
+    alt: 'The Insights and Analytics screen from the Natural Language Search product, built from the shared component library',
+  },
+  {
+    src: '/influencer-campaign.png',
+    width: 1600,
+    height: 1067,
+    product: 'Influencer Campaigns',
+    alt: 'A campaign screen from the Influencer Campaigns product, built from the same shared component library',
+  },
+  {
+    src: '/acj-touchpoints.png',
+    width: 1600,
+    height: 1067,
+    product: 'Multi-Touch Attribution',
+    alt: 'The touchpoints view from the Multi-Touch Attribution product, built from the same shared component library',
+  },
+]
 
 /**
  * The design system case study, deliberately off the main path.
@@ -242,12 +283,27 @@ function Blueprints() {
               example entry. Rewritten from memory, no internal details. */}
 
           <h2 className="pt-10 tracking-tight">The system in use</h2>
+          <p>The same cards, tables, pills and inputs, across three products.</p>
 
-          {/* IMAGE 9 — components in real products. Screens from the existing case
-              studies (Influencer Campaigns, Natural Language Search, Attribution)
-              with callouts pointing at system components: cards, pills, tables,
-              inputs. Sourceable from images already in /public — no new capture
-              needed. Caption: "The same components across three products." */}
+          <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {IN_USE.map(({ src, width, height, product, alt }) => (
+              <div key={src}>
+                {/* sizes describes the grid cell, not the column: (760 - 2 gaps) / 3
+                    at sm and up, full width below it. */}
+                <CaseStudyFigure
+                  flush
+                  sizes="(max-width: 639px) calc(100vw - 48px), 245px"
+                  src={src}
+                  width={width}
+                  height={height}
+                  alt={alt}
+                />
+                <p data-keep className={`${TEXT.xs} ${FAINT} mt-2 mb-0`}>
+                  {product}
+                </p>
+              </div>
+            ))}
+          </div>
 
           <h2 className="pt-10 tracking-tight">Outcome</h2>
           <ul className="mb-8 space-y-2">

@@ -29,7 +29,11 @@ import { WASH } from './tokens'
  * override — passes straight through to the image.
  */
 
-const GROUND = `flex flex-row flex-wrap place-content-center content-center ${WASH} rounded-2xl mb-8`
+const GROUND = `flex flex-row flex-wrap place-content-center content-center ${WASH} rounded-2xl`
+// `flush` drops the bottom margin, for a figure whose parent owns the spacing —
+// /blueprints puts three in a grid and lets the grid gap do it. Same idea as the
+// `data-flush` opt-out on OtherCaseStudies' headings.
+const GROUND_SPACED = `${GROUND} mb-8`
 // Negative margins mirror SURFACE_PADDING in CaseStudyShell (p-8 md:p-12).
 const HERO_GROUND = `${WASH} -mx-8 -mt-8 mb-8 overflow-hidden rounded-t-2xl md:-mx-12 md:-mt-12`
 const IMAGE = 'rounded-2xl ring-1 ring-black/10 dark:ring-white/10'
@@ -42,10 +46,10 @@ const HERO_IMAGE = 'w-full h-auto'
 const SIZES = '(max-width: 768px) 100vw, 760px'
 const HERO_SIZES = '(max-width: 768px) 100vw, 856px'
 
-export default function CaseStudyFigure({ hero = false, zoom = false, className = '', ...img }) {
+export default function CaseStudyFigure({ hero = false, zoom = false, flush = false, className = '', ...img }) {
   const Img = zoom ? ZoomableImage : Image
   return (
-    <div className={hero ? HERO_GROUND : GROUND}>
+    <div className={hero ? HERO_GROUND : flush ? GROUND : GROUND_SPACED}>
       <Img sizes={hero ? HERO_SIZES : SIZES} className={`${hero ? HERO_IMAGE : IMAGE} ${className}`.trim()} {...img} />
     </div>
   )

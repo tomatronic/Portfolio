@@ -536,13 +536,31 @@ shareable but not searchable. That is a stronger hide than Rakuten gets: Rakuten
 is unlisted but still indexable. Remove the robots block to publish it; add an
 entry to `lib/caseStudies.js` to link it.
 
-**It is a draft.** Bracketed text — `[on what cadence]`, `[X] variants` and
-eleven more — renders as-is, deliberately, so the blanks cannot be missed. All
-nine figures are JSX comments rather than `CaseStudyFigure` calls, since none of
-the images exist yet and a figure with no `src` would throw; each comment says
-what the image shows and where it goes. **None of the nine need Rakuten product
-access** — eight are diagrams or Figma recreations, and the ninth is composed
-from images already in `/public`.
+**The copy is complete; the images are not.** Tom filled the thirteen blanks on
+2026-09-28. Two claims were **dropped rather than invented**, because he did not
+have them, and neither is a gap to fill unless the real answer turns up: a
+release cadence (the Version step now says only that versioning is controlled in
+GitHub) and a line about semantic tokens being mirrored in code under specific
+names.
+
+**Image 9 is built** — the three home card images from `/public`, one per
+product, as small multiples in a `sm:grid-cols-3` row. The claim is that these
+resemble each other, and resemblance reads across a row better than down a page;
+at 760px the cells are ~245px, too small to read a label, which is the point.
+The labels name the product only — naming which components appear in which
+screenshot would be a per-image claim, so that sits in the framing line above the
+row instead, where it is true by construction.
+
+**Eight figures remain**, still JSX comments rather than `CaseStudyFigure` calls
+since a figure with no `src` would throw; each comment says what it shows and
+where it goes. **None need Rakuten access** — they are diagrams or Figma
+recreations. Full briefs, including the house style they should follow, are in
+**`BLUEPRINTS-IMAGES.md`** at the repo root.
+
+`CaseStudyFigure` gained a **`flush`** prop for image 9's row: it drops the
+`mb-8` so a grid gap can own the spacing, the same idea as the `data-flush`
+opt-out on OtherCaseStudies headings. Standard figures are unaffected — checked
+against ACJ and Prompt after the change.
 
 `CaseStudyHeader` gained an optional **`meta`** prop for this page: an array of
 `{ label, value }` rather than the `role`/`skills` pair, because this one lists
