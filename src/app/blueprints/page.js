@@ -20,11 +20,18 @@ import OtherCaseStudies from '../components/OtherCaseStudies'
  * you hand to someone directly. Remove that block to make it public; add an
  * entry to `lib/caseStudies.js` to make it linked.
  *
- * **This is a draft.** Bracketed text renders as-is — `[on what cadence]` and
- * the rest are blanks Tom still has to fill, left visible so they cannot be
- * missed. Every figure is a comment rather than a `CaseStudyFigure`, since none
- * of the nine images exist yet; a `CaseStudyFigure` with no `src` would throw.
- * Each comment says what the image is and where it goes.
+ * **The copy is complete; the images are not.** Tom filled the thirteen blanks
+ * on 2026-09-28. Two claims were dropped rather than invented, because he did
+ * not have them: a release cadence (the Version step now says only that
+ * versioning is controlled in GitHub, which is what he could confirm) and a
+ * line about semantic tokens being mirrored in code under specific names.
+ * Neither is a gap to fill later unless the real answer turns up.
+ *
+ * Every figure is a comment rather than a `CaseStudyFigure`, since none of the
+ * nine images exist yet and a figure with no `src` would throw. Each comment
+ * says what the image is and where it goes. **None of the nine need Rakuten
+ * product access** — eight are diagrams or Figma recreations, the ninth is
+ * composed from images already in `/public`.
  */
 
 export async function generateMetadata() {
@@ -136,23 +143,24 @@ function Blueprints() {
               has no `ol` rule. PROSE still styles the `li` text. */}
           <ol className="mb-8 ml-5 list-decimal space-y-2">
             <li>
-              <b>Propose</b>: any designer can propose a new component or a change in [where, e.g. a
-              Figma branch, Jira or a Slack channel].
+              <b>Propose</b>: any designer can propose a new component or a change in the design
+              Slack channel.
             </li>
             <li>
-              <b>Review</b>: [the co-owning designers and engineers] check it against the
-              system&apos;s scope and principles, and decide whether it belongs in the system or
-              should stay local to one product.
+              <b>Review</b>: the co-owning designers check it against the system&apos;s scope and
+              principles, and decide whether it belongs in the system or should stay local to one
+              product. Engineers join the review for new or more complex components.
             </li>
             <li>
-              <b>Version</b>: approved changes are released as a new version [on what cadence].
+              <b>Version</b>: approved changes are versioned and released from GitHub.
             </li>
             <li>
-              <b>Deprecate</b>: components being replaced are marked as deprecated [and how teams
-              were told], then removed after [timeframe].
+              <b>Deprecate</b>: components being replaced are marked as deprecated and announced in
+              the pattern library Slack channel, which carried updates as patterns changed. A
+              deprecated component is removed one full major version later.
             </li>
             <li>
-              <b>Document</b>: usage guidance is written or updated in [where].
+              <b>Document</b>: usage guidance is written or updated in an internal online library.
             </li>
           </ol>
 
@@ -167,8 +175,7 @@ function Blueprints() {
               <b>Foundation tokens</b> hold the raw values: colours, spacing and type sizes.
             </li>
             <li>
-              <b>Semantic tokens</b> describe purpose, e.g. [text-primary] or [surface-success].
-              [They were mirrored in code as …]
+              <b>Semantic tokens</b> describe purpose, e.g. text-primary or surface-success.
             </li>
           </ul>
           <p>
@@ -184,8 +191,8 @@ function Blueprints() {
 
           <h3 className="pt-6">Consolidating cards into one template</h3>
           <p>
-            Over time, the card component built up [X] variants as teams added one-off versions for
-            new features, and each variant had to be maintained separately. I replaced them with a
+            Over time, the card component built up more than twenty variants as teams added one-off
+            versions for new features, and each variant had to be maintained separately. I replaced them with a
             single templated card with configurable content areas. That one component covered every
             existing use case and was far easier to maintain.
           </p>
@@ -193,7 +200,7 @@ function Blueprints() {
           {/* IMAGE 5 — cards before and after. Left: the old variants (rough
               recreations or greyed wireframes are fine). Right: the single
               template with its Figma component properties panel. Recreated in
-              Figma. Caption: "[X] variants replaced by one templated card." */}
+              Figma. Caption: "Twenty-plus variants replaced by one templated card." */}
 
           <h3 className="pt-6">Fixing contrast at component level</h3>
           <p>
@@ -212,20 +219,21 @@ function Blueprints() {
           <p>
             I introduced a contribution workflow that let designers update a component in Figma and
             pass the change directly to code. Claude uses the Figma MCP to read the change, then
-            generates the code update in GitHub [as a pull request for engineers to review].
+            generates the code update in GitHub. GitHub Copilot reviews it first; a patch-level
+            change could ship on that alone, while anything minor or above also went to an engineer.
             Designers could contribute and ship independently instead of waiting for handoff.
           </p>
 
           {/* IMAGE 7 — Figma → code workflow. designer edits component in Figma →
-              Claude reads it via the Figma MCP → code change in GitHub →
-              [engineer review] → release. A diagram to draw; a short screen
+              Claude reads it via the Figma MCP → code change in GitHub → Copilot
+              review → engineer review for minor and above → release. A diagram to draw; a short screen
               recording of the workflow rebuilt on a personal project would be
               stronger still. */}
 
           <h3 className="pt-6">A Design.md file for AI tools</h3>
           <p>
             As more of the team used AI tools, I created a Design.md file: a single written reference
-            describing the system&apos;s [tokens, components and usage rules]. It gave AI models a
+            describing the system&apos;s tokens, components and usage rules. It gave AI models a
             consistent reference, so the UI they generated stayed consistent with the system.
           </p>
 
@@ -247,7 +255,9 @@ function Blueprints() {
               Three products ran on one library, with no product-level customisation, for eight
               years.
             </li>
-            <li>[X] card variants were consolidated into one templated component.</li>
+            <li>
+              More than twenty card variants were consolidated into a single templated component.
+            </li>
             <li>One contrast fix reached every product at once.</li>
             <li>
               Designers could pass component changes directly to code through the Claude workflow.
