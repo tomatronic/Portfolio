@@ -585,6 +585,29 @@ and Prompt, which still carry the wash.
 Role, Team and Scope. The four Rakuten case studies still pass the shorthand and
 are unchanged; `meta` wins if both are given.
 
+**It carries named GA4 events, because it is shared as a link with specific
+people** (added 2026-09-28). `components/ReadTracking.js` is a generic client
+component — `<ReadTracking name="blueprints" />` — sending `blueprints_view` on
+arrival, `blueprints_read` at 30s *and* half the page, and `blueprints_finish`
+past 90%. Each carries a `ref` parameter read from `?ref=` on the URL, and
+**that param is the only thing that distinguishes one visit from another** — GA
+identifies nobody, so a distinct link per recipient is the mechanism. Three
+things worth knowing before trusting it:
+
+- `ref` appears in **Realtime** immediately but needs registering as an
+  event-scoped **custom dimension** (Admin → Custom definitions) before it shows
+  in standard reports, and that is **not retroactive**.
+- A visitor with a tracker blocker sends nothing, so silence is not evidence.
+- The events fire for Tom's own visits too; open it as `?ref=tom` to keep those
+  filterable.
+
+The component reads `window.location.search` in an effect rather than calling
+`useSearchParams`, which would push this page out of static prerendering (or
+require a Suspense boundary) for a value only the client ever needs. It also
+waits for `window.gtag` before sending: `@next/third-parties` queues its init
+script `afterInteractive`, so an event sent on mount can otherwise land ahead of
+`gtag('config')` and be dropped. It retries for ten seconds, then stops.
+
 This page has **the site's only `<ol>`**. Tailwind's preflight strips list
 markers and `globals.css` has no `ol` rule, so the governance steps carry an
 explicit `list-decimal ml-5`. `PROSE` still styles the `li` text.

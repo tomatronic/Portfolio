@@ -2,6 +2,7 @@ import CaseStudyFigure from '../components/site/CaseStudyFigure'
 import CaseStudyHeader from '../components/site/CaseStudyHeader'
 import CaseStudyShell from '../components/site/CaseStudyShell'
 import OtherCaseStudies from '../components/OtherCaseStudies'
+import ReadTracking from '../components/ReadTracking'
 import { TEXT, FAINT } from '../components/site/tokens'
 
 /**
@@ -88,6 +89,12 @@ export async function generateMetadata() {
 function Blueprints() {
   return (
     <CaseStudyShell>
+      {/* This page is shared as a link with named people, so it carries named GA4
+          events rather than relying on the pageview: blueprints_view /
+          blueprints_read / blueprints_finish, each tagged with `?ref=`. Share a
+          distinct ref per recipient — that param is the only thing that tells one
+          visit from another. See ReadTracking.js for how to read it in GA4. */}
+      <ReadTracking name="blueprints" />
       {/* IMAGE 1 — hero. Core components (button, input, pill, card, table row)
           composed on a neutral ground. Recreated in Figma.
           Caption: "Core components, recreated for illustration."
