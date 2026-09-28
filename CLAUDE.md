@@ -564,7 +564,29 @@ detail or be a re-creation standing in as evidence. The section stands on its
 copy and the slot is gone from the page — don't re-add it as an "illustrative"
 markdown block, which is the version that proves nothing.
 
-**Six figures remain** (1, 2, 3, 4, 5, 7), still JSX comments rather than
+**Image 3 (governance flow) landed 2026-09-28** — Tom's Figma build from the
+brief in `BLUEPRINTS-IMAGES.md`, and it improves on it: the branch hangs off an
+explicit decision diamond, **"Can it be reused?"**, with Yes and No arms. The
+brief left the two outcomes to be inferred and the first question asked of the
+draft was what "Keep local" meant, so naming the question answers it in the
+image. Its ink, purple and arrow greys were sampled from the file and match the
+tokens exactly (`#8529CD`, `#292929`, `#5D5D5D`, `#737373`).
+
+**Two things about it are known and accepted, not oversights.** The diamond is
+blue (`#edf2fc` fill, `#123c90` text) and the canvas ground is `#f8fafc`
+rather than white — both off-system, both Tom's call on 2026-09-28. And the type
+is small: the source is 3558x1198 against a 760px column, so **the supporting
+lines render at ~8.8px and the diamond text at ~11.9px**, under the site's 14px
+floor (headings and pill labels clear it at ~15.5px). The figure is therefore
+`zoom`, with `sizes="100vw"` — exactly the case `ZoomableImage`
+documents, a wide diagram in a narrow column.
+
+**The brief itself had the bug, so don't repeat it on the remaining five.** It
+specified type sizes against a 1600px canvas without checking what they become at
+760px — anything at 22px in a 1600 frame renders at 10.5px. Build each frame at
+the width it will be *seen* (760) with real type sizes, and export at 3x.
+
+**Five figures remain** (1, 2, 4, 5, 7), still JSX comments rather than
 `CaseStudyFigure` calls since a figure with no `src` would throw; each comment
 says what it shows and where it goes. **None need Rakuten access** — they are
 diagrams or Figma recreations. Full briefs, the house style they should follow,

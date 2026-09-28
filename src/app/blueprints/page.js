@@ -212,9 +212,30 @@ function Blueprints() {
             </li>
           </ol>
 
-          {/* IMAGE 3 — governance flow. propose → review → version → deprecate →
-              document, with the review step branching to "add to system" and
-              "keep local". A diagram to draw. */}
+          {/* Tom's Figma build, 2026-09-28. It improves on the brief in one way
+              worth keeping: the branch hangs off an explicit decision diamond,
+              "Can it be reused?", with Yes and No arms. The brief left the two
+              outcomes to be inferred, and the first question anyone asked of the
+              draft was what "Keep local" meant — naming the question answers it
+              in the image rather than in a caption.
+
+              `zoom` because the source is 3558x1198 (2.97:1) against a 760px
+              column: the supporting lines land at ~8.8px, under the site's 14px
+              floor. Measured from the file, not estimated. Tom accepted that for
+              the inline render, so this is the mitigation ZoomableImage exists
+              for — a wide diagram in a narrow column, its stated case. It needs
+              `sizes="100vw"` or the zoom is capped at the inline variant.
+              The real fix, if it is ever re-exported: build the frame at 760 wide
+              with 14/16px type and export at 3x, rather than setting type against
+              a 1600+ canvas and letting it scale down. */}
+          <CaseStudyFigure
+            zoom
+            sizes="100vw"
+            src="/blueprints-governance.png"
+            width={3558}
+            height={1198}
+            alt="The governance flow: Propose, Review, Version, Deprecate and Document run left to right. Below Review, a decision diamond asks whether the component can be reused — Yes leads to Add to system, which rejoins the flow at Version, and No leads to Keep local, which ends there."
+          />
 
           <h3 className="pt-6">Tokens</h3>
           <p>I built the token layer in Figma variables, in two tiers:</p>
