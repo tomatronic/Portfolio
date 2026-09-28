@@ -520,6 +520,39 @@ card, figure — and the home page smeared around the card's margins. Now:
 - `/casestudy/InfluencerCampaigns` — Influencer Campaigns (2025) — **not** password protected (all gate code deleted June 2026)
 - Brewtiful and DesignFlows (older, junior-level work) were deleted June 2026 — recover from git history if needed
 
+### `/blueprints` — the design system case study (added 2026-09-28)
+A fifth case study, at a **top-level route, not under `/casestudy`** — Tom asked
+for that address, and the `/casestudy` segment carries machinery this page does
+not want: `@modal` intercepts those slugs from a home card, and there is no home
+card here. It still gets `Nav`/`Footer` from `SiteChrome`, which keys off the
+layout segment, and it reuses `CaseStudyShell` / `CaseStudyHeader` /
+`OtherCaseStudies` so it matches the other four.
+
+**Hidden in two ways, and they are separate.** It is absent from
+`lib/caseStudies.js`, which is what keeps it out of the home cards, the compact
+cards and `sitemap.js` — that list is the single source for all three. And its
+metadata carries `robots: { index: false, follow: false }`, so the URL is
+shareable but not searchable. That is a stronger hide than Rakuten gets: Rakuten
+is unlisted but still indexable. Remove the robots block to publish it; add an
+entry to `lib/caseStudies.js` to link it.
+
+**It is a draft.** Bracketed text — `[on what cadence]`, `[X] variants` and
+eleven more — renders as-is, deliberately, so the blanks cannot be missed. All
+nine figures are JSX comments rather than `CaseStudyFigure` calls, since none of
+the images exist yet and a figure with no `src` would throw; each comment says
+what the image shows and where it goes. **None of the nine need Rakuten product
+access** — eight are diagrams or Figma recreations, and the ninth is composed
+from images already in `/public`.
+
+`CaseStudyHeader` gained an optional **`meta`** prop for this page: an array of
+`{ label, value }` rather than the `role`/`skills` pair, because this one lists
+Role, Team and Scope. The four Rakuten case studies still pass the shorthand and
+are unchanged; `meta` wins if both are given.
+
+This page has **the site's only `<ol>`**. Tailwind's preflight strips list
+markers and `globals.css` has no `ol` rule, so the governance steps carry an
+explicit `list-decimal ml-5`. `PROSE` still styles the `li` text.
+
 ### Case study layout template (all 4 use this)
 ```jsx
 <CaseStudyShell>
