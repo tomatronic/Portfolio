@@ -66,7 +66,17 @@ export default function RootLayout({ children, modal }) {
           <SiteFooter />
           {modal}
         </ThemeProvider>
-        <GoogleAnalytics gaId="G-CCDKVM70NV" />
+        {/* Production only. Until 2026-09-28 this mounted everywhere, so every
+            `next start` on localhost and every Vercel preview deploy sent real
+            hits to the live property — indistinguishable from a visitor except by
+            the Hostname dimension, and nobody checks that. It matters now the
+            /blueprints events are being read as "did this person look yet".
+            VERCEL_ENV is read on the server, so it needs no NEXT_PUBLIC_ prefix;
+            absent locally, it fails closed. ReadTracking already no-ops when gtag
+            never appears, so nothing downstream needs a guard. */}
+        {process.env.VERCEL_ENV === 'production' && (
+          <GoogleAnalytics gaId="G-CCDKVM70NV" />
+        )}
         <Analytics />
         <SpeedInsights />
       </body>

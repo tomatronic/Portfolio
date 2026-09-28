@@ -284,7 +284,7 @@ Project root: `/Users/thomasspencer/Documents/Portfolio2.0/portfolio2.0/`
 - **Animation**: Framer Motion
 - **Icons**: Lucide React (`lucide-react`)
 - **Fonts**: DM Sans only (`--font-dm-sans`) via `next/font/google` — single font across all text; headings and body both `font-normal` (400) as of 2026-07-13 (was `font-semibold`/600 — see Typographic scale section). Home hero is the one exception, at `font-medium` (500).
-- **Deployment**: Vercel. `layout.js` mounts Vercel Analytics, Vercel Speed Insights, and `GoogleAnalytics` (`G-CCDKVM70NV`) from `@next/third-parties`.
+- **Deployment**: Vercel. `layout.js` mounts Vercel Analytics, Vercel Speed Insights, and `GoogleAnalytics` (`G-CCDKVM70NV`) from `@next/third-parties`. **GA is gated on `process.env.VERCEL_ENV === 'production'`** (2026-09-28): it used to mount everywhere, so local `next start` runs and preview deploys sent real hits to the live property, distinguishable from a visitor only by the Hostname dimension. That surfaced the day the `/blueprints` events started being read as "has this person looked yet" — a verification run against `localhost:3001` showed up as a city in the report. `VERCEL_ENV` is read server-side so it needs no `NEXT_PUBLIC_` prefix, and it is absent locally, so it fails closed. Vercel Analytics and Speed Insights are unaffected; they already separate environments themselves.
 
 ## Key files
 ```
