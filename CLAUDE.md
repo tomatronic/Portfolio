@@ -551,7 +551,14 @@ The labels name the product only — naming which components appear in which
 screenshot would be a per-image claim, so that sits in the framing line above the
 row instead, where it is true by construction.
 
-**Eight figures remain**, still JSX comments rather than `CaseStudyFigure` calls
+**Image 6 (pill contrast) landed 2026-09-28.** Its colours were measured from the
+file rather than taken on trust — before is `#16a34a` on `#dcfce7` at 3.00:1
+(fails AA), after is `#456418` on `#e8f4d7` at 5.94:1 (passes) — so the alt text
+states the numbers. **The source is 386px against a 760px column** and wants a
+1600px re-export; it renders centred at natural size rather than upscaling,
+because figure images deliberately carry no `w-full`, but it is soft on retina.
+
+**Seven figures remain**, still JSX comments rather than `CaseStudyFigure` calls
 since a figure with no `src` would throw; each comment says what it shows and
 where it goes. **None need Rakuten access** — they are diagrams or Figma
 recreations. Full briefs, including the house style they should follow, are in

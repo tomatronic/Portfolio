@@ -1,8 +1,9 @@
-# /blueprints — the eight remaining images
+# /blueprints — the remaining images
 
-Image 9 ("The system in use") is built from images already in `/public`. These
-eight are all diagrams or Figma recreations — **none need Rakuten access**, so
-this case study is completable whenever.
+Image 9 ("The system in use") is built from images already in `/public`, and
+**image 6 (pill contrast) landed 2026-09-28** — see the note under it. The
+remaining seven are diagrams or Figma recreations — **none need Rakuten
+access**, so this case study is completable whenever.
 
 ---
 
@@ -105,7 +106,18 @@ by the sheet's top corners.
   left against a calm right is the story.
 - **Size**: 1600 × ~900.
 
-## 6. Pill contrast before and after
+## 6. Pill contrast before and after — ✅ DONE, but re-export it
+
+`public/blueprints-pill-contrast.png`, in place and wired up. The colours are
+correct: measured from the file, the before half is `#16a34a` on `#dcfce7`
+(3.00:1, fails) and the after is `#456418` on `#e8f4d7` (5.94:1, passes), so the
+red and green AA marks are honest.
+
+**It is 386px wide and needs re-exporting at 1600.** The column is 760px, so at
+386 it renders centred at half width and is soft on any retina screen — it needs
+772 device pixels and has 386. The site has no `w-full` on figure images, so
+nothing is stretched; it is just small and soft. A 4x export from the same Figma
+frame fixes both.
 
 **Goes**: Key decisions → "Fixing contrast at component level".
 
@@ -153,7 +165,7 @@ by the sheet's top corners.
 
 ## Order worth doing them in
 
-1. **6 (pill contrast)** — smallest, and the most concrete claim on the page.
+1. ~~**6 (pill contrast)**~~ — done, pending a 1600px re-export.
 2. **5 (cards)** — the strongest single argument you have. Twenty-plus to one.
 3. **4 (tokens)** — makes the most abstract section land.
 4. **3 and 7 (the two flows)** — build them as a pair, same box language.

@@ -251,10 +251,22 @@ function Blueprints() {
             and no product team had to change anything.
           </p>
 
-          {/* IMAGE 6 — pill contrast before and after. Old and new side by side,
-              each labelled with its contrast ratio. Recreated; if the original
-              colours aren't known, use representative ones and label them
-              "illustrative". */}
+          {/* Measured from the file rather than taken on trust: the left half is
+              #16a34a on #dcfce7, which is 3.00:1 and fails; the right is #456418
+              on #e8f4d7, 5.94:1 and passes. The red and green AA marks are
+              therefore correct, and the alt text can state the numbers.
+
+              The source is 386px wide against a 760px column. The site
+              deliberately has no `w-full` on figure images, so it renders at its
+              natural size rather than upscaling — but that also means it sits at
+              half the column width and is soft on a retina screen. A re-export at
+              1600px would let it fill the column crisply. */}
+          <CaseStudyFigure
+            src="/blueprints-pill-contrast.png"
+            width={386}
+            height={130}
+            alt="The status pill before and after the contrast fix. Before: green text on a light green background, 3.00:1, failing WCAG AA. After: darker text on a warmer background, 5.94:1, passing."
+          />
 
           <h3 className="pt-6">Connecting Figma to code with Claude</h3>
           <p>
