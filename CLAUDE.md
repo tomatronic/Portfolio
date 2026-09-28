@@ -564,10 +564,14 @@ where it goes. **None need Rakuten access** — they are diagrams or Figma
 recreations. Full briefs, including the house style they should follow, are in
 **`BLUEPRINTS-IMAGES.md`** at the repo root.
 
-`CaseStudyFigure` gained a **`flush`** prop for image 9's row: it drops the
-`mb-8` so a grid gap can own the spacing, the same idea as the `data-flush`
-opt-out on OtherCaseStudies headings. Standard figures are unaffected — checked
-against ACJ and Prompt after the change.
+`CaseStudyFigure` gained two props here. **`flush`** drops the `mb-8` so a grid
+gap can own the spacing (image 9's row), the same idea as the `data-flush`
+opt-out on OtherCaseStudies headings. **`bare`** drops the purple wash — it only
+changes anything for an image narrower than the column, since a figure that fills
+760px covers the ground completely; below that the wash showed as a band either
+side and read as padding rather than a ground, which is what Tom objected to on
+the pill diagram. Standard figures are unaffected by both — checked against ACJ
+and Prompt, which still carry the wash.
 
 `CaseStudyHeader` gained an optional **`meta`** prop for this page: an array of
 `{ label, value }` rather than the `role`/`skills` pair, because this one lists

@@ -260,8 +260,15 @@ function Blueprints() {
               deliberately has no `w-full` on figure images, so it renders at its
               natural size rather than upscaling — but that also means it sits at
               half the column width and is soft on a retina screen. A re-export at
-              1600px would let it fill the column crisply. */}
+              1600px would let it fill the column crisply.
+
+              `bare` because the image carries its own white card: with the usual
+              wash behind it the purple showed either side of a narrow image and
+              read as padding rather than as a ground (Tom, 2026-09-28). Once it
+              is re-exported at full column width the wash would be covered
+              anyway, so this can stay either way. */}
           <CaseStudyFigure
+            bare
             src="/blueprints-pill-contrast.png"
             width={386}
             height={130}
