@@ -297,9 +297,10 @@ function Blueprints() {
             consistent reference, so the UI they generated stayed consistent with the system.
           </p>
 
-          {/* IMAGE 8 — Design.md excerpt. A short, sanitised excerpt showing its
-              structure: headings for tokens, components and usage rules, with one
-              example entry. Rewritten from memory, no internal details. */}
+          {/* No figure here, and that is deliberate (Tom, 2026-09-28). Design.md is
+              a text file and an internal one: a screenshot would either carry
+              internal detail or be a re-creation standing in as evidence, and
+              neither is worth having. The paragraph above is the whole claim. */}
 
           <h2 className="pt-10 tracking-tight">The system in use</h2>
           <p>The same cards, tables, pills and inputs, across three products.</p>

@@ -1,13 +1,14 @@
 # /blueprints — the remaining images
 
 Image 9 ("The system in use") is built from images already in `/public`, and
-**image 6 (pill contrast) landed 2026-09-28** — see the note under it. The
-remaining seven are diagrams or Figma recreations — **none need Rakuten
-access**, so this case study is completable whenever.
+**image 6 (pill contrast) landed 2026-09-28** — see the note under it. **Image 8
+was dropped** rather than deferred — see below. The remaining six are diagrams or
+Figma recreations — **none need Rakuten access**, so this case study is
+completable whenever.
 
 ---
 
-## House style — applies to all eight
+## House style — applies to all six
 
 The page is monochrome ink with one colour. Diagrams that follow this will look
 like they belong; diagrams in a generic flowchart palette won't.
@@ -147,19 +148,15 @@ frame fixes both.
   diagram of it — but it'd need somewhere to live, so treat it as a stretch.
 - **Size**: 1600 × ~700.
 
-## 8. Design.md excerpt
+## 8. Design.md excerpt — ❌ DROPPED (2026-09-28)
 
-**Goes**: Key decisions → "A Design.md file for AI tools".
+Tom's call, and the right one: the file is text, and it is internal. A
+screenshot would either carry internal detail or be a re-creation standing in as
+evidence, and an illustrative markdown block proves nothing a sentence doesn't.
+The section stands on its copy; the figure slot is gone from the page.
 
-- **Shows**: a short, sanitised excerpt — headings for tokens, components and
-  usage rules, with one real example entry under one of them.
-- **Layout**: a document block on white, monospace, left-aligned, with the
-  markdown syntax visible (`##`, `-`). It should look like a file, not like
-  prose about a file.
-- **Keep it short.** Six to twelve lines. This is evidence the thing existed and
-  had a shape, not documentation to read.
-- **Rewrite from memory — no internal details.**
-- **Size**: 1600 × ~900.
+Don't revive this as "a generic version" — that is the version that isn't worth
+having.
 
 ---
 
@@ -169,10 +166,93 @@ frame fixes both.
 2. **5 (cards)** — the strongest single argument you have. Twenty-plus to one.
 3. **4 (tokens)** — makes the most abstract section land.
 4. **3 and 7 (the two flows)** — build them as a pair, same box language.
+   Figma prompts for both are at the foot of this file.
 5. **2 (coverage map)** — easy, mostly typesetting.
-6. **8 (Design.md)** — easy, but the least load-bearing.
-7. **1 (hero)** — last. It sets the tone, and you'll have the component
-   vocabulary sorted by then from making the other seven.
+6. **1 (hero)** — last. It sets the tone, and you'll have the component
+   vocabulary sorted by then from making the other five.
 
 Send them over as you go and I'll wire each one in — the insertion points are
 already marked as comments in `src/app/blueprints/page.js`.
+
+---
+
+# Figma prompts for the two flow diagrams
+
+Both flows use **the same box language** — build one, then duplicate the frame
+and swap the contents, so images 3 and 7 read as a pair on the page. Shared
+spec, before either prompt:
+
+- Frame **1600 wide**, white fill, no border.
+- Boxes: white fill, **16px radius**, 1px stroke `#292929` at **10%**, no shadow.
+  Label inside in **DM Sans Medium 28px `#292929`**, one or two words.
+- A line of supporting text under a label where it's needed: **DM Sans Regular
+  22px `#5D5D5D`**, kept to one short line.
+- Arrows: **2px `#737373`**, simple triangular heads, horizontal between steps.
+- **One purple, `#8529CD`.** Exactly one path per diagram gets it — box stroke
+  at 100%, fill at 8%, arrow and label in solid purple. Everything else is ink.
+- Step numbers are unnecessary in 3 (the page already numbers them) and wrong in
+  7 (it isn't a numbered list). Leave them off both.
+- Export **PNG at 2x**, so 1600 wide comes out at 3200 and downsamples cleanly.
+
+## Prompt — image 3, governance flow
+
+> A horizontal process diagram on a white background, 1600 × 700, in DM Sans.
+> Five rounded rectangles left to right, evenly spaced, connected by thin grey
+> arrows: **Propose**, **Review**, **Version**, **Deprecate**, **Document**.
+> Each box has its name in dark grey and one short line of lighter grey text
+> beneath it: Propose — "any designer, in the design channel"; Review — "checked
+> against scope and principles"; Version — "released from GitHub"; Deprecate —
+> "removed one major version later"; Document — "guidance in the pattern
+> library".
+>
+> Below the Review box, two short arrows drop down and outward to two smaller
+> boxes: **Add to system** on the left and **Keep local** on the right. A thin
+> arrow curves from *Add to system* back up into the Version box, so the
+> approved path rejoins the flow. **Keep local** has no outgoing arrow — it
+> leaves the flow. Draw this branch in purple (#8529CD): both small boxes
+> stroked purple with an 8% purple fill, both arrows purple. Everything else is
+> monochrome grey.
+>
+> Generous white space, no shadows, no icons, no colour other than the purple
+> branch.
+
+**What the diagram has to earn:** the branch is the whole reason this image
+exists. A five-box row is just the list above it in another shape. Give the
+branch real vertical room — don't tuck it under Review as an afterthought — and
+make sure **Keep local terminating** is visually obvious, because "not
+everything gets in" is the point of having governance at all.
+
+## Prompt — image 7, Figma to code workflow
+
+> A horizontal workflow diagram on a white background, 1600 × 700, in DM Sans,
+> matching the style of the governance diagram: rounded rectangles, 16px radius,
+> thin grey strokes, thin grey arrows, no shadows or icons.
+>
+> Four boxes left to right: **Figma** ("designer edits the component"), **Claude**
+> ("reads the change via the Figma MCP"), **GitHub** ("generates the code
+> change"), **Copilot review** ("automated first pass").
+>
+> After Copilot review the flow splits into two paths that both end at a final
+> **Release** box on the right:
+> - the upper path goes straight from Copilot review to Release, labelled
+>   **"patch — ships on this alone"**. Draw this path in purple (#8529CD):
+>   purple arrows and a purple label.
+> - the lower path passes through one more box, **Engineer review** ("minor and
+>   above"), before reaching Release. Keep this path grey.
+>
+> The purple path should read as the shorter, faster one. Generous white space,
+> no colour other than the purple.
+
+**Why purple goes on the patch path and not the engineer one:** the claim in the
+copy is that designers could ship independently. The short path *is* that claim.
+Highlighting the engineer path instead would make the same diagram argue the
+opposite.
+
+**One thing to watch:** the page says Copilot reviews first and a patch can ship
+on that alone. If you simplify the diagram to a single straight line, it
+contradicts the paragraph directly above it. The split is not optional.
+
+**Stretch, if there's time:** a 20–30 second screen recording of this workflow
+rebuilt on a personal project beats the diagram outright — a moving demo of
+design-to-code is the kind of evidence nobody expects to see. It needs somewhere
+to live, so treat it as a bonus rather than a blocker.

@@ -558,11 +558,18 @@ states the numbers. **The source is 386px against a 760px column** and wants a
 1600px re-export; it renders centred at natural size rather than upscaling,
 because figure images deliberately carry no `w-full`, but it is soft on retina.
 
-**Seven figures remain**, still JSX comments rather than `CaseStudyFigure` calls
-since a figure with no `src` would throw; each comment says what it shows and
-where it goes. **None need Rakuten access** — they are diagrams or Figma
-recreations. Full briefs, including the house style they should follow, are in
-**`BLUEPRINTS-IMAGES.md`** at the repo root.
+**Image 8 (a Design.md excerpt) was dropped, not deferred** (2026-09-28). The
+file is text and it is internal, so a screenshot would either carry internal
+detail or be a re-creation standing in as evidence. The section stands on its
+copy and the slot is gone from the page — don't re-add it as an "illustrative"
+markdown block, which is the version that proves nothing.
+
+**Six figures remain** (1, 2, 3, 4, 5, 7), still JSX comments rather than
+`CaseStudyFigure` calls since a figure with no `src` would throw; each comment
+says what it shows and where it goes. **None need Rakuten access** — they are
+diagrams or Figma recreations. Full briefs, the house style they should follow,
+and Figma prompts for the two flow diagrams are in **`BLUEPRINTS-IMAGES.md`** at
+the repo root.
 
 `CaseStudyFigure` gained two props here. **`flush`** drops the `mb-8` so a grid
 gap can own the spacing (image 9's row), the same idea as the `data-flush`
