@@ -5,6 +5,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { DM_Sans } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SITE_URL, pageMetadata } from './lib/seo'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -14,32 +15,13 @@ const dmSans = DM_Sans({
   weight: ['400', '500', '600', '700'],
 });
 
-const SITE_URL = 'https://www.tomspencer.design'
 const SITE_TITLE = 'Tom Spencer — Senior Product Designer'
 const SITE_DESCRIPTION = 'Portfolio of Tom Spencer, a Senior Product Designer based in Brighton, UK — making complex, data-heavy products easy to use.'
 
-export async function generateMetadata() {
-  return {
-    metadataBase: new URL(SITE_URL),
-    title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
-    icons: { icon: '/just_me.webp' },
-    openGraph: {
-      title: SITE_TITLE,
-      description: SITE_DESCRIPTION,
-      url: SITE_URL,
-      siteName: 'Tom Spencer',
-      locale: 'en_GB',
-      type: 'website',
-      images: [{ url: '/ogdata.png', width: 1200, height: 630, alt: 'Tom Spencer — Senior Product Designer portfolio' }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: SITE_TITLE,
-      description: SITE_DESCRIPTION,
-      images: ['/ogdata.png'],
-    },
-  }
+export const metadata = {
+  metadataBase: new URL(SITE_URL),
+  icons: { icon: '/just_me.webp' },
+  ...pageMetadata({ title: SITE_TITLE, description: SITE_DESCRIPTION }),
 }
 
 // Prevent flash of incorrect theme before React hydrates

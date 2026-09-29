@@ -1,3 +1,4 @@
+import { pageMetadata } from '../lib/seo'
 import AboutContent from '../components/site/About'
 import { getRunningTotals } from '../lib/strava'
 
@@ -5,13 +6,12 @@ import { getRunningTotals } from '../lib/strava'
 // this is ISR, not a per-request fetch.
 export const revalidate = 86400
 
-export async function generateMetadata() {
-  return {
-    title: 'About | Tom Spencer',
-    description:
-      'About Tom Spencer — Senior Product Designer specialising in data-heavy enterprise tools, based in Brighton, UK.',
-  }
-}
+export const metadata = pageMetadata({
+  title: "About | Tom Spencer",
+  description:
+    "About Tom Spencer — Senior Product Designer specialising in data-heavy enterprise tools, based in Brighton, UK.",
+  path: '/about',
+})
 
 export default async function AboutPage() {
   // null when the Strava env vars aren't set, or if the API call fails — the

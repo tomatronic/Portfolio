@@ -1,15 +1,16 @@
+import { pageMetadata } from '../../lib/seo'
 import CaseStudyFigure from "../../components/site/CaseStudyFigure"
 import CaseStudyHeader from "../../components/site/CaseStudyHeader"
 import { WASH, INK } from '../../components/site/tokens'
 import OtherCaseStudies from "../../components/OtherCaseStudies"
 import CaseStudyShell from '../../components/site/CaseStudyShell'
 
-export async function generateMetadata() {
-    return {
-        title: "Natural Language Search & AI | Tom Spencer",
-        description: "Designing a natural language search tool for Rakuten Advertising's custom report builder — balancing AI automation with user trust and control.",
-    }
-}
+export const metadata = pageMetadata({
+  title: "Natural Language Search & AI | Tom Spencer",
+  description:
+    "Designing a natural language search tool for Rakuten Advertising's custom report builder — balancing AI automation with user trust and control.",
+  path: '/casestudy/Prompt',
+})
 
 function Prompt() {
     return (

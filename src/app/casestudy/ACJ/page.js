@@ -1,14 +1,15 @@
+import { pageMetadata } from '../../lib/seo'
 import CaseStudyFigure from "../../components/site/CaseStudyFigure"
 import CaseStudyHeader from "../../components/site/CaseStudyHeader"
 import OtherCaseStudies from "../../components/OtherCaseStudies"
 import CaseStudyShell from '../../components/site/CaseStudyShell'
 
-export async function generateMetadata() {
-    return {
-        title: "Affiliate Conversion Journey | Tom Spencer",
-        description: "Designing multi-touch attribution visualisation for Rakuten Advertising — giving publishers and advertisers a clear view of contribution across the full conversion journey.",
-    }
-}
+export const metadata = pageMetadata({
+  title: "Affiliate Conversion Journey | Tom Spencer",
+  description:
+    "Designing multi-touch attribution visualisation for Rakuten Advertising — giving publishers and advertisers a clear view of contribution across the full conversion journey.",
+  path: '/casestudy/ACJ',
+})
 
 function ACJ() {
     return (

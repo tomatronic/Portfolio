@@ -1,3 +1,4 @@
+import { pageMetadata } from '../lib/seo'
 import CaseStudyFigure from '../components/site/CaseStudyFigure'
 import CaseStudyHeader from '../components/site/CaseStudyHeader'
 import CaseStudyShell from '../components/site/CaseStudyShell'
@@ -76,15 +77,14 @@ const IN_USE = [
  * composed from images already in `/public`.
  */
 
-export async function generateMetadata() {
-  return {
-    title: 'One library, three products | Tom Spencer',
-    description:
-      "Eight years co-owning Rakuten Advertising's design system — one component library shared by three products, its governance, token layer and AI contribution workflows.",
-    // Shareable by link, invisible to search. Drop this to publish it properly.
-    robots: { index: false, follow: false },
-  }
-}
+export const metadata = pageMetadata({
+  title: "One library, three products | Tom Spencer",
+  description:
+    "Eight years co-owning Rakuten Advertising's design system — one component library shared by three products, its governance, token layer and AI contribution workflows.",
+  path: '/blueprints',
+  // Shareable by link, invisible to search. Drop this to publish it properly.
+  robots: { index: false, follow: false },
+})
 
 function Blueprints() {
   return (

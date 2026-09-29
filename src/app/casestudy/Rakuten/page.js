@@ -1,15 +1,16 @@
+import { pageMetadata } from '../../lib/seo'
 import Image from "next/image"
 import CaseStudyFigure from "../../components/site/CaseStudyFigure"
 import CaseStudyHeader from "../../components/site/CaseStudyHeader"
 import OtherCaseStudies from "../../components/OtherCaseStudies"
 import CaseStudyShell from '../../components/site/CaseStudyShell'
 
-export async function generateMetadata() {
-    return {
-      title: "Rakuten Advertising Offer Flow | Tom Spencer",
-      description: "Redesigning Rakuten Advertising's affiliate offer management dashboard through discovery, research, and iterative testing.",
-      }
-  }
+export const metadata = pageMetadata({
+  title: "Rakuten Advertising Offer Flow | Tom Spencer",
+  description:
+    "Redesigning Rakuten Advertising's affiliate offer management dashboard through discovery, research, and iterative testing.",
+  path: '/casestudy/Rakuten',
+})
 
 function Offer() {
     return (
