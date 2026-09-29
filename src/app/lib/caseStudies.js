@@ -16,7 +16,7 @@
  * charcoal, and a pale top against a dark base is what gives it shape.
  * `stack` is the three-image fan on the compact cards.
  */
-export const CASE_STUDIES = [
+const CASE_STUDIES = [
   {
     slug: 'Prompt',
     title: 'Natural Language Search & AI',

@@ -2,6 +2,56 @@
 
 ## Versions
 
+### Production-readiness pass, against a 20-point checklist (2026-09-29)
+Tom found a "20 things your vibe-coded site is missing" list and asked which apply.
+Most are aimed at client sites with forms and funnels; each was checked against the
+code rather than assumed.
+
+**Already done, verified:** custom 404 (`not-found.js`), favicon, `robots.txt`,
+`sitemap.xml`, a per-page `<title>` and description, alt text (the two `alt=""` are
+deliberately decorative: the compact-card image stack and the nav avatar, both
+beside a text label), mobile breakpoints, real contact details, analytics, and
+image optimisation (Next serves resized variants; the heaviest file in `public/` is
+the 1.4MB resume PDF, which is a download rather than a page asset). The
+OpenGraph image is a valid 1200x630.
+
+**Not applicable to a portfolio:** sticky mobile CTA, form error states, thank-you
+page, loading states (the site is statically rendered), terms and conditions.
+
+**One real defect, fixed: link previews were wrong on every page but the home.**
+Next.js merges metadata shallowly per top-level key, so a page that set only
+`title` and `description` still inherited the root layout's `openGraph` and
+`twitter` blocks wholesale. Sharing `/casestudy/Prompt` on LinkedIn, Slack or
+iMessage previewed as "Tom Spencer — Senior Product Designer" whatever was shared;
+the browser tab said the right thing and the preview said the wrong one. Setting
+`openGraph` on a page replaces the root's entirely, image included, so the full
+shape lives once in **`lib/seo.js`** (`pageMetadata`), which also sets a canonical
+URL, and every page calls it. `/blueprints` matters most here: it is the page
+that gets sent to people. The layout deliberately passes no `path`, so the 404
+does not inherit a canonical. Verified on a production build against `/`,
+`/about`, two case studies, `/blueprints` and a 404.
+
+**Two decisions that are Tom's, deliberately not made unprompted:**
+- **Cookie consent and a privacy policy.** GA4 loads for every visitor with no
+  consent step, and the site is UK-based. Analytics cookies generally need consent
+  under UK PECR, and the law was amended in 2025 with a carve-out for low-risk
+  analytics whose exact scope is worth checking rather than trusting from memory.
+  Vercel Analytics and Speed Insights are cookieless and unaffected. Options run
+  from a consent banner that gates GA, through dropping GA and relying on Vercel
+  Analytics, to a privacy page that discloses it.
+- **A global `error.js`.** There is none, so a runtime error shows Next's generic
+  fallback rather than an on-system page. The site is mostly static and the
+  Strava fetch is already wrapped in a try/catch, so the exposure is small.
+
+**Cleanup in the same pass:** `autoprefixer` removed (see Stack); `generateMetadata`
+async functions that never awaited became plain `metadata` exports; the site URL,
+which lived in three files, is one constant; `CASE_STUDIES` is no longer exported
+because only its own file used it. The sweep for unused files, exports, dependencies
+and `public/` assets found nothing else: the flagged `@modal/default.js`,
+`generateStaticParams`, `dynamicParams`, `@tailwindcss/postcss` and `react-dom` are
+framework conventions or config-loaded, and all four font weights the layout loads
+are used (600 in three places, 700 on the hero).
+
 ### Prompt's screenshots span three generations of the UI (2026-08-26)
 Found while adding the Approach artefact. Read from the navigation chrome
 in each image, not from dates — treat the grouping as inferred:
@@ -280,10 +330,10 @@ Project root: `/Users/thomasspencer/Documents/Portfolio2.0/portfolio2.0/`
 
 ## Stack
 - **Framework**: Next.js 15 (App Router)
-- **Styling**: Tailwind CSS v4, configured **CSS-first** in `globals.css` (`@import "tailwindcss"` + an `@theme` block). `postcss.config.mjs` is required and real — it loads `@tailwindcss/postcss` and autoprefixer. There is no JS config: `tailwind.config.js` was deleted 2026-09-09 (see Dark mode).
+- **Styling**: Tailwind CSS v4, configured **CSS-first** in `globals.css` (`@import "tailwindcss"` + an `@theme` block). `postcss.config.mjs` is required and real — it loads `@tailwindcss/postcss` alone. `autoprefixer` was removed 2026-09-29: Tailwind v4 prefixes through Lightning CSS, and the only thing autoprefixer still added was ~555 bytes of `-moz-`/`-o-` prefixes for browsers that no longer exist (built CSS compared with and without). There is no JS config: `tailwind.config.js` was deleted 2026-09-09 (see Dark mode).
 - **Animation**: Framer Motion
 - **Icons**: Lucide React (`lucide-react`)
-- **Fonts**: DM Sans only (`--font-dm-sans`) via `next/font/google` — single font across all text; headings and body both `font-normal` (400) as of 2026-07-13 (was `font-semibold`/600 — see Typographic scale section). Home hero is the one exception, at `font-medium` (500).
+- **Fonts**: DM Sans only (`--font-dm-sans`) via `next/font/google` — single font across all text; headings and body both `font-normal` (400) as of 2026-07-13 (was `font-semibold`/600 — see Typographic scale section). Home hero is the one exception, at `font-bold` (700).
 - **Deployment**: Vercel. `layout.js` mounts Vercel Analytics, Vercel Speed Insights, and `GoogleAnalytics` (`G-CCDKVM70NV`) from `@next/third-parties`. **GA is gated on `process.env.VERCEL_ENV === 'production'`** (2026-09-28): it used to mount everywhere, so local `next start` runs and preview deploys sent real hits to the live property, distinguishable from a visitor only by the Hostname dimension. That surfaced the day the `/blueprints` events started being read as "has this person looked yet" — a verification run against `localhost:3001` showed up as a city in the report. `VERCEL_ENV` is read server-side so it needs no `NEXT_PUBLIC_` prefix, and it is absent locally, so it fails closed. Vercel Analytics and Speed Insights are unaffected; they already separate environments themselves.
 
 ## Key files
@@ -310,6 +360,7 @@ src/app/
     site/               — the design system and every page-level block (see Component map)
   lib/
     caseStudies.js      — the case study list: slug, title, listed, card + stack data
+    seo.js              — SITE_URL and pageMetadata(): the one OpenGraph/Twitter/canonical shape
     sound.js            — playCue(): cuelume, never allowed to throw
     strava.js           — 365-day running total for the About page
   casestudy/            — 4 case study pages (Prompt, InfluencerCampaigns, ACJ, Rakuten)
@@ -703,6 +754,10 @@ asks for; don't let a future pass promote it to a measured result.
 - `prompt-home.png` — **untracked on purpose** (2026-08-26). Tom added it
   alongside `prompt-report.png` and is replacing it shortly; it isn't
   referenced anywhere yet, so it's staying out of git until it has a job.
+  **It was committed by accident in `c0d9cd3`** (a `git add -A` for the pill
+  figure swept it in) and untracked again 2026-09-29 with `git rm --cached`; it
+  is still on disk and still in that commit's history. Use `git add <path>`,
+  not `-A`, while this file is sitting there.
 
 Everything else this list used to offer is **gone, not pending**. `40f6df4`
 (2026-07-30, "Drop 51MB of files the site does not use") deleted
@@ -883,20 +938,20 @@ body actually renders at.
 
 Harmonized 2026-07-13 in two passes:
 1. **Size**: the primary heading was inconsistent across pages (Home hero peaked at 60px desktop, case-study h1s were a flat 36px with no mobile step, About's h1 was smaller at 24→30px, and AboutMeSection's h2 was accidentally bigger than About's own h1 at 30→36px). All primary headings now converge on one shared responsive step — 30px mobile → 36px tablet+. Case-study in-page section headings (Challenge/Solution/etc.) were bumped from a flat 20px up to the shared 24px→30px h2 size, and h3 sub-points were normalized to always use tighter `pt-6` spacing (was a mix of `pt-6`/`pt-10`, which sometimes made an h3 read identically to an h2).
-2. **Weight**: the shared `h1`/`h2`/`h3` default in `globals.css` was still `font-semibold` (600) — a legacy value nothing actually matched anymore, since every deliberately-styled heading (Home hero, About h1, AboutMeSection's h2, card titles) already overrode it to `font-normal` (400). This left "What colleagues say." (an unstyled `<h2>`, inheriting the stale 600 default) visibly heavier than its sibling headings once they were all the same size. Fixed by changing the shared default itself to `font-normal` — this also lightened every case-study h1/h2/h3, which had the same problem. Home's hero is the one deliberate exception, bumped to `font-medium` (500) as the single heaviest text on the site.
+2. **Weight**: the shared `h1`/`h2`/`h3` default in `globals.css` was still `font-semibold` (600) — a legacy value nothing actually matched anymore, since every deliberately-styled heading (Home hero, About h1, AboutMeSection's h2, card titles) already overrode it to `font-normal` (400). This left "What colleagues say." (an unstyled `<h2>`, inheriting the stale 600 default) visibly heavier than its sibling headings once they were all the same size. Fixed by changing the shared default itself to `font-normal` — this also lightened every case-study h1/h2/h3, which had the same problem. Home's hero is the one deliberate exception, now `font-bold` (700) as the single heaviest text on the site.
 
 Single font: **DM Sans** (`--font-dm-sans`) for all text. Hierarchy is now created primarily through size and spacing, with weight mostly uniform except the Home hero.
 
 | Role | Font | Size | Weight | Color | Leading |
 |------|------|------|--------|-------|---------|
-| Home hero h1 (the one exception) | DM Sans | `text-3xl md:text-4xl` (30px → 36px) | `font-medium` (500) | inline (`#ffffff` dark / `#020617` light) | `lineHeight: 1.05` inline |
+| Home hero h1 (the one exception) | DM Sans | `TEXT.title` (27px) | `font-bold` (700) | `INK` | `leading-[1.25]` |
 | Page title (h1) — About, all 4 case studies | DM Sans | `text-3xl md:text-4xl` (30px → 36px, globals default) | `font-normal` (400, globals default) | `text-slate-950 dark:text-white` | `leading-tight` |
 | Section heading (h2) — "A little about me", "What colleagues say.", case-study Challenge/Solution/etc. | DM Sans | `text-2xl md:text-3xl` (24px → 30px, globals default) | `font-normal` (400, globals default) | `text-slate-950 dark:text-white` | `tracking-tight` |
 | Sub-heading (h3) — case-study sub-points, always `pt-6` above (never `pt-10`, which is h2-only) | DM Sans | `text-xl` (20px, flat, globals default) | `font-normal` (400, globals default) | `text-slate-950 dark:text-white` | — |
 | Body / muted text | DM Sans | `text-base` | `font-normal` | `text-slate-600 dark:text-slate-400` | `leading-relaxed` |
 | Small / caption | DM Sans | `text-sm` or `text-xs` | — | — | — |
 
-**Rule going forward**: any new primary page heading or section heading should use a plain `<h1>`/`<h2>`/`<h3>` with no size or weight override at all — the globals defaults now match the site's actual design intent, so most new headings need zero custom classes. The only sanctioned exception is the Home hero's `font-medium`. Don't introduce a third one-off weight or size for any heading role — that's exactly the drift these two passes just cleaned up.
+**Rule going forward**: any new primary page heading or section heading should use a plain `<h1>`/`<h2>`/`<h3>` with no size or weight override at all — the globals defaults now match the site's actual design intent, so most new headings need zero custom classes. The only sanctioned exception is the Home hero's `font-bold`. Don't introduce a third one-off weight or size for any heading role — that's exactly the drift these two passes just cleaned up.
 
 **Rule**: All body/muted `<p>` text must use `text-base font-normal leading-relaxed text-slate-600 dark:text-slate-400`. Do NOT use `font-medium`, `text-slate-700`, `leading-7`, or `text-lg` for regular body copy.
 
