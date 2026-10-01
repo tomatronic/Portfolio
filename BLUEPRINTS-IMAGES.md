@@ -77,7 +77,12 @@ by the sheet's top corners.
   **purple on the branch only** — it's the decision the whole model turns on.
 - **Size**: 1600 × ~700.
 
-## 4. Token architecture
+## 4. Token architecture — ✅ DONE (2026-10-01)
+
+Landed as `public/blueprints-tokens.png`, from Tom's `variant-naming.png`. The brief's
+three columns became two tiers plus a rendered result, matching the page copy. It
+was flattened onto `#f8fafc` because the export was transparent. It is set in Inter
+rather than DM Sans. The brief below is kept for the record.
 
 **Goes**: Approach → Tokens.
 

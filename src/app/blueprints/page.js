@@ -252,9 +252,13 @@ function Blueprints() {
             every product that uses it.
           </p>
 
-          {/* IMAGE 4 — token architecture. Three columns, foundation → semantic →
-              component, with one chain highlighted: green-100 → surface-success →
-              pill background. A diagram to draw. */}
+          <CaseStudyFigure
+            bare
+            src="/blueprints-tokens.png"
+            width={715}
+            height={306}
+            alt="Token architecture. Foundation tokens map to semantic tokens: grey-700 to text-primary, indigo-100 to surface-info, green-100 to surface-success and red-100 to surface-error. Surface-success continues into a component, a green Success status pill."
+          />
 
           <h2 className="pt-10 tracking-tight">Key decisions</h2>
 

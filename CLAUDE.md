@@ -637,7 +637,28 @@ specified type sizes against a 1600px canvas without checking what they become a
 760px — anything at 22px in a 1600 frame renders at 10.5px. Build each frame at
 the width it will be *seen* (760) with real type sizes, and export at 3x.
 
-**Five figures remain** (1, 2, 4, 5, 7), still JSX comments rather than
+**Image 4 (token architecture) landed 2026-10-01** — Tom's Figma export, supplied as
+`variant-naming.png` and shipped as `blueprints-tokens.png`. Foundation → semantic → a
+rendered Success pill, with `green-100 → surface-success` continuing into the
+component. The third column is deliberately **not a third tier**: the copy above
+it says two, so it is labelled "In a component" and shows the result.
+
+**It was flattened before shipping, and that is a rule for any transparent
+diagram.** The export had real transparent regions (alpha 0), so in dark mode its
+labels sat straight on the navy case study card and the figure became a dark panel
+while every other figure stays light. It is now composited onto `#f8fafc` — the
+ground the governance flow already uses — with sharp's `flatten`, and the
+Desktop original is untouched. **Export diagrams with a background fill.** It is
+rendered `bare` (715px against a 760px column, so the wash would otherwise show as
+a purple band either side), at its natural size: the type was set at 14px, so no
+`zoom` is needed. Like the pill figure it is 1x for a retina screen; a 3x re-export
+would sharpen it.
+
+**It is set in Inter, not DM Sans** (Figma's default face), and its ink is a navy
+rather than `#292929`. Noticed 2026-10-01 and left alone — Tom's call whether the
+mismatch against the page's DM Sans is worth a re-export.
+
+**Four figures remain** (1, 2, 5, 7), still JSX comments rather than
 `CaseStudyFigure` calls since a figure with no `src` would throw; each comment
 says what it shows and where it goes. **None need Rakuten access** — they are
 diagrams or Figma recreations. Full briefs, the house style they should follow,
