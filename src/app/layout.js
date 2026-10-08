@@ -1,7 +1,7 @@
 import "./globals.css";
 import { SiteNav, SiteFooter } from './components/SiteChrome';
 import ThemeProvider from './components/ThemeProvider';
-import { GoogleAnalytics } from "@next/third-parties/google";
+import ProductionAnalytics from "./components/ProductionAnalytics";
 import { DM_Sans } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -48,17 +48,7 @@ export default function RootLayout({ children, modal }) {
           <SiteFooter />
           {modal}
         </ThemeProvider>
-        {/* Production only. Until 2026-09-28 this mounted everywhere, so every
-            `next start` on localhost and every Vercel preview deploy sent real
-            hits to the live property — indistinguishable from a visitor except by
-            the Hostname dimension, and nobody checks that. It matters now the
-            /blueprints events are being read as "did this person look yet".
-            VERCEL_ENV is read on the server, so it needs no NEXT_PUBLIC_ prefix;
-            absent locally, it fails closed. ReadTracking already no-ops when gtag
-            never appears, so nothing downstream needs a guard. */}
-        {process.env.VERCEL_ENV === 'production' && (
-          <GoogleAnalytics gaId="G-CCDKVM70NV" />
-        )}
+        <ProductionAnalytics gaId="G-CCDKVM70NV" />
         <Analytics />
         <SpeedInsights />
       </body>
