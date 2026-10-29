@@ -13,37 +13,55 @@ import useCountUp from './useCountUp'
  * The flags are not rendered until the first hover. That keeps 26 looping
  * animations off the page until they are wanted, and means the randomised burst
  * only ever exists on the client — nothing for the server HTML to disagree with.
- * Each hover reshuffles: new order, directions and timings.
+ * Each hover starts a fresh burst, and each flag keeps re-rolling its own route.
  */
 
-// Small seeded generator so one hover's burst is internally consistent.
-function burst(seed) {
-  let s = seed * 9973
-  const rnd = () => {
-    s = (s * 16807) % 2147483647
-    return (s - 1) / 2147483646
+const rand = (min, max) => min + Math.random() * (max - min)
+
+// One flag's launch: a direction (16 rays, near or far), a little distance and
+// tilt jitter so no two passes trace the same line, and a duration.
+function roll() {
+  return {
+    cls: `fl b${Math.floor(Math.random() * 16)}${Math.random() < 0.5 ? 'n' : 'f'}`,
+    scale: rand(0.8, 1.2),
+    rot: rand(-25, 25),
+    dur: rand(2.2, 3.4),
   }
-  const order = [...COUNTRIES]
-  for (let i = order.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(rnd() * (i + 1))
-    ;[order[i], order[j]] = [order[j], order[i]]
-  }
-  const n = order.length
-  return order.map((c, i) => ({
-    src: `/flags/${c.flag}.svg`,
-    cls: `fl b${Math.floor(rnd() * 16)}${rnd() < 0.5 ? 'n' : 'f'}`,
-    // Spread over the first 2.6s so the stream is steady, not a single volley.
-    delay: ((i / n) * 2.6 + rnd() * 0.3).toFixed(2),
-    dur: (2.2 + rnd() * 0.8).toFixed(2),
-  }))
+}
+
+/**
+ * One country's flag. It re-rolls itself every time a loop finishes — the
+ * animation is at opacity 0 at that moment, so the jump to a new direction is
+ * invisible — which means a flag never flies the same route twice. Only the
+ * first pass carries a delay, picked at random across ~1.6s: every flag shows
+ * up inside the first couple of seconds, so a short hover still sees all of
+ * them (a fixed, ordered stagger left the last few barely visible).
+ */
+function Flag({ flag }) {
+  const [launch, setLaunch] = useState(roll)
+  const [delay] = useState(() => rand(0, 1.6))
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      className={launch.cls}
+      src={`/flags/${flag}.svg`}
+      alt=""
+      onAnimationIteration={() => setLaunch(roll())}
+      style={{
+        animationDelay: `${delay.toFixed(2)}s`,
+        animationDuration: `${launch.dur.toFixed(2)}s`,
+        '--s': launch.scale.toFixed(2),
+        '--rot': `${launch.rot.toFixed(0)}deg`,
+      }}
+    />
+  )
 }
 
 export default function TravelCard() {
   const ref = useRef(null)
   const p = useCountUp(ref)
   const [seed, setSeed] = useState(0)
-  const flags = seed ? burst(seed) : null
-
+  
   return (
     <div
       ref={ref}
@@ -54,16 +72,7 @@ export default function TravelCard() {
 
       <div className="relative isolate flex items-start justify-center pb-2.5 pt-1.5">
         <div aria-hidden="true" className="flayer pointer-events-none absolute inset-0 -z-10">
-          {flags?.map((f) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={f.src}
-              className={f.cls}
-              src={f.src}
-              alt=""
-              style={{ animationDelay: `${f.delay}s`, animationDuration: `${f.dur}s` }}
-            />
-          ))}
+          {seed > 0 && COUNTRIES.map((c) => <Flag key={`${seed}-${c.flag}`} flag={c.flag} />)}
         </div>
         {TRAVEL_PHOTOS.map((ph) => (
           <Image
