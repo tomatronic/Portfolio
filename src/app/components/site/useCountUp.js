@@ -34,7 +34,9 @@ export default function useCountUp(ref) {
         io.disconnect()
         const t0 = performance.now()
         const step = (now) => {
-          const t = Math.min(1, (now - t0) / 1400)
+          // Clamped at both ends: the first rAF timestamp can precede t0, which
+          // would otherwise run the count backwards (briefly "-13 km").
+          const t = Math.min(1, Math.max(0, (now - t0) / 1400))
           setP(1 - Math.pow(1 - t, 3))
           if (t < 1) raf = requestAnimationFrame(step)
         }

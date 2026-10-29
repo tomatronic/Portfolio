@@ -20,7 +20,8 @@ import useCountUp from './useCountUp'
 
 const RUN = '#F97316'
 const REST = 'rgba(255,255,255,0.1)'
-const INJURED = '#DC2626'
+// Translucent like the rest days it replaces, so the stretch reads without shouting.
+const INJURED = 'rgba(220,38,38,0.4)'
 const LABEL = `${TEXT.xs} ${DARK_FAINT} mb-0 font-medium leading-[22px]`
 const BIG = `${DARK_INK} mb-0 text-[36px] font-medium leading-[40px] tracking-[-0.01em] tabular-nums`
 const UNIT = `${DARK_FAINT} text-[16px] font-normal`
