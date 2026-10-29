@@ -18,40 +18,42 @@ import useCountUp from './useCountUp'
 
 const rand = (min, max) => min + Math.random() * (max - min)
 
-// One flag's launch: a direction (16 rays, near or far), a little distance and
-// tilt jitter so no two passes trace the same line, and a duration.
-function roll() {
+// One flag's launch: a direction (16 rays, near or far), distance and tilt
+// jitter, a duration, and a random wait before it goes. The first wait is short
+// so every country has appeared within ~1.6s of the first hover; later ones are
+// longer and looser, so the stream has no rhythm.
+function roll(first) {
   return {
     cls: `fl b${Math.floor(Math.random() * 16)}${Math.random() < 0.5 ? 'n' : 'f'}`,
     scale: rand(0.8, 1.2),
     rot: rand(-25, 25),
     dur: rand(2.2, 3.4),
+    delay: first ? rand(0, 1.6) : rand(0, 2.2),
   }
 }
 
 /**
- * One country's flag. It re-rolls itself every time a loop finishes — the
- * animation is at opacity 0 at that moment, so the jump to a new direction is
- * invisible — which means a flag never flies the same route twice. Only the
- * first pass carries a delay, picked at random across ~1.6s: every flag shows
- * up inside the first couple of seconds, so a short hover still sees all of
- * them (a fixed, ordered stagger left the last few barely visible).
+ * One country's flag, on its own clock. Nothing loops: each flight plays once,
+ * and when it ends the flag rolls a new route and a new random pause and is
+ * launched again, forever. The `n` in the key remounts the element, which is
+ * what makes the browser restart the animation with its new delay. There is no
+ * shared cycle, so the burst never settles into a pattern.
  */
 function Flag({ flag }) {
-  const [launch, setLaunch] = useState(roll)
-  const [delay] = useState(() => rand(0, 1.6))
+  const [state, setState] = useState(() => ({ n: 0, ...roll(true) }))
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      className={launch.cls}
+      key={state.n}
+      className={state.cls}
       src={`/flags/${flag}.svg`}
       alt=""
-      onAnimationIteration={() => setLaunch(roll())}
+      onAnimationEnd={() => setState((prev) => ({ n: prev.n + 1, ...roll(false) }))}
       style={{
-        animationDelay: `${delay.toFixed(2)}s`,
-        animationDuration: `${launch.dur.toFixed(2)}s`,
-        '--s': launch.scale.toFixed(2),
-        '--rot': `${launch.rot.toFixed(0)}deg`,
+        animationDelay: `${state.delay.toFixed(2)}s`,
+        animationDuration: `${state.dur.toFixed(2)}s`,
+        '--s': state.scale.toFixed(2),
+        '--rot': `${state.rot.toFixed(0)}deg`,
       }}
     />
   )
