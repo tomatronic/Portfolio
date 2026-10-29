@@ -51,7 +51,68 @@ async function getAccessToken() {
 }
 
 /**
- * @returns {Promise<{ km: number, activities: number } | null>}
+ * The 365 days ending today (Europe/London), shaped for the About page's year
+ * grid: `pad` empty cells so the first column lines up with Monday, then one
+ * entry per day, then the month labels and their column.
+ *
+ * Built here, on the server, rather than in the component. The grid has to be
+ * the same on the server render and in the browser, and a client that computes
+ * "today" itself can disagree with the HTML it hydrates if midnight passes
+ * between the two.
+ *
+ * `perDay` is `{ 'YYYY-MM-DD': { km, runs } }`. Totals are summed from the grid's
+ * own days, not from the activities query, whose window is 365 x 24 hours back
+ * from the current instant and can include a run from the day before the grid
+ * starts — the figure on the card and the dots under it must agree.
+ */
+function buildYear(perDay) {
+  const todayKey = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/London' })
+  const [y, m, d] = todayKey.split('-').map(Number)
+  const end = Date.UTC(y, m - 1, d)
+  const DAY = 86400000
+  const start = end - 364 * DAY
+  const pad = (new Date(start).getUTCDay() + 6) % 7 // Monday first
+
+  const label = new Intl.DateTimeFormat('en-GB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  })
+  const month = new Intl.DateTimeFormat('en-GB', { month: 'short', timeZone: 'UTC' })
+
+  const days = []
+  const months = []
+  let metres = 0
+  let runs = 0
+  for (let i = 0; i < 365; i += 1) {
+    const date = new Date(start + i * DAY)
+    const hit = perDay[date.toISOString().slice(0, 10)]
+    const km = hit ? Math.round((hit.metres / 1000) * 10) / 10 : 0
+    if (hit) {
+      metres += hit.metres
+      runs += hit.runs
+    }
+    days.push({ label: label.format(date), km })
+    const col = Math.floor((pad + i) / 7) + 1
+    // Skip a month whose label would start in the last two columns: it has no
+    // room to print.
+    if (date.getUTCDate() === 1 && col <= 51) months.push({ col, label: month.format(date) })
+  }
+
+  return {
+    pad,
+    days,
+    months,
+    runs,
+    km: Math.round(metres / 1000),
+    avgKm: runs > 0 ? Math.round((metres / 1000 / runs) * 10) / 10 : 0,
+  }
+}
+
+/**
+ * @returns {Promise<{ km: number, activities: number, year: ReturnType<typeof buildYear> } | null>}
  */
 export async function getRunningTotals() {
   if (
@@ -68,6 +129,7 @@ export async function getRunningTotals() {
 
     let metres = 0
     let activities = 0
+    const perDay = {}
 
     for (let page = 1; page <= MAX_PAGES; page += 1) {
       const url = `${ACTIVITIES_URL}?after=${after}&per_page=${PER_PAGE}&page=${page}`
@@ -92,12 +154,22 @@ export async function getRunningTotals() {
         if (!sport.toLowerCase().includes('run')) continue
         metres += activity.distance || 0
         activities += 1
+        // start_date_local is the athlete's own calendar day, which is the day
+        // a run belongs to on the grid; start_date is UTC and would shunt an
+        // evening run into tomorrow.
+        const day = (activity.start_date_local || '').slice(0, 10)
+        if (day) {
+          const slot = (perDay[day] ||= { metres: 0, runs: 0 })
+          slot.metres += activity.distance || 0
+          slot.runs += 1
+        }
       }
 
       if (batch.length < PER_PAGE) break
     }
 
-    return { km: Math.round(metres / 1000), activities }
+    const year = buildYear(perDay)
+    return { km: year.km, activities: year.runs, year }
   } catch (error) {
     // A failed fetch must not take the About page down — fall back to the
     // static figure and leave a trace in the build/function logs.

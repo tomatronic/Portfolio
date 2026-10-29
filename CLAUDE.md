@@ -2,6 +2,32 @@
 
 ## Versions
 
+### About page rebuilt from a Claude Design handoff (2026-10-29)
+`components/site/About.js` was rewritten from `about-handoff.zip`; the design's
+values are the source of truth. New pieces: `RunningCard`, `TravelCard`,
+`NextUpCard`, `useCountUp`, `lib/travel.js` (the country list, photo row and
+next destination — "26 countries" is `COUNTRIES.length`), the hover CSS in
+`globals.css` under "About page motion", and 26 flags in `public/flags/`.
+`ImageWall` was deleted (the draggable pile is gone); `seven-sisters.jpg` and
+`south-downs-walk.jpg` are now unused.
+
+**Decisions Tom made:** keep the design's orange run colour `#F97316`, despite
+"there is no accent colour" below — it appears only in the running data and the
+Prague pin. Dark variants of the light half were built (the reference is
+light-only); icon accent is `#5B2BB5`, lifted to `#B79CF0` in dark.
+**This page deliberately uses sizes outside the 14/15/16/27 scale** (13, 20, 24,
+32, 36), because the approved design does; `tokens.js` is unchanged.
+
+**The year grid is real data.** `lib/strava.js` now also keeps each run's
+`start_date_local` day and returns a ready-shaped `year` (padding, per-day km,
+month columns), built on the server so it cannot disagree with the hydrated
+HTML. The card total and run count are summed from the grid's own 365 days.
+With no Strava data there is no grid — only the "500+ km" floor.
+
+Left alone, not asked for: `Hero.js` and `layout.js` still say "Brighton"; only
+the About meta description was changed to East Sussex. Footer contact buttons
+went 40 → 44px, which also applies on home.
+
 ### Production-readiness pass, against a 20-point checklist (2026-09-29)
 Tom found a "20 things your vibe-coded site is missing" list and asked which apply.
 Most are aimed at client sites with forms and funnels; each was checked against the

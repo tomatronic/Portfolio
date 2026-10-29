@@ -5,83 +5,101 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { useTheme } from '../ThemeProvider'
 import Nav from './Nav'
 import Footer from './Footer'
-import ImageWall from './ImageWall'
 import CanvasReveal from './CanvasReveal'
+import RunningCard from './RunningCard'
+import TravelCard from './TravelCard'
+import NextUpCard from './NextUpCard'
 import {
   TEXT,
   INK,
   MUTED,
   FAINT,
-  DARK_INK,
   DARK_MUTED,
-  DARK_FAINT,
-  CARD_RADIUS,
   CONTAINER,
 } from './tokens'
 
 /**
- * Concept-route About page — copy from Tom's copywriter (July 2026), on this
- * route's type system, so it can be edited without touching the live /about.
+ * About — the October 2026 redesign (design handoff, 2026-10-29).
  *
- * Two sections are restored from git rather than newly invented:
- *  · "Where I add value" — five cards, removed from the live page in d09b1e0
- *    (June 2026). Card titles are the originals; bodies are the new copy.
- *  · Testimonials — the two quotes from components/Testimonials.js, which the
- *    About page carried until 912d870. Copied rather than imported, since that
- *    component is built on the previous type scale and is now unused.
+ * Light sheet: intro, "How I help teams", testimonials. Everything below the
+ * intro is indented to the intro's text column, which is deliberate. The sheet
+ * is still a `CanvasReveal`, so it clips inward on scroll and reveals the dark
+ * "Outside of work" band — running, travel and what's next.
+ *
+ * This page sets its own sizes (13, 20, 24, 32, 36px alongside the scale's
+ * 14/15/16/27) because the approved design does. They are local to this page;
+ * `tokens.js` is unchanged.
+ *
+ * The reference is light-only above the band. The dark variants here follow the
+ * rest of the site: cards are `white/[0.04]` with a white/10 ring, ink steps up.
  */
 
 const REVEAL_BG = '#050505'
 
-/**
- * The card treatment from `CaseStudyCards`, with a white ground where those have
- * a screenshot (Tom, 2026-09-25). What carries over is the chrome: the 16px
- * radius, the neutral ring, and the purple lift on hover — so the cards on this
- * page and the tiles on home read as the same component.
- *
- * The shadow is scaled down from the home tiles the way `OtherCaseStudies` does:
- * the home values (44px blur, 0.28 alpha) are tuned to a ~600px-tall card, and
- * under a ~120px one the same numbers read as a glow rather than a lift.
- *
- * Dark mode is `white/[0.04]`, not white — the home tiles stay a fixed light
- * tint in both themes because a screenshot needs a light mount, but a plain
- * white block on the navy sheet is just a hole. 0.04 is the nav pill's own dark
- * surface. The resting shadow is light-only: it exists to separate a white card
- * from the white sheet, and there is nothing to separate in dark.
- */
-const CARD = [
-  'rounded-[16px] ring-1 ring-black/10 bg-white',
-  'shadow-[0_2px_10px_rgba(88,28,160,0.08)]',
-  'transition-shadow duration-300 hover:shadow-[0_10px_32px_rgba(88,28,160,0.20)]',
-  'motion-reduce:transition-none',
-  'dark:bg-white/[0.04] dark:ring-white/10 dark:shadow-none dark:hover:shadow-[0_12px_36px_rgba(155,105,240,0.42)]',
-].join(' ')
+// Accent for the icon tiles. Light is the design's #5B2BB5; on the navy sheet
+// that is only ~2:1, so dark steps up to a lighter violet.
+const ICON = 'text-[#5B2BB5] dark:text-[#B79CF0]'
+const TILE = 'bg-[#5B2BB5]/[0.08] dark:bg-[#9B69F0]/[0.16]'
 
-const PRACTICAL = [
+// A card with the design's 1px ring and no lift (testimonials). The "How I help"
+// cards add `.vcard`, whose hover lives in globals.css.
+const CARD =
+  'rounded-[16px] bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.1)] dark:bg-white/[0.04] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.1)]'
+
+const FOCUS = [
   'Simplifying dashboards and reporting tools',
-  'Designing search experiences that don’t require technical knowledge',
-  'Making complex concepts (like marketing attribution) clear and usable',
-  'Reducing reliance on support teams by improving usability',
+  'Search that doesn’t need technical knowledge',
+  'Making concepts like attribution clear and usable',
+  'Reducing reliance on support teams',
 ]
 
-// The "8+ years in enterprise UX" card was removed 2026-09-25 — Tom: it repeats
-// what the lead copy already says in its first sentence.
 const VALUE = [
   {
-    title: 'Usability & clarity',
-    body: 'Strong focus on usability, clarity, and fast, confident decision-making.',
+    title: 'Clarity first',
+    body: 'Turning dense data into screens people can read at a glance and act on with confidence.',
+    icon: (
+      <g className="eye">
+        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+        <circle className="pupil" cx="12" cy="12" r="3" />
+      </g>
+    ),
   },
   {
-    title: 'Designing at scale',
-    body: 'Experience designing tools used at scale, by thousands of users.',
+    title: 'Built for scale',
+    body: 'Tools used every day by thousands of advertisers, publishers and account teams.',
+    icon: (
+      <>
+        <path d="M3 21h18" />
+        <path className="bar b1" d="M6 18v-5" />
+        <path className="bar b2" d="M12 18V8" />
+        <path className="bar b3" d="M18 18V4" />
+      </>
+    ),
   },
   {
-    title: 'Technical domains',
-    body: 'Comfortable working in complex, technical domains.',
+    title: 'At home in complexity',
+    body: 'Attribution, reporting, search and campaign management — technical domains made usable.',
+    icon: (
+      <>
+        <path className="lay l1" d="M12 3 2 8l10 5 10-5-10-5Z" />
+        <path className="lay l2" d="m2 12.5 10 5 10-5" />
+        <path className="lay l3" d="m2 17 10 5 10-5" />
+      </>
+    ),
   },
   {
     title: 'Cross-functional',
-    body: 'Collaborative across product, engineering, and commercial teams to ship usable solutions.',
+    body: 'Working hand-in-hand with product, engineering and commercial teams to ship usable solutions.',
+    icon: (
+      <>
+        <path className="link k1" d="M7.5 6h9" />
+        <path className="link k2" d="m17.6 8.3-4.3 8.4" />
+        <path className="link k3" d="m6.4 8.3 4.3 8.4" />
+        <circle className="node" cx="5" cy="6" r="2.5" />
+        <circle className="node" cx="19" cy="6" r="2.5" />
+        <circle className="node" cx="12" cy="19" r="2.5" />
+      </>
+    ),
   },
 ]
 
@@ -116,48 +134,15 @@ const TESTIMONIALS = [
  * whatever the live number happens to be — a floor set just under today's
  * figure is a precise number wearing a plus sign, and this fallback is
  * invisible until it fires, so nobody will notice when it goes stale.
+ *
+ * With no live data there is also no year grid: the card shows this floor alone
+ * rather than inventing runs to draw.
  */
 const FALLBACK_KM = 500
 
-function RunningCard({ km, live }) {
-  return (
-    // flex-1 + justify-between: the card grows to take its share of the column,
-    // and the figure sits at the foot of whatever height that turns out to be.
-    //
-    // Fixed DARK_* ink, no `dark:` variants: since 2026-09-25 this card lives on
-    // the near-black band, which does not flip with the theme — the same reason
-    // Footer and ExperimentsLab use these tokens.
-    <div
-      className={`${CARD_RADIUS} flex flex-1 flex-col justify-between border border-white/10 bg-white/[0.03] p-6 md:p-8`}
-    >
-      <p className={`${TEXT.xs} ${DARK_FAINT} mb-8 font-medium`}>Running</p>
-      <div>
-        <p
-          className={`${TEXT.title} ${DARK_INK} mb-1 font-medium leading-none tracking-tight tabular-nums`}
-        >
-          {km.toLocaleString('en-GB')}
-          {!live && '+'}
-          <span className={`${TEXT.base} ${DARK_FAINT} ml-1.5 font-normal`}>km</span>
-        </p>
-        {/* The window softens with the figure. "the last 365 days" is a precise
-            claim and only the live number can make it; the fallback is a floor,
-            so it says what a floor can say. The pair also restores a visual
-            tell that the fallback has fired — the "Powered by Strava" badge
-            used to be that tell, and it was removed on 2026-08-05. */}
-        <p className={`${TEXT.xs} ${DARK_FAINT} mb-0`}>
-          {live ? 'ran in the last 365 days' : 'ran in a typical year'}
-        </p>
-      </div>
-    </div>
-  )
-}
+const H2 = `${TEXT.title} ${INK} mb-0 font-medium leading-[1.25] tracking-[-0.01em]`
 
 export default function About({ running = null }) {
-  // `running` is null whenever the Strava env vars are missing or the call
-  // failed, so its presence is what tells the card whether it can make the
-  // precise claim or has to fall back to the floor.
-  const runningLive = running != null
-  const runningKm = running?.km ?? FALLBACK_KM
   const { theme } = useTheme()
   const dark = theme === 'dark'
   const prefersReducedMotion = useReducedMotion()
@@ -175,7 +160,6 @@ export default function About({ running = null }) {
     hidden: {},
     visible: { transition: { staggerChildren: prefersReducedMotion ? 0 : 0.07 } },
   }
-
   const inView = {
     initial: 'hidden',
     whileInView: 'visible',
@@ -184,16 +168,7 @@ export default function About({ running = null }) {
 
   return (
     <div style={{ background: REVEAL_BG }}>
-
-      {/* The sheet is a CanvasReveal, exactly as on home (2026-09-25): About
-          used to run white all the way into the footer, so the site's one
-          signature move was missing and the dark footer arrived as a hard edge.
-          Now the sheet clips inward on scroll and reveals the dark "Outside of
-          work" band behind it — professional work on the light sheet, personal
-          on the dark, which is the same split home makes between case studies
-          and Experiments.
-
-          No px-6 in here: CanvasReveal's --canvas-gutter is the side spacing.
+      {/* No px-6 in here: CanvasReveal's --canvas-gutter is the side spacing.
           Putting padding on the container instead measured 848px against home's
           896px and the two pages stopped lining up. */}
       <CanvasReveal style={{ background: sheetBg }}>
@@ -202,145 +177,163 @@ export default function About({ running = null }) {
         </div>
 
         <div className={`${CONTAINER} mx-auto pb-28 pt-8`}>
-          {/* ── Lead ─────────────────────────────────────────────── */}
-          <motion.div initial="hidden" animate="visible" variants={fade}>
-            <h1
-              className={`${TEXT.title} ${INK} mb-12 max-w-[46ch] text-balance font-medium leading-[1.35] tracking-tight`}
-            >
-              I design complex software so it feels easy to use — especially where
-              people rely on data to make fast, high-impact decisions.
-            </h1>
-          </motion.div>
+          {/* ── Intro ───────────────────────────────────────────────── */}
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fade}
+            className="mt-20 flex flex-wrap items-start gap-12"
+          >
+            <figure className="m-0 flex shrink-0 grow-0 basis-[200px] flex-col gap-3">
+              <Image
+                src="/bio.png"
+                alt="Tom Spencer, standing outdoors"
+                width={200}
+                height={250}
+                sizes="200px"
+                priority
+                className="block h-[250px] w-[200px] rounded-[16px] object-cover shadow-[0_0_0_1px_rgba(41,41,41,0.1)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.1)]"
+                style={{ objectPosition: '60% 20%' }}
+              />
+              <figcaption className={`${TEXT.xs} ${MUTED} flex flex-col leading-[22px]`}>
+                <span className={`${INK} font-medium`}>Tom Spencer</span>
+                <span>Senior Product Designer</span>
+                <span className={FAINT}>East Sussex, UK</span>
+              </figcaption>
+            </figure>
 
-          {/* items-stretch + h-full on the figure: the copy column runs ~130px
-              taller than a fixed 3/4 photo, which left an L-shaped void down the
-              right of the lead. The photo now takes the row's full height. */}
-          <div className="grid grid-cols-1 items-stretch gap-10 md:grid-cols-[1fr_300px] md:gap-14">
-            <motion.div
-              {...inView}
-              variants={fade}
-              className="[&>p:last-child]:mb-0 [&>p]:mb-4 [&>p]:text-[16px] [&>p]:leading-relaxed [&>p]:text-[#5D5D5D] dark:[&>p]:text-[#B0B0B0]"
+            <div
+              className={`${TEXT.base} ${MUTED} flex min-w-0 flex-[999_1_420px] flex-col gap-4 leading-[26px] [&>p]:mb-0 [&>p]:max-w-[600px]`}
             >
+              <h1
+                className={`${INK} mb-4 text-[32px] font-medium leading-[1.25] tracking-[-0.015em] text-balance`}
+              >
+                I design complex software so it feels easy to use — especially where
+                people rely on data to make fast, high-impact decisions.
+              </h1>
               <p>
                 For the past 8 years at Rakuten Advertising, I&apos;ve worked on
                 large-scale internal platforms used by thousands of advertisers,
-                publishers, and account teams. Since these systems are built around
-                large datasets, detailed reporting, and multi-step workflows, they
-                can easily become slow, confusing, or overly technical — adding
-                friction where users need to make vital decisions.
+                publishers, and account teams. Built around large datasets, detailed
+                reporting and multi-step workflows, these systems can easily become
+                slow, confusing, or overly technical — adding friction exactly where
+                users need to make vital decisions.
               </p>
-              <p className={`${INK} font-medium`}>It&apos;s my role to remove this friction.</p>
+              <blockquote
+                className={`${INK} m-0 my-4 border-0 p-0 text-[24px] font-medium not-italic leading-8 tracking-[-0.01em]`}
+              >
+                “It&apos;s my role to remove that friction.”
+              </blockquote>
               <p>
-                I take tools that require expertise and redesign them so users can
-                understand what they&apos;re seeing, find the information they need
-                quickly, and act with confidence — without any second-guessing.
+                I take tools that require expertise and redesign them so people can
+                understand what they&apos;re seeing, find what they need quickly, and
+                act with confidence. In practice, that means:
               </p>
-              <p>In practical terms, this includes:</p>
-
-              <ul className="mb-4 space-y-2">
-                {PRACTICAL.map((entry) => (
-                  <li key={entry} className={`${TEXT.base} ${MUTED} flex items-start gap-2`}>
-                    <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-[#292929] dark:bg-[#F2F2F2]" />
-                    <span>{entry}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <p>
-                If you&apos;re building products, services, or workflows for people
-                who know exactly what they want (and won&apos;t tolerate anything
-                that slows them down), that&apos;s the kind of project where I
-                thrive — and what I want to work on next.
-              </p>
-            </motion.div>
-
-            <motion.div
-              {...inView}
-              variants={fade}
-              className={`${CARD_RADIUS} relative aspect-[3/4] w-full overflow-hidden ring-1 ring-[#292929]/10 md:aspect-auto md:h-full dark:ring-white/10`}
-            >
-              <Image
-                src="/bio.png"
-                alt="Tom Spencer"
-                fill
-                sizes="(max-width: 768px) 100vw, 300px"
-                className="object-cover object-top"
-                priority
-              />
-            </motion.div>
-          </div>
-
-          {/* ── Where I add value ────────────────────────────────── */}
-          <motion.div {...inView} variants={fade} className="mt-24">
-            <h2 className={`${TEXT.title} ${INK} mb-8 font-medium leading-[1.25] tracking-tight`}>
-              Where I add value
-            </h2>
-
-            <motion.div
-              variants={stagger}
-              className="grid grid-cols-1 gap-3 sm:grid-cols-2"
-            >
-              {VALUE.map((entry, i, arr) => (
-                <motion.div
-                  key={entry.title}
-                  variants={fade}
-                  // WASH + OUTLINE, the fill every card on the case studies uses.
-                  // These were outline-only with no ground, a treatment that
-                  // appeared nowhere else on the site and was the main reason the
-                  // page read as a different product (2026-09-25).
-                  //
-                  // An odd count has to break the two-column grid somewhere, and
-                  // the FIRST card spanning reads as hierarchy where a full-width
-                  // orphan at the foot reads as a mistake. At an even count —
-                  // four, since the "8+ years" card went — nothing spans and the
-                  // grid tiles cleanly, so this is conditional rather than fixed.
-                  className={`${CARD} p-5 ${
-                    i === 0 && arr.length % 2 !== 0 ? 'sm:col-span-2' : ''
-                  }`}
-                >
-                  <p className={`${TEXT.base} ${INK} mb-1 font-medium`}>{entry.title}</p>
-                  <p className={`${TEXT.sm} ${MUTED} mb-0 leading-relaxed`}>{entry.body}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* ── Testimonials ─────────────────────────────────────── */}
-          <motion.div {...inView} variants={fade} className="mt-24">
-            <h2 className={`${TEXT.title} ${INK} mb-8 font-medium leading-[1.25] tracking-tight`}>
-              What colleagues say
-            </h2>
-
-            <motion.div variants={stagger} className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              {/* Grid rows stretch both cards to the taller one's height, so with
-                  the shorter quote the attribution floated mid-card and the two
-                  names sat on different lines. flex + mt-auto on the figcaption
-                  pins both to the bottom edge, so they align across the pair. */}
-              {TESTIMONIALS.map((t) => (
-                <motion.figure
-                  key={t.name}
-                  variants={fade}
-                  className={`${CARD} mb-0 flex h-full flex-col p-5`}
-                >
-                  <blockquote
-                    className={`${TEXT.base} ${MUTED} mb-3 border-0 p-0 not-italic leading-relaxed`}
+              <div className="grid max-w-[600px] grid-cols-2 gap-2">
+                {FOCUS.map((entry) => (
+                  <p
+                    key={entry}
+                    className={`${TEXT.xs} ${INK} mb-0 rounded-[12px] bg-[#F6F6F6] px-3.5 py-3 leading-[22px] dark:bg-white/[0.06]`}
                   >
-                    {t.quote}
-                  </blockquote>
-                  {/* Name steps up to primary ink, role stays tertiary — the
-                      attribution is the point now that these are real people. */}
-                  <figcaption className="mt-auto">
-                    <span className={`${TEXT.sm} ${INK} block font-medium`}>{t.name}</span>
-                    {/* FAINT again now the card is white — #737373 is 4.74:1 on
-                        white. It was MUTED for as long as these sat on the purple
-                        WASH, where FAINT measured 4.4:1 and failed AA. */}
-                    <span className={`${TEXT.sm} ${FAINT} block`}>{t.role}</span>
-                  </figcaption>
-                </motion.figure>
-              ))}
-            </motion.div>
+                    {entry}
+                  </p>
+                ))}
+              </div>
+              <p className="mt-2">
+                If you&apos;re building for people who know exactly what they want
+                (and won&apos;t tolerate anything that slows them down), that&apos;s
+                where I thrive — and what I want to work on next.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-3">
+                <a
+                  href="mailto:tom.m.spencer@gmail.com"
+                  className={`${TEXT.sm} inline-flex h-11 items-center rounded-full bg-[#292929] px-5 font-medium text-white transition-[background-color,transform] hover:bg-black active:scale-[0.96] dark:bg-[#F2F2F2] dark:text-[#292929] dark:hover:bg-white`}
+                >
+                  Get in touch
+                </a>
+                <a
+                  href="/resume.pdf"
+                  className={`${TEXT.sm} ${INK} inline-flex h-11 items-center rounded-full px-5 font-medium shadow-[inset_0_0_0_1px_rgba(41,41,41,0.16)] transition-[background-color,transform] hover:bg-[#292929]/[0.05] active:scale-[0.96] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.16)] dark:hover:bg-white/10`}
+                >
+                  Download résumé
+                </a>
+              </div>
+            </div>
           </motion.div>
 
+          {/* Everything below lines up with the intro's text column: a 200px
+              spacer plus the 48px gap, which collapses when the intro wraps. */}
+          <div className="flex flex-wrap gap-x-12">
+            <div aria-hidden="true" className="shrink-0 grow-0 basis-[200px]" />
+            <div className="min-w-0 flex-[999_1_420px]">
+              {/* ── How I help teams ──────────────────────────────── */}
+              <motion.div {...inView} variants={fade} className="mt-[120px]">
+                <h2 className={H2}>How I help teams</h2>
+                <motion.div
+                  variants={stagger}
+                  className="mt-7 grid gap-3"
+                  style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))' }}
+                >
+                  {VALUE.map((v) => (
+                    <motion.div
+                      key={v.title}
+                      variants={fade}
+                      className={`vcard ${CARD} flex flex-col gap-4 px-5 py-6`}
+                    >
+                      <div className={`${TILE} flex h-[52px] w-[52px] items-center justify-center rounded-[14px]`}>
+                        <svg
+                          className={`ic ${ICON}`}
+                          width="28"
+                          height="28"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.75"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          {v.icon}
+                        </svg>
+                      </div>
+                      <div className="flex flex-col gap-1.5">
+                        <p className={`${TEXT.base} ${INK} mb-0 font-medium leading-6`}>{v.title}</p>
+                        <p className={`${TEXT.sm} ${MUTED} mb-0 leading-[23px]`}>{v.body}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+
+              {/* ── Testimonials ──────────────────────────────────── */}
+              <motion.div {...inView} variants={fade} className="mt-[120px]">
+                <h2 className={H2}>What colleagues say</h2>
+                <motion.div
+                  variants={stagger}
+                  className="mt-7 grid gap-3"
+                  style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))' }}
+                >
+                  {TESTIMONIALS.map((t) => (
+                    <motion.figure
+                      key={t.name}
+                      variants={fade}
+                      className={`${CARD} m-0 flex flex-col justify-between gap-6 p-6`}
+                    >
+                      <blockquote
+                        className={`${TEXT.base} m-0 border-0 p-0 not-italic leading-[26px] text-[#3A3A3A] dark:text-[#D4D4D4]`}
+                      >
+                        “{t.quote}”
+                      </blockquote>
+                      <figcaption className={`${TEXT.sm} flex flex-col leading-6`}>
+                        <span className={`${INK} font-medium`}>{t.name}</span>
+                        <span className={FAINT}>{t.role}</span>
+                      </figcaption>
+                    </motion.figure>
+                  ))}
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </CanvasReveal>
 
@@ -351,33 +344,27 @@ export default function About({ running = null }) {
       <section className="relative px-6 pb-32 pt-28 md:pt-36">
         <div className={`${CONTAINER} mx-auto`}>
           <motion.div {...inView} variants={fade}>
-            <h2 className={`${TEXT.title} ${DARK_INK} mb-6 font-medium leading-[1.25] tracking-tight`}>
-              Outside of work
-            </h2>
+            <h2 className={`${H2} !text-[#F2F2F2]`}>Outside of work</h2>
+            <div className="mt-5 flex max-w-[640px] flex-col gap-4">
+              <p className={`${TEXT.base} ${DARK_MUTED} mb-0 leading-[26px]`}>
+                I enjoy being outside. I find it helps me mentally unload, and it
+                throws up all sorts of thoughts and ideas along the way.
+              </p>
+              <p className={`${TEXT.base} ${DARK_MUTED} mb-0 leading-[26px]`}>
+                In particular I enjoy running, hiking and seeing the world —
+                travelling to places and trying my hardest to experience the real
+                culture of somewhere rather than the version put on for visitors.
+              </p>
+            </div>
 
-            {/* Copy and stat stack left, photo wall right. The left column is a
-                flex column so the running card can be pinned to the bottom with
-                mt-auto and its baseline lines up with the foot of the wall. */}
-            <div className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-2">
-              <div className="flex flex-col gap-3">
-                <div
-                  className={`${CARD_RADIUS} flex-1 border border-white/10 bg-white/[0.03] p-6 md:p-8`}
-                >
-                  <p className={`${TEXT.base} ${DARK_MUTED} mb-4 leading-relaxed`}>
-                    I enjoy being outside. I find it helps me mentally unload, and it
-                    throws up all sorts of thoughts and ideas along the way.
-                  </p>
-                  <p className={`${TEXT.base} ${DARK_MUTED} mb-0 leading-relaxed`}>
-                    In particular I enjoy running, hiking and seeing the world —
-                    travelling to places and trying my hardest to experience the real
-                    culture of somewhere rather than the version put on for visitors.
-                  </p>
-                </div>
+            <RunningCard year={running?.year ?? null} fallbackKm={FALLBACK_KM} />
 
-                <RunningCard km={runningKm} live={runningLive} />
-              </div>
-
-              <ImageWall />
+            <div
+              className="mt-3 grid gap-3"
+              style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))' }}
+            >
+              <TravelCard />
+              <NextUpCard />
             </div>
           </motion.div>
         </div>
