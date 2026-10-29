@@ -88,13 +88,14 @@ function buildYear(perDay) {
   let runs = 0
   for (let i = 0; i < 365; i += 1) {
     const date = new Date(start + i * DAY)
-    const hit = perDay[date.toISOString().slice(0, 10)]
+    const iso = date.toISOString().slice(0, 10)
+    const hit = perDay[iso]
     const km = hit ? Math.round((hit.metres / 1000) * 10) / 10 : 0
     if (hit) {
       metres += hit.metres
       runs += hit.runs
     }
-    days.push({ label: label.format(date), km })
+    days.push({ date: iso, label: label.format(date), km })
     const col = Math.floor((pad + i) / 7) + 1
     // Skip a month whose label would start in the last two columns: it has no
     // room to print.

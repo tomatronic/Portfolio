@@ -20,12 +20,13 @@ import useCountUp from './useCountUp'
 
 const RUN = '#F97316'
 const REST = 'rgba(255,255,255,0.1)'
+const INJURED = '#DC2626'
 const LABEL = `${TEXT.xs} ${DARK_FAINT} mb-0 font-medium leading-[22px]`
 const BIG = `${DARK_INK} mb-0 text-[36px] font-medium leading-[40px] tracking-[-0.01em] tabular-nums`
 const UNIT = `${DARK_FAINT} text-[16px] font-normal`
 const CAPTION = `${TEXT.xs} ${DARK_FAINT} mb-0 mt-1 leading-[22px]`
 
-export default function RunningCard({ year, fallbackKm }) {
+export default function RunningCard({ year, fallbackKm, injuredFrom = null }) {
   const ref = useRef(null)
   const p = useCountUp(ref)
 
@@ -46,7 +47,11 @@ export default function RunningCard({ year, fallbackKm }) {
     )
   }
 
-  const gridLabel = `${year.runs} runs over the last 365 days, ${year.km.toLocaleString('en-GB')} km in total`
+  // ISO dates compare correctly as strings. Only rest days go red: a run on or
+  // after the date keeps its colour, so a comeback shows up as it happens.
+  const isInjured = (d) => injuredFrom && d.km === 0 && d.date >= injuredFrom
+  const hasInjury = year.days.some(isInjured)
+  const gridLabel = `${year.runs} runs over the last 365 days, ${year.km.toLocaleString('en-GB')} km in total${hasInjury ? ', then injured since ' + injuredFrom : ''}`
 
   return (
     <section
@@ -65,6 +70,12 @@ export default function RunningCard({ year, fallbackKm }) {
             <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full" style={{ background: RUN }} />
             Run
           </span>
+          {hasInjury && (
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full" style={{ background: INJURED }} />
+              Injured
+            </span>
+          )}
         </div>
       </div>
 
@@ -120,9 +131,9 @@ export default function RunningCard({ year, fallbackKm }) {
             {year.days.map((d, i) => (
               <span
                 key={i}
-                title={`${d.label} · ${d.km > 0 ? `${d.km} km` : 'rest day'}`}
+                title={`${d.label} · ${d.km > 0 ? `${d.km} km` : isInjured(d) ? 'Injured :(' : 'rest day'}`}
                 className="aspect-square rounded-full"
-                style={{ background: d.km > 0 ? RUN : REST }}
+                style={{ background: d.km > 0 ? RUN : isInjured(d) ? INJURED : REST }}
               />
             ))}
           </div>

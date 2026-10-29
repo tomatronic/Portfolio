@@ -140,6 +140,14 @@ const TESTIMONIALS = [
  */
 const FALLBACK_KM = 500
 
+/**
+ * Tom's injury: every rest day from this date on is drawn red on the running
+ * grid, with an "Injured :(" tooltip. It is the day after his last August run
+ * (Fri 7 Aug 2026). Set it to null once he is running again — any run on or
+ * after the date keeps its normal colour either way.
+ */
+const INJURED_FROM = '2026-08-08'
+
 const H2 = `${TEXT.title} ${INK} mb-0 font-medium leading-[1.25] tracking-[-0.01em]`
 
 export default function About({ running = null }) {
@@ -357,7 +365,7 @@ export default function About({ running = null }) {
               </p>
             </div>
 
-            <RunningCard year={running?.year ?? null} fallbackKm={FALLBACK_KM} />
+            <RunningCard year={running?.year ?? null} fallbackKm={FALLBACK_KM} injuredFrom={INJURED_FROM} />
 
             <div
               className="mt-3 grid gap-3"
