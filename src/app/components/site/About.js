@@ -9,7 +9,8 @@ import Footer from './Footer'
 import CanvasReveal from './CanvasReveal'
 import RunningCard from './RunningCard'
 import TravelCard from './TravelCard'
-import NextUpCard from './NextUpCard'
+import ReadingCard from './ReadingCard'
+import ListeningCard from './ListeningCard'
 import {
   TEXT,
   INK,
@@ -26,7 +27,7 @@ import {
  * Light sheet: intro, "How I help teams", testimonials. Everything below the
  * intro is indented to the intro's text column, which is deliberate. The sheet
  * is still a `CanvasReveal`, so it clips inward on scroll and reveals the dark
- * "Outside of work" band — running, travel and what's next.
+ * "Outside of work" band — running, travel, and what he is reading and listening to.
  *
  * This page sets its own sizes (13, 20, 24, 32, 36px alongside the scale's
  * 14/15/16/27) because the approved design does. They are local to this page;
@@ -128,11 +129,12 @@ const FALLBACK_KM = 500
 
 /**
  * Tom's injury: every rest day from this date on is drawn red on the running
- * grid, with an "Injured :(" tooltip. It is the day after his last August run
- * (Fri 7 Aug 2026). Set it to null once he is running again — any run on or
+ * grid, with an "Injured :(" tooltip. It starts four days after his last August
+ * run (Fri 7 Aug 2026), so the days straight after it read as ordinary rest
+ * rather than injury. Set it to null once he is running again — any run on or
  * after the date keeps its normal colour either way.
  */
-const INJURED_FROM = '2026-08-08'
+const INJURED_FROM = '2026-08-11'
 
 const H2 = `${TEXT.title} ${INK} mb-0 font-medium leading-[1.25] tracking-[-0.01em]`
 
@@ -202,21 +204,22 @@ export default function About({ running = null }) {
               <h1
                 className={`${INK} mb-4 text-[32px] font-medium leading-[1.25] tracking-[-0.015em] text-balance`}
               >
-                I design complex software so it feels easy to use — especially where
+                I design complex software so it feels easy to use, especially where
                 people rely on data to make fast, high-impact decisions.
               </h1>
               <p>
-                I&apos;ve been designing for 13 years: emails and landing pages
-                first, then, for the last 8 at Rakuten Advertising, internal
-                platforms used by thousands of advertisers, publishers and account
-                teams. They&apos;re built around large datasets, detailed reporting
-                and multi-step workflows, and they slide easily into slow,
-                confusing or overly technical — which costs the most on the screens
+                I&apos;ve been designing for 13 years, starting in email marketing
+                and landing pages, then moving to UX design for the last 8 at
+                Rakuten Advertising, where I design internal platforms used by
+                thousands of advertisers, publishers and account teams.
+                They&apos;re built around large datasets, detailed reporting and
+                multi-step workflows, and they slide easily into being slow,
+                confusing or overly technical, which costs the most on the screens
                 where people make decisions.
               </p>
               <p>
-                My job is to remove that friction. Most recently that meant
-                natural-language search for reporting: people ask for the report
+                My job is to remove friction. Most recently that meant
+                natural-language search for reporting. People ask for the report
                 they want instead of building it by hand, and in beta it cut report
                 creation time by up to 90% (measured in Fullstory). Before that it
                 was multi-touch attribution, turning abstract click paths into a
@@ -224,9 +227,9 @@ export default function About({ running = null }) {
               </p>
               <p>
                 Day to day I work with product managers and engineers, from early
-                discovery through to release. I&apos;ve also helped the team change
-                how it contributes to the pattern library, through Figma MCP and
-                GitHub, and created workshops on running an accessibility audit.
+                discovery through to release. I also helped the UX team change how
+                it contributed to the pattern library, using Figma MCP and GitHub,
+                and created workshops on running an accessibility audit.
               </p>
               <p>
                 I&apos;m currently open to new roles. If you&apos;re building
@@ -353,12 +356,12 @@ export default function About({ running = null }) {
 
             <RunningCard year={running?.year ?? null} fallbackKm={FALLBACK_KM} injuredFrom={INJURED_FROM} />
 
-            <div
-              className="mt-3 grid gap-3"
-              style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))' }}
-            >
+            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
               <TravelCard />
-              <NextUpCard />
+              <div className="flex flex-col gap-3">
+                <ReadingCard />
+                <ListeningCard />
+              </div>
             </div>
           </motion.div>
         </div>
