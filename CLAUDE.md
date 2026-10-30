@@ -5,11 +5,27 @@
 ### About page rebuilt from a Claude Design handoff (2026-10-29)
 `components/site/About.js` was rewritten from `about-handoff.zip`; the design's
 values are the source of truth. New pieces: `RunningCard`, `TravelCard`,
-`NextUpCard`, `useCountUp`, `lib/travel.js` (the country list, photo row and
+`ReadingCard`, `ListeningCard`, `useCountUp`, `lib/travel.js` (the country list, photo row and
 next destination — "26 countries" is `COUNTRIES.length`), the hover CSS in
 `globals.css` under "About page motion", and 26 flags in `public/flags/`.
 `ImageWall` was deleted (the draggable pile is gone); `seven-sisters.jpg` and
 `south-downs-walk.jpg` are now unused.
+
+**The Czech "Next up" map was replaced 2026-10-30** (Tom: it took a lot of space)
+by two stacked cards beside Travel: `ReadingCard` (Golden Son) and
+`ListeningCard` (Idol by YOASOBI), fed from `lib/media.js` with covers
+self-hosted in `public/media/`. One item each, on purpose — "now" copy is only
+honest while it is current, so changing it is a two-line edit plus a new cover.
+Hover: the book cover swings open; the record slides out
+and spins. All CSS in `globals.css`, off under
+reduced motion. `NextUpCard` and `NEXT_UP` are in git history.
+
+**Footer email and Prompt stats (2026-10-30).** The footer's email button now
+copies the address (tick + "Email copied" for 2s) and falls back to `mailto:` if
+the clipboard is refused — the Browser pane in the desktop app refuses clipboard
+writes, so test it by stubbing `navigator.clipboard`, not by clicking. Prompt's
+three headline stats count up on scroll through `CountStat`, which reuses
+`useCountUp` and keeps the real figure in the markup (and for screen readers).
 
 **Decisions Tom made:** keep the design's orange run colour `#F97316`, despite
 "there is no accent colour" below — it appears only in the running data and the
