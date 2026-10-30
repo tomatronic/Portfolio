@@ -9,7 +9,7 @@ export const revalidate = 86400
 export const metadata = pageMetadata({
   title: "About | Tom Spencer",
   description:
-    "About Tom Spencer — Senior Product Designer specialising in data-heavy enterprise tools, based in East Sussex, UK.",
+    "About Tom Spencer — Senior Product Designer specialising in data-heavy enterprise tools, based in Brighton, UK.",
   path: '/about',
 })
 

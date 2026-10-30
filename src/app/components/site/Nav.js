@@ -41,7 +41,7 @@ const BURST_ON_HOVER = 5
 const ITEMS = [
   { label: 'Work', href: '/#work' },
   { label: 'About', href: '/about' },
-  { label: 'Resume', href: '/resume.pdf', external: true },
+  { label: 'Résumé', href: '/resume.pdf', external: true },
 ]
 
 export default function Nav({ active = 'Home' }) {

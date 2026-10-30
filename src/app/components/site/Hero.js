@@ -7,7 +7,7 @@ import CaseStudyCards from './CaseStudyCards'
 // Both open in a new tab, so there's no `external` flag any more — it only
 // existed to special-case the mailto link that's now gone.
 const LINKS = [
-  { label: 'Resume', href: '/resume.pdf' },
+  { label: 'Résumé', href: '/resume.pdf' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/thomas-spencer/' },
 ]
 
@@ -70,7 +70,7 @@ export default function Hero() {
               source, so a runtime-assembled `[&>p]:${TEXT.base}` produces nothing. */}
           <div className="mb-10 [&>p:last-child]:mb-0 [&>p]:text-[16px] [&>p]:leading-relaxed [&>p]:text-[#5D5D5D] dark:[&>p]:text-[#B0B0B0]">
             <p>
-              Thirteen years designing software, currently at{' '}
+              Thirteen years as a designer, currently at{' '}
               <InlineLink href="https://rakutenadvertising.com">
                 Rakuten Advertising
               </InlineLink>

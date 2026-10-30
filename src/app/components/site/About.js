@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useTheme } from '../ThemeProvider'
 import Nav from './Nav'
@@ -16,6 +17,7 @@ import {
   FAINT,
   DARK_MUTED,
   CONTAINER,
+  GHOST_PILL,
 } from './tokens'
 
 /**
@@ -46,39 +48,11 @@ const TILE = 'bg-[#5B2BB5]/[0.08] dark:bg-[#9B69F0]/[0.16]'
 const CARD =
   'rounded-[16px] bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.1)] dark:bg-white/[0.04] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.1)]'
 
-const FOCUS = [
-  'Simplifying dashboards and reporting tools',
-  'Search that doesn’t need technical knowledge',
-  'Making concepts like attribution clear and usable',
-  'Reducing reliance on support teams',
-]
-
 const VALUE = [
   {
-    title: 'Clarity first',
-    body: 'Turning dense data into screens people can read at a glance and act on with confidence.',
-    icon: (
-      <g className="eye">
-        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
-        <circle className="pupil" cx="12" cy="12" r="3" />
-      </g>
-    ),
-  },
-  {
-    title: 'Built for scale',
-    body: 'Tools used every day by thousands of advertisers, publishers and account teams.',
-    icon: (
-      <>
-        <path d="M3 21h18" />
-        <path className="bar b1" d="M6 18v-5" />
-        <path className="bar b2" d="M12 18V8" />
-        <path className="bar b3" d="M18 18V4" />
-      </>
-    ),
-  },
-  {
-    title: 'At home in complexity',
-    body: 'Attribution, reporting, search and campaign management — technical domains made usable.',
+    title: 'Making expert tools self-serve',
+    body: 'Search and reporting that don’t need technical knowledge, so people spend less time waiting on support.',
+    proof: { label: 'Natural-language search', href: '/casestudy/Prompt' },
     icon: (
       <>
         <path className="lay l1" d="M12 3 2 8l10 5 10-5-10-5Z" />
@@ -88,8 +62,20 @@ const VALUE = [
     ),
   },
   {
-    title: 'Cross-functional',
-    body: 'Working hand-in-hand with product, engineering and commercial teams to ship usable solutions.',
+    title: 'Making dense data legible',
+    body: 'Turning attribution and reporting into screens people can read at a glance and act on with confidence.',
+    proof: { label: 'Multi-touch attribution', href: '/casestudy/ACJ' },
+    icon: (
+      <g className="eye">
+        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+        <circle className="pupil" cx="12" cy="12" r="3" />
+      </g>
+    ),
+  },
+  {
+    title: 'Shipping with the whole team',
+    body: 'Working with product, engineering and commercial teams from first prototype to production.',
+    proof: { label: 'Influencer campaigns', href: '/casestudy/InfluencerCampaigns' },
     icon: (
       <>
         <path className="link k1" d="M7.5 6h9" />
@@ -206,7 +192,7 @@ export default function About({ running = null }) {
               <figcaption className={`${TEXT.xs} ${MUTED} flex flex-col leading-[22px]`}>
                 <span className={`${INK} font-medium`}>Tom Spencer</span>
                 <span>Senior Product Designer</span>
-                <span className={FAINT}>East Sussex, UK</span>
+                <span className={FAINT}>Brighton, UK</span>
               </figcaption>
             </figure>
 
@@ -220,48 +206,43 @@ export default function About({ running = null }) {
                 people rely on data to make fast, high-impact decisions.
               </h1>
               <p>
-                For the past 8 years at Rakuten Advertising, I&apos;ve worked on
-                large-scale internal platforms used by thousands of advertisers,
-                publishers, and account teams. Built around large datasets, detailed
-                reporting and multi-step workflows, these systems can easily become
-                slow, confusing, or overly technical — adding friction exactly where
-                users need to make vital decisions.
+                I&apos;ve been designing for 13 years: emails and landing pages
+                first, then, for the last 8 at Rakuten Advertising, internal
+                platforms used by thousands of advertisers, publishers and account
+                teams. They&apos;re built around large datasets, detailed reporting
+                and multi-step workflows, and they slide easily into slow,
+                confusing or overly technical — which costs the most on the screens
+                where people make decisions.
               </p>
-              <blockquote
-                className={`${INK} m-0 my-4 border-0 p-0 text-[24px] font-medium not-italic leading-8 tracking-[-0.01em]`}
-              >
-                “It&apos;s my role to remove that friction.”
-              </blockquote>
               <p>
-                I take tools that require expertise and redesign them so people can
-                understand what they&apos;re seeing, find what they need quickly, and
-                act with confidence. In practice, that means:
+                My job is to remove that friction. Most recently that meant
+                natural-language search for reporting: people ask for the report
+                they want instead of building it by hand, and in beta it cut report
+                creation time by up to 90% (measured in Fullstory). Before that it
+                was multi-touch attribution, turning abstract click paths into a
+                clear story for publishers and advertisers.
               </p>
-              <div className="grid max-w-[600px] grid-cols-2 gap-2">
-                {FOCUS.map((entry) => (
-                  <p
-                    key={entry}
-                    className={`${TEXT.xs} ${INK} mb-0 rounded-[12px] bg-[#F6F6F6] px-3.5 py-3 leading-[22px] dark:bg-white/[0.06]`}
-                  >
-                    {entry}
-                  </p>
-                ))}
-              </div>
-              <p className="mt-2">
-                If you&apos;re building for people who know exactly what they want
-                (and won&apos;t tolerate anything that slows them down), that&apos;s
-                where I thrive — and what I want to work on next.
+              <p>
+                Day to day I work with product managers and engineers, from early
+                discovery through to release. I&apos;ve also helped the team change
+                how it contributes to the pattern library, through Figma MCP and
+                GitHub, and created workshops on running an accessibility audit.
+              </p>
+              <p>
+                I&apos;m currently open to new roles. If you&apos;re building
+                something complex for people who need it to be fast, I&apos;d like
+                to hear about it.
               </p>
               <div className="mt-3 flex flex-wrap gap-3">
                 <a
                   href="mailto:tom.m.spencer@gmail.com"
-                  className={`${TEXT.sm} inline-flex h-11 items-center rounded-full bg-[#292929] px-5 font-medium text-white transition-[background-color,transform] hover:bg-black active:scale-[0.96] dark:bg-[#F2F2F2] dark:text-[#292929] dark:hover:bg-white`}
+                  className={GHOST_PILL}
                 >
                   Get in touch
                 </a>
                 <a
                   href="/resume.pdf"
-                  className={`${TEXT.sm} ${INK} inline-flex h-11 items-center rounded-full px-5 font-medium shadow-[inset_0_0_0_1px_rgba(41,41,41,0.16)] transition-[background-color,transform] hover:bg-[#292929]/[0.05] active:scale-[0.96] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.16)] dark:hover:bg-white/10`}
+                  className={GHOST_PILL}
                 >
                   Download résumé
                 </a>
@@ -279,14 +260,13 @@ export default function About({ running = null }) {
                 <h2 className={H2}>How I help teams</h2>
                 <motion.div
                   variants={stagger}
-                  className="mt-7 grid gap-3"
-                  style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))' }}
+                  className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2"
                 >
-                  {VALUE.map((v) => (
+                  {VALUE.map((v, i) => (
                     <motion.div
                       key={v.title}
                       variants={fade}
-                      className={`vcard ${CARD} flex flex-col gap-4 px-5 py-6`}
+                      className={`vcard ${CARD} flex flex-col gap-4 px-5 py-6 ${i === 0 ? 'sm:col-span-2' : ''}`}
                     >
                       <div className={`${TILE} flex h-[52px] w-[52px] items-center justify-center rounded-[14px]`}>
                         <svg
@@ -307,6 +287,12 @@ export default function About({ running = null }) {
                       <div className="flex flex-col gap-1.5">
                         <p className={`${TEXT.base} ${INK} mb-0 font-medium leading-6`}>{v.title}</p>
                         <p className={`${TEXT.sm} ${MUTED} mb-0 leading-[23px]`}>{v.body}</p>
+                        <Link
+                          href={v.proof.href}
+                          className={`${TEXT.xs} ${FAINT} mt-1.5 w-fit underline decoration-[#292929]/20 underline-offset-2 transition-colors hover:text-[#292929] hover:decoration-[#292929] dark:decoration-white/20 dark:hover:text-[#F2F2F2] dark:hover:decoration-[#F2F2F2]`}
+                        >
+                          {v.proof.label} →
+                        </Link>
                       </div>
                     </motion.div>
                   ))}
