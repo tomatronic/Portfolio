@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useTheme } from '../ThemeProvider'
 import Nav from './Nav'
@@ -19,6 +20,7 @@ import {
   DARK_MUTED,
   CONTAINER,
   GHOST_PILL,
+  ICON_NAV,
 } from './tokens'
 
 /**
@@ -245,9 +247,12 @@ export default function About({ running = null }) {
                 </a>
                 <a
                   href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={GHOST_PILL}
                 >
-                  Download résumé
+                  Résumé
+                  <ArrowUpRight size={ICON_NAV} strokeWidth={2} />
                 </a>
               </div>
             </div>
