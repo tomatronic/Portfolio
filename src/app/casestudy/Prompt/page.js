@@ -4,6 +4,7 @@ import CaseStudyHeader from "../../components/site/CaseStudyHeader"
 import { WASH, INK } from '../../components/site/tokens'
 import OtherCaseStudies from "../../components/OtherCaseStudies"
 import CaseStudyShell from '../../components/site/CaseStudyShell'
+import CountStat from '../../components/site/CountStat'
 
 export const metadata = pageMetadata({
   title: "Natural Language Search & AI | Tom Spencer",
@@ -39,7 +40,7 @@ function Prompt() {
                                         display size. Semibold, not medium: it used to lean on the
                                         amber accent for emphasis, and with the site monochrome
                                         (2026-09-19) weight has to carry that alone. */}
-                                    <p data-keep className={`mb-1 text-[27px] font-semibold tracking-tight ${INK}`}>{stat}</p>
+                                    <CountStat stat={stat} className={`mb-1 text-[27px] font-semibold tracking-tight ${INK}`} />
                                     {/* MUTED, not FAINT: on the purple WASH ground #737373 measures 4.4:1 and
                                         fails AA; #5D5D5D is 5.8:1. */}
                                     <p data-keep className="mb-0 text-[15px] leading-relaxed text-[#5D5D5D] dark:text-[#B0B0B0]">{label}</p>
