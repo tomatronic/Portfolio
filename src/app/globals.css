@@ -174,39 +174,6 @@ html.dark body {
 .vcard:hover .node { animation: ab-pop 0.5s ease; }
 @keyframes ab-pop { 50% { transform: scale(1.4); } }
 
-/* Travel photos: dock zoom. The `scale` property composes with the inline
-   rotate, so neither overwrites the other. */
-.tp { position: relative; transition: scale 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.tp:hover { scale: 1.18; z-index: 3; }
-.tp:hover + .tp,
-.tp:has(+ .tp:hover) { scale: 1.07; z-index: 2; }
-
-/* Flag burst: one particle per country, fired from the middle of the photo row. */
-.fl {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 15px;
-  height: 10px;
-  border-radius: 2px;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.5);
-  animation: ab-burst 2.6s cubic-bezier(0.2, 0.7, 0.3, 1);
-}
-.flayer { opacity: 0; transition: opacity 0.6s ease; }
-.travel:hover .flayer { opacity: 1; }
-@keyframes ab-burst {
-  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-  10% { opacity: 0.95; }
-  82% { opacity: 0.9; }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + var(--dx) * var(--s, 1)), calc(-50% + var(--dy) * var(--s, 1))) rotate(var(--rot, 0deg)) scale(1);
-  }
-}
-.b0n{--dx:174px;--dy:6px}.b0f{--dx:209px;--dy:7px}.b1n{--dx:154px;--dy:26px}.b1f{--dx:185px;--dy:33px}.b2n{--dx:111px;--dy:43px}.b2f{--dx:133px;--dy:54px}.b3n{--dx:50px;--dy:54px}.b3f{--dx:61px;--dy:67px}.b4n{--dx:-17px;--dy:56px}.b4f{--dx:-21px;--dy:70px}.b5n{--dx:-83px;--dy:49px}.b5f{--dx:-99px;--dy:62px}.b6n{--dx:-135px;--dy:35px}.b6f{--dx:-163px;--dy:44px}.b7n{--dx:-168px;--dy:16px}.b7f{--dx:-201px;--dy:20px}.b8n{--dx:-174px;--dy:-6px}.b8f{--dx:-209px;--dy:-7px}.b9n{--dx:-154px;--dy:-26px}.b9f{--dx:-185px;--dy:-33px}.b10n{--dx:-111px;--dy:-43px}.b10f{--dx:-133px;--dy:-54px}.b11n{--dx:-50px;--dy:-54px}.b11f{--dx:-61px;--dy:-67px}.b12n{--dx:17px;--dy:-56px}.b12f{--dx:21px;--dy:-70px}.b13n{--dx:83px;--dy:-49px}.b13f{--dx:99px;--dy:-62px}.b14n{--dx:135px;--dy:-35px}.b14f{--dx:163px;--dy:-44px}.b15n{--dx:168px;--dy:-16px}.b15f{--dx:201px;--dy:-20px}
-
 /* Reading: the cover swings open on its spine to show the pages. */
 .book { perspective: 500px; }
 .book .cover { transform-origin: left center; transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1); }
@@ -226,8 +193,6 @@ html.dark body {
 @keyframes ab-spin { to { rotate: 360deg; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .tp { transition: none; }
-  .fl { display: none; }
   .vcard, .vcard *, .lay, .book .cover, .rec { animation: none !important; transition: none !important; }
   .reading:hover .cover { transform: none; }
   .listening:hover .rec { translate: 20px 0; }
