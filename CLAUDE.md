@@ -5,9 +5,10 @@
 ### About page rebuilt from a Claude Design handoff (2026-10-29)
 `components/site/About.js` was rewritten from `about-handoff.zip`; the design's
 values are the source of truth. New pieces: `RunningCard`, `TravelCard`,
-`ReadingCard`, `ListeningCard`, `useCountUp`, `lib/travel.js` (the country list, photo row and
-next destination — "26 countries" is `COUNTRIES.length`), the hover CSS in
-`globals.css` under "About page motion", and 26 flags in `public/flags/`.
+`ReadingCard`, `ListeningCard`, `useCountUp`, `lib/travel.js` (the country list — "26 countries" is
+`COUNTRIES.length`), the hover CSS in
+`globals.css` under "About page motion", and 26 flags in `public/flags/`
+(unused since 2026-10-31, see below).
 `ImageWall` was deleted (the draggable pile is gone); `seven-sisters.jpg` and
 `south-downs-walk.jpg` are now unused.
 
@@ -19,6 +20,23 @@ honest while it is current, so changing it is a two-line edit plus a new cover.
 Hover: the book cover swings open; the record slides out
 and spins. All CSS in `globals.css`, off under
 reduced motion. `NextUpCard` and `NEXT_UP` are in git history.
+
+**The Travel card is a dot-matrix world map (2026-10-31).** Six alternatives were
+built side by side (photos swapping to maps, a spinning dot globe, a passport, a
+departure board, the dot map, and the dot map with photo moments) and the plain
+dot map won: it echoes the running grid above it, shows all 26 countries at once
+(no hover needed on a phone), and does one thing. The hover is a gentle swell of
+the dots under the cursor and **no country label, on purpose, for now** (a label
+was built and removed 2026-10-31; `WORLD_MAP.names` still maps cells to countries). `TravelCard.js` draws it on a
+canvas from `lib/travelGeo.js` (`WORLD_MAP`, generated from Natural Earth, public
+domain). The lit cells are the visited countries, keyed by the order of
+`COUNTRIES`; **England and Wales are lit but not Scotland or Northern Ireland, and
+France is mainland only** — keep it that way, it is a claim about where Tom has
+been. Adding a country means adding it to `lib/travel.js` *and* regenerating the
+grid. The losers are in git history around 2026-10-30/31, not in the tree. **Now
+unused:** `public/flags/` (26 SVGs), the five travel photos in `public/outside/`
+(`fuji-dusk`, `kinkakuji`, `seoul-gyeongbokgung`, `glendalough-lake`,
+`glendalough-boulder`), and the `flag` field on each `COUNTRIES` entry.
 
 **Footer email and Prompt stats (2026-10-30).** The footer's email button now
 copies the address (tick + "Email copied" for 2s) and falls back to `mailto:` if
