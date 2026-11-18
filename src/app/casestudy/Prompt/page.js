@@ -19,7 +19,7 @@ function Prompt() {
             <CaseStudyShell>
                         <CaseStudyFigure hero priority src="/prompt-header.png" width={1600} height={727} alt="The shipped Create report screen: a &quot;Describe the report you want to see…&quot; box above three suggested questions, with saved reports and collections listed in the left sidebar" />
                         <CaseStudyHeader
-                            eyebrow="Rakuten Advertising • Jan 2025 - Ongoing"
+                            eyebrow="Rakuten Advertising • Jan 2025 – Nov 2026"
                             title="Intelligent Search for Custom Reports — Natural Language Search & AI"
                             role="Sole UX designer"
                             skills="UX/UI, User Research, Prototyping, User testing"
@@ -88,7 +88,7 @@ function Prompt() {
                                 <CaseStudyFigure src="/Prompt-tags-alt.png" width={2390} height={1206} alt="Tag and token system allowing users to refine and direct natural language search queries" />
                                 <div className="max-w-full mb-12">
                                     <h2 className="pt-10 tracking-tight">Outcome</h2>
-                                    <p>Closed beta launched in May 2025 with select power users, followed by a full open beta in July 2025 to all users. With this staggered approach it has allowed us to begin gathering adoption data and user feedback before the full release.</p>
+                                    <p>Closed beta launched in May 2025 with select power users, followed by a full open beta in July 2025 to all users. This staggered approach let us start gathering adoption data and user feedback ahead of the full release.</p>
 
                                     <p>Based on the initial few months of usage we have determined that we have reduced the report creation time by up to 90% (measured using Fullstory during the beta phase). Projected across all users, both internal account managers and external users, that translates to around $10 million in annual time saving once fully adopted.</p>
 

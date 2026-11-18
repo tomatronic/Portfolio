@@ -74,16 +74,15 @@ export default function Hero() {
               rely on data to make fast, high-impact decisions.
             </p>
             <p>
-              Thirteen years as a designer, currently at{' '}
+              Thirteen years designing, the last eight at{' '}
               <InlineLink href="https://rakutenadvertising.com">
                 Rakuten Advertising
-              </InlineLink>
-              . I design for outcomes: fewer support tickets, faster workflows, and
-              happier, more decisive users.
+              </InlineLink>{' '}
+              on enterprise tools used by advertisers, publishers and account teams.
             </p>
             <p>
-              I&apos;m based in Brighton, UK and currently open to new roles — if
-              you think we&apos;d be a match,{' '}
+              Based in Brighton, UK, and open to new roles. If you think we&apos;d be
+              a match,{' '}
               {/* Weight change on hover shifts the text metrics, so the sentence
                   would reflow under the cursor. The invisible bold twin below
                   reserves the wider width up front and keeps it still. */}
@@ -97,8 +96,7 @@ export default function Hero() {
                 <span className="col-start-1 row-start-1 group-hover:font-medium">
                   please get in touch
                 </span>
-              </a>
-              .
+              </a>.
             </p>
           </div>
 

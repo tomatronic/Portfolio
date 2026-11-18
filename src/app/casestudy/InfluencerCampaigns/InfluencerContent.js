@@ -16,7 +16,7 @@ function CaseStudyContent() {
           <CaseStudyFigure hero priority src="/influencerHero.png" width={1600} height={900} alt="Influencer Campaigns product overview — advertiser and influencer interface for managing affiliate influencer campaigns on Rakuten Advertising" />
 
           <CaseStudyHeader
-            eyebrow="Rakuten Advertising • Sept 2025 – Ongoing"
+            eyebrow="Rakuten Advertising • Sept 2025 – Nov 2026"
             title="From Concept to Production in 5 Months"
             role="Sole UX designer"
             skills="UX/UI, User Research, Prototyping, User Testing"

@@ -212,7 +212,7 @@ export default function About({ running = null }) {
               <p>
                 I&apos;ve been designing for 13 years, starting in email marketing
                 and landing pages, then moving to UX design for the last 8 at
-                Rakuten Advertising, where I design internal platforms used by
+                Rakuten Advertising, where I designed internal platforms used by
                 thousands of advertisers, publishers and account teams.
                 They&apos;re built around large datasets, detailed reporting and
                 multi-step workflows, and they slide easily into being slow,
@@ -228,7 +228,7 @@ export default function About({ running = null }) {
                 clear story for publishers and advertisers.
               </p>
               <p>
-                Day to day I work with product managers and engineers, from early
+                Day to day I worked with product managers and engineers, from early
                 discovery through to release. I also helped the UX team change how
                 it contributed to the pattern library, using Figma MCP and GitHub,
                 and created workshops on running an accessibility audit.
