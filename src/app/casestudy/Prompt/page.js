@@ -30,8 +30,8 @@ function Prompt() {
                         {/* Headline outcomes */}
                         <div className={`mb-12 grid grid-cols-1 gap-8 rounded-2xl ${WASH} p-8 sm:grid-cols-3 md:p-10`}>
                             {[
-                                { stat: '90%', label: 'faster report creation, measured in Fullstory during beta' },
-                                { stat: '~$10M', label: 'annual time-saving potential at full adoption' },
+                                { stat: 'Up to 90%', label: 'faster report creation, measured in Fullstory during beta' },
+                                { stat: '~$10M', label: 'projected annual time saving at full adoption' },
                                 { stat: '1,000+', label: 'active advertisers with access from open beta' },
                             ].map(({ stat, label }) => (
                                 <div key={stat}>
@@ -84,13 +84,13 @@ function Prompt() {
                                 <p>
                                     The solution combined natural language prompts, structured tags, and suggested queries to give users both speed and control. Every search generated report remained fully editable, could be saved as a template, or rebuilt from scratch, this preserved the manual workflow for users who preferred it.
                                 </p>
-                                <p>Amends were included based on the feedback gathered after the initial release and an iterative approach meant I could deliver variations quickly and efficiently.</p>
+                                <p>Changes were made based on the feedback gathered after the initial release, and an iterative approach meant I could deliver variations quickly and efficiently.</p>
                                 <CaseStudyFigure src="/Prompt-tags-alt.png" width={2390} height={1206} alt="Tag and token system allowing users to refine and direct natural language search queries" />
                                 <div className="max-w-full mb-12">
                                     <h2 className="pt-10 tracking-tight">Outcome</h2>
                                     <p>Closed beta launched in May 2025 with select power users, followed by a full open beta in July 2025 to all users. With this staggered approach it has allowed us to begin gathering adoption data and user feedback before the full release.</p>
 
-                                    <p>Based on the initial few months of usage we have determined that we have reduced the report creation time by up to 90% (measured using Fullstory during the beta phase) This translates to around $10 million in annual time saving potential when fully adopted by all users (both internal account managers and external users).</p>
+                                    <p>Based on the initial few months of usage we have determined that we have reduced the report creation time by up to 90% (measured using Fullstory during the beta phase). Projected across all users, both internal account managers and external users, that translates to around $10 million in annual time saving once fully adopted.</p>
 
                                     <h3 className="pt-6">User feedback</h3>
 

@@ -38,6 +38,18 @@ unused:** `public/flags/` (26 SVGs), the five travel photos in `public/outside/`
 (`fuji-dusk`, `kinkakuji`, `seoul-gyeongbokgung`, `glendalough-lake`,
 `glendalough-boulder`), and the `flag` field on each `COUNTRIES` entry.
 
+**Design-crit quick wins (2026-11-18).** A self-crit (76/100) flagged claims a
+careful reader would catch. **Prompt's 90% is "up to 90%" everywhere** — the stat
+row, the home card and the About copy now agree with the Outcome prose — and the
+**$10M is labelled a projection** ("projected annual time saving at full
+adoption", "Projected ~$10M"), because it is a potential at full adoption, not a
+measured figure. Don't drop either qualifier. The home hero now opens with the
+About page's positioning line ("I design complex software so it feels easy to
+use…") instead of a CV line; it is still three paragraphs, so the fold is unchanged.
+**Still open from the crit, needs Tom's input:** an adoption number for Prompt
+(1,000+ is advertisers *with access*, not users), the basis for the $10M, and the
+two "Coming soon" lab tiles.
+
 **Footer email and Prompt stats (2026-10-30).** The footer's email button now
 copies the address (tick + "Email copied" for 2s) and falls back to `mailto:` if
 the clipboard is refused — the Browser pane in the desktop app refuses clipboard

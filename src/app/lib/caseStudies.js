@@ -23,7 +23,7 @@ const CASE_STUDIES = [
     listed: true,
     card: {
       descriptor: 'Plain-English reporting for 1,000+ advertisers',
-      metrics: ['90% faster report creation', 'Est. $10M annual time savings'],
+      metrics: ['Up to 90% faster report creation', 'Projected ~$10M annual time savings'],
       image: { src: '/prompt-report.png', position: 'top' },
       tint: '#E6E0F5',
     },

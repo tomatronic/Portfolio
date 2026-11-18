@@ -70,17 +70,16 @@ export default function Hero() {
               source, so a runtime-assembled `[&>p]:${TEXT.base}` produces nothing. */}
           <div className="mb-10 [&>p:last-child]:mb-0 [&>p]:text-[16px] [&>p]:leading-relaxed [&>p]:text-[#5D5D5D] dark:[&>p]:text-[#B0B0B0]">
             <p>
+              I design complex software so it feels easy to use, especially where people
+              rely on data to make fast, high-impact decisions.
+            </p>
+            <p>
               Thirteen years as a designer, currently at{' '}
               <InlineLink href="https://rakutenadvertising.com">
                 Rakuten Advertising
               </InlineLink>
-              . I design enterprise tools used by advertisers, publishers, analysts, and
-              account teams, working with large datasets, detailed reporting, and
-              multi-step workflows.
-            </p>
-            <p>
-              I design for outcomes: fewer support tickets, faster
-              workflows, and happier, more decisive users.
+              . I design for outcomes: fewer support tickets, faster workflows, and
+              happier, more decisive users.
             </p>
             <p>
               I&apos;m based in Brighton, UK and currently open to new roles — if
